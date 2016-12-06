@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, } from 'redux';
 import { Provider, } from 'react-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { root,reducer, getRoutes, } from '../../imports';
+import { root, reducer, getRoutes, fetchComponentData, } from '../../imports';
 
 const collapsed = (getState, action) => action.type;
 const logger = createLogger({ collapsed, });
@@ -42,15 +42,15 @@ export const requestHandler = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const markup = renderToString(<Provider store={store}>
-        <RouterContext {...renderProps} />
-      </Provider>);
-      res.send(renderFullPage(markup, store.getState()));
 
-    // fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then((args) => {
-    //   res.send(renderFullPage(markup, store.getState()));
-    // }).catch(err =>
-    //       res.end(err.message));
+      const markup = renderToString(
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>);
+        
+      fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then((args) => {
+        res.send(renderFullPage(markup, store.getState()));
+      }).catch(err => res.end(err.message));
     } else {
       res.status(404).send('Not found');
     }
