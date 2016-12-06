@@ -1,30 +1,15 @@
-const validate = require('webpack-validator');
-const { resolve, }= require('path');
-const ROOT_PATH = resolve('./');
-const SRC_DIR = resolve(ROOT_PATH, 'src');
-const APP_PATH = resolve(SRC_DIR, 'client/index');
-const PATHS = {
-  app:  resolve(SRC_DIR, 'client/index'),
-  dist: resolve(ROOT_PATH, 'dist'),
+import validate from 'webpack-validator';
+const Joi = require('webpack-validator').Joi;
+
+const schemaExtension = Joi.object({ sassLoader: Joi.any(), });
+import sharedConf from './shared';
+import * as actions from './actions';
+import { CONFIG_EVENTS, } from './constants';
+
+const config = (common = sharedConf, event) =>
+  CONFIG_EVENTS.has(event) ? actions[event](common) : common;
+
+export default (env, ...args) =>{
+  console.log(env, args)
+  return validate(config(sharedConf(env), process.env.npm_lifecycle_event), { schemaExtension, })
 };
-console.log(resolve('src'))
-
-module.exports = () => validate({
-  context: resolve('src'),
-  entry: { app: PATHS.app, },
-  output: {
-    path:      PATHS.dist,
-    filename:   '[name].bundle.js',
-    publicPath: '/',
-
-  },
-  module: {
-    loaders: [
-      {
-        test:    /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: [ 'babel-loader', ],
-      },
-    ],
-  },
-});
