@@ -1,4 +1,5 @@
 import * as components from './components';
-import root from './routes'
+import root, { getRoutes, } from './routes'
+import reducer from './reducer';
 
-export { components, root, };
+export { components, root, reducer,getRoutes, };

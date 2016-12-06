@@ -23,7 +23,7 @@ import { Main,Home, } from './components';
 //   cb();
 // };
 
-const getRoutes = store => (
+export const getRoutes = store => (
   <Route name="app" component={Main} path="/">
     <IndexRoute component={Home} />
 

@@ -3,7 +3,12 @@ import { renderToString, } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { createStore, applyMiddleware, } from 'redux';
 import { Provider, } from 'react-redux';
-import { root, } from '../../imports';
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { root,reducer, getRoutes, } from '../../imports';
+
+const collapsed = (getState, action) => action.type;
+const logger = createLogger({ collapsed, });
 
 export const renderFullPage = (markup, preloadedState={}) => `
     <!doctype html>
@@ -27,7 +32,8 @@ export const renderFullPage = (markup, preloadedState={}) => `
     `;
 
 export const requestHandler = (req, res) => {
-  const routes = root;
+  const store = applyMiddleware(thunk, logger)(createStore)(reducer);
+  const routes = getRoutes(store);
   const location = createMemoryHistory(req.url);
 
   match({ routes, location, }, (error, redirectLocation, renderProps) => {
@@ -36,8 +42,10 @@ export const requestHandler = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const markup = renderToString(<RouterContext {...renderProps} />);
-      res.send(renderFullPage(markup));
+      const markup = renderToString(<Provider store={store}>
+        <RouterContext {...renderProps} />
+      </Provider>);
+      res.send(renderFullPage(markup, store.getState()));
 
     // fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then((args) => {
     //   res.send(renderFullPage(markup, store.getState()));
