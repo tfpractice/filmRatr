@@ -15,6 +15,12 @@
     "webpack": "2.1.0-beta.27"
   },
   "dependencies": {
+    "axios": "^0.15.3",
+    "bcryptjs": "^2.3.0",
+    "bcryptjs-then": "^1.0.1",
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-flash": "^0.0.2",
     "express-session": "^1.14.2",
