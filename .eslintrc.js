@@ -1,36 +1,137 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true
+    env: {
+      node: true,
+      browser: true,
+      commonjs: true,
+      es6: true,
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
+    extends: 'eslint:recommended',
+    parserOptions: {
+        ecmaFeatures: {
+            experimentalObjectRestSpread: true,
+            jsx: true,
+          },
+        sourceType: 'module',
+      },
+    plugins: [
+        'react',
     ],
-    "rules": {
-        "indent": [
-            "error",
-            4
+    rules: {
+        // Ignore Rules
+        strict: 1,
+        'no-underscore-dangle': 0,
+        'no-mixed-requires': 0,
+        'no-process-exit': 0,
+        'no-warning-comments': 0,
+        curly: 0,
+        'no-alert': 0,
+        // Warnings
+        'no-debugger': 1,
+        'no-empty': 1,
+        'no-invalid-regexp': 1,
+        'no-unused-expressions': 1,
+        'no-native-reassign': 1,
+        'no-fallthrough': 1,
+        'handle-callback-err': 1,
+        camelcase: 1,
+        'max-len': [
+            2, 80,
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
+        'newline-per-chained-call': [
+            'error',
+             { ignoreChainWithDepth: 2, },
         ],
-        "quotes": [
-            "error",
-            "single"
+        // Errors
+        'func-call-spacing': ['error', 'never'],
+        'no-undef': 2,
+        'no-dupe-keys': 2,
+        'no-empty-character-class': 2,
+        'no-self-compare': 2,
+        'valid-typeof': 2,
+        'no-unused-vars': 2,
+        'no-multi-spaces': [ 2, {
+          exceptions: { Property: true },
+        },],
+        //  "handle-callback-err": 2,
+        'no-shadow-restricted-names': 2,
+        'no-new-require': 2,
+        'no-mixed-spaces-and-tabs': 2,
+        // stylistic errors
+        'new-cap': 2,
+        'semi-spacing': 2,
+        'array-bracket-spacing': [ 'error', 'always', { singleValue: true,
+          objectsInArrays: false,
+          arraysInArrays: false, }, ],
+        indent: ['error', 2, {
+          FunctionDeclaration:
+            { body: 1, parameters: 'first' },
+          FunctionExpression:
+            { body: 1, parameters: 'first' },
+          MemberExpression: 1, },
         ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
-};
+        quotes: [
+            2, 'single',
+        ],
+        'key-spacing': [ 2, {
+          singleLine: {
+              beforeColon: false,
+              afterColon: true,
+              mode: 'minimum',
+            },
+          multiLine: {
+              beforeColon: false,
+              // afterColon: true,
+              mode: 'minimum',
+              // align: 'value',
+            }, },],
+        'lines-around-comment': ['error', { beforeBlockComment: true,
+          afterBlockComment: false,
+          beforeLineComment: true,
+          afterLineComment: false,
+          allowBlockStart: true,
+          allowBlockEnd: true,
+          allowObjectStart: true,
+          allowObjectEnd: true,
+          allowArrayStart: true,
+          allowArrayEnd: true, },],
+        'object-curly-spacing': [ 'error', 'always', {
+          arraysInObjects: false,
+          objectsInObjects: false, }, ],
+        'object-curly-newline': [ 'error', {
+          ObjectExpression: { multiline: true, minProperties: 5 },
+          ObjectPattern: { multiline: true },
+        }, ],
+        // 'object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
+        'line-comment-position': [ 'error', { position: 'above' }],
+        'brace-style': [
+            'error',
+            '1tbs', {
+                allowSingleLine: true,
+              },
+        ],
+        'comma-dangle': [ 'error', {
+          arrays: 'always',
+          objects: 'always',
+          imports: 'always',
+          exports: 'always',
+          functions: 'ignore',
+        },],
+        'no-trailing-spaces': [ 'error', { skipBlankLines: true }],
+        'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
+        'rest-spread-spacing': [ 'error', 'never'],
+        //  Plugin rules
+        'jsx-quotes': 1,
+        'react/jsx-no-undef': 1,
+        'react/jsx-uses-react': 1,
+        'react/jsx-uses-vars': 1,
+        'react/no-did-mount-set-state': 1,
+        'react/no-did-update-set-state': 1,
+        'react/no-multi-comp': 1,
+        'react/prop-types': 1,
+        'react/react-in-jsx-scope': 1,
+        'react/self-closing-comp': 1,
+        'react/jsx-wrap-multilines': 1,
+        'react/jsx-filename-extension': [1, { extensions: [ '.js', '.jsx' ] }],
+        'react/jsx-equals-spacing': [ 2, 'never'],
+      },
+  };

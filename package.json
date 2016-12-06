@@ -10,9 +10,19 @@
   "author": "theory friction practice <jackson.brebnor@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.8",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-object-rest-spread": "^6.19.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "eslint": "^3.11.1",
     "eslint-plugin-react": "^6.8.0",
-    "webpack": "2.1.0-beta.27"
+    "webpack": "2.1.0-beta.27",
+    "webpack-validator": "^2.2.11"
   },
   "dependencies": {
     "axios": "^0.15.3",
