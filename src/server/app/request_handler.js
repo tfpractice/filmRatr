@@ -3,12 +3,7 @@ import { renderToString, } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { createStore, applyMiddleware, } from 'redux';
 import { Provider, } from 'react-redux';
-import { components } from '../../imports';
-const {Main}= components;
-
-
-
-
+import { root, } from '../../imports';
 
 export const renderFullPage = (markup, preloadedState={}) => `
     <!doctype html>
@@ -32,34 +27,24 @@ export const renderFullPage = (markup, preloadedState={}) => `
     `;
 
 export const requestHandler = (req, res) => {
-    const markup = renderToString(<Main/> );
-    res.send(renderFullPage(markup));
+  const routes = root;
+  const location = createMemoryHistory(req.url);
+
+  match({ routes, location, }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+    } else if (renderProps) {
+      const markup = renderToString(<RouterContext {...renderProps} />);
+      res.send(renderFullPage(markup));
+
+    // fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then((args) => {
+    //   res.send(renderFullPage(markup, store.getState()));
+    // }).catch(err =>
+    //       res.end(err.message));
+    } else {
+      res.status(404).send('Not found');
+    }
+  });
 };
-
-    // const location = createMemoryHistory(req.url);
-//
-    // const store = applyMiddleware()(createStore)(reducer);
-    // const routes = getRoutes(store);
-//
-    // match({
-        // routes,
-        // location,
-    // }, (error, redirectLocation, renderProps) => {
-        // if (error) {
-            // res.status(500).send(error.message);
-        // } else if (redirectLocation) {
-
-            // res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-        // } else if (renderProps) {
-
-
-
-            // const markup = renderToString(        <Main/>            );
-            // res.send(renderFullPage(markup, store.getState()));
-//
-        // } else {
-            // res.status(404).send('Not found');
-        // }
-
-    // });
-// };

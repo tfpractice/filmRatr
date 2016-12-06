@@ -30,6 +30,26 @@ export const BUILD_CONFIG =
     ],
   };
 
+export const BABEL_QUERY = {
+  presets: [
+    'latest', 'react',
+  ],
+  plugins: [
+          [ 'transform-object-rest-spread', ],
+          [ 'transform-class-properties', ],
+    [
+      'react-transform', {
+        transforms: [
+          {
+            transform: 'react-transform-hmr',
+            imports:   [ 'react', ],
+            locals:    [ 'module', ],
+          },
+        ],
+      },
+    ],
+  ],
+};
 export const DEV_CONFIG = {
   devtool: 'eval-source-map',
   entry:   {
