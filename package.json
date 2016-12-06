@@ -1,0 +1,12 @@
+{
+  "name": "filmRatr",
+  "version": "1.0.0",
+  "description": "famll film ratings app",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:tfpractice/filmRatr.git",
+    "type": "git"
+  },
+  "author": "theory friction practice <jackson.brebnor@gmail.com>",
+  "license": "MIT"
+}
