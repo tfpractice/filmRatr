@@ -10,6 +10,8 @@
   "author": "theory friction practice <jackson.brebnor@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-plugin-react": "^6.8.0",
     "webpack": "2.1.0-beta.27"
   },
   "dependencies": {
