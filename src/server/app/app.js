@@ -2,13 +2,16 @@ import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+
 // import session from 'express-session';
 import flash from 'express-flash';
+
 // import passport from 'passport';
 // import { Strategy as LocalStrategy, } from 'passport-local';
 // import mongoose from 'mongoose';
-// import { enableHotReload, } from '../../../config';
+import { enableHotReload, } from '../../../config';
 import { requestHandler, } from './request_handler';
+
 // import { dbConfig, } from '../models';
 // import { TaskRoutes, UserRoutes, applyRoutes, } from '../routes';
 //
@@ -25,7 +28,7 @@ import { requestHandler, } from './request_handler';
 // });
 
 // initialize express
-const app = express();
+const app = enableHotReload(express());
 
 // BodyParser Middleware
 app.use(bodyParser.json({ limit: '20mb', }));

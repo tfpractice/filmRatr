@@ -2,7 +2,6 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { resolve, } from 'path';
 
-// const webpack = require('webpack'); config paths
 export const ROOT_PATH = resolve('./');
 export const SRC_DIR = resolve(ROOT_PATH, 'src');
 export const APP_PATH = resolve(SRC_DIR, 'client/index');
@@ -52,7 +51,7 @@ export const DEV_CONFIG = {
   plugins: [
     // new webpack.optimize.OccurenceOrderPlugin(),
 
-    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV), }, }),
   ],
