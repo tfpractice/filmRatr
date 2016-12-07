@@ -4,7 +4,7 @@ import * as constants from './constants';
 // const { MOVIE_REQUEST_PENDING, MOVIE_REQUEST_SUCCESS, MOVIE_REQUEST_FAILURE, } = constants;
 
 import { MovieUtils, asyncActions, } from '../../utils'
-const { MOVIE_DB_SEARCH_URL as API_URL, } = constants;
+const { MOVIE_DB_SEARCH_URL as API_URL, } = MovieUtils;
 
 const pending = () => () =>
  ({ status: 'pending', updatedAt: Date.now(), message: null, });
@@ -28,8 +28,8 @@ const failure = message => () =>
 
     export const searchMovies = (query) => (dispatch) => {
       dispatch({ type: SEARCH_REQUEST_PENDING, curry: pending, });
-      return axios.get(`${API_URL}/`, {query})
-        .then(({ data: { movies, }, }) =>
-          dispatch(movieRequestSucess()) && dispatch(updateMovies(movies)))
+      return axios.get(`${API_URL}`, { params: { query }, })
+        .then(({ data: { results, }, })=>
+          dispatch(movieRequestSucess()) && dispatch(updateMovies(results)))
         .catch(movieRequestFailure);
     };
