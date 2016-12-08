@@ -4,9 +4,6 @@ import { MovieUtils, } from '../../utils';
 
 const { MOVIE_DB_SEARCH_URL: API_URL, } = MovieUtils;
 
-console.log('=============SEARCH_URL=============', SEARCH_URL);
-console.log('=============API_URL=============', API_URL);
-
 const update = newResults => results => newResults;
 const updateResults = results =>
  ({ type: UPDATE_SEARCH_RESULTS, curry: update(results), });

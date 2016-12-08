@@ -27,8 +27,6 @@ export const renderHTML = (markup, preloadedState = {}) => `
 { /* <link rel="stylesheet" href="app.styles.css"> */ }
 export const requestHandler = (req, res) => {
   const store = getStore();
-  console.log('============stor frome server======', store);
-
   const routes = getRoutes(store);
   const location = createMemoryHistory(req.url);
 
