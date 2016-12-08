@@ -1,13 +1,14 @@
 import axios from 'axios';
-import * as constants from './constants';
-// const { API_URL, UPDATE_MOVIES, EDIT_MOVIE, INSERT_MOVIE, DELETE_MOVIE, } = constants;
-// const { MOVIE_REQUEST_PENDING, MOVIE_REQUEST_SUCCESS, MOVIE_REQUEST_FAILURE, } = constants;
+import { UPDATE_SEARCH_RESULTS, } from './constants';
+import { MovieUtils, } from '../../utils';
+const { MOVIE_DB_SEARCH_URL: API_URL, } = MovieUtils;
 
-import { MovieUtils, asyncActions, } from '../../utils'
-const { MOVIE_DB_SEARCH_URL as API_URL, } = MovieUtils;
+const update = newResults => results => newResults;
+const updateResults = results =>
+ ({ type: UPDATE_SEARCH_RESULTS, curry: update(results), });
 
-const pending = () => () =>
- ({ status: 'pending', updatedAt: Date.now(), message: null, });
+const pending = (query) => () =>
+ ({ status: 'pending', updatedAt: Date.now(), message: query, });
 
 const success = message => () =>
  ({ status: 'suceeded', updatedAt: Date.now(), message, });
@@ -15,21 +16,19 @@ const success = message => () =>
 const failure = message => () =>
  ({ status: 'failed', updatedAt: Date.now(), message, });
 
- const update = newMovies => movies => newMovies;
- const updateResults = results =>
-  ({ type: UPDATE_SEARCH_RESULTS, curry: update(results), });
+const searchRequestPending = (query) =>
+    ({ type: 'SEARCH_REQUEST_PENDING', curry: pending(query), });
 
-
-  const searchRequestSucess = () =>
+const searchRequestSucess = () =>
     ({ type: 'SEARCH_REQUEST_SUCCESS', curry: success, });
 
-  const searchRequestFailure = err =>
-    ({ type: 'SEARCH_REQUEST_FAILURE', curry: failure, });
+const searchRequestFailure = err =>
+    ({ type: 'SEARCH_REQUEST_FAILURE', curry: failure(err.message), });
 
-    export const searchMovies = (query) => (dispatch) => {
-      dispatch({ type: SEARCH_REQUEST_PENDING, curry: pending, });
-      return axios.get(`${API_URL}`, { params: { query }, })
-        .then(({ data: { results, }, })=>
-          dispatch(movieRequestSucess()) && dispatch(updateMovies(results)))
-        .catch(movieRequestFailure);
-    };
+export const search = (query) => (dispatch) => {
+  dispatch(searchRequestPending(query));
+  return axios.get(`${API_URL}`, { params: { query, }, })
+    .then(({ data: { results, }, })=>
+          dispatch(searchRequestSucess()) && dispatch(updateResults(results)))
+    .catch(searchRequestFailure);
+};
