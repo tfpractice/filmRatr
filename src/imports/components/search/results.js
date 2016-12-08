@@ -3,13 +3,15 @@ import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { reset, } from 'redux-form';
 import SearchForm from './form';
-
-import { searchActions, } from '../actions';
+import { SearchActions, } from '../../actions';
 
 const resetForm = name => (action, dispatch) => dispatch(reset(name));
 
-const mapStateToProps = ({ search: { results, query, }, actions, }) =>
- ({ results, query, actions, });
+const mapStateToProps = ({ search: { results, query, }, }) =>
+  ({ results, query, });
+
+const mapDispatchToProps = (dispatch) =>
+  ({ actions: bindActionCreators(SearchActions, dispatch), });
 
 const SearchResults = ({ results, query, actions, }) => (
   <div className="search-list">
@@ -27,4 +29,4 @@ const SearchResults = ({ results, query, actions, }) => (
   </div>
 );
 
-export default connect(mapStateToProps)(SearchResults);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

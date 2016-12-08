@@ -1,1 +1,2 @@
-export { SearchResults, } from './results';
+import SearchResults from './results';
+export { SearchResults, }
