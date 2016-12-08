@@ -7,16 +7,14 @@ import { PATHS, ROOT_PATH, } from './constants';
 const Joi = require('webpack-validator').Joi;
 const schemaExtension = Joi.object({ sassLoader: Joi.any(), });
 
-export default (env, ...args) =>
-
-  // console.log(process.env)
-  // console.log(args);
-   validate({
+export default env =>
+  // console.log(env);
+   ({
      context: ROOT_PATH,
      entry: { app: PATHS.app, },
      resolve: {
-       modulesDirectories: [ 'node_modules', ],
-       extensions: [ '', '.js', '.jsx', '.json', ],
+       modules: [ 'node_modules', ],
+       extensions: [ '.js', '.jsx', '.json', ],
      },
      output: {
        path:      PATHS.dist,
@@ -48,6 +46,5 @@ export default (env, ...args) =>
        net: 'mock',
        tls: 'mock',
        dns: 'mock',
-       net: 'mock',
      },
    });

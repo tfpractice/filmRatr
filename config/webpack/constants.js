@@ -64,7 +64,7 @@ export const DEV_CONFIG = {
         test:    /\.jsx?$/,
         exclude: /node_modules/,
         loader:  'babel-loader',
-        // query:   BABEL_QUERY,
+        query:   BABEL_QUERY,
       },
     ],
   },

@@ -14,12 +14,10 @@ import { BUILD_CONFIG, DEV_CONFIG, PATHS, } from './constants';
 const clean = path =>
 ({ plugins: [ new wpClean([ path, ], { root: process.cwd(), }), ], });
 
-export const build = (common) => {
-  return merge(common, BUILD_CONFIG, clean(PATHS.dist));
-};
+export const build = common => merge(common, BUILD_CONFIG, clean(PATHS.dist));
 
 export const dev = (common) => {
-  const dConf = validate(merge(common, DEV_CONFIG), { schemaExtension, });
+  const dConf = (merge(common, DEV_CONFIG));
   return dConf;
 };
 
