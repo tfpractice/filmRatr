@@ -6,14 +6,16 @@ import SearchForm from './form';
 import { SearchActions, } from '../../actions';
 
 const resetForm = name => (action, dispatch) => dispatch(reset(name));
-
 const mapStateToProps = ({ search: { results, query, }, }) =>
   ({ results, query, });
 
 const mapDispatchToProps = (dispatch) =>
   ({ actions: bindActionCreators(SearchActions, dispatch), });
 
-const SearchResults = ({ results, query, actions, }) => (
+const SearchResults = ({ results, query, actions, }) => {
+  console.log(actions)
+
+  return(
   <div className="search-list">
     <h1>
       SearchResults
@@ -27,6 +29,7 @@ const SearchResults = ({ results, query, actions, }) => (
       <div>{r.toString()}</div>)}
 
   </div>
-);
+  );
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

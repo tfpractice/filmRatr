@@ -24,10 +24,15 @@ const searchRequestSucess = () =>
 
 const searchRequestFailure = err =>
     ({ type: 'SEARCH_REQUEST_FAILURE', curry: failure(err.message), });
+console.log(API_URL)
 
 export const search = (query) => (dispatch) => {
+  console.log(query)
   dispatch(searchRequestPending(query));
-  return axios.get(`${API_URL}`, { params: { query, }, })
+
+  return axios.get(API_URL, query)
+
+  // return axios.get({ baseURL: API_URL, params: { query, }, })
     .then(({ data: { results, }, })=>
           dispatch(searchRequestSucess()) && dispatch(updateResults(results)))
     .catch(searchRequestFailure);
