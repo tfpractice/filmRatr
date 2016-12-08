@@ -27,21 +27,9 @@ const searchRequestFailure = err =>
     ({ type: 'SEARCH_REQUEST_FAILURE', curry: failure(err.message), });
 
 export const search = query => (dispatch) => {
-  console.log('==================CALLING SEARCH==================', query);
   dispatch(searchRequestPending(query));
-
-  //
-  // // return axios.get(API_URL, query)
-  //
-  // return axios.get(SEARCH_URL, { params: { query, }, })
-  //
-  // // return axios.get(SEARCH_URL, { query, })
-  //
-  // // return axios.create({ baseURL: API_URL, }).get( { params: { query, }, })
-  //   .then(({ data: { results, }, }) => {
-  //     console.log('================== SEARCH RESULTS==================', results);
-  //
-  //     return dispatch(searchRequestSucess()) && dispatch(updateResults(results));
-  //   })
-  //   .catch(searchRequestFailure);
+  return axios.get(SEARCH_URL, { params: { ...query, }, })
+    .then(({ data: { results, }, }) =>
+      dispatch(searchRequestSucess()) && dispatch(updateResults(results)))
+    .catch(searchRequestFailure);
 };
