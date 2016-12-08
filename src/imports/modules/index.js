@@ -1,2 +1,3 @@
 import * as Movies from './movies';
-export { Movies, };
+import * as Search from './search';
+export { Movies, Search, };
