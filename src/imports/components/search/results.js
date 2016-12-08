@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) =>
   ({ actions: bindActionCreators(SearchActions, dispatch), });
 
 const SearchResults = ({ results, query, actions, }) => {
-  console.log(actions)
+  console.log(actions.search.toString())
 
   return(
   <div className="search-list">

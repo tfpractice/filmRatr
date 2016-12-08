@@ -5,7 +5,9 @@ module.exports = {
       commonjs: true,
       es6: true,
     },
-    extends: 'eslint:recommended',
+    parser: 'babel-eslint',
+
+    extends: 'airbnb',
     parserOptions: {
         ecmaFeatures: {
             experimentalObjectRestSpread: true,
@@ -14,7 +16,7 @@ module.exports = {
         sourceType: 'module',
       },
     plugins: [
-        'react',
+        'react', 'jsx-a11y', 'import',
     ],
     rules: {
         // Ignore Rules

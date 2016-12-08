@@ -15,13 +15,11 @@ const clean = path =>
 ({ plugins: [ new wpClean([ path, ], { root: process.cwd(), }), ], });
 
 export const build = (common) => {
-  console.log('run build was called');
   return merge(common, BUILD_CONFIG, clean(PATHS.dist));
 };
 
 export const dev = (common) => {
   const dConf = validate(merge(common, DEV_CONFIG), { schemaExtension, });
-  console.log('DEV_CONFIG', dConf.module.loaders);
   return dConf;
 };
 
@@ -34,6 +32,7 @@ export const applyHotMiddleware = compiler => (app) => {
 
   return app;
 };
+
 export const compile = config => webpack(config);
 
 export const enableHotReload = app => applyHotMiddleware(compile(dev(sharedConf)))(app);

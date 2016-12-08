@@ -1,13 +1,17 @@
 import axios from 'axios';
-import { UPDATE_SEARCH_RESULTS, } from './constants';
+import { UPDATE_SEARCH_RESULTS, SEARCH_URL, } from './constants';
 import { MovieUtils, } from '../../utils';
+
 const { MOVIE_DB_SEARCH_URL: API_URL, } = MovieUtils;
+
+console.log('=============SEARCH_URL=============', SEARCH_URL);
+console.log('=============API_URL=============', API_URL);
 
 const update = newResults => results => newResults;
 const updateResults = results =>
  ({ type: UPDATE_SEARCH_RESULTS, curry: update(results), });
 
-const pending = (query) => () =>
+const pending = query => () =>
  ({ status: 'pending', updatedAt: Date.now(), message: query, });
 
 const success = message => () =>
@@ -16,7 +20,7 @@ const success = message => () =>
 const failure = message => () =>
  ({ status: 'failed', updatedAt: Date.now(), message, });
 
-const searchRequestPending = (query) =>
+const searchRequestPending = query =>
     ({ type: 'SEARCH_REQUEST_PENDING', curry: pending(query), });
 
 const searchRequestSucess = () =>
@@ -24,16 +28,18 @@ const searchRequestSucess = () =>
 
 const searchRequestFailure = err =>
     ({ type: 'SEARCH_REQUEST_FAILURE', curry: failure(err.message), });
-console.log(API_URL)
 
-export const search = (query) => (dispatch) => {
-  console.log(query)
+export const search = query => (dispatch) => {
+  console.log('==================CALLING SEARCH==================', query);
   dispatch(searchRequestPending(query));
 
-  return axios.get(API_URL, query)
+  // return axios.get(API_URL, query)
 
-  // return axios.get({ baseURL: API_URL, params: { query, }, })
-    .then(({ data: { results, }, })=>
+  return axios.get(SEARCH_URL, { params: { query, }, });
+  return axios.get(SEARCH_URL, { query, })
+
+  // return axios.create({ baseURL: API_URL, }).get( { params: { query, }, })
+    .then(({ data: { results, }, }) =>
           dispatch(searchRequestSucess()) && dispatch(updateResults(results)))
     .catch(searchRequestFailure);
 };
