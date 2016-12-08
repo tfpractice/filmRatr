@@ -79,7 +79,7 @@ export const DEV_CONFIG = {
         test:    /\.jsx?$/,
         exclude: /node_modules/,
         loaders:  [{ loader: 'react-hot-loader/webpack', },
-        { loader: 'babel-loader', query:   BABEL_QUERY, }, ],
+        { loader: 'babel-loader', query:   BABEL_QUERY, },],
       },
     ],
   },
