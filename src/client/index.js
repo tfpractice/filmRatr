@@ -5,7 +5,8 @@ import { browserHistory, Router, } from 'react-router';
 import { getRoutes, getStore, } from '../imports';
 
 const store = getStore(window.__PRELOADED_STATE__);
-console.log('============stor frome clinet======', store);
+
+// console.log('============stor frome clinet======', store);
 render(
   <Provider store={store}>
     <Router children={getRoutes(store)} history={browserHistory} />

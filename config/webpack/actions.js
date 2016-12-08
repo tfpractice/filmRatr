@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 import merge from 'webpack-merge';
 import wpClean from 'clean-webpack-plugin';
 import sharedConf from './shared';
@@ -10,7 +11,7 @@ const clean = path =>
 
 export const build = common => merge(common, BUILD_CONFIG, clean(PATHS.dist));
 
-export const dev = (common) => {
+export const dev = (common = sharedConf({ prod: false, })) => {
   const dConf = (merge(common, DEV_CONFIG));
   return dConf;
 };
@@ -27,4 +28,4 @@ export const applyHotMiddleware = compiler => (app) => {
 
 export const compile = config => webpack(config);
 
-export const enableHotReload = app => applyHotMiddleware(compile(dev(sharedConf)))(app);
+export const enableHotReload = app => applyHotMiddleware(compile(dev()))(app);

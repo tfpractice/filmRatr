@@ -37,6 +37,8 @@ export const BABEL_QUERY = {
   plugins: [
           [ 'transform-object-rest-spread', ],
           [ 'transform-class-properties', ],
+
+          // [ 'react-hot-loader/babel', ],
     [
       'react-transform', {
         transforms: [
@@ -51,28 +53,42 @@ export const BABEL_QUERY = {
   ],
 };
 export const DEV_CONFIG = {
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map',
   entry:   {
     app: [
       PATHS.app, 'webpack-hot-middleware/client',
+      // 'react-hot-loader/patch',
     ],
     vendor: [ 'react', 'webpack-hot-middleware/client', ],
   },
   module: {
     loaders: [
+      // {
+      //   test:    /\.jsx?$/,
+      //   exclude: /node_modules/,
+      //   loaders: [ 'react-hot-loader/webpack', ],
+      //   // query:   BABEL_QUERY,
+      // }
+      // {
+      //   test:    /\.jsx?$/,
+      //   exclude: /node_modules/,
+      //   loader:  'babel-loader',
+      //   query:   BABEL_QUERY,
+      // },
       {
         test:    /\.jsx?$/,
         exclude: /node_modules/,
-        loader:  'babel-loader',
-        query:   BABEL_QUERY,
+        loaders:  [{ loader: 'react-hot-loader/webpack', },
+        { loader: 'babel-loader', query:   BABEL_QUERY, }, ],
       },
     ],
   },
   plugins: [
     // new webpack.optimize.OccurenceOrderPlugin(),
-
+    // 'react-hot-loader/babel',
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.EnvironmentPlugin([ 'MOVIE_DB_API_KEY', ]),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV), }, }),
   ],
 };
