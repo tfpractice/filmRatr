@@ -38,11 +38,12 @@ export const BABEL_QUERY = {
           [ 'transform-object-rest-spread', ],
           [ 'transform-class-properties', ],
 
-          // [ 'react-hot-loader/babel', ],
+          [ 'react-hot-loader/babel', ],
     [
       'react-transform', {
         transforms: [
           {
+
             transform: 'react-transform-hmr',
             imports:   [ 'react', ],
             locals:    [ 'module', ],
@@ -56,7 +57,7 @@ export const DEV_CONFIG = {
   // devtool: 'eval-source-map',
   entry:   {
     app: [
-      PATHS.app, 'webpack-hot-middleware/client',
+      PATHS.app, 'react-hot-loader/patch', 'webpack-hot-middleware/client',
       // 'react-hot-loader/patch',
     ],
     vendor: [ 'react', 'webpack-hot-middleware/client', ],
