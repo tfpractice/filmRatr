@@ -9,27 +9,27 @@ const resetForm = name => (action, dispatch) => dispatch(reset(name));
 const mapStateToProps = ({ search: { results, query, }, }) =>
   ({ results, query, });
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   ({ actions: bindActionCreators(SearchActions, dispatch), });
 
 const SearchResults = ({ results, query, actions, }) => {
-  console.log(actions.search.toString())
+  console.log(actions);
 
-  return(
-  <div className="search-list">
-    <h1>
+  return (
+    <div className="search-list">
+      <h1>
       SearchResults
     </h1>
-    <SearchForm
-      form={'newSearchForm'}
-      onSubmit={actions.search}
-      onSubmitSuccess={resetForm('newSearchForm')}
-    />
-    {results.map(r=>
-      <div>{r.toString()}</div>)}
+      <SearchForm
+        form={'newSearchForm'}
+        onSubmit={actions.search}
+        onSubmitSuccess={resetForm('newSearchForm')}
+      />
+      {results.map(r =>
+        <div>{r.toString()}</div>)}
 
-  </div>
+    </div>
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);
