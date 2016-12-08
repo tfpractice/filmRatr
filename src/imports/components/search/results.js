@@ -1,7 +1,10 @@
 import React, { PropTypes, } from 'react';
+import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { reset, } from 'redux-form';
 import SearchForm from './form';
+
+import { searchActions, } from '../actions';
 
 const resetForm = name => (action, dispatch) => dispatch(reset(name));
 
