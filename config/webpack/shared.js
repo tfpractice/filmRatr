@@ -1,11 +1,7 @@
 import webpack from 'webpack';
 import path from 'path';
-import validate from 'webpack-validator';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { PATHS, ROOT_PATH, } from './constants';
-
-const Joi = require('webpack-validator').Joi;
-const schemaExtension = Joi.object({ sassLoader: Joi.any(), });
 
 export default env =>
   // console.log(env);

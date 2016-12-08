@@ -1,9 +1,3 @@
-import webpack from 'webpack';
-import validate from 'webpack-validator';
-const Joi = require('webpack-validator').Joi;
-
-const schemaExtension = Joi.object({ sassLoader: Joi.any(), });
-
 import merge from 'webpack-merge';
 import wpClean from 'clean-webpack-plugin';
 import sharedConf from './shared';

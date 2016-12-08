@@ -1,7 +1,3 @@
-import validate from 'webpack-validator';
-const Joi = require('webpack-validator').Joi;
-
-const schemaExtension = Joi.object({ sassLoader: Joi.any(), });
 import sharedConf from './shared';
 import * as actions from './actions';
 import { CONFIG_EVENTS, } from './constants';
