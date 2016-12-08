@@ -7,34 +7,47 @@ import { PATHS, ROOT_PATH, } from './constants';
 const Joi = require('webpack-validator').Joi;
 const schemaExtension = Joi.object({ sassLoader: Joi.any(), });
 
-export default (env, ...args) => {
-  // console.log(process.env)
-  console.log(args);
-  return validate({
-    context: ROOT_PATH,
-    entry: { app: PATHS.app, },
-    output: {
-      path:      PATHS.dist,
-      filename:   '[name].bundle.js',
-      publicPath: '/',
+export default (env, ...args) =>
 
-    },
-    module: {
-      loaders: [
-        {
-          test:    /\.jsx?$/,
-          exclude: /node_modules/,
-          loaders: [ 'babel-loader', ],
-        },
-      ],
-    },
-    devtool: env.prod ? 'source-map' : 'eval',
-    node: {
-      fs:  'empty',
-      net: 'mock',
-      tls: 'mock',
-      dns: 'mock',
-      net: 'mock',
-    },
-  })
-};
+  // console.log(process.env)
+  // console.log(args);
+   validate({
+     context: ROOT_PATH,
+     entry: { app: PATHS.app, },
+     resolve: {
+       modulesDirectories: [ 'node_modules', ],
+       extensions: [ '', '.js', '.jsx', '.json', ],
+     },
+     output: {
+       path:      PATHS.dist,
+       filename:   '[name].bundle.js',
+       publicPath: '/',
+
+     },
+     module: {
+       loaders: [
+         {
+           test:    /\.jsx?$/,
+           exclude: /node_modules/,
+           loaders: [ 'babel-loader', ],
+         },
+       ],
+     },
+     devtool: env.prod ? 'source-map' : 'eval',
+     plugins: [
+       new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"', }, }),
+
+  // new webpack.optimize.UglifyJsPlugin({
+  //   compress: { warnings: false, },
+  //   mangle: { except: [ 'webpackJsonp', ], },
+  // }),
+  // new ExtractTextPlugin('[name].styles.css'),
+     ],
+     node: {
+       fs:  'empty',
+       net: 'mock',
+       tls: 'mock',
+       dns: 'mock',
+       net: 'mock',
+     },
+   });

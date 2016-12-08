@@ -36,8 +36,9 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: false, }));
 app.use(cookieParser());
 
 // Set Static Folder
-// app.use(express.static(path.resolve(__dirname, '../../../dist')));
-app.use(express.static(path.resolve(__dirname, 'dist')));
+app.use(express.static(path.resolve(__dirname, '../../../dist')));
+
+// app.use(express.static(path.resolve(__dirname, 'dist')));
 
 // Express Session
 // app.use(session({ secret: 'secret', saveUninitialized: true, resave: true, }));

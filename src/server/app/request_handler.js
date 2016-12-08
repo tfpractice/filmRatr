@@ -4,14 +4,14 @@ import { Provider, } from 'react-redux';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { getRoutes, fetchComponentData, getStore, } from '../../imports';
 
-export const renderHTML = (markup, preloadedState={}) => `
+export const renderHTML = (markup, preloadedState = {}) => `
     <!doctype html>
     <html>
       <head>
         <title>HomeMakr App</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="app.styles.css">
+
   </head>
       <body>
         <div id="root">${markup}</div>
@@ -24,9 +24,11 @@ export const renderHTML = (markup, preloadedState={}) => `
            </body>
     </html>
     `;
-
+{ /* <link rel="stylesheet" href="app.styles.css"> */ }
 export const requestHandler = (req, res) => {
   const store = getStore();
+  console.log('============stor frome server======', store);
+
   const routes = getRoutes(store);
   const location = createMemoryHistory(req.url);
 
@@ -36,7 +38,6 @@ export const requestHandler = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-
       const markup = renderToString(
         <Provider store={store}>
           <RouterContext {...renderProps} />
