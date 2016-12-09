@@ -1,26 +1,23 @@
 import React from 'react';
 import { render, } from 'react-dom';
 import { Provider, } from 'react-redux';
+import { AppContainer as HotContainer, } from 'react-hot-loader';
 import { browserHistory, Router, } from 'react-router';
-import { getRoutes, getStore, AppContainer, } from '../imports';
+import { getRoutes, getStore, AppContainer as AppComponent, } from '../imports';
 
-const store = getStore(window.__PRELOADED_STATE__);
+const applyToDOM = () => render(
+  <HotContainer>
+    <AppComponent store={getStore(window.__PRELOADED_STATE__)} />
+  </HotContainer>, document.getElementById('root'));
 
-// render(
-//   <Provider store={store}>
-//     <Router children={getRoutes(store)} history={browserHistory} />
-//   </Provider>, document.getElementById('root'));
+applyToDOM();
 
-render(<AppContainer store={store} />, document.getElementById('root'));
-
-// if (module.hot) {
-//   module.hot.accept('../imports', () => {
-//       // If you use Webpack 2 in ES modules mode, you can
-//       // use <App /> here rather than require() a <NextApp />.
-//     const NextApp = require('../imports').getRoutes(store);
-//     render(<Provider store={store}>
-//       <Router children={getRoutes(store)} history={browserHistory} />
-//     </Provider>, document.getElementById('root')
-//       );
-//   });
-// }
+if (module.hot) {
+  module.hot.accept('../imports', (...args) => {
+    console.log(args);
+    applyToDOM();
+    module.hot.accept('../imports/reducer', () => {
+      getStore(window.__PRELOADED_STATE__).replaceReducer(appReducer);
+    });
+  });
+}

@@ -35,16 +35,16 @@ export const BABEL_QUERY = {
     'latest', 'react',
   ],
   plugins: [
+    [ 'react-hot-loader/babel', ],
           [ 'transform-object-rest-spread', ],
           [ 'transform-class-properties', ],
 
-          [ 'react-hot-loader/babel', ],
     [
       'react-transform', {
         transforms: [
           {
 
-            transform: 'react-transform-hmr',
+            transform:  'react-transform-hmr',
             imports:   [ 'react', ],
             locals:    [ 'module', ],
           },
@@ -55,12 +55,19 @@ export const BABEL_QUERY = {
 };
 export const DEV_CONFIG = {
   // devtool: 'eval-source-map',
+  devServer: {
+    hot: true,
+    headers: { 'Access-Control-Allow-Origin': '*', },
+  },
   entry:   {
     app: [
-      PATHS.app, 'react-hot-loader/patch', 'webpack-hot-middleware/client',
-      // 'react-hot-loader/patch',
+      'react-hot-loader/patch', 'webpack-hot-middleware/client', PATHS.app,
     ],
-    vendor: [ 'react', 'webpack-hot-middleware/client', ],
+    vendor: [ 'react', 'react-hot-loader/patch', 'webpack-hot-middleware/client', ],
+  },
+  output: {
+    hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
+    hotUpdateMainFilename: 'hot/[hash].hot-update.json',
   },
   module: {
     loaders: [
@@ -80,14 +87,14 @@ export const DEV_CONFIG = {
         test:    /\.jsx?$/,
         exclude: /node_modules/,
         loaders:  [{ loader: 'react-hot-loader/webpack', },
-        { loader: 'babel-loader', query:   BABEL_QUERY, },],
+        { loader: 'babel-loader', query:   BABEL_QUERY, }, ],
       },
     ],
   },
   plugins: [
-    // new webpack.optimize.OccurenceOrderPlugin(),
-    // 'react-hot-loader/babel',
+
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.EnvironmentPlugin([ 'MOVIE_DB_API_KEY', ]),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV), }, }),

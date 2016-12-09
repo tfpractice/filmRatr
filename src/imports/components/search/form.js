@@ -1,4 +1,3 @@
-
 import React, { PropTypes, } from 'react';
 import { reduxForm, Field, } from 'redux-form';
 import { connect, } from 'react-redux';
@@ -14,7 +13,7 @@ const SearchForm = ({ handleSubmit, }) => (
       <label htmlFor="query">query</label>
     </div>
     <button type="submit" className="waves-effect waves-light btn">
-      Submit  hot???
+    Submit WILLL THIS HOT HOT HOT  WORK???
     </button>
   </form>
 );

@@ -2,7 +2,8 @@ import React from 'react';
 import { renderToString, } from 'react-dom/server';
 import { Provider, } from 'react-redux';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
-import { getRoutes, fetchComponentData, getStore, } from '../../imports';
+import { getRoutes, fetchComponentData, getStore, AppContainer as AppComponent, } from '../../imports';
+import { AppContainer as HotContainer, } from 'react-hot-loader';
 
 export const renderHTML = (markup, preloadedState = {}) => `
     <!doctype html>
@@ -25,23 +26,26 @@ export const renderHTML = (markup, preloadedState = {}) => `
     </html>
     `;
 { /* <link rel="stylesheet" href="app.styles.css"> */ }
+
 export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes(store);
   const location = createMemoryHistory(req.url);
 
-  match({ routes, location, }, (error, redirectLocation, renderProps) => {
+  match({ routes, location, }, (error, redirectLocation, props) => {
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-    } else if (renderProps) {
+    } else if (props) {
       const markup = renderToString(
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>);
+        <HotContainer>
+          <Provider store={store}>
+            <RouterContext {...props} />
+          </Provider>
+        </HotContainer>);
 
-      fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+      fetchComponentData(store.dispatch, props.components, props.params)
         .then((args) => { res.send(renderHTML(markup, store.getState())); })
         .catch(err => res.end(err.message));
     } else {
