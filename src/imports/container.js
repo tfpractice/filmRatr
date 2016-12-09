@@ -8,6 +8,7 @@ import getRoutes from './routes';
 export default class AppContainer extends Component {
   render() {
     const { store, } = this.props;
+    console.log('appContian chnagek', store);
     return (
       <Provider store={store}>
         <Router children={getRoutes(store)} history={browserHistory} />

@@ -18,12 +18,15 @@ export const dev = (common = sharedConf({ prod: false, })) => {
 
 export const applyHotMiddleware = compiler => (app) => {
   if (process.env.NODE_ENV !== 'production') {
-    app.use(webpackDevMiddleware(compiler, { noInfo: true, }));
+    app.use(webpackDevMiddleware(compiler, {
+      noInfo: true,
+      historyApiFallback: true,
+      publicPath: compiler.options.output.publicPath,
+    }));
     app.use(webpackHotMiddleware(compiler));
-    console.log(process.env.NODE_ENV);
 
-    //
-    console.log(app);
+    // console.log(process.env.NODE_ENV);
+    // console.log(compiler.options);
   }
 
   return app;

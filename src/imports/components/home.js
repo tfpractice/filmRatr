@@ -4,7 +4,7 @@ import { SearchResults, } from './search';
 
 const Home = ({ children, ...rest }, context) => (
   <div id="home">
-    <div> HOMEPAGE REOLOACHOT</div>
+    <div> HOMEPAGE NO BABEL </div>
     <SearchResults />
   </div>
   );

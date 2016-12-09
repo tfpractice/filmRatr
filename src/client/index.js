@@ -5,19 +5,18 @@ import { AppContainer as HotContainer, } from 'react-hot-loader';
 import { browserHistory, Router, } from 'react-router';
 import { getRoutes, getStore, AppContainer as AppComponent, } from '../imports';
 
-const applyToDOM = () => render(
-  <HotContainer>
-    <AppComponent store={getStore(window.__PRELOADED_STATE__)} />
-  </HotContainer>, document.getElementById('root'));
+const applyToDOM = (Component) => {
+  console.log('applying Component to dom');
+  render(
+    <HotContainer>
+      {Component}
+    </HotContainer>, document.getElementById('root'));
+};
 
-applyToDOM();
+applyToDOM(<AppComponent store={getStore(window.__PRELOADED_STATE__)} />);
 
 if (module.hot) {
-  module.hot.accept('../imports', (...args) => {
-    console.log(args);
-    applyToDOM();
-    module.hot.accept('../imports/reducer', () => {
-      getStore(window.__PRELOADED_STATE__).replaceReducer(appReducer);
-    });
+  module.hot.accept('../imports', () => {
+    applyToDOM(<AppComponent store={getStore(window.__PRELOADED_STATE__)} />);
   });
 }
