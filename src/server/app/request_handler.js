@@ -9,7 +9,7 @@ export const renderHTML = (markup, preloadedState = {}) => `
     <!doctype html>
     <html>
       <head>
-        <title>HomeMakr App</title>
+        <title>HomeMakr App RRRKSJDDJJD</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -53,3 +53,6 @@ export const requestHandler = (req, res) => {
     }
   });
 };
+if (module.hot) {
+  module.hot.accept();
+}

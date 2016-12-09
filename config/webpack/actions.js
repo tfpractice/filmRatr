@@ -18,8 +18,12 @@ export const dev = (common = sharedConf({ prod: false, })) => {
 
 export const applyHotMiddleware = compiler => (app) => {
   if (process.env.NODE_ENV !== 'production') {
-    app.use(webpackHotMiddleware(compiler));
     app.use(webpackDevMiddleware(compiler, { noInfo: true, }));
+    app.use(webpackHotMiddleware(compiler));
+    console.log(process.env.NODE_ENV);
+
+    //
+    console.log(app);
   }
 
   return app;

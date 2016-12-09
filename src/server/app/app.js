@@ -67,4 +67,15 @@ app.use(flash());
 // establish server render
 app.use(requestHandler);
 
+if (module.hot) {
+    // accept update of dependency
+  module.hot.accept('./request_handler', () => {
+    console.log('HNADLER CHANGED');
+
+        // replace request handler of server
+        // server.removeListener("request", requestHandler);
+    const requestHandler = require('./request_handler');
+    app.use(requestHandler);
+  });
+}
 export default app;

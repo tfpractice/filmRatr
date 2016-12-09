@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute, } from 'react-router';
 
 // import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Main, Home, } from './components';
+import { Home, Main, } from './components';
 
 // import { Login, Register, } from './components/auth';
 //
@@ -27,5 +27,8 @@ const getRoutes = store => (
   <Route name="app" component={Main} path="/">
     <IndexRoute component={Home} />
   </Route>);
+if (module.hot) {
+  module.hot.accept();
+}
 
 export default getRoutes;

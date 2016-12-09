@@ -21,10 +21,6 @@ export const BUILD_CONFIG =
     output: { filename:   '[name].[chunkhash].bundle.js', },
     plugins: [
 
-      // new webpack.optimize.UglifyJsPlugin({
-      //   compress: { warnings: false, },
-      //   mangle: { except: [ 'webpackJsonp', ], },
-      // }),
       // new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
       // new ExtractTextPlugin('[name].[chunkhash].styles.css'),
     ],
@@ -39,17 +35,15 @@ export const BABEL_QUERY = {
           [ 'transform-object-rest-spread', ],
           [ 'transform-class-properties', ],
 
-    [
-      'react-transform', {
-        transforms: [
-          {
-
-            transform:  'react-transform-hmr',
-            imports:   [ 'react', ],
-            locals:    [ 'module', ],
-          },
-        ],
-      },
+    [ 'react-transform', {
+      transforms: [
+        {
+          transform:  'react-transform-hmr',
+          imports:   [ 'react', ],
+          locals:    [ 'module', ],
+        },
+      ],
+    },
     ],
   ],
 };
@@ -87,7 +81,7 @@ export const DEV_CONFIG = {
         test:    /\.jsx?$/,
         exclude: /node_modules/,
         loaders:  [{ loader: 'react-hot-loader/webpack', },
-        { loader: 'babel-loader', query:   BABEL_QUERY, }, ],
+        { loader: 'babel-loader', query:   BABEL_QUERY, },],
       },
     ],
   },
