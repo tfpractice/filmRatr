@@ -1,10 +1,12 @@
 import React, { PropTypes, } from 'react';
 import { connect, } from 'react-redux';
 import { SearchResults, } from './search';
+import FlatButton from 'material-ui/FlatButton';
 
 const Home = ({ children, ...rest }, context) => (
   <div id="home">
-    <div> HOMEPAGE NO BABEL </div>
+    <FlatButton label="HOMEPAGE NO BABEL" />
+    <div> HOMEPAGE NHOTOTOTOOTO BABEL </div>
     <SearchResults />
   </div>
   );

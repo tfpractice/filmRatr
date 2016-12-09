@@ -12,7 +12,7 @@ export const renderHTML = (markup, preloadedState = {}) => `
         <title>HomeMakr App RRRKSJDDJJD</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   </head>
       <body>
         <div id="root">${markup}</div>
@@ -39,11 +39,14 @@ export const requestHandler = (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
       const markup = renderToString(
-        <HotContainer>
-          <Provider store={store}>
-            <RouterContext {...props} />
-          </Provider>
-        </HotContainer>);
+
+        // <HotContainer>
+        <Provider store={store}>
+          <RouterContext {...props} />
+        </Provider>
+
+        // </HotContainer>
+      );
 
       fetchComponentData(store.dispatch, props.components, props.params)
         .then((args) => { res.send(renderHTML(markup, store.getState())); })
@@ -53,6 +56,7 @@ export const requestHandler = (req, res) => {
     }
   });
 };
+
 if (module.hot) {
   module.hot.accept();
 }
