@@ -9,10 +9,15 @@ import { BUILD_CONFIG, DEV_CONFIG, PATHS, } from './constants';
 const clean = path =>
 ({ plugins: [ new wpClean([ path, ], { root: process.cwd(), }), ], });
 
-export const build = common => merge(common, BUILD_CONFIG, clean(PATHS.dist));
+export const build = common =>
+  merge.smart(common, BUILD_CONFIG, clean(PATHS.dist));
 
 export const dev = (common = sharedConf({ prod: false, })) => {
-  const dConf = (merge(common, DEV_CONFIG));
+  console.log('==============common==============');
+  console.log(common);
+  const dConf = (merge.smart(common, DEV_CONFIG));
+  console.log('==============dConf==============');
+  console.log(dConf);
   return dConf;
 };
 
