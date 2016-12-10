@@ -1,5 +1,4 @@
 import React, { Component, } from 'react';
-
 import { AppContainer as HotContainer, } from 'react-hot-loader';
 import { Provider, } from 'react-redux';
 import { browserHistory, Router, } from 'react-router';
