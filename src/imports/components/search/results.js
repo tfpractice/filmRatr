@@ -5,6 +5,7 @@ import { reset, } from 'redux-form';
 import { SearchActions, } from '../../actions';
 import { MovieCard, } from '../movie';
 import SearchForm from './form';
+import SearchGrid from './grid';
 
 const resetForm = name => (action, dispatch) => dispatch(reset(name));
 const mapStateToProps = ({ search: { results, query, }, }) =>
@@ -23,12 +24,9 @@ const SearchResults = ({ results, query, actions, }) => (
       onSubmit={actions.search}
       onSubmitSuccess={resetForm('newSearchForm')}
     />
-
     <div className="mysearch">
       {results.map(r => <MovieCard movie={r} />)}
-
     </div>
-
   </div>
  );
 

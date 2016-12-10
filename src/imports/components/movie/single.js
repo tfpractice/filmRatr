@@ -3,9 +3,6 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText, } from '
 
 import FlatButton from 'material-ui/FlatButton';
 
-// https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
-
-// `https://image.tmdb.org/t/p/w500/${movie.poster_path}.jpg`;
 const MovieCard = ({ movie, }) => (
   <Card>
     <CardHeader
@@ -16,7 +13,10 @@ const MovieCard = ({ movie, }) => (
     />
     {movie.backdrop_path ?
       <CardMedia
-        overlay={<CardTitle title={movie.title} subtitle={<p>{movie.overview}</p>} />}
+        overlay={
+          <CardTitle
+            title={movie.title} subtitle={<p>{movie.overview}</p>}
+          />}
       >
         <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
       </CardMedia>
@@ -48,4 +48,5 @@ export default MovieCard;
 //   title:'Paycheck',
 //   video:false,
 //   vote_average:5.7,
+
 //  }
