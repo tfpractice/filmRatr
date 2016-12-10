@@ -29,7 +29,10 @@ export const renderHTML = (markup, preloadedState = {}) => `
            </body>
     </html>
     `;
-{ /* */ }
+
+{ /* minor c
+
+hnage */ }
 
 export const requestHandler = (req, res) => {
   const store = getStore();
