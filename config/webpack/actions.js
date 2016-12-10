@@ -21,7 +21,7 @@ export const dev = (common = sharedConf({ prod: false, })) => {
   console.log('==============dConf==============');
   console.log(process.env.NODE_ENV);
 
-  console.log(dConf);
+  console.log(dConf.plugins);
   return dConf;
 };
 

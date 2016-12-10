@@ -11,7 +11,7 @@ export const PATHS = {
   dist: resolve(ROOT_PATH, 'dist'),
   src: SRC_DIR,
 };
-
+const vendor = [ 'material-ui', 'redux-form', 'react', ];
 export const DEV = 'dev';
 export const BUILD = 'build';
 export const CONFIG_EVENTS = new Set([ BUILD, DEV, ]);
@@ -27,7 +27,7 @@ export const BUILD_CONFIG = {
 };
 
 export const BABEL_QUERY = {
-  presets: [[ 'latest', { es2015: false, },], 'react', ],
+  presets: [[ 'latest', { modules: false, },], 'react', ],
   plugins: [[ 'react-hot-loader/babel', ], ],
 };
 

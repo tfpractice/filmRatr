@@ -24,6 +24,7 @@ export const renderHTML = (markup, preloadedState = {}) => `
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
         </script>
 
+        <script type="application/javascript" src="manifest.bundle.js"></script>
         <script type="application/javascript" src="vendor.bundle.js"></script>
         <script type="application/javascript" src="app.bundle.js"></script>
            </body>

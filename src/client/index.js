@@ -4,7 +4,6 @@ import { Provider, } from 'react-redux';
 import { AppContainer as HotContainer, } from 'react-hot-loader';
 import { browserHistory, Router, } from 'react-router';
 import { getRoutes, getStore, AppContainer as AppComponent, } from '../imports';
-
 const store = getStore(window.__PRELOADED_STATE__);
 
 const applyToDOM = str =>

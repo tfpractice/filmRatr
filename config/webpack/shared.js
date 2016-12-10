@@ -37,12 +37,13 @@ export default env => ({
 
   devtool: env.prod ? 'source-map' : 'eval',
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin(
+      { names: [ 'vendor', 'manifest', ], }),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"', }, }),
-
- // new webpack.optimize.UglifyJsPlugin({
- //   compress: { warnings: false, },
- //   mangle: { except: [ 'webpackJsonp', ], },
- // }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+    }),
     new ExtractTextPlugin('[name].styles.css'),
     new webpack.LoaderOptionsPlugin(
       {
