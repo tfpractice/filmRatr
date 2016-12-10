@@ -20,7 +20,8 @@ export const BUILD_CONFIG = {
   entry: { vendor: [ 'material-ui', 'redux-form', 'react', ], },
   output: { filename:   '[name].[chunkhash].bundle.js', },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
+    new webpack.optimize.CommonsChunkPlugin(
+      { names: [ 'vendor', 'manifest', ], }),
     new ExtractTextPlugin('[name].[chunkhash].styles.css'),
   ],
 };
