@@ -38,14 +38,17 @@ export const requestHandler = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
+      console.log('============SERVER RENDER PROPS============', props);
+
       const markup = renderToString(
 
-        // <HotContainer>
-        <Provider store={store}>
-          <RouterContext {...props} />
-        </Provider>
+        <HotContainer>
+          
+          <Provider store={store}>
+            <RouterContext {...props} />
+          </Provider>
 
-        // </HotContainer>
+        </HotContainer>
       );
 
       fetchComponentData(store.dispatch, props.components, props.params)
