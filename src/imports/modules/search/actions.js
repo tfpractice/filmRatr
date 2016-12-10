@@ -28,7 +28,7 @@ const searchRequestFailure = err =>
 
 export const search = query => (dispatch) => {
   dispatch(searchRequestPending(query));
-  return axios.get(SEARCH_URL, { params: { ...query, }, })
+  return axios.get(SEARCH_URL, { params: { ...query, append_to_response: 'images', }, })
     .then(({ data: { results, }, }) =>
       dispatch(searchRequestSucess()) && dispatch(updateResults(results)))
     .catch(searchRequestFailure);

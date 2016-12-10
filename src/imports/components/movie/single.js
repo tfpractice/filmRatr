@@ -1,7 +1,11 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, CardText, } from 'material-ui/Card';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText, } from 'material-ui/Card';
+
 import FlatButton from 'material-ui/FlatButton';
 
+// https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
+
+// `https://image.tmdb.org/t/p/w500/${movie.poster_path}.jpg`;
 const MovieCard = ({ movie, }) => (
   <Card>
     <CardHeader
@@ -10,13 +14,20 @@ const MovieCard = ({ movie, }) => (
       actAsExpander
       showExpandableButton
     />
+    {movie.backdrop_path ?
+      <CardMedia
+        overlay={<CardTitle title={movie.title} subtitle={<p>{movie.overview}</p>} />}
+      >
+        <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
+      </CardMedia>
+    : ''}
+    <CardText expandable>
+      {movie.overview}
+    </CardText>
     <CardActions>
       <FlatButton label="Review this movie" />
       <FlatButton label="Show Reviews" />
     </CardActions>
-    <CardText expandable>
-      {movie.overview}
-    </CardText>
   </Card>
 );
 
