@@ -24,9 +24,6 @@ export const applyHotMiddleware = compiler => (app) => {
       publicPath: compiler.options.output.publicPath,
     }));
     app.use(webpackHotMiddleware(compiler));
-
-    // console.log(process.env.NODE_ENV);
-    // console.log(compiler.options);
   }
 
   return app;

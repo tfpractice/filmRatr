@@ -15,6 +15,8 @@ export const renderHTML = (markup, preloadedState = {}) => `
           <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
           <link rel="stylesheet" href="app.styles.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
   </head>
       <body>
         <div id="root">${markup}</div>

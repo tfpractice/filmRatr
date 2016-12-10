@@ -16,44 +16,21 @@ export const DEV = 'dev';
 export const BUILD = 'build';
 export const CONFIG_EVENTS = new Set([ BUILD, DEV, ]);
 
-export const BUILD_CONFIG =
-  {
-    entry: { vendor: [ 'material-ui', 'redux-form', 'react', ], },
-    output: { filename:   '[name].[chunkhash].bundle.js', },
-    plugins: [
-
-      new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
-      // new ExtractTextPlugin('[name].[chunkhash].styles.css'),
-    ],
-  };
-
-export const BABEL_QUERY = {
-  presets: [
-    'latest', 'react',
-  ],
+export const BUILD_CONFIG = {
+  entry: { vendor: [ 'material-ui', 'redux-form', 'react', ], },
+  output: { filename:   '[name].[chunkhash].bundle.js', },
   plugins: [
-
-    [ 'react-hot-loader/babel', ],
-
-          // [ 'transform-object-rest-spread', ],
-          // [ 'transform-class-properties', ],
-
-    // [ 'react-transform', {
-      // transforms: [
-        // {
-          // transform:  'react-transform-hmr',
-          // imports:   [ 'react', ],
-          // locals:    [ 'module', ],
-        // },
-      // ],
-    // },
-    // ],
+    new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
+    new ExtractTextPlugin('[name].[chunkhash].styles.css'),
   ],
 };
 
-// console.log(process.env.NODE_ENV);
+export const BABEL_QUERY = {
+  presets: [ 'latest', 'react', ],
+  plugins: [[ 'react-hot-loader/babel', ],],
+};
+
 export const DEV_CONFIG = {
-  // devtool: 'eval-source-map',
   devServer: { hot: true, },
   entry:   {
     app: [
@@ -67,14 +44,12 @@ export const DEV_CONFIG = {
     hotUpdateMainFilename: 'hot/[hash].hot-update.json',
   },
   module: {
-    loaders: [
-      {
-        test:    /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders:  [{ loader: 'babel-loader', query: BABEL_QUERY, }, ],
-        include: PATHS.src,
-      },
-    ],
+    loaders: [{
+      test:    /\.jsx?$/,
+      exclude: /node_modules/,
+      loaders:  [{ loader: 'babel-loader', query: BABEL_QUERY, },],
+      include: PATHS.src,
+    }, ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

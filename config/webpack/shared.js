@@ -24,6 +24,13 @@ export default env => ({
         loaders: [ 'babel-loader', ],
       },
       { test: /\.json$/, loader: 'json-loader', },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: [ 'css-loader', 'sass-loader?outputStyle=compressed', ],
+        }),
+      },
 
     ],
   },
@@ -31,11 +38,19 @@ export default env => ({
   devtool: env.prod ? 'source-map' : 'eval',
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"', }, }),
+
  // new webpack.optimize.UglifyJsPlugin({
  //   compress: { warnings: false, },
  //   mangle: { except: [ 'webpackJsonp', ], },
  // }),
- // new ExtractTextPlugin('[name].styles.css'),
+    new ExtractTextPlugin('[name].styles.css'),
+    new webpack.LoaderOptionsPlugin(
+      {
+        options: {
+          sassLoader:
+        { includePaths: [ './node_modules', ], },
+        },
+      }),
   ],
   node: {
     fs:  'empty',
@@ -43,4 +58,5 @@ export default env => ({
     tls: 'mock',
     dns: 'mock',
   },
+
 });
