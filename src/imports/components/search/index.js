@@ -1,2 +1,3 @@
 import SearchResults from './results';
-export { SearchResults, }
+import IndependentSearch from './free_form';
+export { SearchResults, IndependentSearch, };

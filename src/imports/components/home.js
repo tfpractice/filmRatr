@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 const Home = ({ children, ...rest }, context) => (
   <div id="home">
-    <div> HOMEPAGE </div>
+    <h1>HOMEPAGE</h1>
     <SearchResults />
   </div>
   );
