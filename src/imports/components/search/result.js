@@ -1,5 +1,15 @@
 import React from 'react';
 
+const Result = ({ movie, }) => (<div className="resultDiv">
+  <p> id:{movie.id}</p>
+  <p>original_title:{movie.original_title}</p>
+  <p>popularity:{movie.popularity}</p>
+  <p>release_date:{movie.release_date}</p>
+  <p>title:{movie.title}</p>
+</div>);
+
+export default Result;
+
 // { adult:false,
 //   backdrop_path:  '/7GyIzZImsBTAH0teL1XKG6Nz3OL.jpg',
 //   genre_ids:Array[5],
@@ -16,12 +26,3 @@ import React from 'react';
 //   video:false,
 //   vote_average:5.7,
 //  }
-
-const Result = ({ movie, }) => (<div className="resultDiv">
-  <p>id:{movie.id}</p>
-  <p>original_title:{movie.original_title}</p>
-  <p>popularity:{movie.popularity}</p>
-  <p>release_date:{movie.release_date}</p>
-  <p>title:{movie.title}</p>
-</div>);
-export default Result;

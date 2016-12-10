@@ -54,15 +54,13 @@ export const BABEL_QUERY = {
 // console.log(process.env.NODE_ENV);
 export const DEV_CONFIG = {
   // devtool: 'eval-source-map',
-  devServer: {
-    hot: true,
-    headers: { 'Access-Control-Allow-Origin': '*', },
-  },
+  devServer: { hot: true, },
   entry:   {
     app: [
       'react-hot-loader/patch', 'webpack-hot-middleware/client', PATHS.app,
     ],
-    vendor: [ 'react-hot-loader/patch', 'webpack-hot-middleware/client', 'react', ],
+    vendor: [ 'react-hot-loader/patch', 'webpack-hot-middleware/client',
+      'material-ui', 'redux-form', 'react', ],
   },
   output: {
     hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
@@ -70,13 +68,10 @@ export const DEV_CONFIG = {
   },
   module: {
     loaders: [
-
       {
         test:    /\.jsx?$/,
         exclude: /node_modules/,
-        loaders:  [
-          // { loader: 'react-hot-loader/webpack', },
-        { loader: 'babel-loader', query: BABEL_QUERY, }, ],
+        loaders:  [{ loader: 'babel-loader', query: BABEL_QUERY, }, ],
         include: PATHS.src,
       },
     ],
