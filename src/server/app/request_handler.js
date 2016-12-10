@@ -38,8 +38,6 @@ export const requestHandler = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
-      console.log('============SERVER RENDER PROPS============', props);
-
       const markup = renderToString(
 
         <Provider store={store}>

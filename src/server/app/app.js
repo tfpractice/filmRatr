@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import { SearchRoutes, } from '../routes';
 
 // import session from 'express-session';
 import flash from 'express-flash';
@@ -57,25 +59,23 @@ app.use(flash());
 //     res.locals.user = req.user || null;
 //     next();
 // });
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
+
+// app.use(cors());
 
 //  backend api routes
 // app.use('/api', TaskRoutes);
 // applyRoutes(app, passport);
 
 // app.use('/api', UserRoutes);
+app.use(SearchRoutes);
 
 // establish server render
 app.use(requestHandler);
 
-if (module.hot) {
-    // accept update of dependency
-  module.hot.accept('./request_handler', () => {
-    console.log('HNADLER CHANGED');
-
-        // replace request handler of server
-        // server.removeListener("request", requestHandler);
-    const requestHandler = require('./request_handler');
-    app.use(requestHandler);
-  });
-}
 export default app;

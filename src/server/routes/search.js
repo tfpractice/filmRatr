@@ -1,6 +1,13 @@
-  import { Router, } from 'express';
+import axios from 'axios';
+import { Router, } from 'express';
+import { utils, } from '../../imports';
+const { MovieUtils, } = utils;
+export const { MOVIE_DB_SEARCH_URL: SEARCH_URL, } = MovieUtils;
 
-  const router = new Router();
+const router = new Router();
+router.route('/search').get((req, res) => {
 
-// Get all Tasks
-// router.route('/search').get(TaskController.getTasks);
+  // return axios.get(SEARCH_URL, { params: { ...req.query, }, }).then(r => res.json(r.data)).catch(err => console.error(err));
+});
+
+export default router;
