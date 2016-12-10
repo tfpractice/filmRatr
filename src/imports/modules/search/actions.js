@@ -28,7 +28,13 @@ const searchRequestFailure = err =>
 
 export const search = query => (dispatch) => {
   dispatch(searchRequestPending(query));
-  return axios.get(SEARCH_URL, { params: { ...query, }, })
+  return axios.get(SEARCH_URL, {
+    params: { ...query, },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'multipart/form-data',
+    },
+  })
     .then(({ data: { results, }, }) =>
       dispatch(searchRequestSucess()) && dispatch(updateResults(results)))
     .catch(searchRequestFailure);
