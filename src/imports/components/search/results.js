@@ -13,29 +13,23 @@ const mapStateToProps = ({ search: { results, query, }, }) =>
 const mapDispatchToProps = dispatch =>
   ({ actions: bindActionCreators(SearchActions, dispatch), });
 
-const SearchResults = ({ results, query, actions, }) => {
-  console.log('============actions============', actions);
-  console.log('============results============', results);
-
-  return (
-    <div className="search-list">
-      <h1>
-        SearchResults
-      </h1>
-      <SearchForm
-        form={'newSearchForm'}
-        onSubmit={actions.search}
-        onSubmitSuccess={resetForm('newSearchForm')}
-      />
-
-      <div className="mysearch">
-        {results.map(r => <div><SearchResult movie={r} /></div>)}
-        
-      </div>
+const SearchResults = ({ results, query, actions, }) => (
+  <div className="search-list">
+    <h1>
+      SearchResults
+    </h1>
+    <SearchForm
+      form={'newSearchForm'}
+      onSubmit={actions.search}
+      onSubmitSuccess={resetForm('newSearchForm')}
+    />
+    <div className="mysearch">
+      {results.map(r => <div><SearchResult movie={r} /></div>)}
 
     </div>
+
+  </div>
   );
-};
 
 // {results.map(r => <div><SearchResult movie={r} /></div>)}
 
