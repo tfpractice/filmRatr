@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 const Home = ({ children, ...rest }, context) => (
   <div id="home">
     <FlatButton label="HOMEPAGE NO BABEL" />
-    <div> HOMEPAGE NHOTOTOTOOTO BABEL </div>
+    <div> HOMEPAGE HOT BABEL </div>
     <SearchResults />
   </div>
   );

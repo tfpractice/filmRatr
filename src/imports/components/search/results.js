@@ -29,14 +29,9 @@ const SearchResults = ({ results, query, actions, }) => {
       />
 
       <div className="mysearch">
-        {results.map((r) => {
-          console.log('============r============', r);
-
-          console.log('result', r);
-          return (<div><p>div return</p> {r.toString()}</div>);
-        })}
+        {results.map(r => <div><SearchResult movie={r} /></div>)}
+        
       </div>
-      {results.map(r => <div><SearchResult movie={r} /></div>)}
 
     </div>
   );

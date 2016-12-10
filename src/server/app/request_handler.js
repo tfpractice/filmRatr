@@ -42,13 +42,10 @@ export const requestHandler = (req, res) => {
 
       const markup = renderToString(
 
-        <HotContainer>
-          
-          <Provider store={store}>
-            <RouterContext {...props} />
-          </Provider>
+        <Provider store={store}>
+          <RouterContext {...props} />
+        </Provider>
 
-        </HotContainer>
       );
 
       fetchComponentData(store.dispatch, props.components, props.params)
@@ -59,7 +56,3 @@ export const requestHandler = (req, res) => {
     }
   });
 };
-
-if (module.hot) {
-  module.hot.accept();
-}

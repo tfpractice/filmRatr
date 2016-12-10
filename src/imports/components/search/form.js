@@ -13,7 +13,7 @@ const SearchForm = ({ handleSubmit, }) => (
       <label htmlFor="query">query</label>
     </div>
     <button type="submit" className="waves-effect waves-light btn">
-      Submit HOT WORK???
+      Submit HOT  willl please WORK???
     </button>
   </form>
 );

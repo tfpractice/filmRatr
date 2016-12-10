@@ -27,8 +27,5 @@ const getRoutes = store => (
   <Route name="app" component={Main} path="/">
     <IndexRoute component={Home} />
   </Route>);
-if (module.hot) {
-  module.hot.accept();
-}
 
 export default getRoutes;

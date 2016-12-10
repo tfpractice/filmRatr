@@ -17,15 +17,11 @@ import React from 'react';
 //   vote_average:5.7,
 //  }
 
-const Result = ({ movie, }) => {
-  console.log('============movie============', movie);
-
-  return (<div className="resultDiv">
-    <p>id:{movie.id}</p>
-    <p>original_title:{movie.original_title}</p>
-    <p>popularity:{movie.popularity}</p>
-    <p>release_date:{movie.release_date}</p>
-    <p>title:{movie.title}</p>
-  </div>);
-};
+const Result = ({ movie, }) => (<div className="resultDiv">
+  <p>id:{movie.id}</p>
+  <p>original_title:{movie.original_title}</p>
+  <p>popularity:{movie.popularity}</p>
+  <p>release_date:{movie.release_date}</p>
+  <p>title:{movie.title}</p>
+</div>);
 export default Result;
