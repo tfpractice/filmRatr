@@ -12,7 +12,9 @@ export const renderHTML = (markup, preloadedState = {}) => `
         <title>HomeMakr App RRRKSJDDJJD</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+          <link rel="stylesheet" href="app.styles.css">
   </head>
       <body>
         <div id="root">${markup}</div>
@@ -25,7 +27,7 @@ export const renderHTML = (markup, preloadedState = {}) => `
            </body>
     </html>
     `;
-{ /* <link rel="stylesheet" href="app.styles.css"> */ }
+{ /* */ }
 
 export const requestHandler = (req, res) => {
   const store = getStore();

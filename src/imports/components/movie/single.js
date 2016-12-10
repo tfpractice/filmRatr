@@ -1,14 +1,26 @@
 import React from 'react';
-import { MovieCard, } from '../movie';
-const Result = ({ movie, }) => (<div className="resultDiv">
-  <p> id:{movie.id}</p>
-  <p>original_title:{movie.original_title}</p>
-  <p>popularity:{movie.popularity}</p>
-  <p>release_date:{movie.release_date}</p>
-  <p>title:{movie.title}</p>
-</div>);
+import { Card, CardActions, CardHeader, CardText, } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
-export default Result;
+const MovieCard = ({ movie, }) => (
+  <Card>
+    <CardHeader
+      title={movie.title}
+      subtitle={<p>{movie.release_date}</p>}
+      actAsExpander
+      showExpandableButton
+    />
+    <CardActions>
+      <FlatButton label="Review this movie" />
+      <FlatButton label="Show Reviews" />
+    </CardActions>
+    <CardText expandable>
+      {movie.overview}
+    </CardText>
+  </Card>
+);
+
+export default MovieCard;
 
 // { adult:false,
 //   backdrop_path:  '/7GyIzZImsBTAH0teL1XKG6Nz3OL.jpg',
