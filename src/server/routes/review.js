@@ -2,7 +2,7 @@ import { Router, } from 'express';
 import { ReviewController, } from '../controllers';
 
 const router = new Router();
-router.param('movie_id', (req, res, next, movie_id, key) => {
+router.param('movie_id', (req, res, next, id, key) => {
   req.movie_id = movie_id;
   next();
 });

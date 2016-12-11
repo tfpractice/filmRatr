@@ -6,7 +6,7 @@ import { Review, } from '../models';
  * @param res
  * @returns void
  */
-export const getReviews = (req, res) => Review.find({ movie_id: req.params.movie_id, })
+export const getReviews = (req, res) => Review.find()
   .sort({ movie_id: 1, dateAdded: -1, }).exec()
   .then(reviews => res.json({ reviews, }))
   .catch(err => res.status(500).send(err));
@@ -17,10 +17,11 @@ export const getReviews = (req, res) => Review.find({ movie_id: req.params.movie
    * @param res
    * @returns void
    */
-export const getMovieReviews = (req, res) => Review.find()
-  .sort({ movie_id: 1, dateAdded: -1, }).exec()
-  .then(reviews => res.json({ reviews, }))
-  .catch(err => res.status(500).send(err));
+export const getMovieReviews = (req, res) =>
+ Review.find({ movie_id: req.movie_id, })
+   .sort({ dateAdded: -1, }).exec()
+   .then(reviews => res.json({ reviews, }))
+   .catch(err => res.status(500).send(err));
 
 /**
  * Save a review
@@ -28,7 +29,8 @@ export const getMovieReviews = (req, res) => Review.find()
  * @param res
  * @returns void
  */
-export const addReview = (req, res) => Review.create({ ...req.body, })
+export const addReview = (req, res) =>
+Review.create({ ...req.body, movie_id: req.movie_id, })
   .then(review => res.json({ review, }))
   .catch((err) => {
     console.error('Review model insert error', err);
