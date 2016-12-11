@@ -1,2 +1,3 @@
 import SearchRoutes from './search';
-export { SearchRoutes, };
+import ReviewRoutes from './review';
+export { SearchRoutes, ReviewRoutes, };

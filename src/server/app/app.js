@@ -2,32 +2,30 @@ import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import { SearchRoutes, } from '../routes';
-
-// import session from 'express-session';
+import mongoose from 'mongoose';
 import flash from 'express-flash';
+import { requestHandler, } from './request_handler';
+import { enableHotReload, } from '../../../config';
+import { dbConfig, } from '../models';
+import { SearchRoutes, ReviewRoutes, } from '../routes';
 
 // import passport from 'passport';
 // import { Strategy as LocalStrategy, } from 'passport-local';
-// import mongoose from 'mongoose';
-import { enableHotReload, } from '../../../config';
-import { requestHandler, } from './request_handler';
+// import cors from 'cors';
 
-// import { dbConfig, } from '../models';
-// import { TaskRoutes, UserRoutes, applyRoutes, } from '../routes';
-//
-// mongoose.Promise = global.Promise;
-//
-// // MongoDB Connection
-// mongoose.connect(dbConfig.mongoURL, (error) => {
-//   if (error) {
-//     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
-//     throw error;
-//   }
-//
-//   console.log('mongoose connected');
-// });
+// import session from 'express-session';
+
+mongoose.Promise = global.Promise;
+
+// MongoDB Connection
+mongoose.connect(dbConfig.mongoURL, (error) => {
+  if (error) {
+    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+    throw error;
+  }
+
+  console.log('mongoose connected');
+});
 
 // initialize express
 const app = enableHotReload(express());
