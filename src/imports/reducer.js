@@ -1,7 +1,7 @@
 import { combineReducers, } from 'redux';
 import { reducer as form, } from 'redux-form';
 import { reducer as movies, } from './modules/movies';
+import { reducer as reviews, } from './modules/reviews';
 import { reducer as search, } from './modules/search';
 
-// commment
-export default combineReducers({ form, movies, search, });
+export default combineReducers({ form, movies, reviews, search, });
