@@ -7,7 +7,7 @@ import { MovieCard, } from '../movie';
 import SearchForm from './form';
 import FreeForm from './free_form';
 
-const mapStateToProps = ({ search: { results, query, }, }) =>
+const mapStateToProps = ({ search: { results, request: { query, }, }, }) =>
  ({ results, query, });
 
 const mapDispatchToProps = dispatch =>
