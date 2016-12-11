@@ -1,4 +1,4 @@
-import { MovieUtils, asyncActions, } from '../../utils';
+import { asyncActions, MovieUtils, } from '../../utils';
 
 export const { MOVIE_DB_SEARCH_URL: SEARCH_URL, } = MovieUtils;
 

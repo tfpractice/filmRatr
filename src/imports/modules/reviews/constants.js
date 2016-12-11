@@ -1,4 +1,4 @@
-import { API_URL, MovieUtils, asyncActions, } from '../../utils';
+import { API_URL, asyncActions, MovieUtils, } from '../../utils';
 export const { MOVIE_DB_REVIEW_URL: MOVIE_URL, } = MovieUtils;
 
 export const REVIEW_URL = `${API_URL}/reviews`;

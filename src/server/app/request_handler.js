@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString, } from 'react-dom/server';
 import { Provider, } from 'react-redux';
-import { RouterContext, createMemoryHistory, match, } from 'react-router';
+import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { AppContainer as AppComponent, fetchComponentData, getRoutes, getStore, } from '../../imports';
 import { AppContainer as HotContainer, } from 'react-hot-loader';
 

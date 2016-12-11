@@ -1,7 +1,7 @@
 import React, { Component, } from 'react';
 import { AppContainer as HotContainer, } from 'react-hot-loader';
 import { Provider, } from 'react-redux';
-import { Router, browserHistory, } from 'react-router';
+import { browserHistory, Router, } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import getRoutes from './routes';

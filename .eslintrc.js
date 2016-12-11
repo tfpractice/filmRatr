@@ -125,7 +125,7 @@ module.exports = {
         'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
         'rest-spread-spacing': [ 'error', 'never'],
         'sort-imports': ['error', {
-          ignoreCase: false,
+          ignoreCase: true,
           ignoreMemberSort: false,
           memberSyntaxSortOrder: ['none', 'single', 'all',  'multiple', ],
         },],
