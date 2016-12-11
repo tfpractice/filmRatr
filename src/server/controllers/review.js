@@ -6,7 +6,18 @@ import { Review, } from '../models';
  * @param res
  * @returns void
  */
-export const getReviews = (req, res) => Review.find()
+export const getReviews = (req, res) => Review.find({ movie_id: req.params.movie_id, })
+  .sort({ movie_id: 1, dateAdded: -1, }).exec()
+  .then(reviews => res.json({ reviews, }))
+  .catch(err => res.status(500).send(err));
+
+  /**
+   * Get all reviews for one movie
+   * @param req
+   * @param res
+   * @returns void
+   */
+export const getMovieReviews = (req, res) => Review.find()
   .sort({ movie_id: 1, dateAdded: -1, }).exec()
   .then(reviews => res.json({ reviews, }))
   .catch(err => res.status(500).send(err));

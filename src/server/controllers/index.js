@@ -1,3 +1,3 @@
-import * as ReviewsController from './review';
+import * as ReviewController from './review';
 
-export { ReviewsController, };
+export { ReviewController, };
