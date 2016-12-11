@@ -12,6 +12,7 @@ export const PATHS = {
   src: SRC_DIR,
   config: resolve(ROOT_PATH, 'config'),
 };
+
 export const vendor = [ 'material-ui', 'redux-form', 'react', ];
 export const DEV = 'dev';
 export const BUILD = 'build';
