@@ -67,10 +67,9 @@ app.use(flash());
 // app.use(cors());
 
 //  backend api routes
-// app.use('/api', TaskRoutes);
-// applyRoutes(app, passport);
+app.use('/api', ReviewRoutes);
 
-// app.use('/api', UserRoutes);
+// applyRoutes(app, passport);
 app.use(SearchRoutes);
 
 // establish server render
