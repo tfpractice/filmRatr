@@ -13,6 +13,10 @@ export default env => ({
   resolve: {
     modules: [ 'node_modules', ],
     extensions: [ '.js', '.jsx', '.json', ],
+    alias: {
+      imports: path.resolve(PATHS.src, 'imports'),
+      config: PATHS.config,
+    },
   },
   output: {
     path:      PATHS.dist,

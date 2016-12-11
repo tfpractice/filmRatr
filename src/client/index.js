@@ -3,7 +3,7 @@ import { render, } from 'react-dom';
 import { Provider, } from 'react-redux';
 import { AppContainer as HotContainer, } from 'react-hot-loader';
 import { browserHistory, Router, } from 'react-router';
-import { AppContainer as AppComponent, getRoutes, getStore, } from '../imports';
+import { AppContainer as AppComponent, getRoutes, getStore, } from 'imports';
 const store = getStore(window.__PRELOADED_STATE__);
 
 const applyToDOM = str =>
