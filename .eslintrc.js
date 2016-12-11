@@ -1,4 +1,5 @@
 module.exports = {
+    extends: 'airbnb',
     env: {
       node: true,
       browser: true,
@@ -7,11 +8,11 @@ module.exports = {
     },
     parser: 'babel-eslint',
 
-    extends: 'airbnb',
     parserOptions: {
         ecmaFeatures: {
             experimentalObjectRestSpread: true,
             jsx: true,
+            modules: true,
           },
         sourceType: 'module',
       },
@@ -69,7 +70,9 @@ module.exports = {
             { body: 1, parameters: 'first' },
           FunctionExpression:
             { body: 1, parameters: 'first' },
-          MemberExpression: 1, },
+          MemberExpression: 1,
+          ObjectExpression: 'first',
+          VariableDeclarator: 0, },
         ],
         quotes: [
             2, 'single',
@@ -121,6 +124,11 @@ module.exports = {
         'no-trailing-spaces': [ 'error', { skipBlankLines: true }],
         'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
         'rest-spread-spacing': [ 'error', 'never'],
+        'sort-imports': ['error', {
+          ignoreCase: false,
+          ignoreMemberSort: false,
+          memberSyntaxSortOrder: ['none', 'single', 'all',  'multiple', ],
+        },],
         //  Plugin rules
         'jsx-quotes': 1,
         'react/jsx-no-undef': 1,
