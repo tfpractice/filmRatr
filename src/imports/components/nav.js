@@ -7,7 +7,7 @@ const Nav = () => (
     title="FilmRatr"
     iconClassNameRight="muidocs-icon-navigation-expand-more"
   >
-    <IndependentSearch />
+    <IndependentSearch formID={'navSearchForm'} />
   </AppBar>
 );
 

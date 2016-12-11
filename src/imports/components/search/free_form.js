@@ -6,15 +6,14 @@ import SearchForm from './form';
 import { SearchActions, } from '../../actions';
 
 const resetForm = name => (action, dispatch) => dispatch(reset(name));
-
 const mapDispatchToProps = dispatch =>
   ({ submitSearch: bindActionCreators(SearchActions.search, dispatch), });
 
-const IndependentForm = ({ submitSearch, }) => (
+const IndependentForm = ({ submitSearch, formID, }) => (
   <SearchForm
-    form={'IndependentSearchForm'}
+    form={formID}
     onSubmit={submitSearch}
-    onSubmitSuccess={resetForm('IndependentSearchForm')}
+    onSubmitSuccess={resetForm(formID)}
   />);
 
 export default connect(() => ({}), mapDispatchToProps)(IndependentForm);
