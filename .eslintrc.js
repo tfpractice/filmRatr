@@ -32,6 +32,8 @@ module.exports = {
         'no-process-exit': 0,
         'no-warning-comments': 0,
         curly: 0,
+        'no-confusing-arrow': 0,
+        'arrow-parens': [ 2, 'as-needed', { requireForBlockBody: true }],
         'no-alert': 0,
         // Warnings
         'no-debugger': 1,

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { REVIEW_URL, } from './constants';
+import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW,
+REVIEW_URL, UPDATE_REVIEWS, } from './constants';
 
 const pending = query => state =>
  ({ ...state, status: 'pending', updatedAt: Date.now(), query, });
@@ -23,24 +24,24 @@ const update = newReviews => reviews => newReviews;
 const insert = review => reviews => reviews.concat(review);
 const remove = ({ id, }) => reviews => reviews.filter(t => t.id !== id);
 const edit = review => reviews =>
-       reviews.map(t => t.id === review.id ? { ...t, ...review, } : t);
+reviews.map(t => t.id === review.id ? { ...t, ...review, } : t);
 
 const insertReview = review =>
-({ type: INSERT_REVIEW, curry: insert(review), });
+  ({ type: INSERT_REVIEW, curry: insert(review), });
 
 const updateReviews = reviews =>
-    ({ type: UPDATE_REVIEWS, curry: update(reviews), });
+  ({ type: UPDATE_REVIEWS, curry: update(reviews), });
 
 const updateReview = review =>
-    ({ type: EDIT_REVIEW, curry: edit(review), });
+  ({ type: EDIT_REVIEW, curry: edit(review), });
 const removeReview = ({ id, }) =>
-       ({ type:  DELETE_REVIEW, curry: remove({ id, }), });
+    ({ type:  DELETE_REVIEW, curry: remove({ id, }), });
 
 export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
   return axios.get(`${REVIEW_URL}/`)
     .then(({ data: { results, }, }) =>
-      dispatch(reviewRequestSucess()) && dispatch(updateResults(results)))
+      dispatch(reviewRequestSucess()) && dispatch(updateReviews(results)))
     .catch(reviewRequestFailure);
 };
 

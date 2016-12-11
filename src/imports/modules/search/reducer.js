@@ -1,7 +1,5 @@
 import { combineReducers, } from 'redux';
-import * as constants from './constants';
-
-const { SEARCH_REQUEST_ACTIONS, SEARCH_ACTIONS, } = constants;
+import { SEARCH_ACTIONS, SEARCH_REQUEST_ACTIONS, } from './constants';
 
 const reqInit = {};
 const resultsInit = [];
