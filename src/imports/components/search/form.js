@@ -1,7 +1,7 @@
 import React, { PropTypes, } from 'react';
-import { reduxForm, Field, } from 'redux-form';
-import { connect, } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
+import { Field, reduxForm, } from 'redux-form';
+import { connect, } from 'react-redux';
 import { TextField, } from 'redux-form-material-ui';
 
 const SearchForm = ({ handleSubmit, }) => (

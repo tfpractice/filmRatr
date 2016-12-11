@@ -1,7 +1,6 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText, } from 'material-ui/Card';
-
 import FlatButton from 'material-ui/FlatButton';
+import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
 
 const MovieCard = ({ movie, }) => (
   <Card>

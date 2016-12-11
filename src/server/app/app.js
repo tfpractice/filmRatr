@@ -7,7 +7,7 @@ import flash from 'express-flash';
 import { requestHandler, } from './request_handler';
 import { enableHotReload, } from '../../../config';
 import { dbConfig, } from '../models';
-import { SearchRoutes, ReviewRoutes, } from '../routes';
+import { ReviewRoutes, SearchRoutes, } from '../routes';
 
 // import passport from 'passport';
 // import { Strategy as LocalStrategy, } from 'passport-local';
@@ -22,7 +22,7 @@ mongoose.connect(dbConfig.mongoURL, (error) => {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
   }
-  
+
   console.log('mongoose connected');
 });
 

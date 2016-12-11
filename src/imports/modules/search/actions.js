@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UPDATE_SEARCH_RESULTS, SEARCH_URL, } from './constants';
+import { SEARCH_URL, UPDATE_SEARCH_RESULTS, } from './constants';
 
 const update = newResults => results => newResults;
 const updateResults = results =>

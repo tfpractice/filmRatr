@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, IndexRoute, } from 'react-router';
+import { IndexRoute, Route, } from 'react-router';
+import { Home, Main, } from './components';
 
 // import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Home, Main, } from './components';
 
 // import { Login, Register, } from './components/auth';
 //
