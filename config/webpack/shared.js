@@ -1,6 +1,10 @@
 import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+// import ManifestPlugin from 'webpack-manifest-plugin';
+// import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin';
+
 import { PATHS, ROOT_PATH, } from './constants';
 
 export default env => ({
@@ -37,8 +41,14 @@ export default env => ({
 
   devtool: env.prod ? 'source-map' : 'eval',
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin(
-      { names: [ 'vendor', 'manifest', ], }),
+    // new webpack.optimize.CommonsChunkPlugin(
+    //   { names: ['vendor', 'manifest',], }),
+
+    // new ManifestPlugin({ basePath: '/', }),
+    // new ChunkManifestPlugin({
+    //   filename: 'chunk-manifest.json',
+    //   manifestVariable: 'webpackManifest',
+    // }),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"', }, }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
