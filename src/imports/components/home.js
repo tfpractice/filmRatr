@@ -10,6 +10,7 @@ const Home = ({ children, dispatch, ...rest }, context) => (
     <FlatButton label="GET 550" onClick={() => dispatch(MovieActions.getMovie(550))} />
     <SearchResults />
   </div>
+
   );
 
 // Home.needs = [ TaskActions.getTasks, ];

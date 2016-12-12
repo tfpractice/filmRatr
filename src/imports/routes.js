@@ -1,6 +1,12 @@
 import React from 'react';
 import { IndexRoute, Route, } from 'react-router';
-import { Home, Main, } from './components';
+import { Home, Main, MovieView, } from './components';
+
+const getRoutes = store => (
+  <Route name="app" component={Main} path="/">
+    <IndexRoute component={Home} />
+    <Route component={MovieView} path="movies/:movie_id" />
+  </Route>);
 
 // import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -22,10 +28,5 @@ import { Home, Main, } from './components';
 //   }
 //   cb();
 // };
-
-const getRoutes = store => (
-  <Route name="app" component={Main} path="/">
-    <IndexRoute component={Home} />
-  </Route>);
 
 export default getRoutes;

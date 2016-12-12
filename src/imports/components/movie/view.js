@@ -11,10 +11,12 @@ const MovieView = ({ movie, ...alt }, params) => {
   console.log(params);
   return (<MovieCard movie={movie} />);
 };
+
 MovieView.fetchData = [ (paramsF) => {
   console.log('================paramsF===================');
   console.log(paramsF);
 
-  // MovieActions.getMovie;
+  return MovieActions.getMovie(550);
 }, ];
+
 export default connect(MapStateToProps)(MovieView);
