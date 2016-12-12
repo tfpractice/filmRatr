@@ -1,25 +1,31 @@
 import axios from 'axios';
 import * as constants from './constants';
-const { API_URL, UPDATE_MOVIES, EDIT_MOVIE, INSERT_MOVIE, DELETE_MOVIE, } = constants;
-const { MOVIE_REQUEST_PENDING, MOVIE_REQUEST_SUCCESS, MOVIE_REQUEST_FAILURE, } = constants;
+const { GET_MOVIE, SET_CURRENT_MOVIE, GET_MOVIES, } = constants;
 
-const pending = () => () =>
- ({ status: 'pending', updatedAt: Date.now(), message: null, });
+// const { MOVIE_REQUEST_PENDING, MOVIE_REQUEST_SUCCESS, 'MOVIE_REQUEST_FAILURE', } = constants;
+import { MovieUtils, } from '../../utils';
+const { getMovieUrl, } = MovieUtils;
 
-const success = message => () =>
- ({ status: 'suceeded', updatedAt: Date.now(), message, });
+const pending = movieID => state =>
+ ({ ...state, status: 'pending', updatedAt: Date.now(), movieID, });
 
-const failure = message => () =>
- ({ status: 'failed', updatedAt: Date.now(), message, });
+const success = message => state =>
+ ({ ...state, status: 'suceeded', updatedAt: Date.now(), message, });
 
+const failure = message => state =>
+ ({ ...state, status: 'failed', updatedAt: Date.now(), message, });
+
+const set = newMovie => movie => newMovie;
 const update = newMovies => movies => newMovies;
 const insert = movie => movies => movies.concat(movie);
 const remove = ({ id, }) => movies => movies.filter(t => t.id !== id);
 const edit = movie => movies =>
    movies.map(t => t.id === movie.id ? { ...t, ...movie, } : t);
 
+const setCurrentMovie = movie =>
+  ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
 const insertMovie = movie =>
-({ type: INSERT_MOVIE, curry: insert(movie), });
+  ({ type: INSERT_MOVIE, curry: insert(movie), });
 
 const updateMovies = movies =>
  ({ type: UPDATE_MOVIES, curry: update(movies), });
@@ -27,20 +33,30 @@ const updateMovies = movies =>
 const updateMovie = movie =>
  ({ type: EDIT_MOVIE, curry: edit(movie), });
 
+const movieRequestPending = id =>
+   ({ type: 'MOVIE_REQUEST_PENDING', curry: pending(id), });
 const movieRequestSucess = () =>
-  ({ type: MOVIE_REQUEST_SUCCESS, curry: success, });
+    ({ type: 'MOVIE_REQUEST_SUCCESS', curry: success, });
 
 const movieRequestFailure = err =>
-  ({ type: MOVIE_REQUEST_FAILURE, curry: failure, });
+  ({ type: 'MOVIE_REQUEST_FAILURE', curry: failure, });
 
 const removeMovie = ({ id, }) =>
  ({ type:  DELETE_MOVIE, curry: remove({ id, }), });
 
+export const getMovie = id => (dispatch) => {
+  dispatch(movieRequestPending(id));
+  return axios.get(getMovieUrl(id))
+    .then(({ data: movie, }) =>
+       dispatch(movieRequestSucess()) && dispatch(setCurrentMovie(movie)))
+    .catch(movieRequestFailure);
+};
+
 export const getMovies = () => (dispatch) => {
-  dispatch({ type: MOVIE_REQUEST_PENDING, curry: pending, });
+  dispatch({ type: 'MOVIE_REQUEST_PENDING', curry: pending, });
   return axios.get(`${API_URL}/movies`)
     .then(({ data: { movies, }, }) =>
-      dispatch(movieRequestSucess()) && dispatch(updateMovies(movies)))
+       dispatch(movieRequestSucess()) && dispatch(updateMovies(movies)))
     .catch(movieRequestFailure);
 };
 
