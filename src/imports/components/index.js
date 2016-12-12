@@ -1,4 +1,5 @@
 import Main from './main';
 import Home from './home';
+import { MovieView, } from './movie';
 
-export { Main, Home, };
+export { Main, Home, MovieView, };
