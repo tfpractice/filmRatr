@@ -11,6 +11,8 @@ export const PATHS = {
   dist: resolve(ROOT_PATH, 'dist'),
   src: SRC_DIR,
   config: resolve(ROOT_PATH, 'config'),
+  hotMiddleware: 'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+  RHLPatch: 'react-hot-loader/patch',
 };
 
 export const vendor = [ 'material-ui', 'redux-form', 'react', ];
@@ -36,11 +38,8 @@ export const BABEL_QUERY = {
 export const DEV_CONFIG = {
   devServer: { hot: true, },
   entry:   {
-    app: [
-      'react-hot-loader/patch', 'webpack-hot-middleware/client', PATHS.app,
-    ],
-    vendor: [ 'react-hot-loader/patch', 'webpack-hot-middleware/client',
-      'material-ui', 'redux-form', 'react', ],
+    app: [ PATHS.RHLPatch, PATHS.hotMiddleware, PATHS.app, ],
+    vendor: [ PATHS.RHLPatch, PATHS.hotMiddleware, ...vendor, ],
   },
 
   output: {},

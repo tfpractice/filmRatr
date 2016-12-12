@@ -27,7 +27,7 @@ export const renderHTML = (markup, preloadedState = {}, chunks = {}) => `
         <script type="application/javascript" src=/${chunks.manifest} ></script>
         <script type="application/javascript" src=/${chunks.vendor} ></script>
         <script type="application/javascript" src=/${chunks.app} ></script>
-           </body>
+        </body>
     </html>
     `;
 
@@ -41,9 +41,7 @@ export const requestHandler = (req, res) => {
   const location = createMemoryHistory(req.url);
   console.log('================WITHIN REQUEST HANDLER ===================');
   const locals = res.locals.webpackStats.toJson();
-  const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
   console.log('================req.url===================', req.url);
-  console.log('================assetsByChunkName===================', assetsByChunkName);
 
   match({ routes, location, }, (error, redirectLocation, props) => {
     if (error) {
@@ -52,6 +50,7 @@ export const requestHandler = (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
       const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
+      console.log('================assetsByChunkName===================', assetsByChunkName);
 
       const markup = renderToString(
 

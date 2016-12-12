@@ -13,16 +13,17 @@ export const build = common =>
   merge.smart(common, BUILD_CONFIG, clean(PATHS.dist));
 
 export const dev = (common = sharedConf({ prod: false, })) => {
-  console.log('==============common==============');
-  console.log(process.env.NODE_ENV);
+  // console.log('==============common==============');
+  // console.log(process.env.NODE_ENV);
 
-  console.log(common);
+  // console.log(common);
   const dConf = (merge.smart(common, DEV_CONFIG));
-  console.log('==============dConf==============');
+
+  // console.log('==============dConf==============');
 
   // console.log(process.env.NODE_ENV);
 
-  console.log(dConf);
+  // console.log(dConf);
   return dConf;
 };
 
