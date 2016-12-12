@@ -19,9 +19,10 @@ export const dev = (common = sharedConf({ prod: false, })) => {
   console.log(common);
   const dConf = (merge.smart(common, DEV_CONFIG));
   console.log('==============dConf==============');
-  console.log(process.env.NODE_ENV);
 
-  console.log(dConf.plugins);
+  // console.log(process.env.NODE_ENV);
+
+  console.log(dConf);
   return dConf;
 };
 
@@ -30,6 +31,9 @@ export const applyHotMiddleware = compiler => (app) => {
     app.use(webpackDevMiddleware(compiler, {
       noInfo: true,
       historyApiFallback: true,
+
+      // publicPath: '/',
+
       publicPath: compiler.options.output.publicPath,
       serverSideRender: true,
     }));

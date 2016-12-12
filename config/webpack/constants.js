@@ -42,10 +42,8 @@ export const DEV_CONFIG = {
     vendor: [ 'react-hot-loader/patch', 'webpack-hot-middleware/client',
       'material-ui', 'redux-form', 'react', ],
   },
-  output: {
-    hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
-    hotUpdateMainFilename: 'hot/[hash].hot-update.json',
-  },
+
+  output: {},
   module: {
     loaders: [{
       test:    /\.jsx?$/,
