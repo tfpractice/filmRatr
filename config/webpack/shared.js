@@ -1,6 +1,6 @@
-import webpack from 'webpack';
-import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import path from 'path';
+import webpack from 'webpack';
 
 import { PATHS, ROOT_PATH, } from './constants';
 

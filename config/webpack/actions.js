@@ -1,15 +1,18 @@
-import webpack from 'webpack';
+import devMiddleware from 'webpack-dev-middleware';
+import hotMiddleware from 'webpack-hot-middleware';
 import merge from 'webpack-merge';
-import wpClean from 'clean-webpack-plugin';
+import webpack from 'webpack';
+import WPClean from 'clean-webpack-plugin';
 import sharedConf from './shared';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
+
 import { BUILD_CONFIG, DEV_CONFIG, PATHS, } from './constants';
 
 const clean = path =>
-({ plugins: [ new wpClean([ path, ], { root: process.cwd(), }), ], });
+({ plugins: [ new WPClean([ path, ], { root: process.cwd(), }), ], });
+
 export const build = common =>
   merge.smart(common, BUILD_CONFIG, clean(PATHS.dist));
+
 export const dev = (common = sharedConf({ prod: false, })) => {
   // console.log('==============common==============');
   // console.log(process.env.NODE_ENV);
@@ -24,14 +27,12 @@ export const dev = (common = sharedConf({ prod: false, })) => {
 
 export const applyHotMiddleware = compiler => (app) => {
   if (process.env.NODE_ENV !== 'production') {
-    app.use(webpackDevMiddleware(compiler, {
+    app.use(devMiddleware(compiler, {
       noInfo: true,
       historyApiFallback: true,
-
-      // publicPath: '/',
       publicPath: compiler.options.output.publicPath,
     }));
-    app.use(webpackHotMiddleware(compiler));
+    app.use(hotMiddleware(compiler));
   }
 
   return app;

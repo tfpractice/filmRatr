@@ -12,7 +12,7 @@ module.exports = {
       es6: true,
     },
     parser: 'babel-eslint',
-
+    
     parserOptions: {
         ecmaFeatures: {
             experimentalObjectRestSpread: true,
@@ -150,5 +150,14 @@ module.exports = {
         'react/jsx-wrap-multilines': 1,
         'react/jsx-filename-extension': [ 1, { extensions: ['.js', '.jsx'] }],
         'react/jsx-equals-spacing': [2, 'never' ],
+        // imports-plugins
+        
+        'import/order': ['error', { groups:
+         ['builtin', 'external', 'parent', 'sibling', 'index'], }, ],
+        'import/no-extraneous-dependencies':
+         [ 'error',
+          { devDependencies: true,
+            optionalDependencies: false,
+            peerDependencies: false, },],
       },
   };
