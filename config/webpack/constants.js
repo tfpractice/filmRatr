@@ -11,9 +11,7 @@ export const PATHS = {
   dist: resolve(ROOT_PATH, 'dist'),
   src: SRC_DIR,
   config: resolve(ROOT_PATH, 'config'),
-
-  hotMiddleware: 'webpack-hot-middleware/client?reload=true',
-
+  hotMiddleware: 'webpack-hot-middleware/client',
   RHLPatch: 'react-hot-loader/patch',
 };
 export const vendor = [ 'material-ui', 'redux-form', 'react', ];
@@ -33,7 +31,7 @@ export const BUILD_CONFIG = {
 
 export const BABEL_QUERY = {
   presets: [[ 'latest', { modules: false, },], 'react', ],
-  plugins: [[ 'react-hot-loader/babel', ], ],
+  // plugins: [[ 'react-hot-loader/babel', ], ],
 };
 
 export const DEV_CONFIG = {
