@@ -6,7 +6,7 @@ const MovieCard = ({ movie, }) => (
   <Card>
     <CardHeader
       title={movie.title}
-      subtitle={<p>{movie.release_date}</p>}
+      subtitle={<p>{movie.release_date} <em>{movie.id}</em> </p>}
       actAsExpander
       showExpandableButton
     />
