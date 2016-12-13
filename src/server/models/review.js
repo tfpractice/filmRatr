@@ -8,4 +8,5 @@ const ReviewSchema = new Schema({
 }, { toObject: { virtuals: true, }, toJSON: { virtuals: true, }, });
 
 const Review = mongoose.model('Review', ReviewSchema);
+
 export default Review;
