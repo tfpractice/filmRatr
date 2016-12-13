@@ -51,6 +51,7 @@ export const getMovie = id => (dispatch) => {
        dispatch(movieRequestSucess()) && dispatch(setCurrentMovie(movie)))
     .catch(movieRequestFailure);
 };
+export const getMovieFromParams = ({ movie_id, }) => getMovie(movie_id);
 
 export const getMovies = () => (dispatch) => {
   dispatch({ type: 'MOVIE_REQUEST_PENDING', curry: pending, });
