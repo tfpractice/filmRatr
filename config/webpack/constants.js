@@ -1,5 +1,5 @@
-import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import webpack from 'webpack';
 import { resolve, } from 'path';
 
 export const ROOT_PATH = resolve('./');
@@ -13,7 +13,13 @@ export const PATHS = {
   config: resolve(ROOT_PATH, 'config'),
   hotMiddleware: 'webpack-hot-middleware/client',
   RHLPatch: 'react-hot-loader/patch',
+
+  // alias: {
+  imports: resolve(SRC_DIR, 'imports'),
+    // config: PATHS.config,
+  // },
 };
+
 export const vendor = [ 'material-ui', 'redux-form', 'react', ];
 export const DEV = 'dev';
 export const BUILD = 'build';
@@ -30,12 +36,11 @@ export const BUILD_CONFIG = {
 };
 
 export const BABEL_QUERY = {
-  presets: [[ 'latest', { modules: false, },], 'react', ],
+  presets: [[ 'latest', { modules: false, }, ], 'react', ],
   // plugins: [[ 'react-hot-loader/babel', ], ],
 };
 
 export const DEV_CONFIG = {
-  // devServer: { hot: true, },
   entry:   {
     app: [ PATHS.RHLPatch, PATHS.hotMiddleware, PATHS.app, ],
     vendor: [ PATHS.RHLPatch, PATHS.hotMiddleware, ...vendor, ],

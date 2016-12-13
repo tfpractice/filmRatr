@@ -12,7 +12,7 @@ module.exports = {
       es6: true,
     },
     parser: 'babel-eslint',
-    
+
     parserOptions: {
         ecmaFeatures: {
             experimentalObjectRestSpread: true,
@@ -113,6 +113,7 @@ module.exports = {
           ObjectExpression: { multiline: true, minProperties: 5 },
           ObjectPattern: { multiline: true },
         },],
+        'newline-after-var': [ 'error', 'always'],
         // 'object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
         'line-comment-position': ['error', { position: 'above' }],
         'brace-style': [
@@ -151,9 +152,9 @@ module.exports = {
         'react/jsx-filename-extension': [ 1, { extensions: ['.js', '.jsx'] }],
         'react/jsx-equals-spacing': [2, 'never' ],
         // imports-plugins
-        
+
         'import/order': ['error', { groups:
-         ['builtin', 'external', 'parent', 'sibling', 'index'], }, ],
+         [[ 'builtin', 'external' ], 'parent', 'sibling', 'index'], }, ],
         'import/no-extraneous-dependencies':
          [ 'error',
           { devDependencies: true,

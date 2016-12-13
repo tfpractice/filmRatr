@@ -13,7 +13,7 @@ export default (env = defEnvar) => ({
     modules: [ 'node_modules', ],
     extensions: [ '.js', '.jsx', '.json', ],
     alias: {
-      imports: path.resolve(PATHS.src, 'imports'),
+      imports: PATHS.imports,
       config: PATHS.config,
     },
   },
@@ -41,7 +41,6 @@ export default (env = defEnvar) => ({
 
     ],
   },
-
   devtool: env.prod ? 'source-map' : 'eval',
   plugins: [
     // new webpack.optimize.CommonsChunkPlugin(
@@ -53,12 +52,7 @@ export default (env = defEnvar) => ({
     }),
     new ExtractTextPlugin('[name].styles.css'),
     new webpack.LoaderOptionsPlugin(
-      {
-        options: {
-          sassLoader:
-        { includePaths: [ './node_modules', ], },
-        },
-      }),
+      { options: { sassLoader: { includePaths: [ './node_modules', ], }, }, }),
   ],
   node: {
     fs:  'empty',
