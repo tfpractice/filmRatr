@@ -32,7 +32,9 @@ export const renderHTML = (markup, preloadedState = {}, entrypoints = []) => `
 export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes(store);
-  const location = createMemoryHistory(req.url);
+
+  // const location = createMemoryHistory(req.url);
+  const location = (req.url);
 
   match({ routes, location, }, (error, redirectLocation, props) => {
     if (error) {
@@ -41,6 +43,8 @@ export const requestHandler = (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
       console.log('================WITHIN REQUEST HANDLER ===================');
+      console.log('================WITHIN REQUEST HANDLERlocation ===================', location);
+      console.log('================WITHIN REQUEST createMemoryHistory ===================', createMemoryHistory);
       const markup = renderToString(
         <Provider store={store}>
           <RouterContext {...props} />

@@ -5,11 +5,12 @@ import { Home, Main, MovieView, } from './components';
 const getRoutes = store => (
   <Route name="app" component={Main} path="/">
     <IndexRoute component={Home} />
-    <Route component={MovieView} path="movies/:movie_id" />
+    <Route component={MovieView} path="/movies/:movie_id" />
+
   </Route>);
 
 // import injectTapEventPlugin from 'react-tap-event-plugin';
-
+    // <Route component={MovieView} path="movies/:movie_id" />
 // import { Login, Register, } from './components/auth';
 //
 // injectTapEventPlugin();
