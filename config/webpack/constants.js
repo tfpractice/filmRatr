@@ -12,9 +12,7 @@ export const PATHS = {
   src: SRC_DIR,
   config: resolve(ROOT_PATH, 'config'),
 
-  // hotMiddleware: 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-
-  hotMiddleware: 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+  hotMiddleware: 'webpack-hot-middleware/client?reload=true',
 
   RHLPatch: 'react-hot-loader/patch',
 };
@@ -39,7 +37,7 @@ export const BABEL_QUERY = {
 };
 
 export const DEV_CONFIG = {
-  devServer: { hot: true, },
+  // devServer: { hot: true, },
   entry:   {
     app: [ PATHS.RHLPatch, PATHS.hotMiddleware, PATHS.app, ],
     vendor: [ PATHS.RHLPatch, PATHS.hotMiddleware, ...vendor, ],

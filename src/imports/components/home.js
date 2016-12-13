@@ -6,7 +6,7 @@ import { MovieActions, } from 'imports/actions';
 
 const Home = ({ children, dispatch, ...rest }, context) => (
   <div id="home">
-    <h1>HOMEPAGE WORK! RELOAD?</h1>
+    <h1>HOMEPAGE WORK! ?</h1>
     <FlatButton label="GET 550" onClick={() => dispatch(MovieActions.getMovie(550))} />
     <SearchResults />
   </div>
