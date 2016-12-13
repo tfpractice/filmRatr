@@ -5,16 +5,8 @@ import MovieCard from './single';
 
 const MapStateToProps = ({ currentMovie, }) => ({ movie: currentMovie, });
 
-const MovieView = ({ movie, ...alt }, params) => {
-  // console.log(alt);
-  console.log('================movie===================');
-
-  console.log(movie);
-
-  // console.log('================params===================');
-  // console.log(params);
-  return (<MovieCard movie={movie} />);
-};
+const MovieView = ({ movie, ...alt }, params) =>
+(<MovieCard movie={movie} />);
 
 MovieView.fetchData = [ MovieActions.getMovieFromParams, ];
 
