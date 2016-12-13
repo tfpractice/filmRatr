@@ -11,10 +11,13 @@ export const PATHS = {
   dist: resolve(ROOT_PATH, 'dist'),
   src: SRC_DIR,
   config: resolve(ROOT_PATH, 'config'),
-  hotMiddleware: 'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+
+  // hotMiddleware: 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+
+  hotMiddleware: 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+
   RHLPatch: 'react-hot-loader/patch',
 };
-
 export const vendor = [ 'material-ui', 'redux-form', 'react', ];
 export const DEV = 'dev';
 export const BUILD = 'build';

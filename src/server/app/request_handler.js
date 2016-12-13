@@ -5,7 +5,7 @@ import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { AppContainer as AppComponent, fetchComponentData, getRoutes, getStore, } from '../../imports';
 import { AppContainer as HotContainer, } from 'react-hot-loader';
 
-export const renderHTML = (markup, preloadedState = {}, chunks = {}) => `
+export const renderHTML = (markup, preloadedState = {}, entrypoints = []) => `
     <!doctype html>
     <html>
       <head>
@@ -24,14 +24,21 @@ export const renderHTML = (markup, preloadedState = {}, chunks = {}) => `
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
         </script>
 
-        <script type="application/javascript" src=/${chunks.manifest} ></script>
-        <script type="application/javascript" src=/${chunks.vendor} ></script>
-        <script type="application/javascript" src=/${chunks.app} ></script>
+           <script type="application/javascript" src=/manifest.js ></script>
+           <script type="application/javascript" src=/vendor.js ></script>
+           <script type="application/javascript" src=/app.js ></script>
+
+
         </body>
     </html>
     `;
 
 { /* minor c
+  ${entrypoints.app.assets.map(path => `<script src="${path}"></script>`).join('')}
+
+  <script type="application/javascript" src=/${chunks.manifest} ></script>
+<script type="application/javascript" src=/${chunks.vendor} ></script>
+<script type="application/javascript" src=/${chunks.app} ></script>
 
 hnage */ }
 
@@ -40,8 +47,6 @@ export const requestHandler = (req, res) => {
   const routes = getRoutes(store);
   const location = createMemoryHistory(req.url);
   console.log('================WITHIN REQUEST HANDLER ===================');
-  const locals = res.locals.webpackStats.toJson();
-  console.log('================req.url===================', req.url);
 
   match({ routes, location, }, (error, redirectLocation, props) => {
     if (error) {
@@ -49,8 +54,18 @@ export const requestHandler = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
-      const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
-      console.log('================assetsByChunkName===================', assetsByChunkName);
+      // const locals = res.locals.webpackStats.toJson();
+      //
+      // console.log('================req.url===================', req.url);
+      // console.log('================locals keys===================', Object.keys(locals));
+      // console.log('================locals.assets===================', locals.assets);
+      //
+      // console.log('================locals.chunks===================', locals.chunks);
+      //
+      // console.log('================locals.children===================', locals.children);
+      // console.log('================locals.entrypoints===================', locals.entrypoints);
+      // const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
+      console.log('================assetsByChunkName===================', );
 
       const markup = renderToString(
 
@@ -61,7 +76,7 @@ export const requestHandler = (req, res) => {
       );
 
       fetchComponentData(store.dispatch, props.components, props.params)
-        .then((args) => { res.send(renderHTML(markup, store.getState(), assetsByChunkName)); })
+        .then((args) => { res.send(renderHTML(markup, store.getState(), )); })
         .catch(err => res.end(err.message));
     } else {
       res.status(404).send('Not found');

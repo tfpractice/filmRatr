@@ -10,10 +10,10 @@ injectTapEventPlugin();
 
 export default class AppContainer extends Component {
   render() {
-    const { store, } = this.props;
+    const { store, history, } = this.props;
     return (
       <Provider store={store}>
-        <Router children={getRoutes(store)} history={browserHistory} />
+        <Router children={getRoutes(store)} history={history} />
       </Provider>
     );
   }
