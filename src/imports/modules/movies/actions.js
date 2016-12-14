@@ -2,7 +2,10 @@ import axios from 'axios';
 import * as constants from './constants';
 const { GET_MOVIE, SET_CURRENT_MOVIE, GET_MOVIES, } = constants;
 
-// const { MOVIE_REQUEST_PENDING, MOVIE_REQUEST_SUCCESS, 'MOVIE_REQUEST_FAILURE', } = constants;
+import { StateUtils, } from 'imports/utils';
+
+const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
+
 import { MovieUtils, } from '../../utils';
 const { getMovieUrl, } = MovieUtils;
 
@@ -16,11 +19,12 @@ const failure = message => state =>
  ({ ...state, status: 'failed', updatedAt: Date.now(), message, });
 
 const set = newMovie => movie => newMovie;
-const update = newMovies => movies => newMovies;
-const insert = movie => movies => movies.concat(movie);
-const remove = ({ id, }) => movies => movies.filter(t => t.id !== id);
-const edit = movie => movies =>
-   movies.map(t => t.id === movie.id ? { ...t, ...movie, } : t);
+
+// const update = newMovies => movies => newMovies;
+// const insert = movie => movies => movies.concat(movie);
+// const remove = ({ id, }) => movies => movies.filter(t => t.id !== id);
+// const edit = movie => movies =>
+  //  movies.map(t => t.id === movie.id ? { ...t, ...movie, } : t);
 
 const setCurrentMovie = movie =>
   ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
@@ -31,7 +35,7 @@ const updateMovies = movies =>
  ({ type: UPDATE_MOVIES, curry: update(movies), });
 
 const updateMovie = movie =>
- ({ type: EDIT_MOVIE, curry: edit(movie), });
+ ({ type: EDIT_MOVIE, curry: editByID(movie), });
 
 const movieRequestPending = id =>
    ({ type: 'MOVIE_REQUEST_PENDING', curry: pending(id), });
@@ -42,7 +46,7 @@ const movieRequestFailure = err =>
   ({ type: 'MOVIE_REQUEST_FAILURE', curry: failure, });
 
 const removeMovie = ({ id, }) =>
- ({ type:  DELETE_MOVIE, curry: remove({ id, }), });
+ ({ type:  DELETE_MOVIE, curry: removeByID({ id, }), });
 
 export const getMovie = id => (dispatch) => {
   dispatch(movieRequestPending(id));
