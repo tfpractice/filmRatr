@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { StateUtils, } from 'imports/utils';
 import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW,
 REVIEW_URL, UPDATE_REVIEWS, } from './constants';
+const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
 
 const pending = query => state =>
  ({ ...state, status: 'pending', updatedAt: Date.now(), query, });
@@ -20,12 +22,6 @@ const reviewRequestSucess = () =>
 const reviewRequestFailure = err =>
   ({ type: 'REVIEW_REQUEST_FAILURE', curry: failure(err.message), });
 
-const update = newReviews => reviews => newReviews;
-const insert = review => reviews => reviews.concat(review);
-const remove = ({ id, }) => reviews => reviews.filter(t => t.id !== id);
-const edit = review => reviews =>
-reviews.map(t => t.id === review.id ? { ...t, ...review, } : t);
-
 const insertReview = review =>
   ({ type: INSERT_REVIEW, curry: insert(review), });
 
@@ -33,10 +29,10 @@ const updateReviews = reviews =>
   ({ type: UPDATE_REVIEWS, curry: update(reviews), });
 
 const updateReview = review =>
-  ({ type: EDIT_REVIEW, curry: edit(review), });
+  ({ type: EDIT_REVIEW, curry: editByID(review), });
 
 const removeReview = ({ id, }) =>
-    ({ type:  DELETE_REVIEW, curry: remove({ id, }), });
+    ({ type:  DELETE_REVIEW, curry: removeByID({ id, }), });
 
 export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
