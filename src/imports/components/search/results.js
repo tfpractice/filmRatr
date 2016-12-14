@@ -1,7 +1,7 @@
 import React, { PropTypes, } from 'react';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
-import { reset, } from 'redux-form';
+import { resetForm, } from 'imports/utils';
 import { SearchActions, } from '../../actions';
 import { MovieCard, } from '../movie';
 import SearchForm from './form';

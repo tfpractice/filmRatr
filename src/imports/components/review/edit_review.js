@@ -1,11 +1,9 @@
 import React from 'react';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
-import { reset, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
+import { resetForm, } from 'imports/utils';
 import ReviewForm from './form_base';
-
-const resetForm = name => (action, dispatch) => dispatch(reset(name));
 
 const mapStateToProps = (state, { review, }) =>
   ({ formID: `editReview_${review.id}`, });

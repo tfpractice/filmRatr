@@ -1,13 +1,13 @@
 import React, { PropTypes, } from 'react';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
-import { reset, } from 'redux-form';
+import { resetForm, } from 'imports/utils';
 import { ReviewActions, } from 'imports/actions';
 import ReviewForm from './form_base';
 import MovieReviewForm from './form';
 import ReviewCard from './item';
 
-const resetForm = name => (action, dispatch) => dispatch(reset(name));
+
 
 const mapStateToProps = ({ reviews, }, { movie, }) =>
    ({ reviews: reviews.data.filter(({ movie_id, }) => movie_id == movie.id, ), });

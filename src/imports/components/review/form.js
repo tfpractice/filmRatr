@@ -2,9 +2,9 @@ import ReviewForm from './form_base';
 import React, { PropTypes, } from 'react';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
-import { reset, } from 'redux-form';
+import { resetForm, } from 'imports/utils';
 import { ReviewActions, } from 'imports/actions';
-const resetForm = name => (action, dispatch) => dispatch(reset(name));
+
 
 const mapDispatchToProps = dispatch =>
  ({ createReview: bindActionCreators(ReviewActions.createReview, dispatch), });
