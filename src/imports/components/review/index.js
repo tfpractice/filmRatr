@@ -1,4 +1,5 @@
-import ReviewList from './list';
+import MovieReviewForm from './form';
 import ReviewForm from './form_base';
+import ReviewList from './list';
 
-export { ReviewForm, ReviewList, };
+export { MovieReviewForm, ReviewForm, ReviewList, };
