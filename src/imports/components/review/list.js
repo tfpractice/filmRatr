@@ -10,9 +10,14 @@ const resetForm = name => (action, dispatch) => dispatch(reset(name));
 
 // import FreeForm from './free_form';
 
-const mapStateToProps = ({ reviews, }, { movie, }) => ({ reviews, });
+const mapStateToProps = ({ reviews, }, { movie, }) => {
+// ({ reviews, });
+  console.log(movie);
+  const xreviews = reviews.data.filter(({ movie_id, }) => movie_id == movie.id, );
 
- // ({ reviews: reviews.filter(({ movie_id, }) => movie_id === movie.id, ), });
+  console.log(reviews.data);
+  return ({ reviews: reviews.data.filter(({ movie_id, }) => movie_id == movie.id, ), });
+};
 
 const mapDispatchToProps = dispatch =>
  ({ actions: bindActionCreators(ReviewActions, dispatch), });
@@ -27,7 +32,7 @@ const ReviewList = ({ movie, reviews, actions, }) => (
     />
     <div className="ReviewList">
       {reviews.length}
-      {/* {reviews.map(r => <p> {r.text}</p>)} */}
+      {reviews.map(r => <p> {r.text}</p>)}
     </div>
   </div>
  );
