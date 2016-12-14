@@ -5,6 +5,7 @@ import { reset, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
 import ReviewForm from './form_base';
 import MovieReviewForm from './form';
+import ReviewCard from './item';
 
 const resetForm = name => (action, dispatch) => dispatch(reset(name));
 
@@ -19,7 +20,7 @@ const ReviewList = ({ movie, reviews, actions, }) => (
     <h2>{`Showing  Reviews for ${movie.title}` }</h2>
     <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
     <div className="ReviewList">
-      {reviews.map(r => <p> {r.text}</p>)}
+      {reviews.map(r => <ReviewCard review={r} />)}
     </div>
   </div>
  );
