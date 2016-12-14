@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { SEARCH_URL, UPDATE_SEARCH_RESULTS, } from './constants';
 
-const update = newResults => results => newResults;
+import { StateUtils, } from 'imports/utils';
+
+const { arrayUtils: { update, }, } = StateUtils;
+
 const updateResults = results =>
  ({ type: UPDATE_SEARCH_RESULTS, curry: update(results), });
 

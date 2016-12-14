@@ -1,13 +1,9 @@
 import axios from 'axios';
-import * as constants from './constants';
-const { GET_MOVIE, SET_CURRENT_MOVIE, GET_MOVIES, } = constants;
+import { MovieUtils, StateUtils, } from 'imports/utils';
+import { GET_MOVIE, GET_MOVIES, SET_CURRENT_MOVIE, } from './constants';
 
-import { StateUtils, } from 'imports/utils';
-
-const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
-
-import { MovieUtils, } from '../../utils';
 const { getMovieUrl, } = MovieUtils;
+const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
 
 const pending = movieID => state =>
  ({ ...state, status: 'pending', updatedAt: Date.now(), movieID, });
@@ -20,14 +16,9 @@ const failure = message => state =>
 
 const set = newMovie => movie => newMovie;
 
-// const update = newMovies => movies => newMovies;
-// const insert = movie => movies => movies.concat(movie);
-// const remove = ({ id, }) => movies => movies.filter(t => t.id !== id);
-// const edit = movie => movies =>
-  //  movies.map(t => t.id === movie.id ? { ...t, ...movie, } : t);
-
 const setCurrentMovie = movie =>
   ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
+
 const insertMovie = movie =>
   ({ type: INSERT_MOVIE, curry: insert(movie), });
 
@@ -39,6 +30,7 @@ const updateMovie = movie =>
 
 const movieRequestPending = id =>
    ({ type: 'MOVIE_REQUEST_PENDING', curry: pending(id), });
+
 const movieRequestSucess = () =>
     ({ type: 'MOVIE_REQUEST_SUCCESS', curry: success, });
 
@@ -55,6 +47,7 @@ export const getMovie = id => (dispatch) => {
        dispatch(movieRequestSucess()) && dispatch(setCurrentMovie(movie)))
     .catch(movieRequestFailure);
 };
+
 export const getMovieFromParams = ({ movie_id, }) => getMovie(movie_id);
 
 export const getMovies = () => (dispatch) => {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { StateUtils, } from 'imports/utils';
-import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW,
-REVIEW_URL, UPDATE_REVIEWS, } from './constants';
+import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW, REVIEW_URL
+  , UPDATE_REVIEWS, } from './constants';
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
 
 const pending = query => state =>
