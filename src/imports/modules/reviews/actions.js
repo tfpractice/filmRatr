@@ -34,6 +34,7 @@ const updateReviews = reviews =>
 
 const updateReview = review =>
   ({ type: EDIT_REVIEW, curry: edit(review), });
+
 const removeReview = ({ id, }) =>
     ({ type:  DELETE_REVIEW, curry: remove({ id, }), });
 

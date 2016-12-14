@@ -7,8 +7,6 @@ import ReviewForm from './form_base';
 import MovieReviewForm from './form';
 import ReviewCard from './item';
 
-
-
 const mapStateToProps = ({ reviews, }, { movie, }) =>
    ({ reviews: reviews.data.filter(({ movie_id, }) => movie_id == movie.id, ), });
 
@@ -20,7 +18,7 @@ const ReviewList = ({ movie, reviews, actions, }) => (
     <h2>{`Showing  Reviews for ${movie.title}` }</h2>
     <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
     <div className="ReviewList">
-      {reviews.map(r => <ReviewCard review={r} />)}
+      {reviews.map(r => <ReviewCard actions={actions} review={r} />)}
     </div>
   </div>
  );
