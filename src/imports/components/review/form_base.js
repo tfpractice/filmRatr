@@ -6,7 +6,7 @@ import { TextField, } from 'redux-form-material-ui';
 
 const ReviewForm = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
-    <Field name="text" component={TextField} hintText="Movie Title" id="text" type="text" />
+    <Field name="text" component={TextField} hintText="review text" id="text" type="text" />
     <FlatButton label="Submit" primary type="submit" />
   </form>
   );

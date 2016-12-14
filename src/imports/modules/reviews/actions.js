@@ -53,10 +53,12 @@ export const getMovieReviews = movieID => (dispatch) => {
     .catch(reviewRequestFailure);
 };
 
-export const createReview = ({ movie_id, ...reviewProps }) => (dispatch) => {
+export const createReview = ({ id: movie_id, }) => dispatch => (reviewProps) => {
   console.log('========reviewsprops======', reviewProps);
   return axios.post(`${REVIEW_URL}/${movie_id}`, reviewProps)
-    .then(({ data: { review, }, }) => dispatch(insertReview(review)))
+    .then(({ data: { review, }, }) => {
+      console.log('NEW REVIEW RECEIVED', review); return dispatch(insertReview(review));
+    })
     .catch(err => console.error('there was an error in creation', err));
 };
 

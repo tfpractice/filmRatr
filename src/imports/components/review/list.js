@@ -4,6 +4,7 @@ import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { reset, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
+const resetForm = name => (action, dispatch) => dispatch(reset(name));
 
 // import { MovieCard, } from '../movie';
 
@@ -19,7 +20,11 @@ const mapDispatchToProps = dispatch =>
 const ReviewList = ({ movie, reviews, actions, }) => (
   <div className="Review-list">
     <h1>{`Showing  Reviews for ${movie.title}` }</h1>
-    <ReviewForm movie={movie} form="newReviewForm" onSubmit={(...args) => { console.log(ars); }} />
+    <ReviewForm
+      form="newReviewForm"
+      onSubmit={actions.createReview(movie)}
+      onSubmitSuccess={resetForm('newReviewForm')}
+    />
     <div className="ReviewList">
       {reviews.length}
       {/* {reviews.map(r => <p> {r.text}</p>)} */}
