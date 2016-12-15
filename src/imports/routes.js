@@ -2,6 +2,7 @@ import React from 'react';
 import { IndexRoute, Route, } from 'react-router';
 import { Home, Main, MovieView, } from './components';
 
+// const getMovieHook = (store)=()
 const getRoutes = store => (
   <Route name="app" component={Main} path="/">
     <IndexRoute component={Home} />

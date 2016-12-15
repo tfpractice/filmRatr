@@ -5,7 +5,6 @@ import { resetForm, } from 'imports/utils';
 import SearchForm from './form';
 import { SearchActions, } from '../../actions';
 
-
 const mapDispatchToProps = dispatch =>
   ({ submitSearch: bindActionCreators(SearchActions.search, dispatch), });
 

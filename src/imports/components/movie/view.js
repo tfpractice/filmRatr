@@ -11,7 +11,13 @@ const MapStateToProps = ({ currentMovie, movies: { data, }, }, { params: { movie
 
   return ({ movie: currentMovie, });
 };
+const mapDispatchToProps = (dispatch, { params: { movie_id, }, }) => {
+  const movie = dispatch(MovieActions.setMovieFromParams({ movie_id, }));
 
+  console.log('\n===================dispatchMovie===================\n', movie);
+
+  return ({});
+};
 const MovieView = ({ movie, }, params) =>
 (<div>
   <MovieCard movie={movie} />
@@ -23,4 +29,4 @@ MovieView.fetchData = [
   MovieActions.getMovieFromParams,
   MovieActions.setMovieFromParams, ReviewActions.getReviewsFromParams, ];
 
-export default connect(MapStateToProps)(MovieView);
+export default connect(MapStateToProps, mapDispatchToProps)(MovieView);
