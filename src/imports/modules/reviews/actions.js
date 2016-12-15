@@ -8,25 +8,6 @@ const reviewRequestPending = requestCreators('REVIEW_REQUEST').pending;
 const reviewRequestFailure = requestCreators('REVIEW_REQUEST').failure;
 const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 
-//
-// const pending = query => state =>
-//  ({ ...state, status: 'pending', updatedAt: Date.now(), query, });
-//
-// const success = message => state =>
-//  ({ ...state, status: 'suceeded', updatedAt: Date.now(), message, });
-//
-// const failure = message => state =>
-//  ({ ...state, status: 'failed', updatedAt: Date.now(), message, });
-//
-// const reviewRequestPending = query =>
-//   ({ type: 'REVIEW_REQUEST_PENDING', curry: pending(query), });
-//
-// const reviewRequestSuccess = () =>
-//   ({ type: 'REVIEW_REQUEST_SUCCESS', curry: success(), });
-//
-// const reviewRequestFailure = err =>
-//   ({ type: 'REVIEW_REQUEST_FAILURE', curry: failure(err.message), });
-
 const insertReview = review =>
   ({ type: INSERT_REVIEW, curry: insert(review), });
 
@@ -57,10 +38,10 @@ export const getMovieReviews = movie_id => (dispatch) => {
 
 export const getReviewsFromParams = ({ movie_id, }) => getMovieReviews(movie_id);
 
-export const createReview = ({ id: movie_id, }) => dispatch => revProps => axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
-  .then(({ data: { review, }, }) => {
-    console.log('NEW REVIEW RECEIVED', review); return dispatch(insertReview(review));
-  })
+export const createReview = ({ id: movie_id, }) => dispatch => revProps =>
+axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
+  .then(({ data: { review, }, }) =>
+   dispatch(insertReview(review)))
   .catch(err => console.error('there was an error in creation', err));
 
 export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
