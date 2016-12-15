@@ -28,18 +28,31 @@ const removeMovie = ({ id, }) =>
  ({ type:  DELETE_MOVIE, curry: removeByID({ id, }), });
 
 export const getMovie = id => (dispatch, getState) => {
+  console.log('getting movie');
   dispatch(movieRequestPending(id));
   return axios.get(getMovieUrl(id))
-    .then(({ data: movie, }) =>
+    .then(({ data: movie, }) => {
+      console.log('\n===================setCurrentMovie===================\n', movie.title);
 
-       [ movieRequestSuccess(),
-         insertMovies(movie),
-         setCurrentMovie(movie), ].map(dispatch)
-    )
+      [ movieRequestSuccess(),
+        insertMovies(movie),
+        setCurrentMovie(movie), ].map(dispatch);
+
+      // [ movieRequestSuccess(),
+      //   insertMovies(movie),
+      // ].map(dispatch)
+    })
     .catch(movieRequestFailure);
 };
 
 export const getMovieFromParams = ({ movie_id, }) => getMovie(movie_id);
+
+export const setMovieFromParams = ({ movie_id, }) => (dispatch) => {
+  dispatch(movieRequestPending(movie_id));
+  return axios.get(getMovieUrl(movie_id))
+    .then(({ data: movie, }) => dispatch(setCurrentMovie(movie)))
+    .catch(movieRequestFailure);
+};
 
 export const getMovies = (...ids) => (dispatch) => {
   dispatch({ type: 'MOVIE_REQUEST_PENDING', curry: pending, });

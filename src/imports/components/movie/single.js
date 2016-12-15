@@ -1,5 +1,6 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
+import { Link, } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
 
 const MovieCard = ({ movie, }) => (
@@ -25,7 +26,7 @@ const MovieCard = ({ movie, }) => (
     </CardText>
     <CardActions>
       <FlatButton label="Review this movie" />
-      <FlatButton label="Show Reviews" />
+      <Link to={`/movies/${movie.id}`} ><FlatButton label="Show Reviews" /></Link>
     </CardActions>
   </Card>
 );
