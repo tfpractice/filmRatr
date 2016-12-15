@@ -16,8 +16,12 @@ ReviewSchema.statics.countByMovieID = function (movie_id) {
 };
 
 ReviewSchema.statics.topFiveMovies = function () {
-  this.aggregate(
-    { $group: { _id: '$movie_id', count: { $sum: 1, }, }, },
+  this.aggregate({
+    $group: {
+      _id: '$movie_id',
+      count: { $sum: 1, },
+    },
+  },
      { $sort: { count: -1, }, },
      { $limit: 5, },
   )
