@@ -12,7 +12,7 @@ const insertReview = review =>
   ({ type: INSERT_REVIEW, curry: insert(review), });
 
 const updateReviews = reviews =>
-  ({ type: UPDATE_REVIEWS, curry: update(reviews), });
+  ({ type: UPDATE_REVIEWS, curry: insert(reviews), });
 
 const updateReview = review =>
   ({ type: EDIT_REVIEW, curry: editByID(review), });
