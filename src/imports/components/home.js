@@ -3,6 +3,7 @@ import { connect, } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import { MovieActions, } from 'imports/actions';
 import { SearchResults, } from './search';
+import { TopTen, } from './movie';
 
 const Home = ({ children, dispatch, ...rest }, context) =>
 (
@@ -10,9 +11,12 @@ const Home = ({ children, dispatch, ...rest }, context) =>
     <h1>HOMEPAGE  WORK! ?</h1>
     <FlatButton label="GET 550" onClick={() => dispatch(MovieActions.getMovie(550))} />
     <SearchResults />
+    <TopTen />
   </div>
 
   );
+
+Home.fetchData = [ MovieActions.getTopFive, ];
 
 // Home.fetchData = [ (paramsF) => {
 //   console.log('================paramsF===================');

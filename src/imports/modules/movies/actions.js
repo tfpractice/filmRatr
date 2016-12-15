@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { MovieUtils, StateUtils, } from 'imports/utils';
-import { GET_MOVIE, GET_MOVIES, INSERT_MOVIE, SET_CURRENT_MOVIE, } from './constants';
+import { API_URL, GET_MOVIE, GET_MOVIES, INSERT_MOVIE, SET_CURRENT_MOVIE, } from './constants';
 
 const { getMovieUrl, } = MovieUtils;
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
@@ -53,11 +53,39 @@ export const getMovie = id => (dispatch) => {
 
 export const getMovieFromParams = ({ movie_id, }) => getMovie(movie_id);
 
-export const getMovies = () => (dispatch) => {
+export const getMovies = (...ids) => (dispatch) => {
   dispatch({ type: 'MOVIE_REQUEST_PENDING', curry: pending, });
-  return axios.get(`${API_URL}/movies`)
-    .then(({ data: { movies, }, }) =>
-       dispatch(movieRequestSucess()) && dispatch(insertMovies(movies)))
+  return axios.all(ids.map(getMovieUrl).map(axios.get))
+
+  // return axios.get(`${API_URL}/movies`)
+    .then(axios.spread(({ data: { movies, }, }) =>
+    [ movieRequestSucess(), insertMovies(movie),
+    ].map(dispatch)))
+    .catch(movieRequestFailure);
+};
+
+export const getTopFive = () => (dispatch) => {
+  console.log('retriebeing top five');
+  return axios.get(`${API_URL}/reviews/top`)
+
+    // .then((r) => {
+    .then(({ data: { topFive, }, }) => {
+      console.log('======================reyrun db=============', topFive);
+
+      // return dispatch(getMovies(...topFive));
+
+      return topFive.map(getMovie).map(dispatch);
+
+      // return Promise.all(movies.map(getMovie).map(dispatch))
+      //   .then((r) => {
+      //     console.log(' top five results ');
+      //     console.log(r);
+      //     return r;
+      //   });
+    }
+
+      //  dispatch(movieRequestSucess()) && dispatch(insertMovies(movies))
+    )
     .catch(movieRequestFailure);
 };
 
