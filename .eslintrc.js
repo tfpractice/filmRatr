@@ -154,7 +154,7 @@ module.exports = {
         // imports-plugins
 
         'import/order': [ 'error', { groups:
-         [['builtin', 'external'], 'parent', 'sibling', 'index' ], },],
+         [['builtin', 'external'], 'index', 'parent', 'sibling' ], },],
         'import/no-extraneous-dependencies':
          ['error',
           { devDependencies: true,

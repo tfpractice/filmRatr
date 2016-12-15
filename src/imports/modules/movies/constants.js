@@ -2,8 +2,6 @@ export const MOVIE_API_URL = `https://api.themoviedb.org/3/movie/550?api_key=${p
 import { API_URL, asyncActions, MovieUtils, } from '../../utils';
 const { getMovieUrl, } = MovieUtils;
 
-  // https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
-
 export const MOVIE_REQUEST_ACTIONS = asyncActions('MOVIE_REQUEST');
 
 export const GET_MOVIE = 'GET_MOVIE';
@@ -16,6 +14,8 @@ export const EDIT_MOVIE = 'EDIT_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 
 export const MOVIE_ACTIONS = new Set([
-  GET_MOVIE, SET_CURRENT_MOVIE, GET_MOVIES, UPDATE_MOVIES,
+  GET_MOVIE, GET_MOVIES, UPDATE_MOVIES,
   INSERT_MOVIE, CREATE_MOVIE, EDIT_MOVIE, DELETE_MOVIE,
 ]);
+
+export const CURRENT_MOVIE_ACTIONS = new Set([ SET_CURRENT_MOVIE, ]);

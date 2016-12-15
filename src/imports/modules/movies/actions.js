@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { MovieUtils, StateUtils, } from 'imports/utils';
-import { GET_MOVIE, GET_MOVIES, SET_CURRENT_MOVIE, } from './constants';
+import { GET_MOVIE, GET_MOVIES, INSERT_MOVIE, SET_CURRENT_MOVIE, } from './constants';
 
 const { getMovieUrl, } = MovieUtils;
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
@@ -19,8 +19,8 @@ const set = newMovie => movie => newMovie;
 const setCurrentMovie = movie =>
   ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
 
-const insertMovie = movie =>
-  ({ type: INSERT_MOVIE, curry: insert(movie), });
+const insertMovies = movies =>
+({ type: INSERT_MOVIE, curry: insert(movies), });
 
 const updateMovies = movies =>
  ({ type: UPDATE_MOVIES, curry: update(movies), });
@@ -44,7 +44,10 @@ export const getMovie = id => (dispatch) => {
   dispatch(movieRequestPending(id));
   return axios.get(getMovieUrl(id))
     .then(({ data: movie, }) =>
-       dispatch(movieRequestSucess()) && dispatch(setCurrentMovie(movie)))
+    [ movieRequestSucess(),
+      insertMovies(movie),
+      setCurrentMovie(movie), ].map(dispatch)
+    )
     .catch(movieRequestFailure);
 };
 
@@ -54,13 +57,13 @@ export const getMovies = () => (dispatch) => {
   dispatch({ type: 'MOVIE_REQUEST_PENDING', curry: pending, });
   return axios.get(`${API_URL}/movies`)
     .then(({ data: { movies, }, }) =>
-       dispatch(movieRequestSucess()) && dispatch(updateMovies(movies)))
+       dispatch(movieRequestSucess()) && dispatch(insertMovies(movies)))
     .catch(movieRequestFailure);
 };
 
 export const createMovie = movieProps => dispatch =>
 axios.post(`${API_URL}/movies`, movieProps)
-  .then(({ data: { movie, }, }) => dispatch(insertMovie(movie)))
+  .then(({ data: { movie, }, }) => dispatch(insertMovies(movie)))
   .catch(err => console.error('there was an error in creation', err));
 
 export const editMovie = ({ id, }) => dispatch => movieProps =>

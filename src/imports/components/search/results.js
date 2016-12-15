@@ -1,10 +1,8 @@
-import React, { PropTypes, } from 'react';
+import React from 'react';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
-import { resetForm, } from 'imports/utils';
-import { SearchActions, } from '../../actions';
+import { SearchActions, } from 'imports/actions';
 import { MovieCard, } from '../movie';
-import SearchForm from './form';
 import FreeForm from './free_form';
 
 const mapStateToProps = ({ search: { results, request: { query, }, }, }) =>
