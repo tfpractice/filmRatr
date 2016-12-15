@@ -8,7 +8,7 @@ const { requestUtils: { requestConstants, requestCreators, }, } = StateUtils;
 
 const movieRequestPending = requestCreators('MOVIE_REQUEST').pending;
 const movieRequestFailure = requestCreators('MOVIE_REQUEST').failure;
-const movieRequestSucess = requestCreators('MOVIE_REQUEST').success;
+const movieRequestSuccess = requestCreators('MOVIE_REQUEST').success;
 
 const set = newMovie => movie => newMovie;
 
@@ -31,7 +31,7 @@ export const getMovie = id => (dispatch) => {
   dispatch(movieRequestPending(id));
   return axios.get(getMovieUrl(id))
     .then(({ data: movie, }) =>
-    [ movieRequestSucess(),
+    [ movieRequestSuccess(),
       insertMovies(movie),
       setCurrentMovie(movie), ].map(dispatch)
     )
@@ -46,7 +46,7 @@ export const getMovies = (...ids) => (dispatch) => {
 
   // return axios.get(`${API_URL}/movies`)
     .then(axios.spread(({ data: { movies, }, }) =>
-    [ movieRequestSucess(), insertMovies(movie),
+    [ movieRequestSuccess(), insertMovies(movie),
     ].map(dispatch)))
     .catch(movieRequestFailure);
 };
@@ -71,7 +71,7 @@ export const getTopFive = () => (dispatch) => {
       //   });
     }
 
-      //  dispatch(movieRequestSucess()) && dispatch(insertMovies(movies))
+      //  dispatch(movieRequestSuccess()) && dispatch(insertMovies(movies))
     )
     .catch(movieRequestFailure);
 };
