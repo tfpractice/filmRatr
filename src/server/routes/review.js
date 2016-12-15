@@ -4,9 +4,7 @@ import { ReviewController, } from '../controllers';
 const router = new Router();
 
 router.param('movie_id', (req, res, next, id, key) => {
-  console.log('received movie_id param', id);
   req.movie_id = id;
-
   next();
 });
 
