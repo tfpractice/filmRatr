@@ -4,15 +4,11 @@ import { API_URL, GET_MOVIE, GET_MOVIES, INSERT_MOVIE, SET_CURRENT_MOVIE, } from
 
 const { getMovieUrl, } = MovieUtils;
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
+const { requestUtils: { requestConstants, requestCreators, }, } = StateUtils;
 
-const pending = movieID => state =>
- ({ ...state, status: 'pending', updatedAt: Date.now(), movieID, });
-
-const success = message => state =>
- ({ ...state, status: 'suceeded', updatedAt: Date.now(), message, });
-
-const failure = message => state =>
- ({ ...state, status: 'failed', updatedAt: Date.now(), message, });
+const movieRequestPending = requestCreators('MOVIE_REQUEST').pending;
+const movieRequestFailure = requestCreators('MOVIE_REQUEST').failure;
+const movieRequestSucess = requestCreators('MOVIE_REQUEST').success;
 
 const set = newMovie => movie => newMovie;
 
@@ -27,15 +23,6 @@ const updateMovies = movies =>
 
 const updateMovie = movie =>
  ({ type: EDIT_MOVIE, curry: editByID(movie), });
-
-const movieRequestPending = id =>
-   ({ type: 'MOVIE_REQUEST_PENDING', curry: pending(id), });
-
-const movieRequestSucess = () =>
-    ({ type: 'MOVIE_REQUEST_SUCCESS', curry: success, });
-
-const movieRequestFailure = err =>
-  ({ type: 'MOVIE_REQUEST_FAILURE', curry: failure, });
 
 const removeMovie = ({ id, }) =>
  ({ type:  DELETE_MOVIE, curry: removeByID({ id, }), });

@@ -1,18 +1,27 @@
+const PENDING = 'PENDING';
+const SUCCESS = 'SUCCESS';
+const FAILURE = 'FAILURE';
+const STATUS_ACTIONS = [ PENDING, SUCCESS, FAILURE, ];
 
-const pending = movieID => state =>
- ({ ...state, status: 'pending', updatedAt: Date.now(), movieID, });
+const actionString = prefix => action => `${prefix}_${action}`;
 
-const success = message => state =>
+export const pending = param => state =>
+ ({ ...state, status: 'pending', updatedAt: Date.now(), param, });
+
+export const success = message => state =>
  ({ ...state, status: 'suceeded', updatedAt: Date.now(), message, });
 
-const failure = message => state =>
+export const failure = message => state =>
  ({ ...state, status: 'failed', updatedAt: Date.now(), message, });
 
-const movieRequestPending = id =>
-   ({ type: 'MOVIE_REQUEST_PENDING', curry: pending(id), });
+export const requestConstants = prefix =>
+  new Set(STATUS_ACTIONS.map(actionString(prefix)));
 
-const movieRequestSucess = () =>
-    ({ type: 'MOVIE_REQUEST_SUCCESS', curry: success, });
-
-const movieRequestFailure = err =>
-  ({ type: 'MOVIE_REQUEST_FAILURE', curry: failure, });
+export const requestCreators = prefix => ({
+   pending: param =>
+   ({ type: actionString(prefix)(PENDING), curry: pending(param), }),
+   success: message =>
+   ({ type: actionString(prefix)(SUCCESS), curry: success(message), }),
+   failure: message =>
+   ({ type: actionString(prefix)(FAILURE), curry: failure(message), }),
+});

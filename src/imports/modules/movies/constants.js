@@ -1,9 +1,10 @@
 export const MOVIE_API_URL = `https://api.themoviedb.org/3/movie/550?api_key=${process.env.MOVIE_DB_API_URL}`;
-import { asyncActions, MovieUtils, API_URL as url, } from 'imports/utils';
+import { asyncActions, MovieUtils, StateUtils, API_URL as url, } from 'imports/utils';
 const { getMovieUrl, } = MovieUtils;
+const { requestUtils: { requestConstants, }, } = StateUtils;
 
 export const API_URL = url;
-export const MOVIE_REQUEST_ACTIONS = asyncActions('MOVIE_REQUEST');
+export const MOVIE_REQUEST_ACTIONS = requestConstants('MOVIE_REQUEST');
 
 export const GET_MOVIE = 'GET_MOVIE';
 export const GET_MOVIES = 'GET_MOVIES';
