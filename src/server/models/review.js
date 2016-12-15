@@ -12,11 +12,15 @@ ReviewSchema.statics.distinctMovies = function () {
 };
 
 ReviewSchema.statics.countByMovieID = function (movie_id) {
-  this.count({ movie_id, });
+  return this.count({ movie_id, });
+};
+
+ReviewSchema.statics.findByMovieID = function (movie_id) {
+  return this.find({ movie_id, });
 };
 
 ReviewSchema.statics.topFiveMovies = function () {
-  this.aggregate({
+  return this.aggregate({
     $group: {
       _id: '$movie_id',
       count: { $sum: 1, },
@@ -24,17 +28,9 @@ ReviewSchema.statics.topFiveMovies = function () {
   },
      { $sort: { count: -1, }, },
      { $limit: 5, },
-  )
-    .then((r) => {
-      console.log('movie_id groups', r);
-
-    // return r.sort
-    });
+  );
 };
 
 const Review = mongoose.model('Review', ReviewSchema);
 
-Review.distinctMovies();
-Review.countByMovieID('550');
-Review.topFiveMovies();
 export default Review;
