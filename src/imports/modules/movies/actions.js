@@ -4,7 +4,7 @@ import { API_URL, GET_MOVIE, GET_MOVIES, INSERT_MOVIE, SET_CURRENT_MOVIE, } from
 
 const { getMovieUrl, } = MovieUtils;
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
-const { requestUtils: { requestConstants, requestCreators, }, } = StateUtils;
+const { requestUtils: { requestCreators, }, } = StateUtils;
 
 const movieRequestPending = requestCreators('MOVIE_REQUEST').pending;
 const movieRequestFailure = requestCreators('MOVIE_REQUEST').failure;
@@ -16,7 +16,7 @@ const setCurrentMovie = movie =>
   ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
 
 const insertMovies = movies =>
-({ type: INSERT_MOVIE, curry: insert(movies), });
+ ({ type: INSERT_MOVIE, curry: insert(movies), });
 
 const updateMovies = movies =>
  ({ type: UPDATE_MOVIES, curry: update(movies), });
@@ -27,13 +27,14 @@ const updateMovie = movie =>
 const removeMovie = ({ id, }) =>
  ({ type:  DELETE_MOVIE, curry: removeByID({ id, }), });
 
-export const getMovie = id => (dispatch) => {
+export const getMovie = id => (dispatch, getState) => {
   dispatch(movieRequestPending(id));
   return axios.get(getMovieUrl(id))
     .then(({ data: movie, }) =>
-    [ movieRequestSuccess(),
-      insertMovies(movie),
-      setCurrentMovie(movie), ].map(dispatch)
+
+       [ movieRequestSuccess(),
+         insertMovies(movie),
+         setCurrentMovie(movie), ].map(dispatch)
     )
     .catch(movieRequestFailure);
 };
@@ -43,38 +44,17 @@ export const getMovieFromParams = ({ movie_id, }) => getMovie(movie_id);
 export const getMovies = (...ids) => (dispatch) => {
   dispatch({ type: 'MOVIE_REQUEST_PENDING', curry: pending, });
   return axios.all(ids.map(getMovieUrl).map(axios.get))
-
-  // return axios.get(`${API_URL}/movies`)
     .then(axios.spread(({ data: { movies, }, }) =>
-    [ movieRequestSuccess(), insertMovies(movie),
-    ].map(dispatch)))
+     [ movieRequestSuccess(), insertMovies(movie),
+     ].map(dispatch)))
     .catch(movieRequestFailure);
 };
 
-export const getTopFive = () => (dispatch) => {
-  console.log('retriebeing top five');
-  return axios.get(`${API_URL}/reviews/top`)
-
-    // .then((r) => {
-    .then(({ data: { topFive, }, }) => {
-      console.log('======================reyrun db=============', topFive);
-
-      // return dispatch(getMovies(...topFive));
-
-      return topFive.map(getMovie).map(dispatch);
-
-      // return Promise.all(movies.map(getMovie).map(dispatch))
-      //   .then((r) => {
-      //     console.log(' top five results ');
-      //     console.log(r);
-      //     return r;
-      //   });
-    }
-
-      //  dispatch(movieRequestSuccess()) && dispatch(insertMovies(movies))
-    )
-    .catch(movieRequestFailure);
-};
+export const getTopFive = () => dispatch =>
+axios.get(`${API_URL}/reviews/top`)
+  .then(({ data: { topFive, }, }) =>
+     Promise.all(topFive.map(id => getMovie(id)(dispatch))))
+  .catch(movieRequestFailure);
 
 export const createMovie = movieProps => dispatch =>
 axios.post(`${API_URL}/movies`, movieProps)

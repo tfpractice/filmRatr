@@ -1,4 +1,12 @@
-export const update = nextState => prevState => nextState;
+export const update = nextState => prevState =>
+
+  // console.log('\n===================UPDATING===================\n');
+  // console.log('\n===================UPDATING prevState===================\n', prevState);
+  //
+  // console.log('\n===================UPDATING nextState===================\n', nextState);
+  //
+  // // console.log('\n===================nextState===================\n', prevState.concat(elem));
+   nextState;
 
 export const replace = nextState => prevState => nextState;
 

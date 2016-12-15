@@ -48,7 +48,7 @@ export const requestHandler = (req, res) => {
       );
 
       fetchComponentData(store.dispatch, props.components, props.params)
-        .then(() => res.send(renderHTML(markup, store.getState())))
+        .then(results => res.send(renderHTML(markup, store.getState())))
         .catch(err => res.end(err.message));
     } else {
       res.status(404).send('Not found');
