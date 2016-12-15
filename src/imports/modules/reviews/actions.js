@@ -2,24 +2,30 @@ import axios from 'axios';
 import { StateUtils, } from 'imports/utils';
 import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW, REVIEW_URL, UPDATE_REVIEWS, } from './constants';
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
+const { requestUtils: { requestCreators, }, } = StateUtils;
 
-const pending = query => state =>
- ({ ...state, status: 'pending', updatedAt: Date.now(), query, });
+const reviewRequestPending = requestCreators('REVIEW_REQUEST').pending;
+const reviewRequestFailure = requestCreators('REVIEW_REQUEST').failure;
+const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 
-const success = message => state =>
- ({ ...state, status: 'suceeded', updatedAt: Date.now(), message, });
-
-const failure = message => state =>
- ({ ...state, status: 'failed', updatedAt: Date.now(), message, });
-
-const reviewRequestPending = query =>
-  ({ type: 'REVIEW_REQUEST_PENDING', curry: pending(query), });
-
-const reviewRequestSucess = () =>
-  ({ type: 'REVIEW_REQUEST_SUCCESS', curry: success(), });
-
-const reviewRequestFailure = err =>
-  ({ type: 'REVIEW_REQUEST_FAILURE', curry: failure(err.message), });
+//
+// const pending = query => state =>
+//  ({ ...state, status: 'pending', updatedAt: Date.now(), query, });
+//
+// const success = message => state =>
+//  ({ ...state, status: 'suceeded', updatedAt: Date.now(), message, });
+//
+// const failure = message => state =>
+//  ({ ...state, status: 'failed', updatedAt: Date.now(), message, });
+//
+// const reviewRequestPending = query =>
+//   ({ type: 'REVIEW_REQUEST_PENDING', curry: pending(query), });
+//
+// const reviewRequestSuccess = () =>
+//   ({ type: 'REVIEW_REQUEST_SUCCESS', curry: success(), });
+//
+// const reviewRequestFailure = err =>
+//   ({ type: 'REVIEW_REQUEST_FAILURE', curry: failure(err.message), });
 
 const insertReview = review =>
   ({ type: INSERT_REVIEW, curry: insert(review), });
@@ -37,7 +43,7 @@ export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
   return axios.get(`${REVIEW_URL}/`)
     .then(({ data: { reviews, }, }) =>
-      dispatch(reviewRequestSucess()) && dispatch(updateReviews(reviews)))
+      dispatch(reviewRequestSuccess()) && dispatch(updateReviews(reviews)))
     .catch(reviewRequestFailure);
 };
 
@@ -45,7 +51,7 @@ export const getMovieReviews = movie_id => (dispatch) => {
   dispatch(reviewRequestPending(movie_id));
   return axios.get(`${REVIEW_URL}/${movie_id}`)
     .then(({ data: { reviews, }, }) =>
-      dispatch(reviewRequestSucess()) && dispatch(updateReviews(reviews)))
+      dispatch(reviewRequestSuccess()) && dispatch(updateReviews(reviews)))
     .catch(reviewRequestFailure);
 };
 
