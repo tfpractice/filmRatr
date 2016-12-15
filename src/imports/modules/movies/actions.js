@@ -58,12 +58,10 @@ export const getMovies = () => (dispatch) => {
     .catch(movieRequestFailure);
 };
 
-export const createMovie = movieProps => (dispatch) => {
-  console.log('========moviesprops======', movieProps);
-  return axios.post(`${API_URL}/movies`, movieProps)
-    .then(({ data: { movie, }, }) => dispatch(insertMovie(movie)))
-    .catch(err => console.error('there was an error in creation', err));
-};
+export const createMovie = movieProps => dispatch =>
+axios.post(`${API_URL}/movies`, movieProps)
+  .then(({ data: { movie, }, }) => dispatch(insertMovie(movie)))
+  .catch(err => console.error('there was an error in creation', err));
 
 export const editMovie = ({ id, }) => dispatch => movieProps =>
  axios.patch(`${API_URL}/movies/${id}`, movieProps)

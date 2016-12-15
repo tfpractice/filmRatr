@@ -13,7 +13,7 @@ router.param('movie_id', (req, res, next, id, key) => {
 // Get all Reviews
 router.route('/reviews/').get(ReviewController.getReviews);
 
-router.route('/reviews/:movie_id').get(ReviewController.getReviews);
+router.route('/reviews/:movie_id').get(ReviewController.getMovieReviews);
 
 // Add a new Review
 router.route('/reviews/:movie_id').post(ReviewController.addReview);

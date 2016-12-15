@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { StateUtils, } from 'imports/utils';
-import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW, REVIEW_URL
-  , UPDATE_REVIEWS, } from './constants';
+import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW, REVIEW_URL, UPDATE_REVIEWS, } from './constants';
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
 
 const pending = query => state =>
@@ -37,30 +36,29 @@ const removeReview = ({ id, }) =>
 export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
   return axios.get(`${REVIEW_URL}/`)
-    .then(({ data: { results, }, }) =>
-      dispatch(reviewRequestSucess()) && dispatch(updateReviews(results)))
+    .then(({ data: { reviews, }, }) =>
+      dispatch(reviewRequestSucess()) && dispatch(updateReviews(reviews)))
     .catch(reviewRequestFailure);
 };
 
-export const getMovieReviews = movieID => (dispatch) => {
-  dispatch(reviewRequestPending(movieID));
-  return axios.get(`${REVIEW_URL}/${movieID}`)
-    .then(({ data: { results, }, }) =>
-      dispatch(reviewRequestSucess()) && dispatch(updateResults(results)))
+export const getMovieReviews = movie_id => (dispatch) => {
+  dispatch(reviewRequestPending(movie_id));
+  return axios.get(`${REVIEW_URL}/${movie_id}`)
+    .then(({ data: { reviews, }, }) =>
+      dispatch(reviewRequestSucess()) && dispatch(updateReviews(reviews)))
     .catch(reviewRequestFailure);
 };
 
-export const createReview = ({ id: movie_id, }) => dispatch => (reviewProps) => {
-  console.log('========reviewsprops======', reviewProps);
-  return axios.post(`${REVIEW_URL}/${movie_id}`, reviewProps)
-    .then(({ data: { review, }, }) => {
-      console.log('NEW REVIEW RECEIVED', review); return dispatch(insertReview(review));
-    })
-    .catch(err => console.error('there was an error in creation', err));
-};
+export const getReviewsFromParams = ({ movie_id, }) => getMovieReviews(movie_id);
 
-export const editReview = ({ movie_id, id, }) => dispatch => reviewProps =>
- axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, reviewProps)
+export const createReview = ({ id: movie_id, }) => dispatch => revProps => axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
+  .then(({ data: { review, }, }) => {
+    console.log('NEW REVIEW RECEIVED', review); return dispatch(insertReview(review));
+  })
+  .catch(err => console.error('there was an error in creation', err));
+
+export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
+ axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, revProps)
    .then(({ data: { review, }, }) => dispatch(updateReview(review)))
    .catch(err => console.error('there was an error in update', err));
 

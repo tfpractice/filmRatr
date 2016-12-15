@@ -6,10 +6,11 @@ import { Review, } from '../models';
  * @param res
  * @returns void
  */
-export const getReviews = (req, res) => Review.find()
-  .sort({ movie_id: 1, dateAdded: -1, }).exec()
-  .then(reviews => res.json({ reviews, }))
-  .catch(err => res.status(500).send(err));
+export const getReviews = (req, res) =>
+  Review.find()
+    .sort({ movie_id: 1, dateAdded: -1, }).exec()
+    .then(reviews => res.json({ reviews, }))
+    .catch(err => res.status(500).send(err));
 
   /**
    * Get all reviews for one movie
@@ -18,12 +19,10 @@ export const getReviews = (req, res) => Review.find()
    * @returns void
    */
 export const getMovieReviews = (req, res) =>
-Review.findByMovieID(req.movie_id)
-
- // Review.find({ movie_id: req.movie_id, })
-  .sort({ dateAdded: -1, }).exec()
-  .then(reviews => res.json({ reviews, }))
-  .catch(err => res.status(500).send(err));
+  Review.findByMovieID(req.movie_id)
+    .sort({ dateAdded: -1, }).exec()
+    .then(reviews => res.json({ reviews, }))
+    .catch(err => res.status(500).send(err));
 
 /**
  * Save a review
@@ -32,20 +31,14 @@ Review.findByMovieID(req.movie_id)
  * @returns void
  */
 export const addReview = (req, res) =>
-Review.create({ ...req.body, movie_id: req.movie_id, })
-  .then(review => res.json({ review, }))
-  .catch((err) => {
-    console.error('Review model insert error', err);
-    return res.status(500).send(err);
-  });
+  Review.create({ ...req.body, movie_id: req.movie_id, })
+    .then(review => res.json({ review, }))
+    .catch(err => res.status(500).send(err));
 
 export const updateReview = (req, res) =>
   Review.findByIdAndUpdate(req.params.id, req.body, { new: true, }).exec()
     .then(review => res.json({ review, }))
-    .catch((err) => {
-      console.error('error in Review Model Update', err);
-      res.status(500).send(err);
-    });
+    .catch(err => res.status(500).send(err));
 
 /**
  * Get a single review
@@ -66,12 +59,6 @@ export const getReview = (req, res) =>
  */
 export const deleteReview = (req, res) => {
   Review.findByIdAndRemove(req.params.id, { select: 'id', }).exec()
-    .then((review) => {
-      console.log('suceessfully removed', review);
-      return res.json({ review, });
-    })
-    .catch((err) => {
-      console.error('DB ERROR,', err);
-      return res.status(500).send(err);
-    });
+    .then(review => res.json({ review, }))
+    .catch(err => res.status(500).send(err));
 };
