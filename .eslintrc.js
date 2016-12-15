@@ -5,7 +5,7 @@ module.exports = {
         'babel-module': {},
         webpack: { config: './config/webpack/shared.js' },
       }, },
-    env: { 
+    env: {
       node: true,
       browser: true,
       commonjs: true,
@@ -49,7 +49,7 @@ module.exports = {
         ],
         'newline-per-chained-call': [
             'error',
-             { ignoreChainWithDepth: 2, },
+             { ignoreChainWithDepth: 3, },
         ],
         // Errors
         'func-call-spacing': ['error', 'never'],

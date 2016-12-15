@@ -18,10 +18,12 @@ export const getReviews = (req, res) => Review.find()
    * @returns void
    */
 export const getMovieReviews = (req, res) =>
- Review.find({ movie_id: req.movie_id, })
-   .sort({ dateAdded: -1, }).exec()
-   .then(reviews => res.json({ reviews, }))
-   .catch(err => res.status(500).send(err));
+Review.findByMovieID(req.movie_id)
+
+ // Review.find({ movie_id: req.movie_id, })
+  .sort({ dateAdded: -1, }).exec()
+  .then(reviews => res.json({ reviews, }))
+  .catch(err => res.status(500).send(err));
 
 /**
  * Save a review

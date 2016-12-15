@@ -16,6 +16,8 @@ ReviewSchema.statics.countByMovieID = function (movie_id) {
 };
 
 ReviewSchema.statics.findByMovieID = function (movie_id) {
+  console.log('\n============================\n');
+  console.log('finding reviews for', movie_id);
   return this.find({ movie_id, });
 };
 
