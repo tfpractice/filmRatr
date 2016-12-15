@@ -30,7 +30,7 @@ ReviewSchema.statics.topFiveMovies = function () {
     },
   },
      { $sort: { count: -1, }, },
-     { $limit: 5, },
+     { $limit: 10, },
   );
 };
 
