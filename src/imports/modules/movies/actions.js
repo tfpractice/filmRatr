@@ -22,7 +22,6 @@ export const updateMovies = movies =>
  ({ type: UPDATE_MOVIES, curry: update(movies), });
 
 export const getMovie = id => (dispatch, getState) => {
-  console.log('getting movie');
   dispatch(movieRequestPending(id));
   return axios.get(getMovieUrl(id))
     .then(({ data: movie, }) => {
@@ -34,30 +33,10 @@ export const getMovie = id => (dispatch, getState) => {
     .catch(movieRequestFailure);
 };
 
-// export const getMovieFromParams = ({ movie_id, }) => getMovie(movie_id);
-//
-// export const setMovieFromParams = ({ movie_id, }) => (dispatch) => {
-//   dispatch(movieRequestPending(movie_id));
-//   return axios.get(getMovieUrl(movie_id))
-//     .then(({ data: movie, }) => {
-//       dispatch(getMovie(movie_id)).then((movie) => {
-//         console.log('===========retrieved movie return val===========', movie.title);
-//         dispatch(setCurrentMovie(movie));
-//       });
-//       dispatch(setCurrentMovie(movie));
-//     })
-//     .catch(movieRequestFailure);
-// };
-
-export const setMovieFromParams = ({ movie_id, }) => (dispatch) => {
-  dispatch(movieRequestPending(movie_id));
-  return dispatch(getMovie(movie_id))
-    .then((movie) => {
-      console.log('===========retrieved movie return val===========', movie.title);
-      dispatch(setCurrentMovie(movie));
-    })
-    .catch(movieRequestFailure);
-};
+export const setMovieFromParams = ({ movie_id, }) => dispatch =>
+dispatch(getMovie(movie_id))
+  .then(setCurrentMovie).then(dispatch)
+  .catch(movieRequestFailure);
 
 export const getMovies = (...ids) => (dispatch) => {
   dispatch(movieRequestPending(ids));
