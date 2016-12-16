@@ -8,8 +8,7 @@ import { TopTen, } from './movie';
 const Home = ({ children, dispatch, ...rest }, context) =>
 (
   <div id="home">
-    <h1>HOMEPAGE  WORK! ?</h1>
-    <FlatButton label="GET 550" onClick={() => dispatch(MovieActions.getMovie(550))} />
+    <h1>HOMEPAGE   ?</h1>
     <SearchResults />
     <TopTen />
   </div>

@@ -3,11 +3,13 @@ import FlatButton from 'material-ui/FlatButton';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';import { Link, } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
-import { MovieActions, } from 'imports/actions';
+import { MovieActions, ReviewActions, } from 'imports/actions';
 
-const mapDispatchToProps = dispatch =>
- ({ setCurrent: bindActionCreators(MovieActions.setCurrentMovie, dispatch), });
-const MovieCard = ({ movie, setCurrent, }) => (
+const mapDispatchToProps = dispatch => ({
+  setCurrent: bindActionCreators(MovieActions.setCurrentMovie, dispatch),
+  getCurrentReviews: bindActionCreators(ReviewActions.getMovieReviews, dispatch),
+});
+const MovieCard = ({ movie, setCurrent, getCurrentReviews, }) => (
   <Card>
     <CardHeader
       title={movie.title}
@@ -32,7 +34,7 @@ const MovieCard = ({ movie, setCurrent, }) => (
       <FlatButton label="Review this movie" />
       <Link
         to={`/movies/${movie.id}`}
-        onClick={() => setCurrent(movie)}
+        onClick={() => Promise.all([ setCurrent(movie), getCurrentReviews(movie.id), ])}
       >
         <FlatButton label="Show Reviews" />
       </Link>

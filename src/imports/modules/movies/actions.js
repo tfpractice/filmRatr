@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { MovieUtils, StateUtils, } from 'imports/utils';
 import { API_URL, GET_MOVIE, GET_MOVIES, INSERT_MOVIE, SET_CURRENT_MOVIE, } from './constants';
-
+import { getMovieReviews, } from '../reviews/actions';
 const { getMovieUrl, } = MovieUtils;
 const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
 const { requestUtils: { requestCreators, }, } = StateUtils;
@@ -21,18 +21,14 @@ export const insertMovies = movies =>
 export const updateMovies = movies =>
  ({ type: UPDATE_MOVIES, curry: update(movies), });
 
-// const updateMovie = movie =>
-//  ({ type: EDIT_MOVIE, curry: editByID(movie), });
-//
-// const removeMovie = ({ id, }) =>
-//  ({ type:  DELETE_MOVIE, curry: removeByID({ id, }), });
-
 export const getMovie = id => (dispatch, getState) => {
   console.log('getting movie');
   dispatch(movieRequestPending(id));
   return axios.get(getMovieUrl(id))
     .then(({ data: movie, }) => {
-      [ movieRequestSuccess(), insertMovies(movie), ].map(dispatch);
+      [ movieRequestSuccess(),
+        insertMovies(movie),
+        getMovieReviews(movie.id), ].map(dispatch);
       return movie;
     })
     .catch(movieRequestFailure);
@@ -67,19 +63,3 @@ axios.get(`${API_URL}/reviews/top`)
   .then(({ data: { topFive, }, }) =>
      Promise.all(topFive.map(id => getMovie(id)(dispatch))))
   .catch(movieRequestFailure);
-
-//
-// export const createMovie = movieProps => dispatch =>
-// axios.post(`${API_URL}/movies`, movieProps)
-//   .then(({ data: { movie, }, }) => dispatch(insertMovies(movie)))
-//   .catch(err => console.error('there was an error in creation', err));
-//
-// export const editMovie = ({ id, }) => dispatch => movieProps =>
-//  axios.patch(`${API_URL}/movies/${id}`, movieProps)
-//    .then(({ data: { movie, }, }) => dispatch(updateMovie(movie)))
-//    .catch(err => console.error('there was an error in update', err));
-//
-// export const deleteMovie = ({ id, }) => dispatch =>
-//   axios.delete(`${API_URL}/movies/${id}`)
-//     .then(({ data: { movie, }, }) => dispatch(removeMovie(movie)))
-//     .catch(err => console.error('there was an error in delete', err));

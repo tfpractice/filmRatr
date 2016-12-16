@@ -11,14 +11,14 @@ const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 const insertReview = review =>
   ({ type: INSERT_REVIEW, curry: insert(review), });
 
-const updateReviews = reviews =>
-  ({ type: UPDATE_REVIEWS, curry: insert(reviews), });
-
 const updateReview = review =>
   ({ type: EDIT_REVIEW, curry: editByID(review), });
 
 const removeReview = ({ id, }) =>
     ({ type:  DELETE_REVIEW, curry: removeByID({ id, }), });
+
+export const updateReviews = reviews =>
+      ({ type: UPDATE_REVIEWS, curry: insert(reviews), });
 
 export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
