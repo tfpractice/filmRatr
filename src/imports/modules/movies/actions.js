@@ -31,8 +31,10 @@ export const getMovie = id => (dispatch, getState) => {
   console.log('getting movie');
   dispatch(movieRequestPending(id));
   return axios.get(getMovieUrl(id))
-    .then(({ data: movie, }) =>
-    [ movieRequestSuccess(), insertMovies(movie), ].map(dispatch))
+    .then(({ data: movie, }) => {
+      [ movieRequestSuccess(), insertMovies(movie), ].map(dispatch);
+      return movie;
+    })
     .catch(movieRequestFailure);
 };
 
@@ -42,8 +44,9 @@ export const setMovieFromParams = ({ movie_id, }) => (dispatch) => {
   dispatch(movieRequestPending(movie_id));
   return axios.get(getMovieUrl(movie_id))
     .then(({ data: movie, }) => {
-      dispatch(getMovie(movie_id)).then((r) => {
-        console.log('===========retrieved movie return val===========', r);
+      dispatch(getMovie(movie_id)).then((movie) => {
+        console.log('===========retrieved movie return val===========', movie.title);
+        dispatch(setCurrentMovie(movie));
       });
       dispatch(setCurrentMovie(movie));
     })

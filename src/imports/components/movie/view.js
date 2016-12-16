@@ -14,7 +14,6 @@ const MovieView = ({ movie, }) =>
 </div>);
 
 MovieView.fetchData = [
-  MovieActions.getMovieFromParams,
   MovieActions.setMovieFromParams,
   ReviewActions.getReviewsFromParams, ];
 

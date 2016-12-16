@@ -30,7 +30,12 @@ const MovieCard = ({ movie, setCurrent, }) => (
     </CardText>
     <CardActions>
       <FlatButton label="Review this movie" />
-      <Link to={`/movies/${movie.id}`} onClick={() => setCurrent(movie)} ><FlatButton label="Show Reviews" /></Link>
+      <Link
+        to={`/movies/${movie.id}`}
+        onClick={() => setCurrent(movie)}
+      >
+        <FlatButton label="Show Reviews" />
+      </Link>
     </CardActions>
   </Card>
 );
