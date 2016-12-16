@@ -1,9 +1,13 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { Link, } from 'react-router';
+import { bindActionCreators, } from 'redux';
+import { connect, } from 'react-redux';import { Link, } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
+import { MovieActions, } from 'imports/actions';
 
-const MovieCard = ({ movie, }) => (
+const mapDispatchToProps = dispatch =>
+ ({ setCurrent: bindActionCreators(MovieActions.setCurrentMovie, dispatch), });
+const MovieCard = ({ movie, setCurrent, }) => (
   <Card>
     <CardHeader
       title={movie.title}
@@ -26,12 +30,12 @@ const MovieCard = ({ movie, }) => (
     </CardText>
     <CardActions>
       <FlatButton label="Review this movie" />
-      <Link to={`/movies/${movie.id}`} ><FlatButton label="Show Reviews" /></Link>
+      <Link to={`/movies/${movie.id}`} onClick={() => setCurrent(movie)} ><FlatButton label="Show Reviews" /></Link>
     </CardActions>
   </Card>
 );
 
-export default MovieCard;
+export default connect(null, mapDispatchToProps)(MovieCard);
 
 // { adult:false,
 //   backdrop_path:  '/7GyIzZImsBTAH0teL1XKG6Nz3OL.jpg',

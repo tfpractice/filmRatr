@@ -11,13 +11,12 @@ const MapStateToProps = ({ currentMovie, movies: { data, }, }, { params: { movie
 
   return ({ movie: currentMovie, });
 };
-const mapDispatchToProps = (dispatch, { params: { movie_id, }, }) => {
-  const movie = dispatch(MovieActions.setMovieFromParams({ movie_id, }));
+const mapDispatchToProps = (dispatch, { params: { movie_id, }, }) =>
+  // const movie = dispatch(MovieActions.setMovieFromParams({ movie_id, }));
 
-  console.log('\n===================dispatchMovie===================\n', movie);
+  // console.log('\n===================dispatchMovie===================\n', movie);
 
-  return ({});
-};
+   ({});
 const MovieView = ({ movie, }, params) =>
 (<div>
   <MovieCard movie={movie} />
