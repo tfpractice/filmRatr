@@ -5,11 +5,13 @@ import { connect, } from 'react-redux';import { Link, } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
 import { MovieActions, ReviewActions, } from 'imports/actions';
 
+const MapStateToProps = ({ movies: { data, }, }) => ({ allIDs: data.map(({ id, }) => id), });
 const mapDispatchToProps = dispatch => ({
   setCurrent: bindActionCreators(MovieActions.setCurrentMovie, dispatch),
   getCurrentReviews: bindActionCreators(ReviewActions.getMovieReviews, dispatch),
+  getMultipleReviews: bindActionCreators(ReviewActions.getMultipleReviews, dispatch),
 });
-const MovieCard = ({ movie, setCurrent, getCurrentReviews, }) => (
+const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, allIDs, }) => (
   <Card>
     <CardHeader
       title={movie.title}
@@ -42,7 +44,7 @@ const MovieCard = ({ movie, setCurrent, getCurrentReviews, }) => (
   </Card>
 );
 
-export default connect(null, mapDispatchToProps)(MovieCard);
+export default connect(MapStateToProps, mapDispatchToProps)(MovieCard);
 
 // { adult:false,
 //   backdrop_path:  '/7GyIzZImsBTAH0teL1XKG6Nz3OL.jpg',
