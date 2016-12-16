@@ -50,10 +50,10 @@ export const setMovieFromParams = ({ movie_id, }) => (dispatch) => {
 };
 
 export const getMovies = (...ids) => (dispatch) => {
-  dispatch({ type: 'MOVIE_REQUEST_PENDING', curry: pending, });
+  dispatch(movieRequestPending(ids));
   return axios.all(ids.map(getMovieUrl).map(axios.get))
     .then(axios.spread(({ data: { movies, }, }) =>
-     [ movieRequestSuccess(), insertMovies(movie),
+     [ movieRequestSuccess(), insertMovies(movie), getMovieReviews(movie.id),
      ].map(dispatch)))
     .catch(movieRequestFailure);
 };
