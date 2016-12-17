@@ -1,7 +1,4 @@
 import { addElement, merge as dedupe, } from './dedupe';
-export const update = nextState => prevState => nextState;
-
-export const replace = nextState => prevState => nextState;
 
 export const merge = (...elems) => prevState =>
   elems.reduce(addElement, prevState);

@@ -4,7 +4,7 @@ import { insertMovies, } from '../movies/actions';
 import { SEARCH_URL, UPDATE_SEARCH_RESULTS, } from './constants';
 
 const { requestUtils: { requestCreators, }, } = StateUtils;
-const { arrayUtils: { update, merge, }, } = StateUtils;
+const { arrayUtils: { merge, }, } = StateUtils;
 
 const searchRequestPending = requestCreators('SEARCH_REQUEST').pending;
 const searchRequestFailure = requestCreators('SEARCH_REQUEST').failure;
