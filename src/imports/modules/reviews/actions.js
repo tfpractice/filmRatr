@@ -22,38 +22,31 @@ export const mergeReviews = (...reviews) =>
 export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
   return axios.get(`${REVIEW_URL}/`)
-    .then(({ data: { reviews, }, }) => {
-      console.log('============== get reviews==============', reviews);
-
-      return [
-        reviewRequestSuccess(),
-        mergeReviews(...reviews),
-      ].map(dispatch);
-    })
+    .then(({ data: { reviews, }, }) =>
+     [ reviewRequestSuccess(),
+       mergeReviews(...reviews),
+     ].map(dispatch))
     .catch(reviewRequestFailure);
 };
 
 export const getMovieReviews = movie_id => (dispatch) => {
   dispatch(reviewRequestPending(movie_id));
   return requestReview(movie_id)
-    .then(({ data: { reviews, }, }) => {
-      console.log('============== get movie reviews==============', reviews);
-
-      return [ reviewRequestSuccess(),
-        mergeReviews(...reviews),
-      ].map(dispatch);
-    })
+    .then(({ data: { reviews, }, }) =>
+    [ reviewRequestSuccess(),
+      mergeReviews(...reviews),
+    ].map(dispatch))
     .catch(reviewRequestFailure);
 };
+
 export const getMultipleReviews = (...ids) => (dispatch) => {
   dispatch(reviewRequestPending(ids));
   return axios.all(ids.map(requestReview))
     .then(axios.spread((...responses) => {
       const reviews = responses.map(({ data: { reviews, }, }) => reviews);
 
-      console.log('============== get MULTIPLE reviews==============', reviews);
-
-      return [ reviewRequestSuccess(ids),
+      return [
+        reviewRequestSuccess(ids),
         mergeReviews(...reviews),
       ].map(dispatch);
     })
@@ -61,7 +54,7 @@ export const getMultipleReviews = (...ids) => (dispatch) => {
     .catch(reviewRequestFailure);
 };
 
-export const getReviewsFromParams = ({ movie_id, }) => getMovieReviews(movie_id);
+export const getReviewsFromParams = ({ movie_id, }) => getMultipleReviews(movie_id);
 
 export const createReview = ({ id: movie_id, }) => dispatch => revProps =>
 axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
