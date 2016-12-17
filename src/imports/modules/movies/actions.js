@@ -16,8 +16,6 @@ const getFirstElement = ([ first, ...rest ]) => first;
 const getResponseData = ({ data, }) => data;
 const unaryMap = mapFun => arr => arr.map(mapFun);
 
-// export const setCurrentMovie = ([ movie, ...rest ]) =>
-
 export const setCurrentMovie = (movie, ...rest) =>
   ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
 

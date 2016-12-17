@@ -1,12 +1,5 @@
-import { addElement, merge as dedupe,
-editCollByID,
-excludeByID,
-updateByID, } from './dedupe';
-
-export const merge = (...elems) => prevState =>
-  elems.reduce(addElement, prevState);
-
-// export const insert = elem => prevState => prevState.concat(elem);
+import { editCollByID, excludeByID, insertByID, } from './dedupe';
 
 export const removeByID = excludeByID;
 export const editByID = editCollByID;
+export const merge = (...elems) => state => elems.reduce(insertByID, state);
