@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { StateUtils, } from 'imports/utils';
 import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW, REVIEW_URL, UPDATE_REVIEWS, } from './constants';
-const { arrayUtils: { editByID, insert, removeByID, update, }, } = StateUtils;
+const { arrayUtils: { editByID, insert, removeByID, update, merge, }, } = StateUtils;
 const { requestUtils: { requestCreators, }, } = StateUtils;
 
 const reviewRequestPending = requestCreators('REVIEW_REQUEST').pending;
@@ -17,26 +17,35 @@ const updateReview = review =>
   ({ type: EDIT_REVIEW, curry: editByID(review), });
 
 const removeReview = ({ id, }) =>
-    ({ type:  DELETE_REVIEW, curry: removeByID({ id, }), });
+  ({ type:  DELETE_REVIEW, curry: removeByID({ id, }), });
 
-export const updateReviews = reviews =>
-      ({ type: UPDATE_REVIEWS, curry: insert(reviews), });
+export const mergeReviews = (...reviews) =>
+  ({ type: UPDATE_REVIEWS, curry: merge(...reviews), });
 
 export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
   return axios.get(`${REVIEW_URL}/`)
-    .then(({ data: { reviews, }, }) =>
-    [ reviewRequestSuccess(),
-      updateReviews(reviews), ].map(dispatch))
+    .then(({ data: { reviews, }, }) => {
+      console.log('============== get reviews==============', reviews);
+
+      return [
+        reviewRequestSuccess(),
+        mergeReviews(...reviews),
+      ].map(dispatch);
+    })
     .catch(reviewRequestFailure);
 };
 
 export const getMovieReviews = movie_id => (dispatch) => {
   dispatch(reviewRequestPending(movie_id));
   return requestReview(movie_id)
-    .then(({ data: { reviews, }, }) =>
-    [ reviewRequestSuccess(),
-      updateReviews(reviews), ].map(dispatch))
+    .then(({ data: { reviews, }, }) => {
+      console.log('============== get movie reviews==============', reviews);
+
+      return [ reviewRequestSuccess(),
+        mergeReviews(...reviews),
+      ].map(dispatch);
+    })
     .catch(reviewRequestFailure);
 };
 export const getMultipleReviews = (...ids) => (dispatch) => {
@@ -45,8 +54,10 @@ export const getMultipleReviews = (...ids) => (dispatch) => {
     .then(axios.spread((...responses) => {
       const reviews = responses.map(({ data: { reviews, }, }) => reviews);
 
+      console.log('============== get MULTIPLE reviews==============', reviews);
+
       return [ reviewRequestSuccess(ids),
-        updateReviews(...reviews),
+        mergeReviews(...reviews),
       ].map(dispatch);
     })
 )

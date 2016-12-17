@@ -7,8 +7,11 @@ import ReviewForm from './form_base';
 import MovieReviewForm from './form';
 import ReviewCard from './item';
 
-const mapStateToProps = ({ reviews, }, { movie, }) =>
-   ({ reviews: reviews.data.filter(({ movie_id, }) => movie_id == movie.id, ), });
+const mapStateToProps = ({ reviews, }, { movie, }) => {
+  console.log('==============CURRENT REVIEW LIST length==============', reviews.data.length);
+
+  return ({ reviews: reviews.data.filter(({ movie_id, }) => movie_id == movie.id, ), });
+};
 
 const mapDispatchToProps = dispatch =>
  ({ actions: bindActionCreators(ReviewActions, dispatch), });

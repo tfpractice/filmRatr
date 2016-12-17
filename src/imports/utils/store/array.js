@@ -1,14 +1,10 @@
-export const update = nextState => prevState =>
-
-  // console.log('\n===================UPDATING===================\n');
-  // console.log('\n===================UPDATING prevState===================\n', prevState);
-  //
-  // console.log('\n===================UPDATING nextState===================\n', nextState);
-  //
-  // // console.log('\n===================nextState===================\n', prevState.concat(elem));
-   nextState;
+import { addElement, merge as dedupe, } from './dedupe';
+export const update = nextState => prevState => nextState;
 
 export const replace = nextState => prevState => nextState;
+
+export const merge = (...elems) => prevState =>
+  elems.reduce(addElement, prevState);
 
 export const insert = elem => prevState => prevState.concat(elem);
 
