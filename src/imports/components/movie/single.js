@@ -5,13 +5,15 @@ import { connect, } from 'react-redux';import { Link, } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
 import { MovieActions, ReviewActions, } from 'imports/actions';
 
-const MapStateToProps = ({ movies: { data, }, }) => ({ allIDs: data.map(({ id, }) => id), });
+const MapStateToProps = ({ movies: { data, }, }) =>
+({ allIDs: [ ...(new Set(data.map(({ id, }) => id))), ], });
 const mapDispatchToProps = dispatch => ({
   setCurrent: bindActionCreators(MovieActions.setCurrentMovie, dispatch),
   getCurrentReviews: bindActionCreators(ReviewActions.getMovieReviews, dispatch),
   getMultipleReviews: bindActionCreators(ReviewActions.getMultipleReviews, dispatch),
+  getMovies: bindActionCreators(MovieActions.getMovies, dispatch),
 });
-const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, allIDs, }) => (
+const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, getMovies, allIDs, }) => (
   <Card>
     <CardHeader
       title={movie.title}
@@ -36,7 +38,7 @@ const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, a
       <FlatButton label="Review this movie" />
       <Link
         to={`/movies/${movie.id}`}
-        onClick={() => Promise.all([ setCurrent(movie), getCurrentReviews(movie.id), ])}
+        onClick={() => Promise.all([ setCurrent(movie), getCurrentReviews(movie.id), getMovies(...allIDs), ])}
       >
         <FlatButton label="Show Reviews" />
       </Link>
