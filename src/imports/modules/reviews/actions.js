@@ -10,9 +10,6 @@ const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 
 const requestReview = id => axios.get(`${REVIEW_URL}/${id}`);
 
-const insertReview = review =>
-  ({ type: INSERT_REVIEW, curry: insert(review), });
-
 const updateReview = review =>
   ({ type: EDIT_REVIEW, curry: editByID(review), });
 
@@ -69,7 +66,7 @@ export const getReviewsFromParams = ({ movie_id, }) => getMovieReviews(movie_id)
 export const createReview = ({ id: movie_id, }) => dispatch => revProps =>
 axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
   .then(({ data: { review, }, }) =>
-   dispatch(insertReview(review)))
+   dispatch(mergeReviews(review)))
   .catch(reviewRequestFailure);
 
 export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
