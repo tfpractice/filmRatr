@@ -3,7 +3,7 @@ const SUCCESS = 'SUCCESS';
 const FAILURE = 'FAILURE';
 const STATUS_ACTIONS = [ PENDING, SUCCESS, FAILURE, ];
 
-export const getResponseData = ({ data, }) => data;
+export const getData = ({ data, }) => data;
 const actionString = prefix => action => `${prefix}_${action}`;
 
 export const pending = param => state =>

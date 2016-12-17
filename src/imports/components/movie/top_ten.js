@@ -8,7 +8,7 @@ import MovieList from './list';
 const mapStateToProps = (state, own) => {
   const movies = state.movies.data;
 
-  console.log('\n===================state.movies.data===================\n', movies);
+  // console.log('\n===================state.movies.data===================\n', movies);
 
   return { movies, };
 };
