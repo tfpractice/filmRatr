@@ -23,3 +23,6 @@ export const insertByID = (arr, elem) =>
   isPresent(arr)(elem) ? arr : setAppend(arr)(elem);
 
 export const merge = arr => (...elems) => elems.reduce(insertByID, arr);
+
+export const getFirst = ([ first, ...rest ]) => first;
+export const unaryMap = mapFun => arr => arr.map(mapFun);
