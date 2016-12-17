@@ -34,15 +34,14 @@ export const getMovie = id => (dispatch, getState) => {
 };
 
 export const setMovieFromParams = ({ movie_id, }) => dispatch =>
-dispatch(getMovie(movie_id))
-  .then(setCurrentMovie).then(dispatch)
-  .catch(movieRequestFailure);
+  dispatch(getMovie(movie_id))
+    .then(setCurrentMovie).then(dispatch)
+    .catch(movieRequestFailure);
 
 export const getMovies = (...ids) => dispatch =>
- Promise.all(ids.map(getMovie).map(dispatch));
+  Promise.all(ids.map(getMovie).map(dispatch));
 
 export const getTopFive = () => dispatch =>
-axios.get(`${API_URL}/reviews/top`)
-  .then(({ data: { topFive, }, }) =>
-     Promise.all(topFive.map(id => getMovie(id)(dispatch))))
-  .catch(movieRequestFailure);
+  axios.get(`${API_URL}/reviews/top`)
+    .then(({ data: { topFive, }, }) => dispatch(getMovies(...topFive)))
+    .catch(movieRequestFailure);
