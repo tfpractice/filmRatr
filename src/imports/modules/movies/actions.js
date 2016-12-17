@@ -3,7 +3,7 @@ import { MovieUtils, StateUtils, } from 'imports/utils';
 import { API_URL, GET_MOVIE, GET_MOVIES, INSERT_MOVIE, SET_CURRENT_MOVIE, } from './constants';
 import { getMovieReviews, } from '../reviews/actions';
 const { getMovieUrl, } = MovieUtils;
-const { arrayUtils: { insert, merge, }, } = StateUtils;
+const { arrayUtils: { merge, }, } = StateUtils;
 const { requestUtils: { requestCreators, }, } = StateUtils;
 
 const movieRequestPending = requestCreators('MOVIE_REQUEST').pending;
