@@ -42,7 +42,7 @@ Promise.resolve(dedupeMovieIDs(getState)(ids))
 
 export const setMovieFromParams = ({ movie_id, }) => dispatch =>
        dispatch(getMovies(movie_id))
-         .then(getFirst)
+         .then((x) => { console.log('movie from params', x); return getFirst(x); })
          .then(setCurrentMovie)
          .then(dispatch)
          .catch(movieRequestFailure);

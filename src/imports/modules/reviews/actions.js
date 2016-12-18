@@ -40,19 +40,34 @@ export const getMovieReviews = movie_id => (dispatch) => {
 };
 
 export const getMultipleReviews = (...ids) => (dispatch) => {
-  dispatch(reviewRequestPending(ids));
-  return axios.all(ids.map(requestReview))
-    .then(axios.spread((...responses) => {
-      const reviews = responses.map(({ data: { reviews, }, }) => reviews);
-
-      return [
-        reviewRequestSuccess(ids),
-        mergeReviews(...reviews),
-      ].map(dispatch);
-    })
-)
+  Promise.resolve(reviewRequestPending(ids))
+    .then(dispatch)
+    .then(() =>
+      axios.all(ids.map(requestReview))
+        .then(unaryMap(getData))
+        .then(reviews =>
+          Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews), ])
+            .then(unaryMap(dispatch))
+            .then(() => reviews)
+          ))
     .catch(reviewRequestFailure);
 };
+
+//
+// export const getMultipleReviews = (...ids) => (dispatch) => {
+//   dispatch(reviewRequestPending(ids));
+//   return axios.all(ids.map(requestReview))
+//     .then(axios.spread((...responses) => {
+//       const reviews = responses.map(({ data: { reviews, }, }) => reviews);
+//
+//       return [
+//         reviewRequestSuccess(ids),
+//         mergeReviews(...reviews),
+//       ].map(dispatch);
+//     })
+// )
+//     .catch(reviewRequestFailure);
+// };
 
 export const getReviewsFromParams = ({ movie_id, }) => getMultipleReviews(movie_id);
 

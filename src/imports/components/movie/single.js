@@ -38,7 +38,7 @@ const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, g
       <FlatButton label="Review this movie" />
       <Link
         to={`/movies/${movie.id}`}
-        onClick={() => Promise.all([ setCurrent(movie), getCurrentReviews(movie.id), ])}
+        onClick={() => Promise.all([ setCurrent(movie), getCurrentReviews(movie.id), getMultipleReviews(movie.id), ])}
       >
         <FlatButton label="Show Reviews" />
       </Link>
