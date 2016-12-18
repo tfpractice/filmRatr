@@ -23,26 +23,26 @@ export const insertMovies = (...movies) =>
    ({ type: INSERT_MOVIE, curry: merge(...movies), });
 
 export const getMovies = (...ids) => (dispatch, getState) =>
-Promise.resolve(dedupeMovieIDs(getState)(ids))
-  .then(distinctIDs =>
+   Promise.resolve(dedupeMovieIDs(getState)(ids))
+     .then(distinctIDs =>
       Promise.resolve(movieRequestPending(distinctIDs))
         .then(dispatch)
         .then(() =>
           axios.all(distinctIDs.map(requestMovieByID))
             .then(unaryMap(getData))
             .then(movies =>
-              Promise.all([
-                movieRequestSuccess(distinctIDs),
-                insertMovies(...movies),
-                ...distinctIDs.map(getMovieReviews),
-              ]).then(unaryMap(dispatch))
-                .then(() => movies)
-              )))
-  .catch(movieRequestFailure);
+               Promise.all([
+                 movieRequestSuccess(distinctIDs),
+                 insertMovies(...movies),
+                 getMovieReviews(...distinctIDs),
+               ]).then(unaryMap(dispatch))
+                 .then(() =>
+                   movies))))
+     .catch(movieRequestFailure);
 
 export const setMovieFromParams = ({ movie_id, }) => dispatch =>
        dispatch(getMovies(movie_id))
-         .then((x) => { console.log('movie from params', x); return getFirst(x); })
+         .then(getFirst)
          .then(setCurrentMovie)
          .then(dispatch)
          .catch(movieRequestFailure);
