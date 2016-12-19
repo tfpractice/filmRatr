@@ -7,13 +7,13 @@ import { MovieActions, ReviewActions, } from 'imports/actions';
 
 const MapStateToProps = ({ movies: { data, }, }) =>
 ({ allIDs: [ ...(new Set(data.map(({ id, }) => id))), ], });
+
 const mapDispatchToProps = dispatch => ({
   setCurrent: bindActionCreators(MovieActions.setCurrentMovie, dispatch),
-  getCurrentReviews: bindActionCreators(ReviewActions.getMovieReviews, dispatch),
-  getMultipleReviews: bindActionCreators(ReviewActions.getMultipleReviews, dispatch),
+  getMovieReviews: bindActionCreators(ReviewActions.getMovieReviews, dispatch),
   getMovies: bindActionCreators(MovieActions.getMovies, dispatch),
 });
-const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, getMovies, allIDs, }) => (
+const MovieCard = ({ movie, setCurrent, getMovieReviews, getMovies, allIDs, }) => (
   <Card>
     <CardHeader
       title={movie.title}
@@ -37,7 +37,10 @@ const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, g
     <CardActions>
       <Link
         to={`/movies/${movie.id}`}
-        onClick={() => { setCurrent(movie); getMultipleReviews(movie.id); }}
+        onClick={() => {
+          setCurrent(movie);
+          getMovies(movie.id);
+        }}
       >
         <FlatButton label="Show Reviews" />
       </Link>

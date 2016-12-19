@@ -14,14 +14,14 @@ const mapDispatchToProps = dispatch =>
  ({ actions: bindActionCreators(ReviewActions, dispatch), });
 
 const ReviewList = ({ movie, reviews, actions, }) => {
-  console.log('==============reviews==============', reviews.length);
+  console.log('==============ReviewList Component==============', reviews.length);
 
   return (
     <div className="Review-list">
       <h2>{`Showing  Reviews for ${movie.title}` }</h2>
       <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
       <div className="ReviewList">
-        {reviews.map(r => <ReviewCard actions={actions} review={r} />)}
+        {reviews.map(r => <ReviewCard key={r.id} actions={actions} review={r} />)}
       </div>
     </div>
   );

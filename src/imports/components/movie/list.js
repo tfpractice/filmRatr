@@ -8,7 +8,7 @@ const MovieList = ({ movies, actions, }) => (
   <div className="movie-list">
     <h1>Showing Movies</h1>
     <div className="movie-cards" />
-    { movies.map(m => <MovieCard movie={m} />)}
+    { movies.map(m => <MovieCard key={m.id} movie={m} />)}
   </div>
   );
 

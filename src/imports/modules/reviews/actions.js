@@ -49,7 +49,7 @@ export const getMultipleReviews = (...ids) => (dispatch, getState) =>
              .then(() => reviews)))
     .catch(reviewRequestFailure);
 
-export const getMovieReviews = getMultipleReviews;
+// export const getMovieReviews = getMultipleReviews;
 
 export const getReviewsFromParams = ({ movie_id, }) => getMultipleReviews(movie_id);
 
@@ -69,12 +69,12 @@ export const deleteReview = ({ movie_id, id, }) => dispatch =>
     .then(({ data: { review, }, }) => dispatch(removeReview(review)))
     .catch(reviewRequestFailure);
 
-    // export const getMovieReviews = movie_id => (dispatch) => {
-    //   dispatch(reviewRequestPending(movie_id));
-    //   return requestReview(movie_id)
-    //     .then(({ data: { reviews, }, }) =>
-    //     [ reviewRequestSuccess(),
-    //       mergeReviews(...reviews),
-    //     ].map(dispatch))x
-    //     .catch(reviewRequestFailure);
-    // };
+export const getMovieReviews = movie_id => (dispatch) => {
+  dispatch(reviewRequestPending(movie_id));
+  return requestReview(movie_id)
+    .then(({ data: { reviews, }, }) =>
+        [ reviewRequestSuccess(),
+          mergeReviews(...reviews),
+        ].map(dispatch))
+    .catch(reviewRequestFailure);
+};

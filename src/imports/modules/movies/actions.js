@@ -22,8 +22,11 @@ export const setCurrentMovie = (movie, ...rest) =>
 export const insertMovies = (...movies) =>
    ({ type: INSERT_MOVIE, curry: merge(...movies), });
 
-export const getMovies = (...ids) => (dispatch, getState) => {
-  console.log('==============getMovies ,ids)==============', getState);
+export const getMovies = (...ids) => (dispatch, getState, ...args) => {
+  console.log('**************getMovies ,ids)**************');
+  console.log('==============getMovies ,ids)==============', ids);
+
+  console.log('==============getMovies ,getState)==============', getState);
 
   return Promise.resolve(dedupeMovieIDs(getState)(ids))
     .then(distinctIDs =>
@@ -43,7 +46,7 @@ export const getMovies = (...ids) => (dispatch, getState) => {
 };
 
 export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) => {
-  console.log('==============setMovieFromParams ,movie_id==============', getMovies(movie_id)(dispatch, getState));
+  console.log('==============setMovieFromParams ,movie_id==============');
 
   return (Promise.resolve(getMovies(movie_id)))
     .then(dispatch)
@@ -53,6 +56,7 @@ export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) => {
     .then(setCurrentMovie)
     .then(dispatch)
 
+// z67
     // .then((value) => {
     //   console.log('==============setMovieFromParams ,value==============', value);
     //

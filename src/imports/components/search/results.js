@@ -16,7 +16,7 @@ const SearchResults = ({ results, query, actions, }) => (
     <h1>{query ? `Showing Results for ${query}` : 'Enter Movie Title' }</h1>
     <FreeForm formID={'searchRouteForm'} />
     <div className="searchResults">
-      {results.map(r => <MovieCard movie={r} />)}
+      {results.map(r => <MovieCard key={r.id} movie={r} />)}
     </div>
   </div>
  );
