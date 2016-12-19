@@ -22,9 +22,11 @@ export const setCurrentMovie = (movie, ...rest) =>
 export const insertMovies = (...movies) =>
    ({ type: INSERT_MOVIE, curry: merge(...movies), });
 
-export const getMovies = (...ids) => (dispatch, getState) =>
-   Promise.resolve(dedupeMovieIDs(getState)(ids))
-     .then(distinctIDs =>
+export const getMovies = (...ids) => (dispatch, getState) => {
+  console.log('==============getMovies ,ids)==============', getState);
+
+  return Promise.resolve(dedupeMovieIDs(getState)(ids))
+    .then(distinctIDs =>
       Promise.resolve(movieRequestPending(distinctIDs))
         .then(dispatch)
         .then(() =>
@@ -37,18 +39,27 @@ export const getMovies = (...ids) => (dispatch, getState) =>
                  getMovieReviews(...distinctIDs),
                ]).then(unaryMap(dispatch))
                  .then(() => movies))))
-     .catch(movieRequestFailure);
+    .catch(movieRequestFailure);
+};
 
 export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) => {
-  console.log('==============setMovieFromParams ,movie_id==============', movie_id);
-  return dispatch(getMovies(movie_id))
+  console.log('==============setMovieFromParams ,movie_id==============', getMovies(movie_id)(dispatch, getState));
+
+  return (Promise.resolve(getMovies(movie_id)))
+    .then(dispatch)
+
+    // .then(movies => (((movies))))
     .then(getFirst)
     .then(setCurrentMovie)
     .then(dispatch)
-    .then((value) => {
-      console.log('==============setMovieFromParams ,getState==============', getState().reviews.data.length);
-      return dispatch(getMovies(movie_id));
-    })
+
+    // .then((value) => {
+    //   console.log('==============setMovieFromParams ,value==============', value);
+    //
+    //   console.log('==============setMovieFromParams , getState().reviews.data.length==============', getState().reviews.data.length);
+    //
+    //   return dispatch(getMovies(movie_id));
+    // })
     .catch(movieRequestFailure);
 };
 
