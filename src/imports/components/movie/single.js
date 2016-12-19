@@ -37,9 +37,7 @@ const MovieCard = ({ movie, setCurrent, getCurrentReviews, getMultipleReviews, g
     <CardActions>
       <Link
         to={`/movies/${movie.id}`}
-        onClick={() => {
-          setCurrent(movie); getCurrentReviews(movie.id); getMultipleReviews(movie.id);
-        }}
+        onClick={() => { setCurrent(movie); getMultipleReviews(movie.id); }}
       >
         <FlatButton label="Show Reviews" />
       </Link>

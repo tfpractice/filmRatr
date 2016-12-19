@@ -36,16 +36,21 @@ export const getMovies = (...ids) => (dispatch, getState) =>
                  insertMovies(...movies),
                  getMovieReviews(...distinctIDs),
                ]).then(unaryMap(dispatch))
-                 .then(() =>
-                   movies))))
+                 .then(() => movies))))
      .catch(movieRequestFailure);
 
-export const setMovieFromParams = ({ movie_id, }) => dispatch =>
-       dispatch(getMovies(movie_id))
-         .then(getFirst)
-         .then(setCurrentMovie)
-         .then(dispatch)
-         .catch(movieRequestFailure);
+export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) => {
+  console.log('==============setMovieFromParams ,movie_id==============', movie_id);
+  return dispatch(getMovies(movie_id))
+    .then(getFirst)
+    .then(setCurrentMovie)
+    .then(dispatch)
+    .then((value) => {
+      console.log('==============setMovieFromParams ,getState==============', getState().reviews.data.length);
+      return dispatch(getMovies(movie_id));
+    })
+    .catch(movieRequestFailure);
+};
 
 export const getTopFive = () => dispatch =>
   axios.get(`${API_URL}/reviews/top`)

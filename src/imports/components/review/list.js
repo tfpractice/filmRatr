@@ -13,14 +13,18 @@ const mapStateToProps = ({ reviews, }, { movie, }) =>
 const mapDispatchToProps = dispatch =>
  ({ actions: bindActionCreators(ReviewActions, dispatch), });
 
-const ReviewList = ({ movie, reviews, actions, }) => (
-  <div className="Review-list">
-    <h2>{`Showing  Reviews for ${movie.title}` }</h2>
-    <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
-    <div className="ReviewList">
-      {reviews.map(r => <ReviewCard actions={actions} review={r} />)}
+const ReviewList = ({ movie, reviews, actions, }) => {
+  console.log('==============reviews==============', reviews.length);
+
+  return (
+    <div className="Review-list">
+      <h2>{`Showing  Reviews for ${movie.title}` }</h2>
+      <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
+      <div className="ReviewList">
+        {reviews.map(r => <ReviewCard actions={actions} review={r} />)}
+      </div>
     </div>
-  </div>
- );
+  );
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);

@@ -18,7 +18,7 @@ const removeReview = ({ id, }) =>
   ({ type:  DELETE_REVIEW, curry: removeByID({ id, }), });
 
 export const mergeReviews = (...reviews) =>
-  ({ type: UPDATE_REVIEWS, curry: merge(...reviews), });
+({ type: UPDATE_REVIEWS, curry: merge(...reviews), });
 
 export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
@@ -30,21 +30,12 @@ export const getReviews = () => (dispatch) => {
     .catch(reviewRequestFailure);
 };
 
-// export const getMovieReviews = movie_id => (dispatch) => {
-//   dispatch(reviewRequestPending(movie_id));
-//   return requestReview(movie_id)
-//     .then(({ data: { reviews, }, }) =>
-//     [ reviewRequestSuccess(),
-//       mergeReviews(...reviews),
-//     ].map(dispatch))x
-//     .catch(reviewRequestFailure);
-// };
 const reviewSelector = ({ reviews, }) => reviews;
 const flatten = a => b => [ ...a, ...b, ];
 const rflat = (a, b) => flatten(a)(b);
 const reduceFlatten = a => a.reduce(rflat);
 
-export const getMultipleReviews = (...ids) => dispatch =>
+export const getMultipleReviews = (...ids) => (dispatch, getState) =>
   Promise.resolve(reviewRequestPending(ids))
     .then(dispatch)
     .then(() =>
@@ -55,8 +46,7 @@ export const getMultipleReviews = (...ids) => dispatch =>
         .then(reviews =>
            Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews), ])
              .then(unaryMap(dispatch))
-             .then(() =>
-               reviews)))
+             .then(() => reviews)))
     .catch(reviewRequestFailure);
 
 export const getMovieReviews = getMultipleReviews;
@@ -78,3 +68,13 @@ export const deleteReview = ({ movie_id, id, }) => dispatch =>
   axios.delete(`${REVIEW_URL}/${movie_id}/${id}`)
     .then(({ data: { review, }, }) => dispatch(removeReview(review)))
     .catch(reviewRequestFailure);
+
+    // export const getMovieReviews = movie_id => (dispatch) => {
+    //   dispatch(reviewRequestPending(movie_id));
+    //   return requestReview(movie_id)
+    //     .then(({ data: { reviews, }, }) =>
+    //     [ reviewRequestSuccess(),
+    //       mergeReviews(...reviews),
+    //     ].map(dispatch))x
+    //     .catch(reviewRequestFailure);
+    // };
