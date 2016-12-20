@@ -3,7 +3,7 @@ export const getID = ({ id = '', }) => id;
 export const sameID = e0 => e1 => getID(e0) === getID(e1);
 export const diffID = e0 => e1 => !sameID(e0)(e1);
 
-export const updateByID = e0 => e1 => sameID(e0)(e1) ? { ...e0, ...e1, } : e1;
+export const updateByID = e0 => e1 => sameID(e0)(e1) ? { ...e1, ...e0, } : e1;
 export const excludeByID = e0 => coll => coll.filter(diffID(e0));
 export const editCollByID = elem => coll => coll.map(updateByID(elem));
 

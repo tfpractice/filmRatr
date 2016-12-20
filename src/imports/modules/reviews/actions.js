@@ -43,11 +43,9 @@ export const getMultipleReviews = (...ids) => dispatch =>
         .then(unaryMap(getData))
         .then(unaryMap(tapReviews))
         .then(reduceFlatten)
-        .then(reviews =>
-           Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews),
-           ].map(dispatch))
-             .then(() => reviews)
-           ))
+        .then(reviews => Promise.all(
+          [ reviewRequestSuccess(ids), mergeReviews(...reviews), ].map(dispatch))
+          .then(() => reviews)))
     .catch(e => dispatch(reviewRequestFailure(e)));
 
 export const getMovieReviews = getMultipleReviews;
@@ -61,11 +59,14 @@ export const createReview = ({ id: movie_id, }) => dispatch => revProps =>
     .then(mergeReviews)
     .then(dispatch)
     .catch(err => dispatch(reviewRequestFailure(err)));
-  
+
 export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
  axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, revProps)
-   .then(({ data: { review, }, }) => dispatch(updateReview(review)))
-   .catch(reviewRequestFailure);
+   .then(getData)
+   .then(tapReview)
+   .then(updateReview)
+   .then(dispatch)
+   .catch(err => dispatch(reviewRequestFailure(err)));
 
 export const deleteReview = ({ movie_id, id, }) => dispatch =>
   axios.delete(`${REVIEW_URL}/${movie_id}/${id}`)
