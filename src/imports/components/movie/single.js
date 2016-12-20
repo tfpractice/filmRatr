@@ -39,7 +39,6 @@ const MovieCard = ({ movie, setCurrent, getMovieReviews, getMovies, allIDs, }) =
         to={`/movies/${movie.id}`}
         onClick={() => {
           setCurrent(movie);
-          getMovies(movie.id);
         }}
       >
         <FlatButton label="Show Reviews" />
@@ -49,6 +48,8 @@ const MovieCard = ({ movie, setCurrent, getMovieReviews, getMovies, allIDs, }) =
 );
 
 export default connect(MapStateToProps, mapDispatchToProps)(MovieCard);
+
+//           getMovies(movie.id);
 
 // { adult:false,
 //   backdrop_path:  '/7GyIzZImsBTAH0teL1XKG6Nz3OL.jpg',
