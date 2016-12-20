@@ -24,14 +24,14 @@ export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
   return axios.get(`${REVIEW_URL}/`)
     .then(({ data: { reviews, }, }) =>
-     [reviewRequestSuccess(),
+     [ reviewRequestSuccess(),
        mergeReviews(...reviews),
      ].map(dispatch))
     .catch(reviewRequestFailure);
 };
 
 const reviewSelector = ({ reviews, }) => reviews;
-const flatten = a => b => [...a, ...b,];
+const flatten = a => b => [ ...a, ...b, ];
 const rflat = (a = [], b = []) => flatten(a)(b);
 const reduceFlatten = a => a.reduce(rflat, []);
 
@@ -45,15 +45,15 @@ export const getMultipleReviews = (...ids) => (dispatch, getState) =>
 
         .then(reduceFlatten)
 
-        .then(reviews => dispatch =>
+        .then(reviews =>
 
-           Promise.all([reviewRequestSuccess(ids), mergeReviews(...reviews),])
+           Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews), ])
 
 // [ reviewRequestSuccess(ids), mergeReviews(...reviews), ].map(dispatch)
 
             //  .then(ps => dispatch = unaryMap(dispatch)(ps))
 
-             .then(unaryMap(dispatch))
+             .then(unaryMap(dispatch)).then(Promise.resolve)
 
             //  .then(() => reviews)
            ))
