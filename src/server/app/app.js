@@ -1,18 +1,16 @@
-import express from 'express';
-import path from 'path';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import mongoose from 'mongoose';
+import express from 'express';
 import flash from 'express-flash';
-import { requestHandler, } from './request_handler';
+import mongoose from 'mongoose';
+import passport from 'passport';
+import path from 'path';
+import session from 'express-session';
+import { Strategy as LocalStrategy, } from 'passport-local';
 import { enableHotReload, } from '../../../config';
 import { dbConfig, } from '../models';
 import { ReviewRoutes, SearchRoutes, } from '../routes';
-
-// import passport from 'passport';
-// import { Strategy as LocalStrategy, } from 'passport-local';
-// import cors from 'cors';
-// import session from 'express-session';
+import { requestHandler, } from './request_handler';
 
 mongoose.Promise = global.Promise;
 
@@ -39,23 +37,26 @@ app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
 // Express Session
-// app.use(session({ secret: 'secret', saveUninitialized: true, resave: true, }));
+app.use(session({
+  secret: process.env.FILMRATR_AUTH_SECRET,
+  saveUninitialized: true, resave: true,
+}));
 
 // Connect Flash
 app.use(flash());
 
-// Passport init
-// app.use(passport.initialize());
-// app.use(passport.session());
+Passport init
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Global Vars
-// app.use((req, res, next) => {
-//     res.locals.success_msg = req.flash('success_msg');
-//     res.locals.error_msg = req.flash('error_msg');
-//     res.locals.error = req.flash('error');
-//     res.locals.user = req.user || null;
-//     next();
-// });
+Global Vars
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
+    next();
+});
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*');
 //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
