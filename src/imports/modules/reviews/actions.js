@@ -70,7 +70,10 @@ export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
 
 export const deleteReview = ({ movie_id, id, }) => dispatch =>
   axios.delete(`${REVIEW_URL}/${movie_id}/${id}`)
-    .then(({ data: { review, }, }) => dispatch(removeReview(review)))
-    .catch(reviewRequestFailure);
+    .then(getData)
+    .then(tapReview)
+    .then(removeReview)
+    .then(dispatch)
+    .catch(err => dispatch(reviewRequestFailure(err)));
 
 // };
