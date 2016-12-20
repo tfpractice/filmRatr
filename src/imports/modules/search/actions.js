@@ -22,7 +22,7 @@ export const search = ({ query, }) => (dispatch) => {
     Promise.all(
     [ searchRequestSuccess(),
       updateResults(...results),
-      insertMovies(...results), ].map(dispatch))
-      .then(() => dispatch(getMovieReviews(...keySet(results)))))
+      insertMovies(...results),
+      getMovieReviews(...keySet(results)), ].map(dispatch)))
     .catch(searchRequestFailure);
 };
