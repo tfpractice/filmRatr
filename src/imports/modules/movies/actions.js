@@ -14,7 +14,7 @@ const movieRequestSuccess = requestCreators('MOVIE_REQUEST').success;
 const set = newMovie => movie => newMovie;
 const requestMovieByID = id => axios.get(getMovieUrl(id));
 const dedupeMovieIDs = getState => (...ids) =>
-    diff(keySet(getData(getState().movies)))(ids);
+  diff(keySet(getData(getState().movies)))(ids);
 
 export const setCurrentMovie = (movie, ...rest) =>
   ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
@@ -37,12 +37,12 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
           axios.all(distinctIDs.map(requestMovieByID))
             .then(unaryMap(getData))
             .then((movies) => {
-              console.log('==============should not run disret,distinctIDs, movies==============', disret, distinctIDs, movies);
+              console.log('==============should not run disret,distinctIDs, movies==============', disret, distinctIDs,);
 
               return Promise.all([
-                ...distinctIDs.map(movieRequestSuccess),
-                ...movies.map(insertMovies),
-                ...distinctIDs.map(getMovieReviews),
+                movieRequestSuccess(distinctIDs),
+                insertMovies(...movies),
+                getMovieReviews(...distinctIDs),
               ].map(dispatch))
                 .then(() => movies);
             })))
@@ -50,7 +50,7 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
 };
 
 export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) => {
-  console.log('==============setMovieFromParams ,movie_id==============');
+  // console.log('==============setMovieFromParams ,movie_id==============');
   const x = null;
 
   return (dispatch(getMovies(movie_id)))

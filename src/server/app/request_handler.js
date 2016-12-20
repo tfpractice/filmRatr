@@ -33,11 +33,12 @@ export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes(store);
 
-  // const history = createMemoryHistory(req.url);
-  // const location = history.createLocation(req.url);
-  const location = (req.url);
+  const history = createMemoryHistory(req.url);
+  const location = history.createLocation(req.url);
 
-  match({ routes, location, }, (error, redirectLocation, props) => {
+  // const location = (req.url);
+
+  match({ routes, history, location, }, (error, redirectLocation, props) => {
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {

@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { StateUtils, } from 'imports/utils';
 import { insertMovies, } from '../movies/actions';
-import { SEARCH_URL, UPDATE_SEARCH_RESULTS, } from './constants';
+import { getMovieReviews, } from '../reviews/actions';
 
-const { requestUtils: { requestCreators, }, } = StateUtils;
+import { SEARCH_URL, UPDATE_SEARCH_RESULTS, } from './constants';
 const { arrayUtils: { merge, }, } = StateUtils;
+const { requestUtils: { requestCreators, }, } = StateUtils;
+const { dedupe: { getFirst, unaryMap, diff, keySet, }, } = StateUtils;
 
 const searchRequestPending = requestCreators('SEARCH_REQUEST').pending;
 const searchRequestFailure = requestCreators('SEARCH_REQUEST').failure;
@@ -17,9 +19,10 @@ export const search = ({ query, }) => (dispatch) => {
   dispatch(searchRequestPending(query));
   return axios.get(SEARCH_URL, { params: { query, append_to_response: 'images', }, })
     .then(({ data: { results, }, }) =>
+    Promise.all(
     [ searchRequestSuccess(),
       updateResults(...results),
-      insertMovies(...results), ].map(dispatch)
-    )
+      insertMovies(...results), ].map(dispatch))
+      .then(() => dispatch(getMovieReviews(...keySet(results)))))
     .catch(searchRequestFailure);
 };
