@@ -14,8 +14,9 @@ const mapDispatchToProps = dispatch =>
  ({ actions: bindActionCreators(ReviewActions, dispatch), });
 
 const ReviewList = ({ movie, reviews, actions, }) => {
-  // console.log('==============ReviewList Component==============', reviews.length);
-  console.log('');
+  console.log('==============ReviewList Component==============', reviews.length);
+
+  // console.log('');
   return (
     <div className="Review-list">
       <h2>{`Showing  Reviews for ${movie.title}` }</h2>

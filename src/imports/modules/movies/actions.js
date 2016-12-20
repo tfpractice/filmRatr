@@ -27,31 +27,35 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
   // console.log('==============getMovies ,ids)==============', ids);
   const x = null;
 
-  // console.log('==============getMovies ,getState)==============', getState);
+  console.log('==============dedupeMovieIDs(getState)(ids)==============',
+   dedupeMovieIDs(getState)(ids));
 
   return Promise.resolve(dedupeMovieIDs(getState)(ids))
     .then(distinctIDs =>
-      Promise.resolve(movieRequestPending(distinctIDs))
-        .then(dispatch)
+      Promise.all(distinctIDs.map(movieRequestPending).map(dispatch))
         .then(() =>
           axios.all(distinctIDs.map(requestMovieByID))
             .then(unaryMap(getData))
-            .then(movies =>
-               Promise.all([
-                 movieRequestSuccess(distinctIDs),
-                 insertMovies(...movies),
-                 getMovieReviews(...distinctIDs),
-               ].map(dispatch))
-                 .then(() => movies))))
-    .catch(movieRequestFailure);
+            .then((movies) => {
+              console.log('==============should not run==============', distinctIDs, movies);
+
+              return Promise.all([
+                movieRequestSuccess(distinctIDs),
+                insertMovies(...movies),
+                getMovieReviews(...distinctIDs),
+              ].map(dispatch))
+                .then(() => movies);
+            })))
+    .catch(e => dispatch(movieRequestFailure(e)));
 };
 
 export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) => {
   // console.log('==============setMovieFromParams ,movie_id==============');
   const x = null;
 
-  return (Promise.resolve(getMovies(movie_id)))
-    .then(dispatch)
+  return (dispatch(getMovies(movie_id)))
+
+    // .then(dispatch)
 
     // .then(movies => (((movies))))
     .then(getFirst)
