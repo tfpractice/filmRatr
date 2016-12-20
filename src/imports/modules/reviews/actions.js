@@ -36,24 +36,15 @@ const rflat = (a = [], b = []) => flatten(a)(b);
 const reduceFlatten = a => a.reduce(rflat, []);
 
 export const getMultipleReviews = (...ids) => (dispatch, getState) =>
-  Promise.resolve(reviewRequestPending(ids))
-    .then(dispatch)
+  Promise.resolve(dispatch(reviewRequestPending(ids)))
     .then(() =>
       axios.all(ids.map(requestReview))
         .then(unaryMap(getData))
         .then(unaryMap(reviewSelector))
         .then(reduceFlatten)
         .then(reviews =>
-           Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews), ].map(dispatch))
-
-// [ reviewRequestSuccess(ids), mergeReviews(...reviews), ].map(dispatch)
-
-            //  .then(ps => dispatch = unaryMap(dispatch)(ps))
-
-            //  .then(unaryMap(dispatch))
-
-            //  .then(Promise.resolve)
-
+           Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews),
+           ].map(dispatch))
              .then(() => reviews)
            ))
     .catch(e => dispatch(reviewRequestFailure(e)));
@@ -78,12 +69,4 @@ export const deleteReview = ({ movie_id, id, }) => dispatch =>
     .then(({ data: { review, }, }) => dispatch(removeReview(review)))
     .catch(reviewRequestFailure);
 
-// export const getMovieReviews = movie_id => (dispatch) => {
-//   dispatch(reviewRequestPending(movie_id));
-//   return requestReview(movie_id)
-//     .then(({ data: { reviews, }, }) =>
-//         [ reviewRequestSuccess(),
-//           mergeReviews(...reviews),
-//         ].map(dispatch))
-//     .catch(reviewRequestFailure);
 // };

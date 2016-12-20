@@ -33,19 +33,16 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
   return Promise.resolve(dedupeMovieIDs(getState)(...ids))
     .then(distinctIDs =>
       Promise.all(distinctIDs.map(movieRequestPending).map(dispatch))
-        .then(disret =>
+        .then(() =>
           axios.all(distinctIDs.map(requestMovieByID))
             .then(unaryMap(getData))
-            .then((movies) => {
-              console.log('==============should not run disret,distinctIDs, movies==============', disret, distinctIDs,);
-
-              return Promise.all([
+            .then(movies =>
+              Promise.all([
                 movieRequestSuccess(distinctIDs),
                 insertMovies(...movies),
                 getMovieReviews(...distinctIDs),
               ].map(dispatch))
-                .then(() => movies);
-            })))
+                .then(() => movies))))
     .catch(e => dispatch(movieRequestFailure(e)));
 };
 
