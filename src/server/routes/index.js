@@ -1,3 +1,5 @@
 import SearchRoutes from './search';
 import ReviewRoutes from './review';
-export { SearchRoutes, ReviewRoutes, };
+import UserRoutes, { applyRoutes, } from './user';
+
+export { ReviewRoutes, SearchRoutes, UserRoutes, };
