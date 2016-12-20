@@ -24,16 +24,16 @@ export const getReviews = () => (dispatch) => {
   dispatch(reviewRequestPending());
   return axios.get(`${REVIEW_URL}/`)
     .then(({ data: { reviews, }, }) =>
-     [ reviewRequestSuccess(),
+     [reviewRequestSuccess(),
        mergeReviews(...reviews),
      ].map(dispatch))
     .catch(reviewRequestFailure);
 };
 
 const reviewSelector = ({ reviews, }) => reviews;
-const flatten = a => b => [ ...a, ...b, ];
-const rflat = (a, b) => flatten(a)(b);
-const reduceFlatten = a => a.reduce(rflat);
+const flatten = a => b => [...a, ...b,];
+const rflat = (a = [], b = []) => flatten(a)(b);
+const reduceFlatten = a => a.reduce(rflat, []);
 
 export const getMultipleReviews = (...ids) => (dispatch, getState) =>
   Promise.resolve(reviewRequestPending(ids))
@@ -42,14 +42,24 @@ export const getMultipleReviews = (...ids) => (dispatch, getState) =>
       axios.all(ids.map(requestReview))
         .then(unaryMap(getData))
         .then(unaryMap(reviewSelector))
-        .then(getFirst)
-        .then(reviews =>
-           Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews), ])
+
+        .then(reduceFlatten)
+
+        .then(reviews => dispatch =>
+
+           Promise.all([reviewRequestSuccess(ids), mergeReviews(...reviews),])
+
+// [ reviewRequestSuccess(ids), mergeReviews(...reviews), ].map(dispatch)
+
+            //  .then(ps => dispatch = unaryMap(dispatch)(ps))
+
              .then(unaryMap(dispatch))
-             .then(() => reviews)))
+
+            //  .then(() => reviews)
+           ))
     .catch(reviewRequestFailure);
 
-// export const getMovieReviews = getMultipleReviews;
+export const getMovieReviews = getMultipleReviews;
 
 export const getReviewsFromParams = ({ movie_id, }) => getMultipleReviews(movie_id);
 
@@ -69,12 +79,12 @@ export const deleteReview = ({ movie_id, id, }) => dispatch =>
     .then(({ data: { review, }, }) => dispatch(removeReview(review)))
     .catch(reviewRequestFailure);
 
-export const getMovieReviews = movie_id => (dispatch) => {
-  dispatch(reviewRequestPending(movie_id));
-  return requestReview(movie_id)
-    .then(({ data: { reviews, }, }) =>
-        [ reviewRequestSuccess(),
-          mergeReviews(...reviews),
-        ].map(dispatch))
-    .catch(reviewRequestFailure);
-};
+// export const getMovieReviews = movie_id => (dispatch) => {
+//   dispatch(reviewRequestPending(movie_id));
+//   return requestReview(movie_id)
+//     .then(({ data: { reviews, }, }) =>
+//         [ reviewRequestSuccess(),
+//           mergeReviews(...reviews),
+//         ].map(dispatch))
+//     .catch(reviewRequestFailure);
+// };

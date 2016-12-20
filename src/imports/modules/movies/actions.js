@@ -23,10 +23,11 @@ export const insertMovies = (...movies) =>
    ({ type: INSERT_MOVIE, curry: merge(...movies), });
 
 export const getMovies = (...ids) => (dispatch, getState, ...args) => {
-  console.log('**************getMovies ,ids)**************');
-  console.log('==============getMovies ,ids)==============', ids);
+  // console.log('**************getMovies ,ids)**************');
+  // console.log('==============getMovies ,ids)==============', ids);
+  const x = null;
 
-  console.log('==============getMovies ,getState)==============', getState);
+  // console.log('==============getMovies ,getState)==============', getState);
 
   return Promise.resolve(dedupeMovieIDs(getState)(ids))
     .then(distinctIDs =>
@@ -39,14 +40,30 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
                Promise.all([
                  movieRequestSuccess(distinctIDs),
                  insertMovies(...movies),
-                 getMovieReviews(...distinctIDs),
+
+                //  getMovieReviews(...distinctIDs),
+                  (dispatch(getMovieReviews(...distinctIDs))),
                ]).then(unaryMap(dispatch))
+                 .then((proms) => {
+                   console.log('==============proms==============', proms);
+
+                   const revs = dispatch(getMovieReviews(...distinctIDs));
+
+                   console.log('==============revs==============', (revs));
+
+                   revs.then((r) => {
+                     console.log('==============revs.then==============', r);
+                   });
+
+                  //  console.log('==============getMovieReviews(...distinctIDs)==============', r, dispatch(getMovieReviews(...distinctIDs)));
+                 })
                  .then(() => movies))))
     .catch(movieRequestFailure);
 };
 
 export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) => {
-  console.log('==============setMovieFromParams ,movie_id==============');
+  // console.log('==============setMovieFromParams ,movie_id==============');
+  const x = null;
 
   return (Promise.resolve(getMovies(movie_id)))
     .then(dispatch)
