@@ -11,6 +11,12 @@ const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 
 const requestReview = id => axios.get(`${REVIEW_URL}/${id}`);
 
+const tapReviews = ({ reviews, }) => reviews;
+const tapReview = ({ review, }) => review;
+const flatten = a => b => [ ...a, ...b, ];
+const rflat = (a = [], b = []) => flatten(a)(b);
+const reduceFlatten = a => a.reduce(rflat, []);
+
 const updateReview = review =>
   ({ type: EDIT_REVIEW, curry: editByID(review), });
 
@@ -30,17 +36,12 @@ export const getReviews = () => (dispatch) => {
     .catch(reviewRequestFailure);
 };
 
-const reviewSelector = ({ reviews, }) => reviews;
-const flatten = a => b => [ ...a, ...b, ];
-const rflat = (a = [], b = []) => flatten(a)(b);
-const reduceFlatten = a => a.reduce(rflat, []);
-
-export const getMultipleReviews = (...ids) => (dispatch, getState) =>
+export const getMultipleReviews = (...ids) => dispatch =>
   Promise.resolve(dispatch(reviewRequestPending(ids)))
     .then(() =>
       axios.all(ids.map(requestReview))
         .then(unaryMap(getData))
-        .then(unaryMap(reviewSelector))
+        .then(unaryMap(tapReviews))
         .then(reduceFlatten)
         .then(reviews =>
            Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews),
@@ -54,11 +55,13 @@ export const getMovieReviews = getMultipleReviews;
 export const getReviewsFromParams = ({ movie_id, }) => getMultipleReviews(movie_id);
 
 export const createReview = ({ id: movie_id, }) => dispatch => revProps =>
-axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
-  .then(({ data: { review, }, }) =>
-   dispatch(mergeReviews(review)))
-  .catch(reviewRequestFailure);
-
+  axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
+    .then(getData)
+    .then(tapReview)
+    .then(mergeReviews)
+    .then(dispatch)
+    .catch(err => dispatch(reviewRequestFailure(err)));
+  
 export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
  axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, revProps)
    .then(({ data: { review, }, }) => dispatch(updateReview(review)))
