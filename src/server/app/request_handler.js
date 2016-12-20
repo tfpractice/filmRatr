@@ -43,15 +43,15 @@ export const requestHandler = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
-      const markup = renderToString(
-        <Provider store={store}>
-          <RouterContext {...props} />
-        </Provider>
-      );
-
       fetchComponentData(store.dispatch, props.components, props.params)
         .then((results) => {
-          console.log('==============rendering==============', results, store.getState().reviews.data.length);
+          const markup = renderToString(
+            <Provider store={store}>
+              <RouterContext {...props} />
+            </Provider>
+          );
+
+          console.log('**************RENDERING**************', store.getState().reviews.data.length);
 
           return res.send(renderHTML(markup, store));
         })
