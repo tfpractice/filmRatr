@@ -42,22 +42,21 @@ export const getMultipleReviews = (...ids) => (dispatch, getState) =>
       axios.all(ids.map(requestReview))
         .then(unaryMap(getData))
         .then(unaryMap(reviewSelector))
-
         .then(reduceFlatten)
-
         .then(reviews =>
-
-           Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews), ])
+           Promise.all([ reviewRequestSuccess(ids), mergeReviews(...reviews), ].map(dispatch))
 
 // [ reviewRequestSuccess(ids), mergeReviews(...reviews), ].map(dispatch)
 
             //  .then(ps => dispatch = unaryMap(dispatch)(ps))
 
-             .then(unaryMap(dispatch)).then(Promise.resolve)
+            //  .then(unaryMap(dispatch))
 
-            //  .then(() => reviews)
+            //  .then(Promise.resolve)
+
+             .then(() => reviews)
            ))
-    .catch(reviewRequestFailure);
+    .catch(e => dispatch(reviewRequestFailure(e)));
 
 export const getMovieReviews = getMultipleReviews;
 

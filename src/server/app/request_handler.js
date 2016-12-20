@@ -51,7 +51,7 @@ export const requestHandler = (req, res) => {
             </Provider>
           );
 
-          console.log('**************RENDERING**************', store.getState().reviews.data.length);
+          console.log('**************RENDERING**************', store.getState(), store.getState().reviews.data.length);
 
           return res.send(renderHTML(markup, store));
         })

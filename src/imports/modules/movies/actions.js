@@ -40,10 +40,11 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
                Promise.all([
                  movieRequestSuccess(distinctIDs),
                  insertMovies(...movies),
+                 getMovieReviews(...distinctIDs),
+                  // (dispatch(getMovieReviews(...distinctIDs))),
+               ].map(dispatch))
 
-                //  getMovieReviews(...distinctIDs),
-                  (dispatch(getMovieReviews(...distinctIDs))),
-               ]).then(unaryMap(dispatch))
+              //  .then(unaryMap(dispatch))
                  .then((proms) => {
                    console.log('==============proms==============', proms);
 
@@ -51,8 +52,8 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
 
                    console.log('==============revs==============', (revs));
 
-                   revs.then((r) => {
-                     console.log('==============revs.then==============', r);
+                   return revs.then((r) => {
+                     console.log('==============revs.then==============', r.length);
                    });
 
                   //  console.log('==============getMovieReviews(...distinctIDs)==============', r, dispatch(getMovieReviews(...distinctIDs)));
