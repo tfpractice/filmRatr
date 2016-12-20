@@ -45,14 +45,12 @@ export const requestHandler = (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (props) {
       fetchComponentData(store.dispatch, props.components, props.params)
-        .then((results) => {
+        .then(() => {
           const markup = renderToString(
             <Provider store={store}>
               <RouterContext {...props} />
             </Provider>
           );
-
-          console.log('**************RENDERING**************', store.getState(), store.getState().reviews.data.length);
 
           return res.send(renderHTML(markup, store));
         })
