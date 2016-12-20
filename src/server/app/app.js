@@ -45,18 +45,19 @@ app.use(session({
 // Connect Flash
 app.use(flash());
 
-Passport init
+// Passport init
 app.use(passport.initialize());
 app.use(passport.session());
 
-Global Vars
+// Global Vars
 app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
-    res.locals.user = req.user || null;
-    next();
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
 });
+
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*');
 //   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
