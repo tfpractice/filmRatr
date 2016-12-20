@@ -27,9 +27,6 @@ export const getMovies = (...ids) => (dispatch, getState, ...args) => {
   // console.log('==============getMovies ,ids)==============', ids);
   const x = null;
 
-  console.log('==============dedupeMovieIDs(getState)(ids)==============',
-   dedupeMovieIDs(getState)(...ids));
-
   return Promise.resolve(dedupeMovieIDs(getState)(...ids))
     .then(distinctIDs =>
       Promise.all(distinctIDs.map(movieRequestPending).map(dispatch))

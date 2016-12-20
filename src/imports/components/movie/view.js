@@ -15,7 +15,7 @@ const MovieView = ({ movie, }) =>
 
 MovieView.fetchData = [
   MovieActions.setMovieFromParams,
-  // ReviewActions.getReviewsFromParams,
+  ReviewActions.getReviews,
 ];
 
 export default connect(MapStateToProps)(MovieView);

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { StateUtils, } from 'imports/utils';
-import { DELETE_REVIEW, EDIT_REVIEW, INSERT_REVIEW, REVIEW_URL, UPDATE_REVIEWS, } from './constants';
+import { DELETE_REVIEW, EDIT_REVIEW, REVIEW_URL, UPDATE_REVIEWS, } from './constants';
+
 const { arrayUtils: { editByID, removeByID, merge, }, } = StateUtils;
-const { dedupe: { getFirst, unaryMap, diff, keySet, }, } = StateUtils;
+const { dedupe: { unaryMap, }, } = StateUtils;
 const { requestUtils: { requestCreators, getData, }, } = StateUtils;
 
 const reviewRequestPending = requestCreators('REVIEW_REQUEST').pending;
@@ -26,17 +27,17 @@ const removeReview = ({ id, }) =>
 export const mergeReviews = (...reviews) =>
 ({ type: UPDATE_REVIEWS, curry: merge(...reviews), });
 
-export const getReviews = () => (dispatch) => {
-  dispatch(reviewRequestPending());
-  return axios.get(`${REVIEW_URL}/`)
-    .then(({ data: { reviews, }, }) =>
-     [ reviewRequestSuccess(),
-       mergeReviews(...reviews),
-     ].map(dispatch))
-    .catch(reviewRequestFailure);
-};
+export const getReviews = () => dispatch =>
+  Promise.resolve(dispatch(reviewRequestPending()))
+    .then(() => requestReview())
+    .then(getData)
+    .then(tapReviews)
+    .then(reviews => Promise.all(
+    [ reviewRequestSuccess(), mergeReviews(...reviews), ].map(dispatch))
+      .then(() => reviews))
+    .catch(err => dispatch(reviewRequestFailure(err)));
 
-export const getMultipleReviews = (...ids) => dispatch =>
+export const getMovieReviews = (...ids) => dispatch =>
   Promise.resolve(dispatch(reviewRequestPending(ids)))
     .then(() =>
       axios.all(ids.map(requestReview))
@@ -48,9 +49,7 @@ export const getMultipleReviews = (...ids) => dispatch =>
           .then(() => reviews)))
     .catch(e => dispatch(reviewRequestFailure(e)));
 
-export const getMovieReviews = getMultipleReviews;
-
-export const getReviewsFromParams = ({ movie_id, }) => getMultipleReviews(movie_id);
+export const getReviewsFromParams = ({ movie_id, }) => getMovieReviews(movie_id);
 
 export const createReview = ({ id: movie_id, }) => dispatch => revProps =>
   axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
@@ -75,5 +74,3 @@ export const deleteReview = ({ movie_id, id, }) => dispatch =>
     .then(removeReview)
     .then(dispatch)
     .catch(err => dispatch(reviewRequestFailure(err)));
-
-// };
