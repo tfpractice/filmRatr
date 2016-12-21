@@ -71,7 +71,8 @@
     "redux-form": "^6.2.1",
     "redux-form-material-ui": "^4.1.2",
     "redux-logger": "^2.7.4",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "redux-ui": "^0.0.15"
   },
   "peerDependencies": {
     "eslint-plugin-jsx-a11y": "^2.2.3"
