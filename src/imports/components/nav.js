@@ -4,38 +4,41 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { Link, } from 'react-router';
 import SideBar from './ui_sidebar';
+import Trigger from './sidebar_trigger';
 import { IndependentSearch, } from './search';
+import { bindActionCreators, } from 'redux';
+import { connect, } from 'react-redux';
 
-const triggers = [ React.createElement(MenuItem, { primaryText: 'Login', }),
-  React.createElement(MenuItem, { primaryText: 'Logout', }),
-  React.createElement(MenuItem, { primaryText: 'Register', }), ];
+const toggle = () => ({ type: 'TOGGLE_DRAWER', });
 
-const AuthMenu = props => (
+const mapDispatchToProps = dispatch => ({ toggle: bindActionCreators(toggle, dispatch), });
+
+const AuthMenu = ({ toggle, ...props }) => (
   <IconMenu
     {...props}
-    iconButtonElement={
-      <IconButton><MoreVertIcon /></IconButton>
-    }
+    iconButtonElement={<IconButton><ExpandMore /></IconButton>}
     targetOrigin={{ horizontal: 'right', vertical: 'top', }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top', }}
   >
-    {triggers}
+    <MenuItem primaryText="Login" onClick={toggle} />
+    <MenuItem primaryText="Logout" onClick={toggle} />
+    <MenuItem primaryText="Register" onClick={toggle} />
 
   </IconMenu>
 );
-const Nav = () => (
+const Nav = ({ toggle, }) => (
   <AppBar
     title={<Link to="/" >FilmRatr</Link>}
     iconClassNameRight="muidocs-icon-navigation-expand-more"
-    iconElementLeft={<AuthMenu />}
+    iconElementLeft={<AuthMenu toggle={toggle} />}
   >
-    <SideBar triggers={triggers} />
+    <SideBar />
     <IndependentSearch formID={'navSearchForm'} />
   </AppBar>
 );
 
-export default Nav;
+export default connect(null, mapDispatchToProps)(Nav);
