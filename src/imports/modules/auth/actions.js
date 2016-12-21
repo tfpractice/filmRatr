@@ -6,7 +6,7 @@ const { arrayUtils: { merge, }, } = StateUtils;
 const { dedupe: { getFirst, unaryMap, diff, keySet, }, } = StateUtils;
 const { requestUtils: { requestCreators, getData, }, } = StateUtils;
 
-const { SET_USER, LOGIN, LOGOUT, REGISTATION, } = CONSTANTS;
+const { SET_USER, LOGIN, LOGOUT, REGISTRATION, } = CONSTANTS;
 
 export const set = user => () => user;
 export const setUser = ({ username, id, }) =>

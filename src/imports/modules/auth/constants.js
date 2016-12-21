@@ -11,6 +11,9 @@ export const API_URL = url;
 //     ? process.env.BASE_URL || (`http://localhost:${process.env.PORT || 3000}/api`)
 //     : '/api';
 
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const REGISTRATION = 'REGISTRATION';
 export const REGISTRATION_ACTIONS = requestConstants('REGISTRATION');
 export const LOGIN_ACTIONS = requestConstants('LOGIN');
 export const LOGOUT_ACTIONS = requestConstants('LOGOUT');
