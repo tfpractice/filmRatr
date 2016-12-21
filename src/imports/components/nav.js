@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { Link, } from 'react-router';
-import SideBar from './sidebar';
+import SideBar from './ui_sidebar';
 import { IndependentSearch, } from './search';
 
 const triggers = [ React.createElement(MenuItem, { primaryText: 'Login', }),
