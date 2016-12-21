@@ -9,7 +9,7 @@ import session from 'express-session';
 import { Strategy as LocalStrategy, } from 'passport-local';
 import { enableHotReload, } from '../../../config';
 import { dbConfig, } from '../models';
-import { ReviewRoutes, SearchRoutes, } from '../routes';
+import { applyRoutes, ReviewRoutes, SearchRoutes, UserRoutes, } from '../routes';
 import { requestHandler, } from './request_handler';
 
 mongoose.Promise = global.Promise;
@@ -71,6 +71,8 @@ app.use((req, res, next) => {
 app.use('/api', ReviewRoutes);
 
 // applyRoutes(app, passport);
+applyRoutes(app, passport);
+
 app.use(SearchRoutes);
 
 // establish server render
