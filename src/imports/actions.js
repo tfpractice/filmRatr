@@ -1,7 +1,8 @@
-import { Movies, Reviews, Search, } from './modules';
+import { Auth, Movies, Reviews, Search, } from './modules';
 
-const { actions: MovieActions, } = Movies;
-const { actions: ReviewActions, } = Reviews;
-const { actions: SearchActions, } = Search;
+export const AuthActions = Auth.actions;
+export const MovieActions = Movies.actions;
+export const ReviewActions = Reviews.actions;
+export const SearchActions = Search.actions;
 
-export { MovieActions, SearchActions, ReviewActions, };
+// export { AuthActions, MovieActions, SearchActions, ReviewActions, };
