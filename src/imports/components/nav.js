@@ -10,6 +10,10 @@ import { Link, } from 'react-router';
 import SideBar from './sidebar';
 import { IndependentSearch, } from './search';
 
+const triggers = [ React.createElement(MenuItem, { primaryText: 'Login', }),
+  React.createElement(MenuItem, { primaryText: 'Logout', }),
+  React.createElement(MenuItem, { primaryText: 'Register', }), ];
+
 const AuthMenu = props => (
   <IconMenu
     {...props}
@@ -19,9 +23,7 @@ const AuthMenu = props => (
     targetOrigin={{ horizontal: 'right', vertical: 'top', }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top', }}
   >
-    <MenuItem primaryText="Login" />
-    <MenuItem primaryText="Register" />
-    <MenuItem primaryText="Logout" />
+    {triggers}
 
   </IconMenu>
 );
@@ -31,7 +33,9 @@ const Nav = () => (
     iconClassNameRight="muidocs-icon-navigation-expand-more"
     iconElementLeft={<AuthMenu />}
   >
-    <SideBar />
+    <SideBar
+      triggers={triggers}
+    />
     <IndependentSearch formID={'navSearchForm'} />
   </AppBar>
 );

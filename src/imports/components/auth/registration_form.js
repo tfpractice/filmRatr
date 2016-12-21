@@ -6,6 +6,7 @@ import { TextField, } from 'redux-form-material-ui';
 import { Field, reduxForm, reset, } from 'redux-form';
 import { resetForm, } from 'imports/utils';
 import { AuthActions, } from 'imports/actions';
+console.log(AuthActions);
 
 const mapDispatchToProps = dispatch =>
   ({ registerUser: bindActionCreators(AuthActions.registerUser, dispatch), });
