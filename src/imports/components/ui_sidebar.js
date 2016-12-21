@@ -2,46 +2,43 @@ import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import { combineReducers, createStore, } from 'redux';
+import { local, } from 'redux-fractal';
 
-// import ui from 'redux-ui';
+const toggle = () => ({ type: 'TOGGLE_DRAWER', });
+const open = (state = false, { type, }) =>
+  type === 'TOGGLE_DRAWER' ? !state : state;
+
 import { LoginForm, RegisterForm, } from './auth';
 
-const uiProps = { key: 'sidebar', state: { open: false, }, };
+const uiProps = {
+  key: 'sidebar',
+  createStore: props => createStore(combineReducers({ open, })),
+  mapDispatchToProps: { toggle, },
+};
 
-class SideBar extends React.Component {
+const SideBar = ({ triggers, open, toggle, ...rest }) => {
+  console.log('=========REST OF PROPS======', rest, open);
+  return (
+    <div>
+      <RaisedButton
+        label="Open Drawer"
+        onTouchTap={toggle}
+      />
+      <Drawer
+        docked={false}
+        width={200}
+        open={open}
+        onRequestChange={toggle}
 
-  constructor(props) {
-    super(props);
-    this.state = { open: false, };
-  }
+      >
+        <LoginForm formID={'navBarLogin'} />
+        <RegisterForm formID={'navBarRegister'} />
+        <MenuItem onTouchTap={toggle} />
+        <MenuItem onTouchTap={toggle} />
+      </Drawer>
+    </div>
+  );
+};
 
-  handleToggle = () => this.setState({ open: !this.state.open, });
-
-  handleClose = () => this.setState({ open: false, });
-
-  render() {
-    const { triggers, ui, updateUI, } = this.props;
-
-    return (
-      <div>
-        <RaisedButton
-          label="Open Drawer"
-          onTouchTap={() => updateUI({ open: !ui.open, })}
-        />
-        <Drawer
-          docked={false}
-          width={200}
-          open={ui.open}
-          onRequestChange={() => updateUI({ open: !ui.open, })}
-        >
-          <LoginForm formID={'navBarLogin'} />
-          <RegisterForm formID={'navBarRegister'} />
-          <MenuItem onTouchTap={() => updateUI({ open: !ui.open, })} />
-          <MenuItem onTouchTap={() => updateUI({ open: !ui.open, })} />
-        </Drawer>
-      </div>
-    );
-  }
-}
-
-export default ui(uiProps)(SideBar);
+export default local(uiProps)(SideBar);
