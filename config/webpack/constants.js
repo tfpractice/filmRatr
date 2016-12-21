@@ -37,7 +37,9 @@ export const BUILD_CONFIG = {
 
 export const BABEL_QUERY = {
   presets: [[ 'latest', { modules: false, }, ], 'react', ],
-  // plugins: [[ 'react-hot-loader/babel', ], ],
+  plugins: [ 'transform-class-properties',
+  [ 'react-hot-loader/babel', ],
+  ],
 };
 
 export const DEV_CONFIG = {
@@ -51,7 +53,9 @@ export const DEV_CONFIG = {
     loaders: [{
       test:    /\.jsx?$/,
       exclude: /node_modules/,
-      loaders:  [{ loader: 'babel-loader', query: BABEL_QUERY, }, ],
+      loaders:  [{ loader: 'babel-loader', }, ],
+
+      // query: BABEL_QUERY,
       include: PATHS.src,
     },],
   },
