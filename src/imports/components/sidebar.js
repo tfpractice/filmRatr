@@ -18,13 +18,14 @@ export default class SideBar extends React.Component {
   render() {
     const { triggers, } = this.props;
 
-    triggers.forEach(t => console.log(t.props));
-
-    triggers.map(t => Object.assign(t, t.props, { props: { onClick: this.handleToggle, }, }));
-
-      // t.props.onClick(this.handleToggle) && t);
-
-    triggers.forEach(t => console.log(t.props));
+    //
+    // triggers.forEach(t => console.log(t.props));
+    //
+    // triggers.map(t => Object.assign(t, t.props, { props: { onClick: this.handleToggle, }, }));
+    //
+    //   // t.props.onClick(this.handleToggle) && t);
+    //
+    // triggers.forEach(t => console.log(t.props));
 
     console.log(triggers);
 
