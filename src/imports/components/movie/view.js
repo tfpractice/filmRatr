@@ -1,21 +1,17 @@
 import React, { PropTypes, } from 'react';
 import { connect, } from 'react-redux';
-import { MovieActions, ReviewActions, } from 'imports/actions';
-import { MovieReviewForm, ReviewList, } from '../review';
+import { MovieActions, } from 'imports/actions';
+import { ReviewList, } from '../review';
 import MovieCard from './single';
 
-const MapStateToProps = ({ currentMovie: movie, }) =>
-   ({ movie, });
+const MapStateToProps = ({ currentMovie: movie, }) => ({ movie, });
 
-const MovieView = ({ movie, }) =>
-(<div>
-  <MovieCard movie={movie} />
-  <ReviewList movie={movie} />
-</div>);
+const MovieView = ({ movie, }) => (
+  <div>
+    <MovieCard movie={movie} />
+    <ReviewList movie={movie} />
+  </div>);
 
-MovieView.fetchData = [
-  MovieActions.setMovieFromParams,
-  // ReviewActions.getReviews,
-];
+MovieView.fetchData = [ MovieActions.setMovieFromParams, ];
 
 export default connect(MapStateToProps)(MovieView);
