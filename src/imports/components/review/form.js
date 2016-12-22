@@ -8,7 +8,8 @@ import { ReviewActions, } from 'imports/actions';
 const MovieReviewForm = ({ createReview, formID, movie, }) => (
   <ReviewForm
     form={formID}
-    onSubmit={createReview(movie)} onSubmitSuccess={resetForm(formID)}
+    onSubmit={createReview(movie)}
+    onSubmitSuccess={resetForm(formID)}
   />);
 
 export default connect(null, ReviewActions)(MovieReviewForm);

@@ -16,7 +16,6 @@ const ReviewCard = ({ review, deleteReview, }) => (
     <CardText expandable>
       <EditReviewForm review={review} />
     </CardText>
-    <CardActions />
   </Card>
 );
 

@@ -4,7 +4,7 @@ import { Field, reduxForm, } from 'redux-form';
 import { connect, } from 'react-redux';
 import { TextField, } from 'redux-form-material-ui';
 
-const ReviewForm = ({ handleSubmit, }) => (
+const ReviewForm = ({ handleSubmit, reset, }) => (
   <form onSubmit={handleSubmit} >
     <Field name="text" component={TextField} hintText="review text" id="text" type="text" />
     <FlatButton label="Submit" primary type="submit" />
