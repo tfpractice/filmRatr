@@ -1,10 +1,7 @@
 import React from 'react';
-import { bindActionCreators, } from 'redux';
-import { connect, } from 'react-redux';
-import { SearchActions, } from 'imports/actions';
 import { MovieCard, } from '../movie';
 
-const MovieList = ({ movies, actions, }) => (
+const MovieList = ({ movies, }) => (
   <div className="movie-list">
     <h1>Showing Movies</h1>
     <div className="movie-cards" />
@@ -12,4 +9,4 @@ const MovieList = ({ movies, actions, }) => (
   </div>
   );
 
-export default connect()(MovieList);
+export default (MovieList);

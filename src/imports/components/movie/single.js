@@ -1,19 +1,11 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { bindActionCreators, } from 'redux';
-import { connect, } from 'react-redux';import { Link, } from 'react-router';
+import { connect, } from 'react-redux';
+import { Link, } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
-import { MovieActions, ReviewActions, } from 'imports/actions';
+import { MovieActions, } from 'imports/actions';
 
-const MapStateToProps = ({ movies: { data, }, }) =>
-({ allIDs: [ ...(new Set(data.map(({ id, }) => id))), ], });
-
-const mapDispatchToProps = dispatch => ({
-  setCurrent: bindActionCreators(MovieActions.setCurrentMovie, dispatch),
-  getMovieReviews: bindActionCreators(ReviewActions.getMovieReviews, dispatch),
-  getMovies: bindActionCreators(MovieActions.getMovies, dispatch),
-});
-const MovieCard = ({ movie, setCurrent, getMovieReviews, getMovies, allIDs, }) => (
+const MovieCard = ({ movie, setCurrentMovie, }) => (
   <Card>
     <CardHeader
       title={movie.title}
@@ -31,23 +23,16 @@ const MovieCard = ({ movie, setCurrent, getMovieReviews, getMovies, allIDs, }) =
         <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
       </CardMedia>
     : ''}
-    <CardText expandable>
-      {movie.overview}
-    </CardText>
+    <CardText children={movie.overview} expandable />
     <CardActions>
-      <Link
-        to={`/movies/${movie.id}`}
-        onClick={() => {
-          setCurrent(movie);
-        }}
-      >
+      <Link to={`/movies/${movie.id}`} onClick={() => setCurrentMovie(movie)} >
         <FlatButton label="Show Reviews" />
       </Link>
     </CardActions>
   </Card>
 );
 
-export default connect(MapStateToProps, mapDispatchToProps)(MovieCard);
+export default connect(null, MovieActions)(MovieCard);
 
 //           getMovies(movie.id);
 
