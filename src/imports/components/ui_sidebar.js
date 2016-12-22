@@ -18,24 +18,19 @@ const uiProps = {
   filterGlobalActions: ({ type, }) => type === 'TOGGLE_DRAWER',
 };
 
-const SideBar = ({ open, toggle, }) => (
-  <div>
-    <RaisedButton
-      label="Open Drawer"
-      onTouchTap={toggle}
-    />
-    <Drawer
-      docked={false}
-      width={200}
-      open={open}
-      onRequestChange={toggle}
-    >
-      <LoginForm formID={'navBarLogin'} />
-      <RegisterForm formID={'navBarRegister'} />
-      <MenuItem onTouchTap={toggle} />
-      <MenuItem onTouchTap={toggle} />
-    </Drawer>
-  </div>
+const SideBar = ({ open, toggle, children, }) => (
+  <Drawer
+    docked={false}
+    width={200}
+    open={open}
+    onRequestChange={toggle}
+  >
+    {children}
+    <LoginForm formID={'navBarLogin'} />
+    <RegisterForm formID={'navBarRegister'} />
+    <MenuItem onTouchTap={toggle} />
+    <MenuItem onTouchTap={toggle} />
+  </Drawer>
   );
 
 export default local(uiProps)(SideBar);

@@ -5,6 +5,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
+import NavMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { Link, } from 'react-router';
 import SideBar from './ui_sidebar';
@@ -20,10 +21,11 @@ const mapDispatchToProps = dispatch => ({ toggle: bindActionCreators(toggle, dis
 const AuthMenu = ({ toggle, ...props }) => (
   <IconMenu
     {...props}
-    iconButtonElement={<IconButton><ExpandMore /></IconButton>}
+    iconButtonElement={<IconButton><NavMenu /></IconButton>}
     targetOrigin={{ horizontal: 'right', vertical: 'top', }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top', }}
   >
+
     <MenuItem primaryText="Login" onClick={toggle} />
     <MenuItem primaryText="Logout" onClick={toggle} />
     <MenuItem primaryText="Register" onClick={toggle} />
