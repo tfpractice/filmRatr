@@ -1,31 +1,18 @@
-import React, { PropTypes, } from 'react';
-import { bindActionCreators, } from 'redux';
+import React from 'react';
 import { connect, } from 'react-redux';
-import { resetForm, } from 'imports/utils';
-import { ReviewActions, } from 'imports/actions';
-import ReviewForm from './form_base';
-import MovieReviewForm from './form';
 import ReviewCard from './item';
+import MovieReviewForm from './form';
 
 const mapStateToProps = ({ reviews, }, { movie, }) =>
-({ reviews: reviews.data.filter(({ movie_id, }) => movie_id == movie.id, ), });
+({ reviews: reviews.data.filter(r => r.movie_id == movie.id), });
 
-const mapDispatchToProps = dispatch =>
- ({ actions: bindActionCreators(ReviewActions, dispatch), });
-
-const ReviewList = ({ movie, reviews, actions, }) => {
-  console.log('==============ReviewList Component==============', reviews.length);
-
-  // console.log('');
-  return (
-    <div className="Review-list">
-      <h2>{`Showing  Reviews for ${movie.title}` }</h2>
-      <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
-      <div className="ReviewList">
-        {reviews.map(r => <ReviewCard key={r.id} actions={actions} review={r} />)}
-      </div>
+const ReviewList = ({ movie, reviews, }) => (
+  <div className="Review-list">
+    <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
+    <div className="ReviewList">
+      {reviews.map(r => <ReviewCard key={r.id} review={r} />)}
     </div>
+  </div>
   );
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);
+export default connect(mapStateToProps)(ReviewList);

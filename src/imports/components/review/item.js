@@ -1,7 +1,7 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import { connect, } from 'react-redux';
-import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
+import { Card, CardHeader, CardText, CardTitle, } from 'material-ui/Card';
 import { ReviewActions, } from 'imports/actions';
 import EditReviewForm from './edit_review';
 
@@ -11,9 +11,10 @@ const ReviewCard = ({ review, deleteReview, }) => (
       title={review.text}
       subtitle={<p>{review.dateAdded} </p>}
       actAsExpander
+      closeIcon={<EditIcon />}
       showExpandableButton
     />
-    <CardText expandable>
+    <CardText expandable >
       <EditReviewForm review={review} />
     </CardText>
   </Card>
