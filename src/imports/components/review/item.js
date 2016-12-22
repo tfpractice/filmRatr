@@ -1,9 +1,11 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
+import { connect, } from 'react-redux';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
+import { ReviewActions, } from 'imports/actions';
 import EditReviewForm from './edit_review';
 
-const ReviewCard = ({ review, actions, }) => (
+const ReviewCard = ({ review, deleteReview, }) => (
   <Card>
     <CardHeader
       title={review.text}
@@ -14,10 +16,8 @@ const ReviewCard = ({ review, actions, }) => (
     <CardText expandable>
       <EditReviewForm review={review} />
     </CardText>
-    <CardActions>
-      <FlatButton label="Delete this review" onClick={() => actions.deleteReview(review)} />
-    </CardActions>
+    <CardActions />
   </Card>
 );
 
-export default ReviewCard;
+export default connect(null, ReviewActions)(ReviewCard);
