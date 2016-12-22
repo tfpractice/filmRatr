@@ -12,18 +12,22 @@ const mapDispatchToProps = dispatch =>
 
 const baseLogin = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
-    <Field name="username" component={TextField} placeholder="Placeholder" id="username" type="text" />
-    <Field name="password" component={TextField} placeholder="password" id="password" type="password" />
-    <FlatButton label="Submit" primary type="submit" />
+    <Field name="username" component={TextField} placeholder="username" type="text" />
+    <Field name="password" component={TextField} placeholder="password" type="password" />
+    <FlatButton label="Login" primary type="submit" />
   </form>
 );
 const ReduxLogin = reduxForm()(baseLogin);
 
 const LoginForm = ({ loginUser, formID, }) => (
-  <ReduxLogin
-    form={formID}
-    onSubmit={loginUser}
-    onSubmitSuccess={resetForm(formID)}
-  />);
+  <div className="row">
+    <p>Login</p>
+    <ReduxLogin
+      form={formID}
+      onSubmit={loginUser}
+      onSubmitSuccess={resetForm(formID)}
+    />
+  </div>
+);
 
 export default connect(null, mapDispatchToProps)(LoginForm);

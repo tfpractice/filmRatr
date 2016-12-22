@@ -10,11 +10,7 @@ import { SideBarActions, } from '../stateful';
 
 const { toggle, } = SideBarActions;
 
-const mapStateToProps = ({ auth: { user, }, }) => {
-  console.log('user', user);
-  console.log('loggedIn', !!user);
-  return ({ loggedIn: !!user, });
-};
+const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, });
 
 const mapDispatchToProps = dispatch => ({ toggle: bindActionCreators(toggle, dispatch), });
 

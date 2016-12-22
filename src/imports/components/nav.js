@@ -23,11 +23,9 @@ const Nav = ({ loggedIn, toggle, }) => (
     iconElementLeft={<AuthMenu />}
   >
     <SideBar>
-
       {loggedIn && <LogoutLink />}
       {!loggedIn && <LoginForm formID={'navBarLogin'} />}
       {!loggedIn && <RegisterForm formID={'navBarRegister'} />}
-
     </SideBar>
     <IndependentSearch formID={'navSearchForm'} />
   </AppBar>
