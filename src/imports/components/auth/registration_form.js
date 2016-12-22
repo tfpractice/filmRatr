@@ -1,14 +1,10 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
-import { TextField, } from 'redux-form-material-ui';
 import { Field, reduxForm, } from 'redux-form';
+import { TextField, } from 'redux-form-material-ui';
 import { resetForm, } from 'imports/utils';
 import { AuthActions, } from 'imports/actions';
-
-const mapDispatchToProps = dispatch =>
-  ({ registerUser: bindActionCreators(AuthActions.registerUser, dispatch), });
 
 const baseReg = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit}>
@@ -25,11 +21,9 @@ const RegisterForm = ({ registerUser, formID, }) => (
   <div className="row">
     <p>Register</p>
     <ReduxRegister
-      form={formID}
-      onSubmit={registerUser}
-      onSubmitSuccess={resetForm(formID)}
+      form={formID} onSubmit={registerUser} onSubmitSuccess={resetForm(formID)}
     />
   </div>
 );
 
-export default connect(null, mapDispatchToProps)(RegisterForm);
+export default connect(null, AuthActions)(RegisterForm);

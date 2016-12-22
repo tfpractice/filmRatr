@@ -7,9 +7,6 @@ import { resetForm, } from 'imports/utils';
 import { AuthActions, } from 'imports/actions';
 import { TextField, } from 'redux-form-material-ui';
 
-const mapDispatchToProps = dispatch =>
-  ({ loginUser: bindActionCreators(AuthActions.loginUser, dispatch), });
-
 const baseLogin = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
     <Field name="username" component={TextField} placeholder="username" type="text" />
@@ -23,11 +20,9 @@ const LoginForm = ({ loginUser, formID, }) => (
   <div className="row">
     <p>Login</p>
     <ReduxLogin
-      form={formID}
-      onSubmit={loginUser}
-      onSubmitSuccess={resetForm(formID)}
+      form={formID} onSubmit={loginUser} onSubmitSuccess={resetForm(formID)}
     />
   </div>
 );
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(null, AuthActions)(LoginForm);
