@@ -9,18 +9,15 @@ injectTapEventPlugin();
 
 class Main extends Component {
   render() {
-    const { children, } = this.props;
-
     return (
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent: false, })}>
         <div id="main-view" >
           <Nav />
           <div className="container">
-            {children}
+            {this.props.children}
           </div>
         </div>
       </MuiThemeProvider>
-
     );
   }
 }
