@@ -10,19 +10,20 @@ import { SideBarActions, } from '../stateful';
 
 const { toggle, } = SideBarActions;
 
+const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, });
 const mapDispatchToProps = dispatch => ({ toggle: bindActionCreators(toggle, dispatch), });
 
-const AuthMenu = ({ toggle, ...props }) => (
+// const
+const AuthMenu = ({ loggedIn, toggle, ...props }) => (
   <IconMenu
     {...props}
     iconButtonElement={<IconButton><NavMenu /></IconButton>}
     targetOrigin={{ horizontal: 'right', vertical: 'top', }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top', }}
   >
-
-    <MenuItem primaryText="Login" onClick={toggle} />
-    <MenuItem primaryText="Logout" onClick={toggle} />
-    <MenuItem primaryText="Register" onClick={toggle} />
+    {loggedIn && <MenuItem primaryText="Logout" onClick={toggle} />}
+    {!loggedIn && <MenuItem primaryText="Login" onClick={toggle} />}
+    {!loggedIn && <MenuItem primaryText="Register" onClick={toggle} />}
 
   </IconMenu>
 );
