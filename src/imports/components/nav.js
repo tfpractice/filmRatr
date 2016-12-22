@@ -8,11 +8,16 @@ import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import NavMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { Link, } from 'react-router';
+
 import SideBar from './ui_sidebar';
-import Trigger from './sidebar_trigger';
+
+// import Trigger from './sidebar_trigger';
 import { IndependentSearch, } from './search';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
+import { SideBarActions, } from './stateful';
+
+// const { toggle, } = SideBarActions;
 
 const toggle = () => ({ type: 'TOGGLE_DRAWER', });
 
