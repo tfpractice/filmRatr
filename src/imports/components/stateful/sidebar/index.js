@@ -1,4 +1,4 @@
-import SideBar from './container';
+import container from './container';
 import { actions, } from './state';
 
-export { SideBar, actions, };
+export { container, actions, };

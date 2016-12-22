@@ -1,5 +1,3 @@
-import * as SideBar from './sidebar';
+import { container as SideBar, actions as SideBarActions, } from './sidebar';
 
-export const SideBarActions = SideBar.actions;
-
-export { SideBar, };
+export { SideBar, SideBarActions, };

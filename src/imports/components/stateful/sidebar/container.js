@@ -12,4 +12,4 @@ const SideBar = ({ open, toggle, children, }) => (
   </Drawer>
   );
 
-export default local(uiProps)(Drawer);
+export default local(uiProps)(SideBar);
