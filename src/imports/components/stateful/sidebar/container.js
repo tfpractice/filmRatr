@@ -6,9 +6,13 @@ import { uiProps, } from './state';
 
 const SideBar = ({ open, toggle, children, }) => (
   <Drawer docked={false} width={200} open={open} onRequestChange={toggle}>
-    {children}
-    <MenuItem primaryText="close sidebar" onTouchTap={toggle} />
+    <div className="row">
+      <div className="col 8">
+        {children}
+        <MenuItem primaryText="close sidebar" onTouchTap={toggle} />
+      </div>
+    </div>
   </Drawer>
-  );
+    );
 
 export default local(uiProps)(SideBar);

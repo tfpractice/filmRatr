@@ -13,9 +13,11 @@ class Main extends Component {
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme({ userAgent: false, })}>
-        <div id="main-view" className="container">
+        <div id="main-view" >
           <Nav />
-          {children}
+          <div className="container">
+            {children}
+          </div>
         </div>
       </MuiThemeProvider>
 
