@@ -5,15 +5,10 @@ import { connect, } from 'react-redux';
 import { resetForm, } from 'imports/utils';
 import { ReviewActions, } from 'imports/actions';
 
-
-const mapDispatchToProps = dispatch =>
- ({ createReview: bindActionCreators(ReviewActions.createReview, dispatch), });
-
 const MovieReviewForm = ({ createReview, formID, movie, }) => (
   <ReviewForm
     form={formID}
-    onSubmit={createReview(movie)}
-    onSubmitSuccess={resetForm(formID)}
+    onSubmit={createReview(movie)} onSubmitSuccess={resetForm(formID)}
   />);
 
-export default connect(null, mapDispatchToProps)(MovieReviewForm);
+export default connect(null, ReviewActions)(MovieReviewForm);
