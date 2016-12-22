@@ -8,26 +8,29 @@ import { AuthMenu, } from './auth';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { Link, } from 'react-router';
-import { LoginForm, RegisterForm, } from './auth';
+import { LoginForm, LogoutLink, RegisterForm, } from './auth';
 import { IndependentSearch, } from './search';
 import { SideBar, SideBarActions, } from './stateful';
 
 const { toggle, } = SideBarActions;
-
+const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, });
 const mapDispatchToProps = dispatch => ({ toggle: bindActionCreators(toggle, dispatch), });
 
-const Nav = ({ toggle, }) => (
+const Nav = ({ loggedIn, toggle, }) => (
   <AppBar
     title={<Link to="/" >FilmRatr</Link>}
     iconClassNameRight="muidocs-icon-navigation-expand-more"
     iconElementLeft={<AuthMenu />}
   >
     <SideBar>
-      <RegisterForm formID={'navBarRegister'} />
-      <LoginForm formID={'navBarLogin'} />
+
+      {loggedIn && <LogoutLink />}
+      {!loggedIn && <LoginForm formID={'navBarLogin'} />}
+      {!loggedIn && <RegisterForm formID={'navBarRegister'} />}
+
     </SideBar>
     <IndependentSearch formID={'navSearchForm'} />
   </AppBar>
 );
 
-export default connect(null, mapDispatchToProps)(Nav);
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
