@@ -12,6 +12,9 @@ const TopTen = ({ movies, actions, }) => (
   </div>
   );
 
-TopTen.fetchData = [ MovieActions.getTopFive, ];
+//
+// // MovieActions.getTopFive,
+//
+// TopTen.fetchData = [ MovieActions.getByFreq, ];
 
 export default connect(mapStateToProps)(TopTen);

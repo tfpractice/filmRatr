@@ -4,6 +4,7 @@ const isWrapped = ({ WrappedComponent = null, }) => WrappedComponent;
 
 const getNeeds = ({ needs, } = fetchDef) => needs;
 const getData = ({ fetchData, } = fetchDef) => fetchData;
+const getWrapped = c => isWrapped(c) ? c.WrappedComponent : c;
 
 const compData = component => isWrapped(component)
     ? getData(component.WrappedComponent)

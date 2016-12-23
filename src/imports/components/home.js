@@ -13,6 +13,6 @@ const Home = ({ children, dispatch, ...rest }, context) => (
   </div>
   );
 
-Home.fetchData = [ MovieActions.getTopFive, ];
+Home.fetchData = [ MovieActions.getByFreq, ];
 
 export default connect()(Home);

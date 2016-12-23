@@ -52,8 +52,13 @@ export const getTopFive = () => dispatch =>
         .then(({ topFive, }) => dispatch(getMovies(...topFive)))
         .catch(e => dispatch(movieRequestFailure(e)));
 
-export const getByFreq = () => dispatch =>
-  axios.get(`${API_URL}/reviews/freq`)
+export const getByFreq = () => (dispatch) => {
+  console.log('==============getByFreq==============');
+  console.log('==============getByFreq==============');
+  console.log('==============getByFreq==============');
+  console.log('==============getByFreq==============');
+  return axios.get(`${API_URL}/reviews/freq`)
     .then(getData)
     .then(ids => dispatch(getMovies(...ids)))
     .catch(e => dispatch(movieRequestFailure(e)));
+};
