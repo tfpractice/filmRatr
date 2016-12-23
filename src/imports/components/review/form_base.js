@@ -1,7 +1,7 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import { connect, } from 'react-redux';
-import { TextField, } from 'redux-form-material-ui';
+import { Slider, TextField, } from 'redux-form-material-ui';
 import { Field, reduxForm, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
 
@@ -10,6 +10,10 @@ const renderDelete = handler => rev =>
 
 const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
   <form onSubmit={handleSubmit} >
+    <Field
+      name="rating"
+      component={Slider} min={1} max={5} step={1} defaultValue={3}
+    />
     <Field name="text" component={TextField} hintText="content" />
     <FlatButton primary label="Submit" type="submit" />
     {renderDelete(deleteReview)(review) }

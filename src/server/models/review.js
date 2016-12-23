@@ -1,11 +1,11 @@
 import mongoose, { Schema, } from 'mongoose';
 
-const rand = () => Math.floor(Math.random() * 6);
+const rand = () => Math.floor((Math.random() * 4) + 1);
 const ReviewSchema = new Schema({
   text:      { type: String, default: 'default review text', required: true, },
   movie_id:  { type: String, default: '9620', required: true, },
   rating:  {
-    type: Number, default: rand, min: 0, max: 5, required: true,
+    type: Number, default: rand, min: 1, max: 5, required: true,
   },
   dateAdded: { type: 'Date', default: Date.now, required: true, },
   // author: { type: Schema.Types.ObjectId, ref: 'User', default: null, },
