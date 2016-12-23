@@ -1,6 +1,7 @@
 import mongoose, { Schema, } from 'mongoose';
 
 const rand = () => Math.floor((Math.random() * 4) + 1);
+
 const ReviewSchema = new Schema({
   text:      { type: String, default: 'default review text', required: true, },
   movie_id:  { type: String, default: '9620', required: true, },
@@ -10,10 +11,6 @@ const ReviewSchema = new Schema({
   dateAdded: { type: 'Date', default: Date.now, required: true, },
   // author: { type: Schema.Types.ObjectId, ref: 'User', default: null, },
 }, { toObject: { virtuals: true, }, toJSON: { virtuals: true, }, });
-
-ReviewSchema.statics.distinctMovies = function () {
-  return this.distinct('movie_id');
-};
 
 ReviewSchema.statics.countByMovieID = function (movie_id) {
   return this.count({ movie_id, });
@@ -35,18 +32,22 @@ ReviewSchema.statics.topFiveMovies = function () {
   );
 };
 
-ReviewSchema.statics.moviesByFreq = function () {
+ReviewSchema.statics.movies = function () {
+  return this.aggregate({ $group: { _id: '$movie_id', }, });
+};
+
+ReviewSchema.statics.moviesByAvg = function () {
   return this.aggregate({
     $group: {
       _id: '$movie_id',
-      count: { $sum: 1, },
+      rating: { $avg: '$rating', },
     },
   },
-     { $sort: { count: -1, }, },
-     { $limit: 10, },
-  );
+     { $sort: { rating: -1, }, },
+   );
 };
-ReviewSchema.statics.HighestRated = function () {
+
+ReviewSchema.statics.moviesByFreq = function () {
   return this.aggregate({
     $group: {
       _id: '$movie_id',
@@ -59,5 +60,7 @@ ReviewSchema.statics.HighestRated = function () {
 };
 
 const Review = mongoose.model('Review', ReviewSchema);
+
+// console.log('==============Review.movies()==============', r);
 
 export default Review;
