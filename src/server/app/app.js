@@ -7,7 +7,7 @@ import passport from 'passport';
 import path from 'path';
 import session from 'express-session';
 import { Strategy as LocalStrategy, } from 'passport-local';
-import { enableHotReload, } from '../../../config';
+import { enableHotReload, } from 'config';
 import { dbConfig, } from '../models';
 import { applyRoutes, ReviewRoutes, SearchRoutes, UserRoutes, } from '../routes';
 import { requestHandler, } from './request_handler';
@@ -33,7 +33,6 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: false, }));
 app.use(cookieParser());
 
 // Set Static Folder
-// app.use(express.static(path.resolve(__dirname, '../../../dist')));
 app.use(express.static(path.resolve(__dirname, 'dist')));
 
 // Express Session

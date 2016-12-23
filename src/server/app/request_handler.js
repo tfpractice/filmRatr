@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider, } from 'react-redux';
 import { renderToString, } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
-import { fetchComponentData, getRoutes, getStore, } from '../../imports';
+import { fetchComponentData, getRoutes, getStore, } from 'imports';
 
 export const renderHTML = (markup, store) => `
     <!doctype html>
