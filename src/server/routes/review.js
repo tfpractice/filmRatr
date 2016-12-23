@@ -1,5 +1,5 @@
 import { Router, } from 'express';
-import { ReviewController, } from '../controllers';
+import { MovieController, ReviewController, } from '../controllers';
 
 const router = new Router();
 
@@ -11,9 +11,9 @@ router.param('movie_id', (req, res, next, id, key) => {
 // Get all Reviews
 router.route('/reviews/').get(ReviewController.getReviews);
 
-router.route('/reviews/top').get(ReviewController.getTopFive);
+router.route('/reviews/top').get(MovieController.getTopFive);
 
-router.route('/reviews/freq').get(ReviewController.moviesByFreq);
+router.route('/reviews/freq').get(MovieController.moviesByFreq);
 
 router.route('/reviews/:movie_id').get(ReviewController.getMovieReviews);
 
