@@ -1,18 +1,14 @@
 import React from 'react';
-import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { resetForm, } from 'imports/utils';
-import SearchForm from './form';
 import { SearchActions, } from '../../actions';
+import SearchForm from './form';
 
-const mapDispatchToProps = dispatch =>
-  ({ submitSearch: bindActionCreators(SearchActions.search, dispatch), });
-
-const IndependentForm = ({ submitSearch, formID, }) => (
+const IndependentForm = ({ search, formID, }) => (
   <SearchForm
     form={formID}
-    onSubmit={submitSearch}
+    onSubmit={search}
     onSubmitSuccess={resetForm(formID)}
   />);
 
-export default connect(() => ({}), mapDispatchToProps)(IndependentForm);
+export default connect(() => ({}), SearchActions)(IndependentForm);

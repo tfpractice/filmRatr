@@ -11,6 +11,8 @@ const EditReviewForm = ({ editReview, review, deleteReview, }) => (
   <div style={formStyles}>
     <ReviewForm
       form={`editReview_${review.id}`}
+      review={review}
+      oprop="oprop"
       initialValues={review}
       enableReinitialize
       onSubmit={editReview(review)}
