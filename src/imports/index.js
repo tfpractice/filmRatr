@@ -1,9 +1,8 @@
-import getRoutes from './routes';
-import reducer from './reducer';
-import AppContainer from './container';
-import getStore from './store';
-import * as components from './components';
+export { default as getRoutes, } from './routes';
+export { default as reducer, } from './reducer';
+export { default as AppContainer, } from './container';
+export { default as getStore, } from './store';
+export { default as components, } from './components';
 import * as utils from './utils';
-const { fetchComponentData, } = utils;
-
-export { AppContainer, getStore, reducer, getRoutes, utils, fetchComponentData, };
+export { fetchComponentData, } from './utils';
+export { utils, };

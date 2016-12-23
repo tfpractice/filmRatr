@@ -38,7 +38,7 @@ export const BUILD_CONFIG = {
 export const BABEL_QUERY = {
   presets: [[ 'latest', { modules: false, }, ], 'react', ],
   plugins: [ 'transform-class-properties',
-  [ 'react-hot-loader/babel', ],
+  // [ 'react-hot-loader/babel', ],
   ],
 };
 

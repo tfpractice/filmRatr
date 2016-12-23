@@ -7,7 +7,7 @@ import { TopTen, } from './movie';
 
 const Home = ({ children, dispatch, ...rest }, context) => (
   <div id="home">
-    <h1>HOMEPAGE   ?</h1>
+    <h1>HOMEPAGE </h1>
     <SearchResults />
     <TopTen />
   </div>
