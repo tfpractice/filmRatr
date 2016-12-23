@@ -34,6 +34,17 @@ ReviewSchema.statics.topFiveMovies = function () {
      { $limit: 10, },
   );
 };
+ReviewSchema.statics.HighestRated = function () {
+  return this.aggregate({
+    $group: {
+      _id: '$movie_id',
+      count: { $sum: 1, },
+    },
+  },
+     { $sort: { count: -1, }, },
+     { $limit: 10, },
+  );
+};
 
 const Review = mongoose.model('Review', ReviewSchema);
 
