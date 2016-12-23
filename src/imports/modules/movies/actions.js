@@ -47,7 +47,13 @@ export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) =>
     .catch(movieRequestFailure);
 
 export const getTopFive = () => dispatch =>
-  axios.get(`${API_URL}/reviews/top`)
+      axios.get(`${API_URL}/reviews/top`)
+        .then(getData)
+        .then(({ topFive, }) => dispatch(getMovies(...topFive)))
+        .catch(e => dispatch(movieRequestFailure(e)));
+
+export const getByFreq = () => dispatch =>
+  axios.get(`${API_URL}/reviews/freq`)
     .then(getData)
-    .then(({ topFive, }) => dispatch(getMovies(...topFive)))
+    .then(ids => dispatch(getMovies(...ids)))
     .catch(e => dispatch(movieRequestFailure(e)));
