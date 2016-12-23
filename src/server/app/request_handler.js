@@ -16,7 +16,7 @@ export const renderHTML = (markup, store) => `
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
   </head>
       <body>
-        <div id="root">${markup}</div>
+        <div id="root" style="background-color:#303030;">${markup}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
         </script>
@@ -32,12 +32,12 @@ export const renderHTML = (markup, store) => `
 export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes(store);
-  
+
   const history = createMemoryHistory(req.url);
   const location = history.createLocation(req.url);
-  
+
   // const location = (req.url);
-  
+
   match({ routes, history, location, }, (error, redirectLocation, props) => {
     if (error) {
       res.status(500).send(error.message);
@@ -51,7 +51,7 @@ export const requestHandler = (req, res) => {
               <RouterContext {...props} />
             </Provider>
           );
-          
+
           return res.send(renderHTML(markup, store));
         })
         .catch(err => res.end(err.message));

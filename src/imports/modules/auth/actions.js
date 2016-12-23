@@ -1,12 +1,8 @@
 import axios from 'axios';
-import * as CONSTANTS from './constants';
-import { MovieUtils, StateUtils, } from 'imports/utils';
+import { StateUtils, } from 'imports/utils';
+import { LOGIN, LOGOUT, REGISTRATION, SET_USER, } from './constants';
 
-const { arrayUtils: { merge, }, } = StateUtils;
-const { dedupe: { getFirst, unaryMap, diff, keySet, }, } = StateUtils;
 const { requestUtils: { requestCreators, getData, }, } = StateUtils;
-
-const { SET_USER, LOGIN, LOGOUT, REGISTRATION, } = CONSTANTS;
 
 const set = user => () => user;
 const unset = () => () => null;
