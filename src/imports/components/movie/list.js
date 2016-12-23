@@ -2,9 +2,8 @@ import React from 'react';
 import { MovieCard, } from '../movie';
 
 const MovieList = ({ movies, }) => (
-  <div className="movie-list">
-    <h1>Showing Movies</h1>
-    <div className="movie-cards" />
+  <div className="movie-list hot">
+
     { movies.map(m => <MovieCard key={m.id} movie={m} />)}
   </div>
   );

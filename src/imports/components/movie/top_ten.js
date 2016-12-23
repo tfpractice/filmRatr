@@ -3,18 +3,15 @@ import { connect, } from 'react-redux';
 import { MovieActions, } from 'imports/actions';
 import MovieList from './list';
 
-const mapStateToProps = (state, own) => {
-  const movies = state.movies.data;
-  
-  // console.log('\n===================state.movies.data===================\n', movies);
-  
-  return { movies, };
-};
+const mapStateToProps = ({ movies: { data, }, }, own) => ({ movies: data, });
 
 const TopTen = ({ movies, actions, }) => (
-  <MovieList movies={movies} />
+  <div className="TopTen">
+    <h3>Most Frequently rated Movies</h3>
+    <MovieList movies={movies} />
+  </div>
   );
 
-TopTen.fetchData = [MovieActions.getTopFive,];
+TopTen.fetchData = [ MovieActions.getTopFive, ];
 
 export default connect(mapStateToProps)(TopTen);
