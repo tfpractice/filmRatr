@@ -13,7 +13,7 @@ const searchRequestSuccess = requestCreators('SEARCH_REQUEST').success;
 
 const tapResults = ({ results, }) => results;
 const updateResults = (...results) =>
- ({ type: UPDATE_SEARCH_RESULTS, curry: merge(...results), });
+  ({ type: UPDATE_SEARCH_RESULTS, curry: merge(...results), });
 
 export const search = ({ query, }) => dispatch =>
   Promise.resolve(dispatch(searchRequestPending(query)))
