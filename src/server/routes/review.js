@@ -13,6 +13,8 @@ router.route('/reviews/').get(ReviewController.getReviews);
 
 router.route('/reviews/top').get(ReviewController.getTopFive);
 
+router.route('/reviews/freq').get(ReviewController.moviesByFreq);
+
 router.route('/reviews/:movie_id').get(ReviewController.getMovieReviews);
 
 // Add a new Review
