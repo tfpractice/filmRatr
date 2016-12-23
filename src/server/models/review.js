@@ -35,7 +35,7 @@ ReviewSchema.statics.topFiveMovies = function () {
   );
 };
 
-ReviewSchema.statics.MoviesByFrequency = function () {
+ReviewSchema.statics.moviesByFreq = function () {
   return this.aggregate({
     $group: {
       _id: '$movie_id',
