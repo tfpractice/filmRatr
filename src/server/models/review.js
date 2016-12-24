@@ -9,7 +9,7 @@ const ReviewSchema = new Schema({
     type: Number, default: rand, min: 1, max: 5, required: true,
   },
   dateAdded: { type: 'Date', default: Date.now, required: true, },
-  // author: { type: Schema.Types.ObjectId, ref: 'User', default: null, },
+  user: { type: Schema.Types.ObjectId, ref: 'User', default: null, },
 }, { toObject: { virtuals: true, }, toJSON: { virtuals: true, }, });
 
 ReviewSchema.statics.findByMovieID = function(movie_id) {
