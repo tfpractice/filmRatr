@@ -6,7 +6,7 @@ import getRoutes from './routes';
 export default class AppContainer extends Component {
   render() {
     const { store, history, } = this.props;
-    
+
     return (
       <Provider store={store}>
         <Router routes={getRoutes(store)} history={history} />

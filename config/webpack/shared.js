@@ -1,5 +1,4 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import path from 'path';
 import webpack from 'webpack';
 
 import { PATHS, ROOT_PATH, } from './constants';
@@ -46,10 +45,7 @@ export default (env = defEnvar) => ({
     // new webpack.optimize.CommonsChunkPlugin(
     //   { names: ['vendor', 'manifest',], }),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"', }, }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-    }),
+    new webpack.LoaderOptionsPlugin({ minimize: true, debug: false, }),
     new ExtractTextPlugin('[name].styles.css'),
     new webpack.LoaderOptionsPlugin(
       { options: { sassLoader: { includePaths: [ './node_modules', ], }, }, }),

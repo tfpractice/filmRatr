@@ -13,7 +13,6 @@ const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
     <Field
       format={null}
       name="rating"
-      type="input"
       component={Slider} min={1} max={5} step={1}
     />
     <Field name="text" component={TextField} hintText="content" />

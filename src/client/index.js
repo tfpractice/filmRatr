@@ -7,6 +7,8 @@ import { AppContainer as AppComponent, getRoutes, getStore, } from 'imports';
 
 const store = getStore(window.__PRELOADED_STATE__);
 
+console.log('App3Container', AppComponent);
+
 const applyToDOM = (rStore, history) =>
   render(
     <HotContainer>

@@ -7,17 +7,14 @@ export const SRC_DIR = resolve(ROOT_PATH, 'src');
 export const APP_PATH = resolve(SRC_DIR, 'client/index');
 
 export const PATHS = {
-  app:  resolve(SRC_DIR, 'client/index'),
-  dist: resolve(ROOT_PATH, 'dist'),
   src: SRC_DIR,
+  dist: resolve(ROOT_PATH, 'dist'),
   config: resolve(ROOT_PATH, 'config'),
+  app:  resolve(SRC_DIR, 'client/index'),
+  imports: resolve(SRC_DIR, 'imports'),
   hotMiddleware: 'webpack-hot-middleware/client',
   RHLPatch: 'react-hot-loader/patch',
 
-  // alias: {
-  imports: resolve(SRC_DIR, 'imports'),
-    // config: PATHS.config,
-  // },
 };
 
 export const vendor = [ 'material-ui', 'redux-form', 'react', ];
@@ -36,10 +33,8 @@ export const BUILD_CONFIG = {
 };
 
 export const BABEL_QUERY = {
-  presets: [[ 'latest', { modules: false, }, ], 'react', ],
-  plugins: [ 'transform-class-properties',
-  // [ 'react-hot-loader/babel', ],
-  ],
+  presets: [ 'react', [ 'latest', { modules: false, },], ],
+  plugins: [ 'transform-class-properties', ],
 };
 
 export const DEV_CONFIG = {
@@ -53,15 +48,12 @@ export const DEV_CONFIG = {
     loaders: [{
       test:    /\.jsx?$/,
       exclude: /node_modules/,
-      loaders:  [{ loader: 'babel-loader', }, ],
-
-      // query: BABEL_QUERY,
+      loaders:  [{ loader: 'babel-loader', },],
       include: PATHS.src,
-    },],
+    }, ],
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin(
-        { names: [ 'vendor', 'manifest', ], }),
+    new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoErrorsPlugin(),
