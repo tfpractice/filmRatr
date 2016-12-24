@@ -9,6 +9,7 @@ const EditReviewForm = ({ editReview, review, }) => (
   <ReviewForm
     form={`editReview_${review.id}`}
     review={review}
+    enableReinitialize
     initialValues={review}
     onSubmit={editReview(review)}
     onSubmitSuccess={resetForm(`editReview_${review.id}`)}

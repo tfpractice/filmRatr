@@ -10,6 +10,7 @@ const MovieReviewForm = ({ createReview, formID, movie, }) => (
     <p>{`Create Review for ${movie.title}`} </p>
     <ReviewForm
       form={formID}
+      enableReinitialize
       onSubmit={createReview(movie)}
       onSubmitSuccess={resetForm(formID)}
     />
