@@ -11,8 +11,8 @@ const renderDelete = handler => rev =>
 const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
   <form onSubmit={handleSubmit} >
     <Field
-      name="rating"
-      component={Slider} min={1} max={5} step={1} defaultValue={3}
+      name="rating" label="rating"
+      component={Slider} min={1} max={5} step={1}
     />
     <Field name="text" component={TextField} hintText="content" />
     <FlatButton primary label="Submit" type="submit" />

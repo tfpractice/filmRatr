@@ -15,49 +15,49 @@ const movieRequestSuccess = requestCreators('MOVIE_REQUEST').success;
 const set = newMovie => movie => newMovie;
 const requestMovieByID = id => axios.get(getMovieUrl(id));
 const dedupeMovieIDs = getState => (...ids) =>
-  diff(keySet(getData(getState().movies)))(ids);
+ diff(keySet(getData(getState().movies)))(ids);
 
 export const setCurrentMovie = movie =>
-  ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
+ ({ type: SET_CURRENT_MOVIE, curry: set(movie), });
 
 export const insertMovies = (...movies) =>
-   ({ type: INSERT_MOVIE, curry: merge(...movies), });
+  ({ type: INSERT_MOVIE, curry: merge(...movies), });
 
 export const getMovies = (...ids) => (dispatch, getState) =>
-   Promise.resolve(dedupeMovieIDs(getState)(...ids))
-     .then(distinctIDs =>
-      Promise.all(distinctIDs.map(movieRequestPending).map(dispatch))
-        .then(() =>
-          axios.all(distinctIDs.map(requestMovieByID))
-            .then(unaryMap(getData))
-            .then(movies =>
-              Promise.all([
-                movieRequestSuccess(distinctIDs),
-                insertMovies(...movies),
-                getMovieReviews(...distinctIDs),
-              ].map(dispatch))
-                .then(() => movies))))
-     .catch(e => dispatch(movieRequestFailure(e)));
+  Promise.resolve(dedupeMovieIDs(getState)(...ids))
+    .then(distinctIDs =>
+     Promise.all(distinctIDs.map(movieRequestPending).map(dispatch))
+       .then(() =>
+         axios.all(distinctIDs.map(requestMovieByID))
+           .then(unaryMap(getData))
+           .then(movies =>
+             Promise.all([
+               movieRequestSuccess(distinctIDs),
+               insertMovies(...movies),
+               getMovieReviews(...distinctIDs),
+             ].map(dispatch))
+               .then(() => movies))))
+    .catch(e => dispatch(movieRequestFailure(e)));
 
 export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) =>
-  dispatch(getMovies(movie_id))
-    .then(getFirst)
-    .then(setCurrentMovie)
-    .then(dispatch)
-    .catch(movieRequestFailure);
+ dispatch(getMovies(movie_id))
+   .then(getFirst)
+   .then(setCurrentMovie)
+   .then(dispatch)
+   .catch(movieRequestFailure);
 
-export const getTopFive = () => dispatch =>
-      axios.get(`${API_URL}/reviews/top`)
-        .then(getData)
-        .then(({ topFive, }) => dispatch(getMovies(...topFive)))
-        .catch(e => dispatch(movieRequestFailure(e)));
+export const getByAvg = () => (dispatch) => {
+  console.log('==============getByFreq==============');
+  return axios.get(`${API_URL}/movies/avg`)
+    .then(getData)
+    .then(ids => dispatch(getMovies(...ids)))
+    .catch(e => dispatch(movieRequestFailure(e)));
+};
 
 export const getByFreq = () => (dispatch) => {
   console.log('==============getByFreq==============');
-  console.log('==============getByFreq==============');
-  console.log('==============getByFreq==============');
-  console.log('==============getByFreq==============');
-  return axios.get(`${API_URL}/reviews/freq`)
+  
+  return axios.get(`${API_URL}/movies/freq`)
     .then(getData)
     .then(ids => dispatch(getMovies(...ids)))
     .catch(e => dispatch(movieRequestFailure(e)));

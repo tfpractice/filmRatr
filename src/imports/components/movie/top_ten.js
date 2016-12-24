@@ -5,16 +5,11 @@ import MovieList from './list';
 
 const mapStateToProps = ({ movies: { data, }, }, own) => ({ movies: data, });
 
-const TopTen = ({ movies, actions, }) => (
+const TopTen = ({ movies, }) => (
   <div className="TopTen">
     <h3>Most Frequently rated Movies</h3>
     <MovieList movies={movies} />
   </div>
   );
-
-//
-// // MovieActions.getTopFive,
-//
-// TopTen.fetchData = [ MovieActions.getByFreq, ];
 
 export default connect(mapStateToProps)(TopTen);

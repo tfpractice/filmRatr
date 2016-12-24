@@ -12,31 +12,15 @@ const ReviewSchema = new Schema({
   // author: { type: Schema.Types.ObjectId, ref: 'User', default: null, },
 }, { toObject: { virtuals: true, }, toJSON: { virtuals: true, }, });
 
-ReviewSchema.statics.countByMovieID = function (movie_id) {
-  return this.count({ movie_id, });
-};
-
-ReviewSchema.statics.findByMovieID = function (movie_id) {
+ReviewSchema.statics.findByMovieID = function(movie_id) {
   return this.find({ movie_id, });
 };
 
-ReviewSchema.statics.topFiveMovies = function () {
-  return this.aggregate({
-    $group: {
-      _id: '$movie_id',
-      count: { $sum: 1, },
-    },
-  },
-     { $sort: { count: -1, }, },
-     { $limit: 10, },
-  );
-};
-
-ReviewSchema.statics.movies = function () {
+ReviewSchema.statics.movies = function() {
   return this.aggregate({ $group: { _id: '$movie_id', }, });
 };
 
-ReviewSchema.statics.moviesByAvg = function () {
+ReviewSchema.statics.moviesByAvg = function() {
   return this.aggregate({
     $group: {
       _id: '$movie_id',
@@ -47,7 +31,7 @@ ReviewSchema.statics.moviesByAvg = function () {
    );
 };
 
-ReviewSchema.statics.moviesByFreq = function () {
+ReviewSchema.statics.moviesByFreq = function() {
   return this.aggregate({
     $group: {
       _id: '$movie_id',
@@ -60,7 +44,5 @@ ReviewSchema.statics.moviesByFreq = function () {
 };
 
 const Review = mongoose.model('Review', ReviewSchema);
-
-// console.log('==============Review.movies()==============', r);
 
 export default Review;
