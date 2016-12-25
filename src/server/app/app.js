@@ -12,6 +12,8 @@ import { dbConfig, } from '../models';
 import { applyRoutes, MovieRoutes, ReviewRoutes, SearchRoutes, UserRoutes, } from '../routes';
 import { requestHandler, } from './request_handler';
 
+import { Review, User, } from '../models';
+
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
