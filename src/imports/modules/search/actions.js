@@ -6,6 +6,7 @@ import { SEARCH_URL, UPDATE_SEARCH_RESULTS, } from './constants';
 
 const { requestUtils: { requestCreators, getData, }, } = StateUtils;
 const { dedupe: { keySet, }, } = StateUtils;
+const { arrayUtils: { merge, }, } = StateUtils;
 
 const searchRequestPending = requestCreators('SEARCH_REQUEST').pending;
 const searchRequestFailure = requestCreators('SEARCH_REQUEST').failure;
@@ -22,7 +23,7 @@ export const search = ({ query, }) => dispatch =>
         .then(getData)
         .then(tapResults)
         .then(results => Promise.all(
-      [ searchRequestSuccess(),
+      [ searchRequestSuccess(query),
         updateResults(...results),
         insertMovies(...results),
         getMovieReviews(...keySet(results)), ].map(dispatch))

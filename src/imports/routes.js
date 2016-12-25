@@ -1,12 +1,13 @@
 import React from 'react';
 import { IndexRoute, Route, } from 'react-router';
-import { Home, Main, MovieView, } from './components';
+import { Home, Main, MovieView, SearchResults, } from './components';
 
 // const getMovieHook = (store)=()
 const getRoutes = store => (
   <Route name="app" component={Main} path="/">
     <IndexRoute component={Home} />
-    <Route component={MovieView} path="/movies/:movie_id" />
+    <Route path="/movies/:movie_id" component={MovieView} />
+    <Route path="/search" component={SearchResults} />
 
   </Route>);
 
