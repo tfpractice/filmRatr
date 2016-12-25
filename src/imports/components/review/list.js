@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect, } from 'react-redux';
+import Divider from 'material-ui/Divider';
 import ReviewCard from './item';
 import MovieReviewForm from './form';
 
@@ -10,7 +11,10 @@ const ReviewList = ({ movie, reviews, }) => (
   <div className="Review-list">
     <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
     <div className="ReviewList">
-      {reviews.map(r => <ReviewCard key={r.id} review={r} />)}
+      {reviews.map(r => <div>
+        <ReviewCard key={r.id} review={r} />
+        <Divider />
+      </div>)}
     </div>
   </div>
   );

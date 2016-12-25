@@ -4,6 +4,7 @@ import { connect, } from 'react-redux';
 import { Link, } from 'react-router';
 import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
 import { MovieActions, } from 'imports/actions';
+import MovieLink from './movie_link';
 
 const MovieCard = ({ movie, setCurrentMovie, }) => (
   <Card>
@@ -13,30 +14,32 @@ const MovieCard = ({ movie, setCurrentMovie, }) => (
       actAsExpander
       showExpandableButton
     />
-    {movie.backdrop_path ?
-      <CardMedia
-        overlay={
-          <CardTitle
-            title={movie.title} subtitle={<p>{movie.overview}</p>}
-          />}
-      >
-        <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
-      </CardMedia>
-    : ''}
-    <CardText children={movie.overview} expandable />
-    <CardActions>
-      <Link to={`/movies/${movie.id}`} onClick={() => setCurrentMovie(movie)} >
-        <FlatButton label="Show Reviews" />
-      </Link>
-    </CardActions>
+    <MovieLink movie={movie}>
+      {movie.backdrop_path ?
+        <CardMedia
+          expandable
+          overlay={
+            <CardTitle
+              title={movie.title}
+              subtitle={<p>{movie.overview}</p>}
+            />}
+        >
+          <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
+        </CardMedia>
+        : <CardText expandable children={movie.overview} />
+      }
+    </MovieLink>
   </Card>
 );
 
 export default connect(null, MovieActions)(MovieCard);
 
-//           getMovies(movie.id);
-
-// { adult:false,
+// //           getMovies(movie.id);
+// <CardActions>
+//   <Link to={`/movies/${movie.id}`} onClick={() => setCurrentMovie(movie)} >
+//     <FlatButton label="Show Reviews" />
+//   </CardActions>
+// // { adult:false,
 //   backdrop_path:  '/7GyIzZImsBTAH0teL1XKG6Nz3OL.jpg',
 //   genre_ids:Array[5],
 //   id:9620,
