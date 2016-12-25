@@ -6,7 +6,7 @@ import { SEARCH_URL, UPDATE_SEARCH_RESULTS, } from './constants';
 
 const { requestUtils: { requestCreators, getData, }, } = StateUtils;
 const { dedupe: { keySet, }, } = StateUtils;
-const { arrayUtils: { merge, }, } = StateUtils;
+const { arrayUtils: { merge, replace, }, } = StateUtils;
 
 const searchRequestPending = requestCreators('SEARCH_REQUEST').pending;
 const searchRequestFailure = requestCreators('SEARCH_REQUEST').failure;
@@ -14,7 +14,7 @@ const searchRequestSuccess = requestCreators('SEARCH_REQUEST').success;
 
 const tapResults = ({ results, }) => results;
 const updateResults = (...results) =>
-  ({ type: UPDATE_SEARCH_RESULTS, curry: merge(...results), });
+  ({ type: UPDATE_SEARCH_RESULTS, curry: replace(results), });
 
 export const search = ({ query, }) => dispatch =>
   Promise.resolve(dispatch(searchRequestPending(query)))
@@ -25,7 +25,6 @@ export const search = ({ query, }) => dispatch =>
         .then(results => Promise.all(
       [ searchRequestSuccess(query),
         updateResults(...results),
-        insertMovies(...results),
         getMovieReviews(...keySet(results)), ].map(dispatch))
           .then(() => results)))
     .catch(e => dispatch(searchRequestFailure(e.message)))
