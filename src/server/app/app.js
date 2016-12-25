@@ -12,8 +12,6 @@ import { dbConfig, } from '../models';
 import { applyRoutes, MovieRoutes, ReviewRoutes, SearchRoutes, UserRoutes, } from '../routes';
 import { requestHandler, } from './request_handler';
 
-import { Review, User, } from '../models';
-
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
@@ -58,15 +56,6 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   next();
-// });
-
-// app.use(cors());
 
 //  backend api routes
 app.use('/api', MovieRoutes, ReviewRoutes);
