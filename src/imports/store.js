@@ -10,4 +10,4 @@ const predicate = (getState, { type, }) =>
 const collapsed = (getState, action) => action.type;
 const log = createLogger({ collapsed, });
 
-export default state => applyMiddleware(thunk, log)(createStore)(reducer, state);
+export default state => applyMiddleware(thunk)(createStore)(reducer, state);
