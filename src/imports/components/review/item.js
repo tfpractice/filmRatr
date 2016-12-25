@@ -5,7 +5,10 @@ import { Card, CardHeader, CardText, CardTitle, } from 'material-ui/Card';
 import { ReviewActions, } from 'imports/actions';
 import EditReviewForm from './edit_review';
 
-const ReviewCard = ({ review, deleteReview, }) => (
+const mapStateToProps = ({ auth: { user, }, }, review) =>
+ ({ canEdit: user && user.id === review.user, });
+
+const ReviewCard = ({ review, deleteReview, canEdit, }) => (
   <Card>
     <CardHeader
       title={review.text}
@@ -14,10 +17,10 @@ const ReviewCard = ({ review, deleteReview, }) => (
       closeIcon={<EditIcon />}
       showExpandableButton
     />
-    <CardText expandable >
+    {canEdit && <CardText expandable >
       <EditReviewForm review={review} />
-    </CardText>
+    </CardText>}
   </Card>
 );
 
-export default connect(null, ReviewActions)(ReviewCard);
+export default connect(mapStateToProps, ReviewActions)(ReviewCard);
