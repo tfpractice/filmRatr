@@ -63,7 +63,7 @@ app.use('/api', MovieRoutes, ReviewRoutes);
 // applyRoutes(app, passport);
 applyRoutes(app, passport);
 
-app.use(SearchRoutes);
+// app.use(SearchRoutes);
 
 // establish server render
 app.use(requestHandler);

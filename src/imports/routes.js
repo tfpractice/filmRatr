@@ -7,7 +7,7 @@ const getRoutes = store => (
   <Route name="app" component={Main} path="/">
     <IndexRoute component={Home} />
     <Route path="/movies/:movie_id" component={MovieView} />
-    <Route path="/search/(:title)" component={SearchResults} />
+    <Route path="search*" component={SearchResults} />
 
   </Route>);
 
