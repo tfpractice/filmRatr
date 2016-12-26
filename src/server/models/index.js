@@ -1,9 +1,7 @@
-import Review from './review';
-import User from './user';
+export { default as Review, } from './review';
+export { default as User, } from './user';
 
-const dbConfig = {
+export const dbConfig = {
   mongoURL: process.env.MONGO_URL || 'mongodb://localhost:27017/filmRatr',
   port:     process.env.PORT || 3000,
 };
-
-export { dbConfig, Review, User, };
