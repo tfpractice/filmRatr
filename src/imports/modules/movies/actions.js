@@ -39,26 +39,21 @@ export const getMovies = (...ids) => (dispatch, getState) =>
                .then(() => movies))))
     .catch(e => dispatch(movieRequestFailure(e)));
 
-export const setMovieFromParams = ({ movie_id, }) => (dispatch, getState) =>
+export const setMovieFromParams = ({ movie_id, }) => dispatch =>
  dispatch(getMovies(movie_id))
    .then(getFirst)
    .then(setCurrentMovie)
    .then(dispatch)
    .catch(movieRequestFailure);
 
-export const getByAvg = () => (dispatch) => {
-  console.log('==============getByFreq==============');
-  return axios.get(`${API_URL}/movies/avg`)
+export const getByAvg = () => dispatch =>
+  axios.get(`${API_URL}/movies/avg`)
     .then(getData)
     .then(ids => dispatch(getMovies(...ids)))
     .catch(e => dispatch(movieRequestFailure(e)));
-};
 
-export const getByFreq = () => (dispatch) => {
-  console.log('==============getByFreq==============');
-  
-  return axios.get(`${API_URL}/movies/freq`)
-    .then(getData)
-    .then(ids => dispatch(getMovies(...ids)))
-    .catch(e => dispatch(movieRequestFailure(e)));
-};
+export const getByFreq = () => dispatch =>
+ axios.get(`${API_URL}/movies/freq`)
+   .then(getData)
+   .then(ids => dispatch(getMovies(...ids)))
+   .catch(e => dispatch(movieRequestFailure(e)));

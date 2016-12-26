@@ -1,6 +1,4 @@
-import MovieReviewForm from './form';
-import EditReviewForm from './edit_review';
-import ReviewForm from './form_base';
-import ReviewList from './list';
-
-export { MovieReviewForm, ReviewForm, EditReviewForm, ReviewList, };
+export { default as MovieReviewForm, } from './form';
+export { default as EditReviewForm, } from './edit_review';
+export { default as ReviewForm, } from './form_base';
+export { default as ReviewList, } from './list';

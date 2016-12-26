@@ -1,4 +1,2 @@
-import SearchResults from './results';
-import IndependentSearch from './free_form';
-
-export { SearchResults, IndependentSearch, };
+export { default as SearchResults, } from './results';
+export { default as IndependentSearch, } from './free_form';

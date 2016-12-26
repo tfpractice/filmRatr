@@ -1,6 +1,4 @@
-import AuthMenu from './menu';
-import LoginForm from './login_form';
-import LogoutLink from './logout_link';
-import RegisterForm from './registration_form';
-
-export { AuthMenu, LoginForm, LogoutLink, RegisterForm, };
+export { default as AuthMenu, } from './menu';
+export { default as LoginForm, } from './login_form';
+export { default as LogoutLink, } from './logout_link';
+export { default as RegisterForm, } from './registration_form';
