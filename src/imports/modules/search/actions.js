@@ -27,6 +27,6 @@ export const search = ({ query, }) => dispatch =>
         updateResults(...results),
         getMovieReviews(...keySet(results)), ].map(dispatch))
           .then(() => results)))
-    .catch(e => dispatch(searchRequestFailure(e.message)))
+    .catch(e => dispatch(searchRequestFailure(e.message)));
 
-;
+// export const

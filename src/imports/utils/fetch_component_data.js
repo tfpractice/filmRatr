@@ -15,6 +15,8 @@ const flatten = (prev = [], next = []) => [ ...prev, ...next, ];
 const fetchComponentData = (dispatch, components, params) => {
   const needs = components.map(compData).reduce(flatten, []);
 
+  console.log('==============fetchDataparams==============', params);
+
   const promises = needs.map(need => Promise.resolve(dispatch(need(params))));
 
   return Promise.all(promises);

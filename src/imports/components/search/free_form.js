@@ -16,9 +16,13 @@ const IndependentForm = ({ query, search, formID, dispatch, router, }) => (
     onSubmit={search}
     onSubmitSuccess={(action, dispatch) => {
       dispatch(resetForm(formID));
-      router.push('search');
+      console.log(typeof query, `search?${query}`);
+
+      router.replace(`/search/${query}`);
+
+      // router.push({ pathname: 'search?', query, });
     }}
-    
+
   />);
 
 export default connect(mapStateToProps, SearchActions)(withRouter(IndependentForm));

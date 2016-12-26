@@ -11,19 +11,16 @@ const mapStateToProps = ({ search: { results, request: { query, }, }, }) => ({ r
 const mapDispatchToProps = dispatch =>
  ({ actions: bindActionCreators(SearchActions, dispatch), });
 
-const SearchResults = ({ results, query, actions, router, }) => {
-  console.log('router', router);
-  return (
-    <div className="search-list">
-      <h1>{query ? `Showing Results for ${query}` : 'Enter Movie Title' }</h1>
-      <FreeForm formID={'searchRouteForm'} />
-      <div className="searchResults">
-        {results.map(r => <MovieCard key={r.id} movie={r} />)}
-      </div>
+const SearchResults = ({ results, query, actions, router, }) => (
+  <div className="search-list">
+    <h1>{query ? `Showing Results for ${query}` : 'Enter Movie Title' }</h1>
+    <FreeForm formID={'searchRouteForm'} />
+    <div className="searchResults">
+      {results.map(r => <MovieCard key={r.id} movie={r} />)}
     </div>
+  </div>
   );
-};
 
-// SearchResults.fetchData = [ MovieActions.getByFreq, ];
+SearchResults.fetchData = [ SearchActions.search, ];
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchResults));
