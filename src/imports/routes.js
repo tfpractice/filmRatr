@@ -4,11 +4,10 @@ import { Home, Main, MovieView, SearchResults, } from './components';
 
 // const getMovieHook = (store)=()
 const getRoutes = store => (
-  <Route name="app" component={Main} path="/">
+  <Route name="app" path="/" component={Main}>
     <IndexRoute component={Home} />
-    <Route path="/movies/:movie_id" component={MovieView} />
+    <Route path="movies/:movie_id" component={MovieView} />
     <Route path="search(*:query)" component={SearchResults} />
-
   </Route>);
 
 // import injectTapEventPlugin from 'react-tap-event-plugin';
