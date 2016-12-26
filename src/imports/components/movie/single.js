@@ -7,28 +7,33 @@ import { MovieActions, } from 'imports/actions';
 import MovieLink from './movie_link';
 
 const MovieCard = ({ movie, setCurrentMovie, }) => (
-  <Card>
+  <Card initiallyExpanded >
     <CardHeader
       title={movie.title}
       subtitle={<p>{movie.release_date} <em>{movie.id}</em> </p>}
       actAsExpander
       showExpandableButton
     />
-    <MovieLink movie={movie}>
-      {movie.backdrop_path ?
-        <CardMedia
-          expandable
-          overlay={
+    {movie.backdrop_path ?
+      <CardMedia
+        expandable
+        overlay={
+          <MovieLink movie={movie}>
             <CardTitle
               title={movie.title}
               subtitle={<p>{movie.overview}</p>}
-            />}
-        >
-          <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
-        </CardMedia>
-        : <CardText expandable children={movie.overview} />
-      }
-    </MovieLink>
+            />
+          </MovieLink>
+        }
+      >
+        <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
+      </CardMedia>
+      : <CardText expandable >
+        <MovieLink movie={movie} >
+          {movie.overview}
+        </MovieLink>
+      </CardText>
+    }
   </Card>
 );
 

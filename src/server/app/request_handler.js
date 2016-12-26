@@ -32,15 +32,8 @@ export const renderHTML = (markup, store) => `
 export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes(store);
-
   const history = createMemoryHistory(req.url);
-
   const location = history.createLocation(req.url);
-
-  // const location = (req.url);
-
-  console.log(location);
-  console.log(req.url);
 
   match({ routes, history, location, }, (error, redirectLocation, props) => {
     if (error) {
