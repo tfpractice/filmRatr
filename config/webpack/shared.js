@@ -43,9 +43,12 @@ export default (env = defEnvar) => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-        MOVIE_DB_API_KEY: JSON.stringify(process.env.MOVIE_DB_API_KEY),
+        // MOVIE_DB_API_KEY: JSON.stringify(process.env.MOVIE_DB_API_KEY),
       },
     }),
+    new webpack.EnvironmentPlugin([
+      'MOVIE_DB_API_KEY',
+    ]),
     new webpack.LoaderOptionsPlugin({ minimize: true, debug: true, }),
     new webpack.optimize.UglifyJsPlugin({ compress: { warnings: true, }, sourceMap: true, }),
     new ExtractTextPlugin('[name].styles.css'),
