@@ -1,3 +1,4 @@
+import HtmlPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import webpack from 'webpack';
 import { resolve, } from 'path';
@@ -11,6 +12,8 @@ export const PATHS = {
   dist: resolve(ROOT_PATH, 'dist'),
   config: resolve(ROOT_PATH, 'config'),
   app:  resolve(SRC_DIR, 'client/index'),
+  template: resolve(SRC_DIR, 'client/templates/index.html'),
+  surge: resolve(SRC_DIR, 'client/templates/200.html'),
   imports: resolve(SRC_DIR, 'imports'),
   hotMiddleware: 'webpack-hot-middleware/client',
   RHLPatch: 'react-hot-loader/patch',
@@ -29,11 +32,19 @@ export const BUILD_CONFIG = {
     new webpack.optimize.CommonsChunkPlugin(
       { names: [ 'vendor', 'manifest', ], }),
     new ExtractTextPlugin('[name].[chunkhash].styles.css'),
+    new HtmlPlugin({
+      filename: 'index.html',
+      template: PATHS.template,
+    }),
+    new HtmlPlugin({
+      filename: '200.html',
+      template: PATHS.surge,
+    }),
   ],
 };
 
 export const BABEL_QUERY = {
-  presets: [ 'react', [ 'latest', { modules: false, },], ],
+  presets: [ 'react', [ 'latest', { modules: false, }, ],],
   plugins: [ 'transform-class-properties', ],
 };
 
@@ -48,9 +59,9 @@ export const DEV_CONFIG = {
     loaders: [{
       test:    /\.jsx?$/,
       exclude: /node_modules/,
-      loaders:  [{ loader: 'babel-loader', },],
+      loaders:  [{ loader: 'babel-loader', }, ],
       include: PATHS.src,
-    }, ],
+    },],
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),

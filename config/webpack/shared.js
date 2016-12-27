@@ -1,4 +1,5 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 
 import { PATHS, ROOT_PATH, } from './constants';
@@ -49,6 +50,11 @@ export default (env = defEnvar) => ({
     new ExtractTextPlugin('[name].styles.css'),
     new webpack.LoaderOptionsPlugin(
       { options: { sassLoader: { includePaths: [ './node_modules', ], }, }, }),
+    // new HtmlPlugin({
+    //   filename: 'index.html',
+    //   hash: true,
+    //   template: PATHS.template,
+    // }),
   ],
   node: {
     fs:  'empty',
