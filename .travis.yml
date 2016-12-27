@@ -2,5 +2,7 @@ language: node_js
 node_js:
   - '7'
   - '6'
-after_success:
-  - surge --project ./dist --domain filmratr-test.surge.sh
+deploy:
+  provider: surge
+  project: ./dist/
+  domain: filmratr-test.surge.sh
