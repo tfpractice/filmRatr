@@ -4,4 +4,5 @@ node_js:
   - '6'
  provider: surge
   project: ./dist/
-  domain: filmratr-test.surge.sh  
+  domain: filmratr-test.surge.sh
+  skip_cleanup: true  
