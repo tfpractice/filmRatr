@@ -1,7 +1,6 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
-
 import { PATHS, ROOT_PATH, } from './constants';
 
 const defEnvar = { prod: true, };
@@ -21,7 +20,6 @@ export default (env = defEnvar) => ({
     path:      PATHS.dist,
     filename:   '[name].bundle.js',
     publicPath: '/',
-
   },
   module: {
     loaders: [
@@ -38,24 +36,21 @@ export default (env = defEnvar) => ({
           loader: [ 'css-loader', 'sass-loader?outputStyle=compressed', ],
         }),
       },
-
     ],
   },
   devtool: env.prod ? 'source-map' : 'eval',
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin(
-    //   { names: ['vendor', 'manifest',], }),
-    new webpack.EnvironmentPlugin([ 'MOVIE_DB_API_KEY', ]),
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"', }, }),
-    new webpack.LoaderOptionsPlugin({ minimize: true, debug: false, }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+        MOVIE_DB_API_KEY: JSON.stringify(process.env.MOVIE_DB_API_KEY),
+      },
+    }),
+    new webpack.LoaderOptionsPlugin({ minimize: true, debug: true, }),
+    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: true, }, sourceMap: true, }),
     new ExtractTextPlugin('[name].styles.css'),
     new webpack.LoaderOptionsPlugin(
       { options: { sassLoader: { includePaths: [ './node_modules', ], }, }, }),
-    // new HtmlPlugin({
-    //   filename: 'index.html',
-    //   hash: true,
-    //   template: PATHS.template,
-    // }),
   ],
   node: {
     fs:  'empty',
@@ -63,5 +58,4 @@ export default (env = defEnvar) => ({
     tls: 'mock',
     dns: 'mock',
   },
-
 });
