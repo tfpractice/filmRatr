@@ -45,6 +45,7 @@ export default (env = defEnvar) => ({
   plugins: [
     // new webpack.optimize.CommonsChunkPlugin(
     //   { names: ['vendor', 'manifest',], }),
+    new webpack.EnvironmentPlugin([ 'MOVIE_DB_API_KEY', ]),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: '"production"', }, }),
     new webpack.LoaderOptionsPlugin({ minimize: true, debug: false, }),
     new ExtractTextPlugin('[name].styles.css'),
