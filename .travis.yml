@@ -2,7 +2,8 @@ language: node_js
 node_js:
   - '7'
   - '6'
-provider: surge
-  project: ./dist/
-  domain: filmratr-test.surge.sh
-  skip_cleanup: true
+deploy:
+ provider: surge
+ project: ./dist/
+ domain: filmratr-test.surge.sh
+ skip_cleanup: true
