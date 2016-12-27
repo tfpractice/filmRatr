@@ -5,4 +5,4 @@ node_js:
  provider: surge
   project: ./dist/
   domain: filmratr-test.surge.sh
-  skip_cleanup: true  
+  skip_cleanup: true
