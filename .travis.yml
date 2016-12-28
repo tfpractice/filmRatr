@@ -9,3 +9,4 @@ deploy:
   domain: filmratr-test.surge.sh
 after_success:
   - surge --project ./dist/ --domain filmratr-test.surge.sh
+skip_cleanup: true
