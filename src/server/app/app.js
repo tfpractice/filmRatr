@@ -23,6 +23,14 @@ mongoose.connect(dbConfig.mongoURL, (error) => {
 
   console.log('mongoose connected');
 });
+const conn = mongoose.connection;
+
+conn.on('error', console.error.bind(console, 'connection error:'));
+conn.once('open', () => {
+  console.log('mongoose connected from conn variable');
+
+  // Wait for the database connection to establish, then start the app.
+});
 
 // initialize express
 const app = enableHotReload(express());

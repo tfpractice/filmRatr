@@ -4,7 +4,7 @@ import { renderToString, } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { fetchComponentData, getRoutes, getStore, } from 'imports';
 
-export const renderHTML = (markup, store) => `
+export const renderHTML = (markup, state) => `
     <!doctype html>
     <html>
       <head>
@@ -18,7 +18,7 @@ export const renderHTML = (markup, store) => `
       <body>
         <div id="root" style="background-color:#303030;">${markup}</div>
         <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
+          window.__PRELOADED_STATE__ = ${JSON.stringify(state)}
         </script>
            <script type="application/javascript" src=/manifest.js ></script>
            <script type="application/javascript" src=/vendor.js ></script>
@@ -49,7 +49,8 @@ export const requestHandler = (req, res) => {
             </Provider>
           );
 
-          return res.send(renderHTML(markup, store));
+          console.log((store.getState()));
+          return res.send(renderHTML(markup, store.getState()));
         })
         .catch(err => res.end(err.message));
     } else {

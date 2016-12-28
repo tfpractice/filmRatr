@@ -27,6 +27,7 @@ export const dev = (common = sharedConf({ prod: false, })) => {
 
 export const applyHotMiddleware = compiler => (app) => {
   if (process.env.NODE_ENV !== 'production') {
+    console.log('dev');
     app.use(devMiddleware(compiler, {
       noInfo: true,
       historyApiFallback: true,

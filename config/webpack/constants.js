@@ -35,6 +35,7 @@ export const BUILD_CONFIG = {
 
   ],
 };
+console.log(process.env.NODE_ENV);
 
 export const DEV_CONFIG = {
   entry:   {

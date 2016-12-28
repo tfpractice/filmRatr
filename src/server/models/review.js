@@ -12,15 +12,15 @@ const ReviewSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', default: null, },
 }, { toObject: { virtuals: true, }, toJSON: { virtuals: true, }, });
 
-ReviewSchema.statics.findByMovieID = function(movie_id) {
+ReviewSchema.statics.findByMovieID = function (movie_id) {
   return this.find({ movie_id, });
 };
 
-ReviewSchema.statics.movies = function() {
+ReviewSchema.statics.movies = function () {
   return this.aggregate({ $group: { _id: '$movie_id', }, });
 };
 
-ReviewSchema.statics.moviesByAvg = function() {
+ReviewSchema.statics.moviesByAvg = function () {
   return this.aggregate({
     $group: {
       _id: '$movie_id',
@@ -31,7 +31,7 @@ ReviewSchema.statics.moviesByAvg = function() {
    );
 };
 
-ReviewSchema.statics.moviesByFreq = function() {
+ReviewSchema.statics.moviesByFreq = function () {
   return this.aggregate({
     $group: {
       _id: '$movie_id',
