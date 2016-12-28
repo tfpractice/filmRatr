@@ -7,7 +7,6 @@ export const DEV = 'dev';
 export const BUILD = 'build';
 export const CONFIG_EVENTS = new Set([ BUILD, DEV, ]);
 
-console.log(process.env);
 export const ROOT_PATH = resolve('./');
 export const SRC_DIR = resolve(ROOT_PATH, 'src');
 export const APP_PATH = resolve(SRC_DIR, 'client/index');
@@ -27,7 +26,7 @@ export const PATHS = {
 
 export const BUILD_CONFIG = {
   entry: { vendor, },
-  output: { filename:   '[name].[chunkhash].bundle.js', },
+  output: { filename: '[name].[chunkhash].bundle.js', },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new ExtractTextPlugin('[name].[chunkhash].styles.css'),

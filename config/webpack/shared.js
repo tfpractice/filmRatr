@@ -40,18 +40,13 @@ export default (env = defEnvar) => ({
   },
   devtool: env.prod ? 'source-map' : 'eval',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-        // MOVIE_DB_API_KEY: JSON.stringify(process.env.MOVIE_DB_API_KEY),
-      },
-    }),
-    new webpack.EnvironmentPlugin([
-      'MOVIE_DB_API_KEY',
-    ]),
-    new webpack.LoaderOptionsPlugin({ minimize: true, debug: true, }),
-    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: true, }, sourceMap: true, }),
     new ExtractTextPlugin('[name].styles.css'),
+    new webpack.EnvironmentPlugin([ 'MOVIE_DB_API_KEY', 'FILMRATR_AUTH_SECRET', ]),
+    new webpack.LoaderOptionsPlugin({ minimize: true, debug: false, }),
+    new webpack.DefinePlugin(
+      { 'process.env': { NODE_ENV: JSON.stringify('production'), }, }),
+    new webpack.optimize.UglifyJsPlugin(
+      { compress: { warnings: true, }, sourceMap: true, }),
     new webpack.LoaderOptionsPlugin(
       { options: { sassLoader: { includePaths: [ './node_modules', ], }, }, }),
   ],

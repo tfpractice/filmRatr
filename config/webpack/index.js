@@ -1,4 +1,2 @@
-import common from './shared';
-import { enableHotReload, } from './actions';
-
-export { enableHotReload, common, };
+export { default as common, } from './shared';
+export { enableHotReload, } from './actions';
