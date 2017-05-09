@@ -1,6 +1,5 @@
 import React, { PropTypes, } from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { Field, reduxForm, reset, } from 'redux-form';
 import { resetForm, } from 'imports/utils';
