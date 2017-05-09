@@ -54,7 +54,7 @@ export const getReview = (req, res) =>
 export const moviesByFreq = (req, res) =>
   Review.moviesByFreq()
     .then(arr => arr.map(({ _id: movie_id, }) => movie_id))
-    .then(movies => res.json(movies))
+    .then(movies => res.json({ movies, }))
     .catch(err => res.status(500).send(err));
 
 /**

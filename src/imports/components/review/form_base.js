@@ -21,4 +21,5 @@ const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
   </form>
   );
 
+// onSubmitSuccess={resetForm('nodeCount')}
 export default connect(null, ReviewActions)(reduxForm()(ReviewForm));
