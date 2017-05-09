@@ -49,7 +49,6 @@ export const requestHandler = (req, res) => {
             </Provider>
           );
 
-          console.log((store.getState()));
           return res.send(renderHTML(markup, store.getState()));
         })
         .catch(err => res.end(err.message));
