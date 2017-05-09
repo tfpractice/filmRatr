@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, } from 'react-dom';
 
-// import { Provider, } from 'react-redux';
 import { AppContainer as HotContainer, } from 'react-hot-loader';
 import { browserHistory, Router, } from 'react-router';
 import { AppContainer as AppComponent, getRoutes, getStore, } from 'imports';

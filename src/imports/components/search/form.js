@@ -1,4 +1,4 @@
-import React, { PropTypes, } from 'react';
+import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import { Field, reduxForm, } from 'redux-form';
 import { connect, } from 'react-redux';

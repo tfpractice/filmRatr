@@ -1,7 +1,6 @@
 import React from 'react';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import { connect, } from 'react-redux';
 import { Card, CardActions, CardHeader, CardText, } from 'material-ui/Card';

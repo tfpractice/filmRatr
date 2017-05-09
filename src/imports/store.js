@@ -4,7 +4,6 @@ import { applyMiddleware, createStore, } from 'redux';
 import { MOVIE_ACTIONS, } from './modules/movies/constants';
 import reducer from './reducer';
 
-//
 const predicate = (getState, { type, }) =>
   MOVIE_ACTIONS.has(type);
 const collapsed = (getState, action) => action.type;

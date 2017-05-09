@@ -4,7 +4,6 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import NavMenu from 'material-ui/svg-icons/navigation/menu';
 import { connect, } from 'react-redux';
-import { Link, } from 'react-router';
 import { SideBarActions, } from '../stateful';
 
 const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, });

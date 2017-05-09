@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { withRouter, } from 'react-router';
-import { MovieActions, SearchActions, } from 'imports/actions';
+import { SearchActions, } from 'imports/actions';
 import { MovieCard, } from '../movie';
 import FreeForm from './free_form';
 

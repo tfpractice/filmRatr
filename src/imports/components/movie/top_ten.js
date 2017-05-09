@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import { MovieActions, } from 'imports/actions';
 import MovieList from './list';
 
 const mapStateToProps = ({ movies: { data, }, }, own) => ({ movies: data, });

@@ -11,10 +11,10 @@ const ReviewList = ({ movie, reviews, }) => (
   <div className="Review-list">
     <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
     <div className="ReviewList">
-      {reviews.map(r => <div>
+      {reviews.map(r => (<div>
         <ReviewCard key={r.id} review={r} />
         <Divider />
-      </div>)}
+      </div>))}
     </div>
   </div>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
 import { connect, } from 'react-redux';
 import { resetForm, } from 'imports/utils';
 import { ReviewActions, } from 'imports/actions';
