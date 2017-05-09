@@ -33,8 +33,8 @@ export default (env = defEnvar) => ({
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [ 'css-loader', 'sass-loader?outputStyle=compressed', ],
+          fallback: 'style-loader',
+          use:  [ 'css-loader', ],
         }),
       },
     ],

@@ -1,8 +1,8 @@
-import createLogger from 'redux-logger';
-import reducer from './reducer';
 import thunk from 'redux-thunk';
+import { createLogger, } from 'redux-logger';
 import { applyMiddleware, createStore, } from 'redux';
 import { MOVIE_ACTIONS, } from './modules/movies/constants';
+import reducer from './reducer';
 
 //
 const predicate = (getState, { type, }) =>

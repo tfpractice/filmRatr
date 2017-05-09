@@ -1,11 +1,28 @@
 {
-  "presets": [ "react" ,["latest", { "modules": false}]],
-  "plugins":  [ ["module-resolver", {
-      "root": ["./src"],
-      "alias": {
-        "imports": "./imports",
-        "config": "./config",
+  "presets": [
+    "env",
+    "react",
+    [
+      "latest",
+      {
+        "modules": false
       }
-    }] ,"transform-class-properties", "transform-object-rest-spread"]
-
+    ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "alias": {
+          "imports": "./imports",
+          "config": "./config"
+        }
+      }
+    ],
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ]
 }

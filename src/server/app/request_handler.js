@@ -20,9 +20,9 @@ export const renderHTML = (markup, state) => `
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(state)}
         </script>
-           <script type="application/javascript" src=/manifest.js ></script>
-           <script type="application/javascript" src=/vendor.js ></script>
-           <script type="application/javascript" src=/app.js ></script>
+           <script type="application/javascript" src=manifest.js ></script>
+           <script type="application/javascript" src=vendor.js ></script>
+           <script type="application/javascript" src=app.js ></script>
         </body>
     </html>
     `;

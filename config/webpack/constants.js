@@ -32,10 +32,8 @@ export const BUILD_CONFIG = {
     new ExtractTextPlugin('[name].[chunkhash].styles.css'),
     new HtmlPlugin({ filename: 'index.html', template: PATHS.template, }),
     new HtmlPlugin({ filename: '200.html', template: PATHS.surge, }),
-
   ],
 };
-console.log(process.env.NODE_ENV);
 
 export const DEV_CONFIG = {
   entry:   {
@@ -47,7 +45,8 @@ export const DEV_CONFIG = {
     new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.NoErrorsPlugin(),
+
+    // new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV), }, }),
   ],
 };
