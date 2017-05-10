@@ -8,8 +8,6 @@ import createPalette, { dark, } from 'material-ui/styles/palette';
 import { createMuiTheme, MuiThemeProvider, } from 'material-ui/styles';
 import { pink, teal, } from 'material-ui/styles/colors';
 
-// import Grid from 'material-ui/Grid';
-
 const palette = createPalette({
   primary: teal,
   accent: pink,
@@ -32,15 +30,16 @@ export const renderHTML = (markup, state, css) => `
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
       <body>
-        <div id="root" style="background-color:#303030;">${markup}</div>
         <style id="jss-server-side">${css}</style>
 
+        <div id="root" style="background-color:#303030;">${markup}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(state)}
         </script>
-           <script type="application/javascript" src=/manifest.js ></script>
-           <script type="application/javascript" src=/vendor.js ></script>
-           <script type="application/javascript" src=/app.js ></script>
+           <script type="application/javascript" src=manifest.js ></script>
+           <script type="application/javascript" src=vendor.js ></script>
+           <script type="application/javascript" src=app.js ></script>
+
         </body>
     </html>
     `;
@@ -69,8 +68,10 @@ export const requestHandler = (req, res) => {
               </MuiThemeProvider>
             </Provider>
           );
+          
           const css = styleManager.sheetsToString();
 
+          console.log('css', css);
           return res.send(renderHTML(markup, store.getState(), css));
         })
         .catch(err => res.end(err.message));

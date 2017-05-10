@@ -27,15 +27,15 @@ import Nav from './nav';
 const styles = { paddingTop: '3rem', };
 
 export default class Main extends Component {
-  componentDidMount() {
-    const jssStyles = document.getElementById('jss-server-side');
-
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }
+  // componentDidMount() {
+  //   const jssStyles = document.getElementById('jss-server-side');
+  //
+  //   if (jssStyles && jssStyles.parentNode) {
+  //     jssStyles.parentNode.removeChild(jssStyles);
+  //   }
+  // }
   render() {
-    console.log('MAINprops', this.props);
+    console.log('MAINprops', this.props, this.context);
 
     // <MuiThemeProvider theme={theme} styleManager={styleManager}>
 //       </MuiThemeProvider>

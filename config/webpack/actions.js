@@ -21,17 +21,13 @@ export const dev = (common = sharedConf({ prod: false, })) => {
 
 export const applyHotMiddleware = compiler => (app) => {
   if (process.env.NODE_ENV !== 'production') {
-    console.log('compiler.options.output.publicPath,', compiler.options.output.publicPath,);
     app.use(devMiddleware(compiler, {
       noInfo: false,
       historyApiFallback: true,
       publicPath: compiler.options.output.publicPath,
     }));
-    app.use(hotMiddleware(compiler, { dynamicPublicPath: true, }));
+    app.use(hotMiddleware(compiler));
   }
-
-  // console.log('app/ sections');
-  // console.log('app', app);
 
   return app;
 };

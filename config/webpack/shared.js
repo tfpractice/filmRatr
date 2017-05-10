@@ -2,14 +2,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import { PATHS, ROOT_PATH, } from './constants';
-console.log('PATHS.dist', PATHS);
-console.log('PATHS.dist', PATHS);
-console.log('PATHS.dist', PATHS);
-console.log('PATHS.dist', PATHS);
-console.log('PATHS.dist', PATHS);
-console.log('PATHS.dist', PATHS);
-console.log('PATHS.dist', PATHS);
-console.log('PATHS.dist', PATHS);
+
 const defEnvar = { prod: true, };
 
 export default (env = defEnvar) => ({
@@ -37,18 +30,18 @@ export default (env = defEnvar) => ({
         loaders: [ 'babel-loader', ],
       },
       { test: /\.json$/, loader: 'json-loader', },
-      {
-        test: /\.s?css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use:  [ 'css-loader', ],
-        }),
-      },
+      // {
+      //   test: /\.css$/,
+      //   loader: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use:  [ 'css-loader', ],
+      //   }),
+      // },
     ],
   },
   devtool: env.prod ? 'source-map' : 'eval',
   plugins: [
-    new ExtractTextPlugin('[name].styles.css'),
+    // new ExtractTextPlugin('[name].styles.css'),
     new webpack.EnvironmentPlugin([ 'MOVIE_DB_API_KEY', 'FILMRATR_AUTH_SECRET', ]),
     new webpack.LoaderOptionsPlugin({ minimize: true, debug: false, }),
     new webpack.DefinePlugin(

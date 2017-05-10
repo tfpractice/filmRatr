@@ -23,9 +23,18 @@ const { styleManager, theme, } = MuiThemeProvider.createDefaultContext(
 const styles = { paddingTop: '3rem', };
 
 export default class AppContainer extends Component {
+  componentDidMount() {
+    const jssStyles = document.getElementById('jss-server-side');
+
+    console.log('jssStyles', jssStyles);
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }
   render() {
     const { store, history, } = this.props;
 
+    console.log('theme', theme);
     return (
       <Provider store={store}>
         <MuiThemeProvider theme={theme} styleManager={styleManager}>
