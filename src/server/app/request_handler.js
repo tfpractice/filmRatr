@@ -13,7 +13,6 @@ export const renderHTML = (markup, state) => `
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
   </head>
       <body>
         <div id="root" style="background-color:#303030;">${markup}</div>
@@ -28,6 +27,7 @@ export const renderHTML = (markup, state) => `
     `;
 
     //           <link rel="stylesheet" href="/app.styles.css">
+//         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 
 export const requestHandler = (req, res) => {
   const store = getStore();

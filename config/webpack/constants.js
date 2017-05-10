@@ -29,7 +29,8 @@ export const BUILD_CONFIG = {
   output: { filename: '[name].[chunkhash].bundle.js', },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
-    new ExtractTextPlugin('[name].[chunkhash].styles.css'),
+
+    // new ExtractTextPlugin('[name].[chunkhash].styles.css'),
     new HtmlPlugin({ filename: 'index.html', template: PATHS.template, }),
     new HtmlPlugin({ filename: '200.html', template: PATHS.surge, }),
   ],

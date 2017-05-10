@@ -27,13 +27,13 @@ const styles = { paddingTop: '3rem', };
 export default class Main extends Component {
   
   render() {
-    console.log('this.props', this.props);
+    console.log('MAINprops', this.props);
 
     return (
       <MuiThemeProvider theme={theme} styleManager={styleManager}>
-        <Grid id="main-view" container className="App" direction={'column'}>
+        <Grid container direction={'column'}>
           <Grid item xs={12}>
-            {/* <Nav /> */}
+            <Nav />
           </Grid>
           <Grid item xs={12} style={styles}>
             {this.props.children}
