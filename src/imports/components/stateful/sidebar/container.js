@@ -1,6 +1,6 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import Menu, { MenuItem, } from 'material-ui/Menu';
 import { local, } from 'redux-fractal';
 import { uiProps, } from './state';
 

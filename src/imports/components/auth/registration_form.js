@@ -1,5 +1,5 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 import { connect, } from 'react-redux';
 import { Field, reduxForm, } from 'redux-form';
 import { TextField, } from 'redux-form-material-ui';
@@ -11,7 +11,7 @@ const baseReg = ({ handleSubmit, }) => (
     <Field name="username" component={TextField} placeholder="username" id="username" type="text" />
     <Field name="password" component={TextField} placeholder="password" id="password" type="password" />
     <Field name="email" component={TextField} placeholder="email" id="email" type="text" />
-    <FlatButton label="Register" primary type="submit" />
+    <Button label="Register" primary type="submit" />
   </form>
 );
 

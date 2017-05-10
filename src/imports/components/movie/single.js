@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import { Card, CardActions, CardHeader, CardMedia, CardText, CardTitle, } from 'material-ui/Card';
+import { Card, CardActions, CardHeader, CardMedia, CardContent, CardTitle, } from 'material-ui/Card';
 import { MovieActions, } from 'imports/actions';
 import MovieLink from './movie_link';
 
@@ -26,11 +26,11 @@ const MovieCard = ({ movie, setCurrentMovie, }) => (
       >
         <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
       </CardMedia>
-      : <CardText expandable >
+      : <CardContent expandable >
         <MovieLink movie={movie} >
           {movie.overview}
         </MovieLink>
-      </CardText>
+      </CardContent>
     }
   </Card>
 );

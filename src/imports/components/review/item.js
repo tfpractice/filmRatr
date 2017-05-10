@@ -1,9 +1,12 @@
 import React from 'react';
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import Icon from 'material-ui/Icon';
+import Button from 'material-ui/Button';
+
+// import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+// import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import IconButton from 'material-ui/IconButton';
 import { connect, } from 'react-redux';
-import { Card, CardActions, CardHeader, CardText, } from 'material-ui/Card';
+import Card, { CardActions, CardContent, CardHeader, } from 'material-ui/Card';
 import { ReviewActions, } from 'imports/actions';
 import EditReviewForm from './edit_review';
 
@@ -14,19 +17,14 @@ const ReviewCard = ({ review, deleteReview, canEdit, }) => (
   <Card>
     <CardHeader
       title={<p>{review.text} || {review.rating}</p>}
-      subtitle={<p>{review.dateAdded} </p>}
-      closeIcon={<EditIcon />}
-      actAsExpander={canEdit}
-      showExpandableButton={canEdit}
-      avatar={canEdit ?
-        <IconButton onTouchTap={() => deleteReview(review)} >
-          <DeleteIcon />
-        </IconButton> : null
+      subeader={<p>{review.dateAdded} </p>}
+      avatar={canEdit ? (<Button onTouchTap={() => deleteReview(review)} >
+        edit</Button>) : null
       }
     />
-    {canEdit && <CardText expandable >
+    {canEdit && <CardContent expandable >
       <EditReviewForm review={review} />
-    </CardText> }
+    </CardContent> }
   </Card>
   );
 

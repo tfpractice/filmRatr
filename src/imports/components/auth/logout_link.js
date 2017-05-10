@@ -1,10 +1,10 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 import { connect, } from 'react-redux';
 
 import { AuthActions, } from 'imports/actions';
 
 const LogoutLink = ({ logoutUser, }) =>
-  <FlatButton label="Logout" onClick={logoutUser} />;
+  <Button label="Logout" onClick={logoutUser} />;
 
 export default connect(null, AuthActions)(LogoutLink);
