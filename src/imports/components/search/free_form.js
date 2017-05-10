@@ -12,9 +12,9 @@ const mapStateToProps = (state, { formID, }) =>
 const IndependentForm = ({ query, search, formID, router, }) => (
   <SearchForm form={formID} onSubmit={search} />);
 
+export default connect(null, SearchActions)(((IndependentForm)));
+
   // onSubmitSuccess={(action, dispatch) => {
   //   dispatch(resetForm(formID));
   //   router.replace(`/search/${query}`);
   // }}
-
-export default connect(null, SearchActions)((ClearForm(IndependentForm)));

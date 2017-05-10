@@ -45,7 +45,6 @@ export const DEV_CONFIG = {
     new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV), }, }),
   ],

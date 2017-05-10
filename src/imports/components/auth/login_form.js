@@ -2,10 +2,10 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import { connect, } from 'react-redux';
 import { Field, } from 'redux-form';
-
-// import { resetForm, } from 'imports/utils';
 import { AuthActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';
+
+// import { resetForm, } from 'imports/utils';
 
 // import { AlertBar, } from '../stateful';
 

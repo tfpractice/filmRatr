@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import { Card, CardActions, CardHeader, CardMedia, CardContent, CardTitle, } from 'material-ui/Card';
+import Card, { CardActions, CardContent, CardHeader, CardMedia, CardTitle, } from 'material-ui/Card';
 import { MovieActions, } from 'imports/actions';
 import MovieLink from './movie_link';
 
