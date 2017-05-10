@@ -4,7 +4,24 @@ import { renderToString, } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { fetchComponentData, getRoutes, getStore, } from 'imports';
 
-export const renderHTML = (markup, state) => `
+import createPalette, { dark, } from 'material-ui/styles/palette';
+import { createMuiTheme, MuiThemeProvider, } from 'material-ui/styles';
+import { pink, teal, } from 'material-ui/styles/colors';
+
+// import Grid from 'material-ui/Grid';
+
+const palette = createPalette({
+  primary: teal,
+  accent: pink,
+  type: 'dark',
+  ...dark,
+});
+
+const { styleManager, theme, } = MuiThemeProvider.createDefaultContext(
+  { theme: createMuiTheme({ palette, }), });
+
+// const styles = { paddingTop: '3rem', };
+export const renderHTML = (markup, state, css) => `
     <!doctype html>
     <html>
       <head>
@@ -16,17 +33,19 @@ export const renderHTML = (markup, state) => `
   </head>
       <body>
         <div id="root" style="background-color:#303030;">${markup}</div>
+        <style id="jss-server-side">${css}</style>
+
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(state)}
         </script>
-           <script type="application/javascript" src=manifest.js ></script>
-           <script type="application/javascript" src=vendor.js ></script>
-           <script type="application/javascript" src=app.js ></script>
+           <script type="application/javascript" src=/manifest.js ></script>
+           <script type="application/javascript" src=/vendor.js ></script>
+           <script type="application/javascript" src=/app.js ></script>
         </body>
     </html>
     `;
 
-    //           <link rel="stylesheet" href="/app.styles.css">
+    //
 //         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 
 export const requestHandler = (req, res) => {
@@ -45,11 +64,14 @@ export const requestHandler = (req, res) => {
         .then(() => {
           const markup = renderToString(
             <Provider store={store}>
-              <RouterContext {...props} />
+              <MuiThemeProvider styleManager={styleManager} theme={theme}>
+                <RouterContext {...props} />
+              </MuiThemeProvider>
             </Provider>
           );
+          const css = styleManager.sheetsToString();
 
-          return res.send(renderHTML(markup, store.getState()));
+          return res.send(renderHTML(markup, store.getState(), css));
         })
         .catch(err => res.end(err.message));
     } else {
