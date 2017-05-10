@@ -4,7 +4,8 @@ import IconButton from 'material-ui/IconButton';
 // import IconMenu from 'material-ui/IconMenu';
 import Menu, { MenuItem, } from 'material-ui/Menu';
 
-import { NavMenu, } from 'material-ui-icons';
+// import { NavMenu, } from 'material-ui-icons';
+import NavMenu from 'material-ui-icons/Navigation';
 
 // import MenuItem from 'material-ui/MenuItem';
 // import NavMenu from 'material-ui/svg-icons/navigation/menu';

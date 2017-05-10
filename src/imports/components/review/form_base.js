@@ -4,6 +4,7 @@ import { connect, } from 'react-redux';
 import { Slider, TextField, } from 'redux-form-material-ui';
 import { Field, reduxForm, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
+import { ClearForm, renderText, } from 'imports/utils';
 
 const renderDelete = handler => rev =>
   rev && <Button secondary label="Delete" onClick={() => handler(rev)} />;
@@ -15,11 +16,11 @@ const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
       name="rating"
       component={Slider} min={1} max={5} step={1}
     />
-    <Field name="text" component={TextField} hintText="content" />
+    <Field name="text" component={renderText} hintText="content" />
     <Button primary label="Submit" type="submit" />
     {renderDelete(deleteReview)(review) }
   </form>
   );
 
 // onSubmitSuccess={resetForm('nodeCount')}
-export default connect(null, ReviewActions)(reduxForm()(ReviewForm));
+export default connect(null, ReviewActions)(ClearForm(ReviewForm));

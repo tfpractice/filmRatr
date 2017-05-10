@@ -4,6 +4,8 @@ import resetForm from './form_utils';
 import * as MovieUtils from './movie_db';
 import * as StateUtils from './store';
 
+export * from './form_utils';
+
 const API_URL =
  (typeof window === 'undefined' || process.env.NODE_ENV === 'test')
     ? process.env.BASE_URL || (`http://localhost:${process.env.PORT || 3000}/api`)

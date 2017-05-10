@@ -11,7 +11,6 @@ const MovieReviewForm = ({ createReview, formID, movie, }) => (
       form={formID}
       enableReinitialize
       onSubmit={createReview(movie)}
-      onSubmitSuccess={resetForm(formID)}
     />
   </div>);
 

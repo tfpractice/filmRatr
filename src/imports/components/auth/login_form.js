@@ -8,7 +8,6 @@ import { AuthActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';
 
 // import { AlertBar, } from '../stateful';
-import { TextField, } from 'redux-form-material-ui';
 
 const baseLogin = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
@@ -23,9 +22,7 @@ const ReduxLogin = ClearForm(baseLogin);
 const LoginForm = ({ loginUser, formID, }) => (
   <div className="row">
     <p>Login</p>
-    <ReduxLogin
-      form={formID} onSubmit={loginUser}
-    />
+    <ReduxLogin form={formID} onSubmit={loginUser} />
   </div>
 );
 
