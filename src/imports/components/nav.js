@@ -17,29 +17,35 @@ const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, });
 const mapDispatchToProps = dispatch => ({ toggle: bindActionCreators(toggle, dispatch), });
 
 const Nav = ({ loggedIn, toggle, }) => (
-  <Grid container justify="space-between" direction="row" align="center">
-    <AppBar>
-      <Toolbar>
-        <IconButton contrast>
-          <MenuIcon />
-        </IconButton>
-        <AuthMenu />
-
-        <Text type="headline" colorInherit>
-          <Link to="/" >FilmRatr</Link>
-        </Text>
+  <AppBar>
+    <Toolbar>
+      <Grid container justify="space-between" direction="row" align="center">
+        <Grid item>
+          <Grid container direction="row" align="center">
+            <IconButton contrast>
+              <MenuIcon />
+            </IconButton>
+            <Text type="headline" colorInherit>
+              <Link to="/" >FilmRatr</Link>
+            </Text>
+          </Grid>
+        </Grid>
         <Grid item >
           <IndependentSearch formID="navSearchForm" />
         </Grid>
+        <AuthMenu />
+
+        {/* <Grid item> */}
         <SideBar>
           {loggedIn && <LogoutLink />}
           {!loggedIn && <LoginForm formID={'navBarLogin'} />}
           {!loggedIn && <RegisterForm formID={'navBarRegister'} />}
         </SideBar>
+        {/* </Grid> */}
+      </Grid>
 
-      </Toolbar>
-    </AppBar>
-  </Grid>
+    </Toolbar>
+  </AppBar>
 
 );
 

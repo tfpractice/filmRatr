@@ -8,7 +8,7 @@ export default class Main extends Component {
 
   render() {
     return (
-      <Grid container direction="column" >
+      <Grid container direction="column" align="stretch">
         <Grid item xs={12}>
           <Nav />
         </Grid>
