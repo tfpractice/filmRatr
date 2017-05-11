@@ -5,6 +5,7 @@ import * as MovieUtils from './movie_db';
 import * as StateUtils from './store';
 
 export * from './form_utils';
+export * from './themer';
 
 const API_URL =
  (typeof window === 'undefined' || process.env.NODE_ENV === 'test')

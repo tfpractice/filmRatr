@@ -4,19 +4,9 @@ import { renderToString, } from 'react-dom/server';
 import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { fetchComponentData, getRoutes, getStore, } from 'imports';
 
-import createPalette, { dark, } from 'material-ui/styles/palette';
-import { createMuiTheme, MuiThemeProvider, } from 'material-ui/styles';
-import { pink, teal, } from 'material-ui/styles/colors';
+import { MuiThemeProvider, } from 'material-ui/styles';
 
-const palette = createPalette({
-  primary: teal,
-  accent: pink,
-  type: 'dark',
-  ...dark,
-});
-
-const { styleManager, theme, } = MuiThemeProvider.createDefaultContext(
-  { theme: createMuiTheme({ palette, }), });
+import { styleManager, theme, } from 'imports/utils';
   
 const makeSrc = path => `<script type="application/javascript" src=${path}></script>`;
 
