@@ -26,13 +26,8 @@ export const applyHotMiddleware = compiler => (app) => {
     // console.log('compiler', compiler);
     console.log('compiler.options.output.publicPath', compiler.options);
     app.use(devMiddleware(compiler, {
-      // noInfo: false,
       historyApiFallback: true,
-      
-      hot: true,
-
-      // index: 'index.html',
-      
+      lazy: false,
       stats: { colors: true, },
       serverSideRender: true,
       publicPath: compiler.options.output.publicPath,

@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch =>
 
 const SearchResults = ({ results, query, actions, router, }) => (
   <div className="search-list">
-    <h1>{query ? `Showing Results for ${query}` : 'Enter Movie Title' }</h1>
+    <h1>{query ? `Showing SEARCH Results for ${query}` : 'Enter Movie Title' }</h1>
     <FreeForm formID={'searchRouteForm'} />
     <div className="searchResults">
       {results.map(r => <MovieCard key={r.id} movie={r} />)}

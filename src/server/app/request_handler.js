@@ -85,7 +85,8 @@ export const requestHandler = (req, res) => {
           const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
 
           const css = styleManager.sheetsToString();
-          
+
+          console.log('[].concat(chunks.app)', [].concat(chunks.app));
           return res.send(renderHTML(markup, store.getState(), css, chunks));
         })
         .catch(err => res.end(err.message));
