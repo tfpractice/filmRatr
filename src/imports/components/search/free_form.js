@@ -12,8 +12,6 @@ import SearchForm from './form';
 //    ({ query: formValueSelector(formID)(state, 'query'), });
 
 const IndependentForm = ({ query, search, formID, router, }) => (
-  <SearchForm
-    form={formID} onSubmit={search}
-  />);
+  <SearchForm form={formID} onSubmit={search} />);
 
 export default connect(null, SearchActions)(((IndependentForm)));

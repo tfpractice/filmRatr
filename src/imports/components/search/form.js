@@ -4,11 +4,14 @@ import { Field, reduxForm, } from 'redux-form';
 import { connect, } from 'react-redux';
 import { TextField, } from 'redux-form-material-ui';
 import { ClearForm, renderText, } from 'imports/utils';
+import { FormGroup, } from 'material-ui/Form';
 
 const SearchForm = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
-    <Field name="query" component={renderText} />
-    <Button primary type="submit" > REALLY REALLY!!! HOT</Button>
+    <FormGroup row>
+      <Field label="movie title" name="query" component={renderText} />
+      <Button secondary contrast type="submit"> Search</Button>
+    </FormGroup>
   </form>
   );
 

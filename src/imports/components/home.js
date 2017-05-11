@@ -3,13 +3,14 @@ import { connect, } from 'react-redux';
 import { MovieActions, } from 'imports/actions';
 import { SearchResults, } from './search';
 import { TopTen, } from './movie';
+import Grid from 'material-ui/Grid';
 
-const Home = ({ children, dispatch, ...rest }, context) => (
-  <div id="home">
+const Home = ({ children, dispatch, ...rest }) => (
+  <Grid container direction="column" id="home">
     <h1>FilmRatr </h1>
     <SearchResults />
     <TopTen />
-  </div>
+  </Grid>
   );
 
 Home.fetchData = [ MovieActions.getByFreq, ];

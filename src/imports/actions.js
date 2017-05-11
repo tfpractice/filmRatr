@@ -4,5 +4,3 @@ export const AuthActions = Auth.actions;
 export const MovieActions = Movies.actions;
 export const ReviewActions = Reviews.actions;
 export const SearchActions = Search.actions;
-
-// export { AuthActions, MovieActions, SearchActions, ReviewActions, };

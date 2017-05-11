@@ -8,11 +8,11 @@ export default class Main extends Component {
 
   render() {
     return (
-      <Grid container direction={'column'}>
+      <Grid container direction="column" >
         <Grid item xs={12}>
           <Nav />
         </Grid>
-        <Grid item xs={12} style={styles}>
+        <Grid item xs={12} style={styles} >
           {this.props.children}
         </Grid>
       </Grid>

@@ -5,24 +5,24 @@ import { Field, } from 'redux-form';
 import { AuthActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';
 import Grid from 'material-ui/Grid';
+import { FormGroup, } from 'material-ui/Form';
 
 // import { AlertBar, } from '../stateful';
 
 const baseLogin = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
-    <Field name="username" component={renderText} placeholder="username" type="text" />
-    <Field name="password" component={renderText} placeholder="password" type="password" />
-    <Button label="Login" primary type="submit" />
+    <FormGroup row>
+      <Field name="username" label="username" component={renderText} type="text" />
+      <Field name="password" label="password" component={renderText} type="password" />
+      <Button primary type="submit">Login</Button>
+    </FormGroup>
     {/* <AlertBar message={'you logged in'} /> */}
   </form>
 );
 const ReduxLogin = ClearForm(baseLogin);
 
 const LoginForm = ({ loginUser, formID, }) => (
-  <Grid container>
-    <p>Login</p>
-    <ReduxLogin form={formID} onSubmit={loginUser} />
-  </Grid>
+  <ReduxLogin form={formID} onSubmit={loginUser} />
 );
 
 export default connect(null, AuthActions)(LoginForm);
