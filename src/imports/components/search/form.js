@@ -5,10 +5,10 @@ import { connect, } from 'react-redux';
 import { TextField, } from 'redux-form-material-ui';
 import { ClearForm, renderText, } from 'imports/utils';
 
-const SearchForm = ({ handleSubmit, }, context) => (
+const SearchForm = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
-    <Field name="query" component={renderText} hintText="Title" />
-    <Button primary label="Submit" type="submit" />
+    <Field name="query" component={renderText} />
+    <Button primary type="submit" > REALLY REALLY!!! HOT</Button>
   </form>
   );
 

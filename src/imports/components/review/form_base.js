@@ -16,7 +16,7 @@ const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
       name="rating"
       component={Slider} min={1} max={5} step={1}
     />
-    <Field name="text" component={renderText} hintText="content" />
+    <Field name="text" component={renderText} />
     <Button primary label="Submit" type="submit" />
     {renderDelete(deleteReview)(review) }
   </form>

@@ -18,8 +18,7 @@ const palette = createPalette({
 const { styleManager, theme, } = MuiThemeProvider.createDefaultContext(
   { theme: createMuiTheme({ palette, }), });
 
-// const styles = { paddingTop: '3rem', };
-export const renderHTML = (markup, state, css) => `
+export const renderHTML = (markup, state, css, chunks = {}) => `
     <!doctype html>
     <html>
       <head>
@@ -28,31 +27,45 @@ export const renderHTML = (markup, state, css) => `
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>
-      <body>
-        <style id="jss-server-side">${css}</style>
-
-        <div id="root" style="background-color:#303030;">${markup}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(state)}
         </script>
-           <script type="application/javascript" src=manifest.js ></script>
-           <script type="application/javascript" src=vendor.js ></script>
-           <script type="application/javascript" src=app.js ></script>
-
+  </head>
+      <body>
+        <style id="jss-server-side">${css}</style>
+        <div id="root" style="background-color:#303030;">${markup}</div>
+            ${[].concat(chunks.manifest).map(path =>
+              `<script type="application/javascript" src=${path} ></script>`)
+            }
+            ${[].concat(chunks.vendor).map(path =>
+              `<script type="application/javascript" src=${path} ></script>`)
+            }
+            ${[].concat(chunks.app).map(path =>
+              `<script type="application/javascript" src=${path} ></script>`)
+            }
         </body>
     </html>
     `;
 
-    //
-//         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    // ${[].concat(chunks.manifest).map(path =>
+    //   `<script type="application/javascript" src=${path} ></script>`)
+    // }
+    // ${[].concat(chunks.vendor).map(path =>
+    //   `<script type="application/javascript" src=${path} ></script>`)
+    // }
+    // ${[].concat(chunks.app).map(path =>
+    //   `<script type="application/javascript" src=${path} ></script>`)
+    // }
+    // <script type="application/javascript" src=manifest.js ></script>
+    // <script type="application/javascript" src=vendor.js ></script>
+    // <script type="application/javascript" src=app.js ></script>
 
 export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes(store);
   const history = createMemoryHistory(req.url);
   const location = history.createLocation(req.url);
-
+  
   match({ routes, history, location, }, (error, redirectLocation, props) => {
     if (error) {
       res.status(500).send(error.message);
@@ -68,11 +81,12 @@ export const requestHandler = (req, res) => {
               </MuiThemeProvider>
             </Provider>
           );
-          
-          const css = styleManager.sheetsToString();
 
-          console.log('css', css);
-          return res.send(renderHTML(markup, store.getState(), css));
+          const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
+
+          const css = styleManager.sheetsToString();
+          
+          return res.send(renderHTML(markup, store.getState(), css, chunks));
         })
         .catch(err => res.end(err.message));
     } else {

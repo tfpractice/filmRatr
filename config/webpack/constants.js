@@ -40,15 +40,18 @@ export const DEV_CONFIG = {
     app: [ PATHS.RHLPatch, PATHS.hotMiddleware, PATHS.app, ],
     vendor: [ PATHS.RHLPatch, PATHS.hotMiddleware, ...vendor, ],
   },
-  output: { filename: '[name].bundle.js', },
+  output: { },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+
     new webpack.NoEmitOnErrorsPlugin(),
 
-    // new HtmlPlugin({ filename: 'index.html', template: PATHS.template, inject: true, }),
-    // new HtmlPlugin({ filename: '200.html', template: PATHS.surge, inject: true, }),
+    //
+    // new HtmlPlugin({ filename: 'index.html', template: PATHS.template, }),
+
+    // new HtmlPlugin({ filename: '200.html', template: PATHS.surge, }),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV), }, }),
   ],
 };

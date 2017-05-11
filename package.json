@@ -60,6 +60,7 @@
     "express": "^4.15.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.15.2",
+    "fenugreek-collections": "^1.1.1",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.3",
     "mongoose": "^4.9.8",

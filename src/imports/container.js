@@ -4,7 +4,6 @@ import { Router, } from 'react-router';
 import createPalette, { dark, } from 'material-ui/styles/palette';
 import { createMuiTheme, MuiThemeProvider, } from 'material-ui/styles';
 import { pink, teal, } from 'material-ui/styles/colors';
-import Grid from 'material-ui/Grid';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getRoutes from './routes';
 
@@ -20,13 +19,10 @@ const palette = createPalette({
 const { styleManager, theme, } = MuiThemeProvider.createDefaultContext(
   { theme: createMuiTheme({ palette, }), });
 
-const styles = { paddingTop: '3rem', };
-
 export default class AppContainer extends Component {
   componentDidMount() {
     const jssStyles = document.getElementById('jss-server-side');
 
-    console.log('jssStyles', jssStyles);
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
@@ -34,7 +30,6 @@ export default class AppContainer extends Component {
   render() {
     const { store, history, } = this.props;
 
-    console.log('theme', theme);
     return (
       <Provider store={store}>
         <MuiThemeProvider theme={theme} styleManager={styleManager}>
