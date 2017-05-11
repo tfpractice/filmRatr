@@ -12,10 +12,10 @@ const renderDelete = handler => rev =>
 const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
   <form onSubmit={handleSubmit} >
     <Field
-      format={null}
       name="rating"
       label="rating"
-      component={Slider} min={1} max={5} step={1}
+      type="range"
+      component="input" min={1} max={5} step={1}
     />
     <Field name="text" label="content" component={renderText} />
     <Button primary type="submit" > Submit Review </Button>

@@ -17,6 +17,7 @@ export const renderHTML = (markup, state, css, chunks = {}) => `
         <title>FilmRatr</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script>
@@ -24,8 +25,8 @@ export const renderHTML = (markup, state, css, chunks = {}) => `
         </script>
         <style id="jss-server-side">${css}</style>
   </head>
-      <body>
-        <div id="root" style="background-color:#303030;">${markup}</div>
+      <body style="background-color:#424242;">
+        <div id="root">${markup}</div>
             ${[].concat(chunks.manifest).map(makeSrc)}
             ${[].concat(chunks.vendor).map(makeSrc)}
             ${[].concat(chunks.app).map(makeSrc)}

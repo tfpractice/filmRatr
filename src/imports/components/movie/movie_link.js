@@ -4,8 +4,8 @@ import { Link, } from 'react-router';
 import { MovieActions, } from 'imports/actions';
 
 const MovieLink = ({ children, movie, setCurrentMovie, }) =>
-  <Link to={`/movies/${movie.id}`} onClick={() => setCurrentMovie(movie)} >
+  (<Link to={`movies/${movie.id}`} onClick={() => setCurrentMovie(movie)} >
     {children}
-  </Link>;
+  </Link>);
 
 export default connect(null, MovieActions)(MovieLink);
