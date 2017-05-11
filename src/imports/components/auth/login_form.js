@@ -4,8 +4,7 @@ import { connect, } from 'react-redux';
 import { Field, } from 'redux-form';
 import { AuthActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';
-
-// import { resetForm, } from 'imports/utils';
+import Grid from 'material-ui/Grid';
 
 // import { AlertBar, } from '../stateful';
 
@@ -20,10 +19,10 @@ const baseLogin = ({ handleSubmit, }) => (
 const ReduxLogin = ClearForm(baseLogin);
 
 const LoginForm = ({ loginUser, formID, }) => (
-  <div className="row">
+  <Grid container>
     <p>Login</p>
     <ReduxLogin form={formID} onSubmit={loginUser} />
-  </div>
+  </Grid>
 );
 
 export default connect(null, AuthActions)(LoginForm);
