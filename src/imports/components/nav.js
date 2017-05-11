@@ -25,9 +25,11 @@ const Nav = ({ loggedIn, toggle, }) => (
             <IconButton contrast>
               <MenuIcon />
             </IconButton>
-            <Text type="headline" colorInherit>
-              <Link to="/" >FilmRatr</Link>
+            <Link to="/" >
+              <Text type="headline" secondary >
+              FilmRatr
             </Text>
+            </Link>
           </Grid>
         </Grid>
         <Grid item >

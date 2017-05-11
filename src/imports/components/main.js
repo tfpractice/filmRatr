@@ -10,7 +10,7 @@ export default class Main extends Component {
     return (
       <Grid container justify="center" style={styles} >
         <Nav />
-        <Grid item >
+        <Grid item sm={12}>
           {this.props.children}
         </Grid>
       </Grid>

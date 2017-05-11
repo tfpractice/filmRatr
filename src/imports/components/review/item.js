@@ -16,7 +16,7 @@ const ReviewCard = ({ review, deleteReview, canEdit, }) => (
   <Card>
     <CardHeader
       title={<p>{review.text} || {review.rating}</p>}
-      subeader={<p>{review.dateAdded} </p>}
+      subheader={<p>{review.dateAdded} </p>}
       avatar={canEdit ? (<Button onTouchTap={() => deleteReview(review)} >
       edit</Button>) : null
       }
