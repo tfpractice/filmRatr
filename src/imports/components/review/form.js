@@ -7,11 +7,7 @@ import { ReviewActions, } from 'imports/actions';
 const MovieReviewForm = ({ createReview, formID, movie, }) => (
   <div>
     <p>{`Create Review for ${movie.title}`} </p>
-    <ReviewForm
-      form={formID}
-      enableReinitialize
-      onSubmit={createReview(movie)}
-    />
+    <ReviewForm form={formID} onSubmit={createReview(movie)} />
   </div>);
 
 export default connect(null, ReviewActions)(MovieReviewForm);
