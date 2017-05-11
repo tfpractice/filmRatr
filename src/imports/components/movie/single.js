@@ -4,27 +4,26 @@ import Card, { CardActions, CardContent, CardHeader, CardMedia, CardTitle, } fro
 import { MovieActions, } from 'imports/actions';
 import MovieLink from './movie_link';
 import Collapse from 'material-ui/transitions/Collapse';
+
+const imgBase = 'http://image.tmdb.org/t/p/w300/';
+const hasImage = movie => movie.backdrop_path || movie.poster_path;
+const movieImg = movie => movie.backdrop_path ? movie.backdrop_path : movie.poster_path;
+const imgUrl = movie => hasImage(movie) ? `${imgBase}${movieImg(movie)}` : `http://placehold.it/300x200?text=${movie.title}`;
+
 const MovieCard = ({ movie, setCurrentMovie, }) => (
   <Card raised >
     <CardHeader
-      title={movie.title}
-      subtitle={<p>{movie.release_date} <em>{movie.id}</em> </p>}
+      title={`${movie.title} || ${movie.release_date} || ${movie.id}`}
+      subheader={<em>{movie.id}</em>}
     />
-    {movie.backdrop_path ?
-      <CardMedia >
-
-        <MovieLink movie={movie}>
-          
-          <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
-
-        </MovieLink>
-      </CardMedia>
-      : <CardContent >
-        <MovieLink movie={movie} >
-          {movie.overview}
-        </MovieLink>
-      </CardContent>
-    }
+    <CardMedia >
+      <MovieLink movie={movie}>
+        {<img src={`${imgUrl(movie)}`} />}
+      </MovieLink>
+    </CardMedia>
+    <CardContent >
+      {movie.overview}
+    </CardContent>
   </Card>
 );
 
