@@ -23,7 +23,7 @@ export const PATHS = {
   hotMiddleware: 'webpack-hot-middleware/client',
   RHLPatch: 'react-hot-loader/patch',
 };
-
+console.log('PATHS', PATHS);
 export const BUILD_CONFIG = {
   entry: { vendor, },
   output: { filename: '[name].[chunkhash].bundle.js', },
@@ -42,16 +42,12 @@ export const DEV_CONFIG = {
   },
   output: { },
   plugins: [
+    // new HtmlPlugin({ filename: 'index.html', template: PATHS.template, }),
+    // new HtmlPlugin({ filename: '200.html', template: PATHS.surge, }),
     new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-
     new webpack.NoEmitOnErrorsPlugin(),
-
-    //
-    // new HtmlPlugin({ filename: 'index.html', template: PATHS.template, }),
-
-    // new HtmlPlugin({ filename: '200.html', template: PATHS.surge, }),
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV), }, }),
   ],
 };

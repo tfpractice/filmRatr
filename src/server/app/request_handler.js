@@ -17,6 +17,8 @@ const palette = createPalette({
 
 const { styleManager, theme, } = MuiThemeProvider.createDefaultContext(
   { theme: createMuiTheme({ palette, }), });
+  
+const makeSrc = path => `<script type="application/javascript" src=${path}></script>`;
 
 export const renderHTML = (markup, state, css, chunks = {}) => `
     <!doctype html>
@@ -30,35 +32,16 @@ export const renderHTML = (markup, state, css, chunks = {}) => `
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(state)}
         </script>
+        <style id="jss-server-side">${css}</style>
   </head>
       <body>
-        <style id="jss-server-side">${css}</style>
         <div id="root" style="background-color:#303030;">${markup}</div>
-            ${[].concat(chunks.manifest).map(path =>
-              `<script type="application/javascript" src=${path} ></script>`)
-            }
-            ${[].concat(chunks.vendor).map(path =>
-              `<script type="application/javascript" src=${path} ></script>`)
-            }
-            ${[].concat(chunks.app).map(path =>
-              `<script type="application/javascript" src=${path} ></script>`)
-            }
+            ${[].concat(chunks.manifest).map(makeSrc)}
+            ${[].concat(chunks.vendor).map(makeSrc)}
+            ${[].concat(chunks.app).map(makeSrc)}
         </body>
     </html>
     `;
-
-    // ${[].concat(chunks.manifest).map(path =>
-    //   `<script type="application/javascript" src=${path} ></script>`)
-    // }
-    // ${[].concat(chunks.vendor).map(path =>
-    //   `<script type="application/javascript" src=${path} ></script>`)
-    // }
-    // ${[].concat(chunks.app).map(path =>
-    //   `<script type="application/javascript" src=${path} ></script>`)
-    // }
-    // <script type="application/javascript" src=manifest.js ></script>
-    // <script type="application/javascript" src=vendor.js ></script>
-    // <script type="application/javascript" src=app.js ></script>
 
 export const requestHandler = (req, res) => {
   const store = getStore();
@@ -74,6 +57,8 @@ export const requestHandler = (req, res) => {
     } else if (props) {
       fetchComponentData(store.dispatch, props.components, props.params)
         .then(() => {
+          const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
+          const css = styleManager.sheetsToString();
           const markup = renderToString(
             <Provider store={store}>
               <MuiThemeProvider styleManager={styleManager} theme={theme}>
@@ -81,12 +66,7 @@ export const requestHandler = (req, res) => {
               </MuiThemeProvider>
             </Provider>
           );
-
-          const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
-
-          const css = styleManager.sheetsToString();
-
-          console.log('[].concat(chunks.app)', [].concat(chunks.app));
+      
           return res.send(renderHTML(markup, store.getState(), css, chunks));
         })
         .catch(err => res.end(err.message));

@@ -8,8 +8,6 @@ const defEnvar = { prod: true, };
 export default (env = defEnvar) => ({
   context: ROOT_PATH,
   entry: { app: PATHS.app, },
-
-  // devServer: { contentBase: PATHS.dist, hot: true, },
   resolve: {
     modules: [ 'node_modules', ],
     extensions: [ '.js', '.jsx', '.json', ],
@@ -21,7 +19,6 @@ export default (env = defEnvar) => ({
   },
   output: {
     path:      PATHS.dist,
-    pathinfo: true,
     filename:   '[name].bundle.js',
     publicPath: '/',
   },
