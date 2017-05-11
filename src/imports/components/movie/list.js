@@ -1,10 +1,11 @@
 import React from 'react';
 import { MovieCard, } from '../movie';
+import Grid from 'material-ui/Grid';
 
 const MovieList = ({ movies, }) => (
-  <div className="movie-list">
+  <Grid className="movie-list">
     { movies.map(m => <MovieCard key={m.id} movie={m} />)}
-  </div>
+  </Grid>
   );
 
 export default (MovieList);
