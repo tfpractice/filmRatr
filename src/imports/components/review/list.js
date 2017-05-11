@@ -10,9 +10,11 @@ const mapStateToProps = ({ reviews, }, { movie, }) =>
 ({ reviews: reviews.data.filter(r => r.movie_id == movie.id), });
 
 const ReviewList = ({ movie, reviews, }) => (
-  <Grid container className="Review-list">
-    <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
-    <Grid className="ReviewList">
+  <Grid container justify="center" direction="column" className="Review-list">
+    <Grid item xs={12}>
+      <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
+    </Grid>
+    <Grid item xs={12} className="ReviewList">
       {reviews.map(r => (<div>
         <ReviewCard key={r.id} review={r} />
         <Divider />
