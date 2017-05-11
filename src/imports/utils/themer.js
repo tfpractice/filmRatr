@@ -1,13 +1,7 @@
-import createPalette, { dark, } from 'material-ui/styles/palette';
+import createPalette from 'material-ui/styles/palette';
 import { createMuiTheme, MuiThemeProvider, } from 'material-ui/styles';
 import { pink, teal, } from 'material-ui/styles/colors';
-
-const palette = createPalette({
-  primary: teal,
-  accent: pink,
-  type: 'dark',
-  ...dark,
-});
+const palette = createPalette({ primary: teal, accent: pink, type: 'dark', });
 
 const { styleManager, theme, } = MuiThemeProvider.createDefaultContext(
   { theme: createMuiTheme({ palette, }), });
