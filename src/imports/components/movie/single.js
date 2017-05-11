@@ -14,10 +14,7 @@ const MovieCard = ({ movie, setCurrentMovie, }) => (
       <CardMedia >
 
         <MovieLink movie={movie}>
-          {/* <CardTitle
-            title={movie.title}
-            subtitle={<p></p>}
-          /> */}
+          
           <img src={`http://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} />
 
         </MovieLink>
