@@ -19,6 +19,11 @@ export default class Main extends Component {
         <Nav />
         <Grid item sm={12}>
           {this.props.children}
+          {/* <Switch>
+            <Route exact path="/" component={Main} />
+            <Route path="/movies/:movie_id" component={MovieView} />
+            <Route path="/search(*:query)" component={SearchResults} />
+          </Switch> */}
         </Grid>
       </Grid>
                 
