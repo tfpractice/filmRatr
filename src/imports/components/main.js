@@ -6,6 +6,13 @@ import Nav from './nav';
 const styles = { paddingTop: '5rem', };
 
 export default class Main extends Component {
+  // componentWillMount() {
+  //   const jssStyles = document.getElementById('jss-server-side');
+  //
+  //   if (jssStyles && jssStyles.parentNode) {
+  //     jssStyles.parentNode.removeChild(jssStyles);
+  //   }
+  // }
   render() {
     return (
       <Grid container justify="center" style={styles} >

@@ -5,7 +5,8 @@ import Text from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
-import { Link, } from 'react-router';
+
+import { Link, } from 'react-router-dom';
 import { AuthMenu, LoginForm, LogoutLink, RegisterForm, } from './auth';
 import { IndependentSearch, } from './search';
 import { SideBar, SideBarActions, } from './stateful';
@@ -27,8 +28,8 @@ const Nav = ({ loggedIn, toggle, }) => (
             </IconButton>
             <Link to="/" >
               <Text type="headline" secondary >
-              FilmRatr
-            </Text>
+                FilmRatr
+              </Text>
             </Link>
           </Grid>
         </Grid>

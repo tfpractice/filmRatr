@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'material-ui/Button';
 import { connect, } from 'react-redux';
-import { Slider, TextField, } from 'redux-form-material-ui';
 import { Field, reduxForm, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';

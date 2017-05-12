@@ -1,14 +1,14 @@
 import React, { Component, } from 'react';
 import { Provider, } from 'react-redux';
-import { Router, } from 'react-router';
+import { BrowserRouter, } from 'react-router-dom';
 import { MuiThemeProvider, } from 'material-ui/styles';
 import { styleManager, theme, } from 'imports/utils';
 import getRoutes from './routes';
 
 export default class AppContainer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const jssStyles = document.getElementById('jss-server-side');
-
+  
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
@@ -19,7 +19,9 @@ export default class AppContainer extends Component {
     return (
       <Provider store={store}>
         <MuiThemeProvider theme={theme} styleManager={styleManager}>
-          <Router routes={getRoutes(store)} history={history} />
+          <BrowserRouter>
+            {getRoutes(store)}
+          </BrowserRouter>
         </MuiThemeProvider>
       </Provider>
     );

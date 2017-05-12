@@ -23,7 +23,7 @@ export const PATHS = {
   hotMiddleware: 'webpack-hot-middleware/client',
   RHLPatch: 'react-hot-loader/patch',
 };
-console.log('PATHS', PATHS);
+
 export const BUILD_CONFIG = {
   entry: { vendor, },
   output: { filename: '[name].[chunkhash].bundle.js', },

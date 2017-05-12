@@ -3,7 +3,6 @@ import Button from 'material-ui/Button';
 import { connect, } from 'react-redux';
 import { Field, reduxForm, } from 'redux-form';
 
-// import { TextField, } from 'redux-form-material-ui';
 import { resetForm, } from 'imports/utils';
 import { AuthActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';
