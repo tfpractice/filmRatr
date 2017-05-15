@@ -1,15 +1,13 @@
 import React from 'react';
 import { Provider, } from 'react-redux';
 import { renderToString, } from 'react-dom/server';
-
-// import { createMemoryHistory, match, RouterContext, } from 'react-router';
 import { AppContainer, getRoutes, getStore, } from 'imports';
 import { StaticRouter, } from 'react-router';
 
 import { MuiThemeProvider, } from 'material-ui/styles';
 
 import { styleManager, theme, } from 'imports/utils';
-
+import { Main, } from 'imports/components';
 const makeSrc = path => `<script type="application/javascript" src=${path}></script>`;
 
 export const renderHTML = (markup, state, css, chunks = {}) => `
@@ -61,8 +59,7 @@ export const requestHandler = (req, res) => {
       <Provider store={store}>
         <MuiThemeProvider styleManager={styleManager} theme={theme}>
           <StaticRouter location={req.url} context={context} >
-            {/* <AppContainer store={store} /> */}
-            {routes}
+            <Main />
           </StaticRouter>
         </MuiThemeProvider>
       </Provider>
