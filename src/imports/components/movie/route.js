@@ -7,20 +7,28 @@ import MovieView from './view';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 
-const MovieRoute = ({ children, dispatch, match, ...rest }) => {
-  console.log('children, rest,match', children, rest, match);
-  return (
-    <Grid container direction="column" align="center" className="MovieRouteDiv" id="MovieRoute">
-      <Grid item>
-        <Text type="display1">I am the movie route</Text>
-      </Grid>
-      <Grid item>
-        <Route exact path={`${match.url}`} component={TopTen} />
-        <Route path={`${match.url}/:movie_id`} component={MovieView} />
-      </Grid>
-    </Grid>
+const MovieRoute = ({ children, dispatch, match, ...rest }) =>
+
+  // console.log('children, rest,match', children, rest, match);
+   (
+     <Grid container direction="column" align="center" className="MovieRouteDiv" id="MovieRoute">
+       <Grid item>
+         <Text type="display1">I am the movie route</Text>
+       </Grid>
+       <Grid item>
+         <Route
+           exact path={`${match.url}`} component={TopTen} loadData={(...args) => {
+             console.log('loadData args', args);
+           }}
+         />
+         <Route
+           path={`${match.url}/:movie_id`} component={MovieView} loadData={(...args) => {
+             console.log('loadData args', args);
+           }}
+         />
+       </Grid>
+     </Grid>
   );
-};
 
 MovieRoute.fetchData = [ MovieActions.getByFreq, ];
 

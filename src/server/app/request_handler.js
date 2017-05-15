@@ -3,6 +3,7 @@ import { Provider, } from 'react-redux';
 import { renderToString, } from 'react-dom/server';
 import { AppContainer, getRoutes, getStore, } from 'imports';
 import { StaticRouter, } from 'react-router';
+import { matchPath, } from 'react-router-dom';
 
 import { MuiThemeProvider, } from 'material-ui/styles';
 
@@ -43,10 +44,21 @@ export const requestHandler = (req, res) => {
   const context = {};
   
   // match({ routes, history, location, }, (error, redirectLocation, props) => {
-  
+  const mPath = matchPath(req.url, { path: '/movies', });
+
+  console.log('===========+++++++==========');
+  console.log('===========+++++++==========');
+
+  console.log('req.url', req.url);
+  console.log('mPath', mPath);
+  console.log('===========+++++++==========');
+
+  console.log('===========+++++++==========');
+
   // if (context.url) {
   //   res.status(500).send(error.message);
   // }
+
   if (context.url) {
     res.redirect(302);
   } else {

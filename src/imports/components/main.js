@@ -21,14 +21,18 @@ export default class Main extends Component {
   //   }
   // }
   render() {
-    console.log('this.props.match', this.props);
+    // console.log('this.props.match', this.props);
     return (
       <Grid container justify="center" style={styles} >
         <Nav />
         <Grid item sm={12}>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/movies" component={MovieRoute} />
+            <Route
+              path="/movies" component={MovieRoute} loadData={(...args) => {
+                console.log('loadData args', args);
+              }}
+            />
             <Route path="/movies/:movie_id" component={MovieView} />
             <Route path="/search/:query" component={SearchResults} />
           </Switch>

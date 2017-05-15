@@ -12,14 +12,17 @@ import SearchForm from './form';
 //    ({ query: formValueSelector(formID)(state, 'query'), });
 
 const IndependentForm = ({ formID, search, history, ...props }) => {
-  console.log('IndependentForm props', props);
-  console.log('history', history);
+  // console.log('IndependentForm props', props);
+  // console.log('history', history);
+  const b = 0;
 
   // query, search, router,
+
   return (
     <SearchForm
       form={formID} onSubmit={(q, ...args) => {
         console.log('args', q, args);
+
         search(q).then((r) => {
           console.log('promise res', r);
           console.log('q.query', q.query);
