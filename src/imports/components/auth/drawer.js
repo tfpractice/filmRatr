@@ -68,7 +68,7 @@ class Dash extends Component {
           { loggedIn && <Text secondary align="center" type="headline">
             {`Welcome, ${user.username}`}
           </Text>}
-
+          
         </Grid>
         <Grid item>
 
