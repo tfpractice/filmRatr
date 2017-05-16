@@ -7,11 +7,14 @@ import { SideBarActions, } from '../stateful';
 const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, });
 
 const AuthMenu = ({ loggedIn, toggle, ...props }) => {
-  console.log('AuthMenu props', props);
+  console.log('AuthMenu props', props, loggedIn, toggle);
   return (
     <Menu {...props} >
       <IconButton><NavMenu /></IconButton>
       <NavMenu />
+      <h1>IA M THE AUTH MEU</h1>
+      <MenuItem onClick={toggle}>Login</MenuItem>
+      <MenuItem onClick={toggle}>Register</MenuItem>
       {loggedIn && <MenuItem onClick={toggle}>Logout</MenuItem> }
       {!loggedIn && <MenuItem onClick={toggle}>Login</MenuItem> }
       {!loggedIn && <MenuItem onClick={toggle}>Register</MenuItem> }

@@ -23,9 +23,9 @@ const Nav = ({ loggedIn, toggle, }) => (
       <Grid container justify="space-between" direction="row" align="center">
         <Grid item>
           <Grid container direction="row" align="center">
-            <IconButton contrast>
-              <MenuIcon />
-            </IconButton>
+            <Grid item >
+              <AuthMenu />
+            </Grid>
             <Link to="/" >
               <Text type="headline" secondary >
                 FilmRatr
@@ -36,15 +36,7 @@ const Nav = ({ loggedIn, toggle, }) => (
         <Grid item >
           <IndependentSearch formID="navSearchForm" />
         </Grid>
-        <AuthMenu />
 
-        {/* <Grid item> */}
-        <SideBar>
-          {loggedIn && <LogoutLink />}
-          {!loggedIn && <LoginForm formID={'navBarLogin'} />}
-          {!loggedIn && <RegisterForm formID={'navBarRegister'} />}
-        </SideBar>
-        {/* </Grid> */}
       </Grid>
 
     </Toolbar>
