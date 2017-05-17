@@ -9,9 +9,10 @@ const movies = {
  path: '/movies',
  component: MovieRoute,
  routes: [
-   { path: '/movies/:movie_id', component: MovieView, },
-   { path: '/movies/top', component: TopTen, },
+   { path: '/movies/:movie_id', component: MovieView, loadData: MovieView.fetchData, },
+   { path: '/movies/top', component: TopTen, loadData: MovieRoute.fetchData, },
  ],
+ loadData: MovieRoute.fetchData,
 };
 
 const home = {
@@ -22,11 +23,12 @@ const home = {
 };
 
 const rootRoute = {
- path: '/',
  component: Main,
+ exact: true,
  routes: [
-   search, home, movies,
+   movies, search, home,
  ],
+ loadData: MovieRoute.fetchData,
 };
 const routes = [ rootRoute, ];
 

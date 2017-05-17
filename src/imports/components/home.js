@@ -9,8 +9,9 @@ import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 
 const Home = ({ children, dispatch, route, ...rest }) => {
-  console.log('HOME children', children, rest);
-  
+  // console.log('HOME children', children, rest);
+  const a = 0;
+
   return (
     <Grid container direction="column" align="center" className="homeDiv" id="home">
       <Grid item>
@@ -18,7 +19,7 @@ const Home = ({ children, dispatch, route, ...rest }) => {
         THIS IS GENERAL hotINFO ON THE SITE</Text>
       </Grid>
       {renderRoutes(route.routes)}
-      
+
     </Grid>
   );
 };

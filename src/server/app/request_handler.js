@@ -39,21 +39,50 @@ export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes;
 
+  //
+  const promises = [];
+
+  // // use `some` to imitate `<Switch>` behavior of selecting only
+  // // the first to match
+  const matchedRoutes = routes.filter((route) => {
+    // use `matchPath` here
+    console.log('===========+++++++==========');
+
+    // console.log('req.url', req.url);
+
+    const match = matchPath(req.url, route);
+
+    console.log('match', match);
+
+    if (match && !!route.loadData) {
+      console.log('===========+++++++==========');
+      console.log('===========MATCHED==========');
+      console.log('route', route.loadData);
+
+      // console.log('match', match);
+      console.log('===========+++++++==========');
+
+      // promises.push(route.loadData(match));
+      console.log('===========+++++++==========');
+    }
+
+    return !!match;
+  });
+
+  //
+  //
+  console.log('matchedRoutes', matchedRoutes);
+
+  // Promise.all(promises).then(data => {
+  //   // do something w/ the data so the client
+  //   // can access it then render the app
+  // })
   // const history = cr eateMemoryHistory(req.url);
   // const location = history.createLocation(req.url);
   const context = {};
   
   // match({ routes, history, location, }, (error, redirectLocation, props) => {
-  const mPath = matchPath(req.url, { path: '/movies', });
-
-  console.log('===========+++++++==========');
-  console.log('===========+++++++==========');
-
-  console.log('req.url', req.url);
-  console.log('mPath', mPath);
-  console.log('===========+++++++==========');
-
-  console.log('===========+++++++==========');
+  // const mPath = matchPath(req.url, { path: '/movies', });
 
   // if (context.url) {
   //   res.status(500).send(error.message);

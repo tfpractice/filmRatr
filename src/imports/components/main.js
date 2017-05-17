@@ -28,7 +28,9 @@ export default class Main extends Component {
       <Grid container justify="center" style={styles} >
         <Nav />
         <Grid item sm={12}>
+          {/* <Switch> */}
           {renderRoutes(subRoutes)}
+          {/* </Switch> */}
         </Grid>
         
       </Grid>
