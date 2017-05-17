@@ -52,7 +52,7 @@ export const getMovieReviews = (...ids) => dispatch =>
 export const getReviewsFromParams = ({ movie_id, }) => getMovieReviews(movie_id);
 
 export const createReview = ({ id: movie_id, }) => (dispatch, getState) => (revProps) => {
-  console.log(getState());
+  console.log('getState createReview', getState());
   return axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
     .then(getData)
     .then(tapReview)
