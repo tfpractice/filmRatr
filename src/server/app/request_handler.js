@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider, } from 'react-redux';
+import { renderRoutes, } from 'react-router-config';
 import { renderToString, } from 'react-dom/server';
 import { AppContainer, getRoutes, getStore, } from 'imports';
 import { StaticRouter, } from 'react-router';
 import { matchPath, } from 'react-router-dom';
-
 import { MuiThemeProvider, } from 'material-ui/styles';
 
 import { styleManager, theme, } from 'imports/utils';
@@ -37,7 +37,7 @@ export const renderHTML = (markup, state, css, chunks = {}) => `
 
 export const requestHandler = (req, res) => {
   const store = getStore();
-  const routes = getRoutes(store);
+  const routes = getRoutes;
 
   // const history = cr eateMemoryHistory(req.url);
   // const location = history.createLocation(req.url);
@@ -71,7 +71,7 @@ export const requestHandler = (req, res) => {
       <Provider store={store}>
         <MuiThemeProvider styleManager={styleManager} theme={theme}>
           <StaticRouter location={req.url} context={context} >
-            <Main />
+            {renderRoutes(routes)}
           </StaticRouter>
         </MuiThemeProvider>
       </Provider>

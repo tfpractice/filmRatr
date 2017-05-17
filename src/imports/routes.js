@@ -2,14 +2,32 @@ import React from 'react';
 
 import { BrowserRouter, Link, Route, Switch, } from 'react-router-dom';
 
-import { Home, Main, MovieView, SearchResults, } from './components';
+import { Home, Main, MovieRoute, MovieView, SearchResults, TopTen, } from './components';
 
-const getRoutes = store => (
-  <Switch>
-    <Route exact path="/" component={Main} />
-    <Route path="/movies/:movie_id" component={MovieView} />
-    <Route path="/search(*:query)" component={SearchResults} />
-  </Switch>
-  );
+const search = { path: '/search/:query', component: SearchResults, };
+const movies = {
+ path: '/movies',
+ component: MovieRoute,
+ routes: [
+   { path: '/movies/:movie_id', component: MovieView, },
+   { path: '/movies/top', component: TopTen, },
+ ],
+};
 
-export default getRoutes;
+const home = {
+ path: '/',
+ exact: true,
+ component: Home,
+
+};
+
+const rootRoute = {
+ path: '/',
+ component: Main,
+ routes: [
+   search, home, movies,
+ ],
+};
+const routes = [ rootRoute, ];
+
+export default routes;

@@ -14,8 +14,12 @@ const mapDispatchToProps = dispatch =>
  ({ actions: bindActionCreators(SearchActions, dispatch), });
 
 const SearchResults = ({ results, query, actions, router, history, location, }) => {
-  // console.log('results, history, location, query, actions', results, history, location, query, actions);
+  console.log('SearchResultsresults, history, location, query, actions', results, history, location, query, actions);
   const a = 0;
+
+  console.log('SearchResults component');
+
+// CL
 
   return (
     <Grid container direction="column" align="center" className="search-list">

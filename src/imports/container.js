@@ -1,5 +1,7 @@
 import React, { Component, } from 'react';
 import { Provider, } from 'react-redux';
+import { renderRoutes, } from 'react-router-config';
+
 import { BrowserRouter, } from 'react-router-dom';
 import { MuiThemeProvider, } from 'material-ui/styles';
 import { styleManager, theme, } from 'imports/utils';
@@ -15,13 +17,15 @@ export default class AppContainer extends Component {
     }
   }
   render() {
+    console.log('getRoutes', getRoutes);
+
     const { store, history, } = this.props;
 
     return (
       <Provider store={store}>
         <MuiThemeProvider theme={theme} styleManager={styleManager}>
           <BrowserRouter>
-            <Main />
+            { renderRoutes(getRoutes) }
           </BrowserRouter>
         </MuiThemeProvider>
       </Provider>

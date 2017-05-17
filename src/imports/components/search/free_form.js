@@ -26,7 +26,7 @@ const IndependentForm = ({ formID, search, history, ...props }) => {
         search(q).then((r) => {
           console.log('promise res', r);
           console.log('q.query', q.query);
-          history.push(`search/${q.query}`);
+          history.push(`/search/${q.query}`);
           return r;
         });
       }}
