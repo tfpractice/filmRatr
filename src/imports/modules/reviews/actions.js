@@ -51,13 +51,15 @@ export const getMovieReviews = (...ids) => dispatch =>
 
 export const getReviewsFromParams = ({ movie_id, }) => getMovieReviews(movie_id);
 
-export const createReview = ({ id: movie_id, }) => dispatch => revProps =>
-  axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
+export const createReview = ({ id: movie_id, }) => (dispatch, getState) => (revProps) => {
+  console.log(getState());
+  return axios.post(`${REVIEW_URL}/${movie_id}`, revProps)
     .then(getData)
     .then(tapReview)
     .then(mergeReviews)
     .then(dispatch)
     .catch(err => dispatch(reviewRequestFailure(err)));
+};
 
 export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
  axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, revProps)

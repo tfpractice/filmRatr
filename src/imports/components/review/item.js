@@ -9,22 +9,27 @@ import EditReviewForm from './edit_review';
 // import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 // import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
-const mapStateToProps = ({ auth: { user, }, }, { review, }) =>
- ({ canEdit: !!user && user.id === review.user, });
+const mapStateToProps = ({ auth: { user, }, }, { review, }) => {
+  console.log(user, review);
+  return ({ canEdit: !!user && user.id === review.user, });
+};
 
-const ReviewCard = ({ review, deleteReview, canEdit, }) => (
-  <Card>
-    <CardHeader
-      title={<p>{review.text} || {review.rating}</p>}
-      subheader={<p>{review.dateAdded} </p>}
-      avatar={canEdit ? (<Button onTouchTap={() => deleteReview(review)} >
-      edit</Button>) : null
+const ReviewCard = ({ review, deleteReview, canEdit, }) => {
+  console.log(canEdit);
+  return (
+    <Card>
+      <CardHeader
+        title={<p>{review.text} || {review.rating}</p>}
+        subheader={<p>{review.dateAdded} </p>}
+        avatar={canEdit ? (<Button onTouchTap={() => deleteReview(review)} >
+        edit</Button>) : null
       }
-    />
-    {canEdit && <CardContent >
-      <EditReviewForm review={review} />
-    </CardContent> }
-  </Card>
+      />
+      {canEdit && <CardContent >
+        <EditReviewForm review={review} />
+      </CardContent> }
+    </Card>
   );
+};
 
 export default connect(mapStateToProps, ReviewActions)(ReviewCard);
