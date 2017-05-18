@@ -70,3 +70,4 @@ export const deleteReview = (req, res) => {
 };
 
 export const deleteUnclaimed = (req, res) => Review.deleteMany({ user: null, });
+deleteUnclaimed();

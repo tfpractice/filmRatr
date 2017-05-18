@@ -5,11 +5,7 @@ import { Field, reduxForm, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';
 
-const stateToProps = ({ auth: { user, }, }, { review, }) => {
-  console.log(user, review);
-  console.log('!!user && !!review && user.id === review.user,', !!user && !!review && user.id === review.user);
-  return ({ canEdit: !!user && !!review && user.id === review.user, });
-};
+const stateToProps = ({ auth: { user, }, }, { review, }) => ({ canEdit: !!user && !!review && user.id === review.user, });
 const renderDelete = handler => rev =>
   rev && <Button secondary onClick={() => handler(rev)} >Delete</Button>;
 
