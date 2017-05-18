@@ -8,6 +8,7 @@ export const getMovies = (req, res) =>
 
 export const moviesByAvg = (req, res) =>
   Review.moviesByAvg()
+    .then(arr=> console.log('arr', arr)|| arr)
     .then(arr => arr.map(({ _id: movie_id, }) => movie_id))
     .then(res.json.bind(res))
     .catch(err => res.status(500).send(err));

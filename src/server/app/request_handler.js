@@ -10,6 +10,7 @@ import { MuiThemeProvider, } from 'material-ui/styles';
 import { matchRoutes, } from 'react-router-config';
 import { styleManager, theme, } from 'imports/utils';
 import { Main, } from 'imports/components';
+
 const makeSrc = path => `<script type="application/javascript" src=${path}></script>`;
 
 export const renderHTML = (markup, state, css, chunks = {}) => `
@@ -39,29 +40,31 @@ export const renderHTML = (markup, state, css, chunks = {}) => `
 export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes;
-
+  
   const promises = [];
-
+  
   const loadBranchData = r => (location) => {
     console.log('location.pathname', location);
     const branch = matchRoutes(r, location);
     const rFilt = branch.filter(r => r.route.loadData);
     const mapped = rFilt.map(({ route, match, }) => {
-      console.log('route,, match', route, match);
+      console.log(' Object.keys(route)', Object.keys(route));
+      console.log('match', match);
       return route.loadData.map(f => f(match));
     });
     const promises = mapped.reduce(flattenBin, []);
-
-    console.log('rFilt', rFilt);
+    
     console.log('branch', branch);
-    console.log('mapped', mapped);
-    console.log('promises', promises, );
+    console.log('rFilt', rFilt);
 
+    console.log('mapped', mapped);
+    console.log('promises', promises,);
+    
     return Promise.all(promises.map(store.dispatch));
   };
-
+  
   const context = {};
-
+  
   if (context.url) {
     res.redirect(302);
   } else {
@@ -69,7 +72,7 @@ export const requestHandler = (req, res) => {
       console.log('data', data);
       const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
       const css = styleManager.sheetsToString();
-    
+      
       const markup = renderToString(
         <Provider store={store}>
           <MuiThemeProvider styleManager={styleManager} theme={theme}>
@@ -79,8 +82,8 @@ export const requestHandler = (req, res) => {
           </MuiThemeProvider>
         </Provider>
       );
-    
-      console.log('store', store.getState());
+      
+      console.log('store', store.getState().movies.status.message);
       return res.send(renderHTML(markup, store.getState(), css, chunks));
     })
       .catch(err => res.end(err.message));

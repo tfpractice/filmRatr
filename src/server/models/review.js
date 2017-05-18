@@ -21,7 +21,8 @@ ReviewSchema.statics.movies = function(){
 };
 
 ReviewSchema.statics.moviesByAvg = function(){
-  return this.aggregate({ $match: { rating: { $gte: 0, }, }, },
+  return this.aggregate({ $match: { movie_id: { $ne: 'undefined', }, }, },
+
     {
       $group: {
         _id: '$movie_id',

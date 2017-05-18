@@ -21,23 +21,13 @@ const MovieRoute = ({ children, dispatch, match, ...rest }) => {
         <Text type="display1">I am the movie route</Text>
       </Grid>
       <Grid item>
-        <Route
-  exact path={'/movies'} component={TopTen} loadData={(...args) => {
-    console.log('loadData args', args);
-  }}
-
-  />
-        <Route
-  path={'/movies/:movie_id'} component={MovieView} loadData={(...args) => {
-    console.log('loadData args', args);
-  }}
-
-  />
+        <Route exact path={'/movies'} component={TopTen}/>
+        <Route path={'/movies/:movie_id'} component={MovieView} />
       </Grid>
     </Grid>
   );
 };
 
-MovieRoute.fetchData = [ MovieActions.getByFreq, MovieActions.getByAvg, ];
+MovieRoute.fetchData = [ MovieActions.getByFreq, ];
 
 export default connect()(MovieRoute);

@@ -17,11 +17,11 @@ const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 //       console.log('axios delete', x);
 //       return axios.get(`${REVIEW_URL}/${id}`);
 //     })
-//     .catch(err => dispatch(reviewRequestFailure(err)));
+//     .catch(err => dispatch(reviewRequestFailure(err.message)));
    
 const requestReview = id => axios.get(`${REVIEW_URL}/${id}`)
 
-// .catch(err => dispatch(reviewRequestFailure(err)));
+// .catch(err => dispatch(reviewRequestFailure(err.message)));
 
 const tapReviews = ({ reviews, }) => reviews;
 const tapReview = ({ review, }) => review;
@@ -46,7 +46,7 @@ export const getReviews = () => dispatch =>
     .then(reviews => Promise.all(
       [ reviewRequestSuccess(), mergeReviews(...reviews), ].map(dispatch))
       .then(() => reviews))
-    .catch(err => dispatch(reviewRequestFailure(err)));
+    .catch(err => dispatch(reviewRequestFailure(err.message)));
 
 export const getMovieReviews = (...ids) => dispatch =>
   Promise.resolve(dispatch(reviewRequestPending(ids)))
@@ -67,7 +67,7 @@ export const createReview = ({ id: movie_id, }) => (dispatch, getState) => revPr
   .then(tapReview)
   .then(mergeReviews)
   .then(dispatch)
-  .catch(err => dispatch(reviewRequestFailure(err)));
+  .catch(err => dispatch(reviewRequestFailure(err.message)));
 
 export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
   axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, revProps)
@@ -75,7 +75,7 @@ export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
     .then(tapReview)
     .then(updateReview)
     .then(dispatch)
-    .catch(err => dispatch(reviewRequestFailure(err)));
+    .catch(err => dispatch(reviewRequestFailure(err.message)));
 
 export const deleteReview = ({ movie_id, id, }) => dispatch =>
   axios.delete(`${REVIEW_URL}/${movie_id}/${id}`)
@@ -83,4 +83,4 @@ export const deleteReview = ({ movie_id, id, }) => dispatch =>
     .then(tapReview)
     .then(removeReview)
     .then(dispatch)
-    .catch(err => dispatch(reviewRequestFailure(err)));
+    .catch(err => dispatch(reviewRequestFailure(err.message)));
