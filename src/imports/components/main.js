@@ -14,7 +14,6 @@ import { SearchResults, } from './search';
 const styles = { paddingTop: '5rem', };
 
 export default class Main extends Component {
-  
   render() {
     const { route: { routes: subRoutes, }, } = this.props;
     
@@ -23,6 +22,7 @@ export default class Main extends Component {
         <Nav />
         <Grid item sm={12}>
           <Switch>
+            
             {renderRoutes(subRoutes)}
           </Switch>
         </Grid>

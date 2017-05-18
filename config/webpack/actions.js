@@ -8,7 +8,7 @@ import sharedConf from './shared';
 import { BUILD_CONFIG, DEV_CONFIG, PATHS, } from './constants';
 
 const clean = path =>
-({ plugins: [ new WPClean([ path, ], { root: process.cwd(), }), ], });
+  ({ plugins: [ new WPClean([ path, ], { root: process.cwd(), }), ], });
 
 export const build = common =>
   merge.smart(common, BUILD_CONFIG, clean(PATHS.dist));
@@ -21,17 +21,15 @@ export const dev = (common = sharedConf({ prod: false, })) => {
 
 export const applyHotMiddleware = compiler => (app) => {
   if (process.env.NODE_ENV !== 'production') {
-    // console.log('compiler', compiler);
-    // console.log('compiler.options.output.publicPath', compiler.options);
     app.use(devMiddleware(compiler, {
-      // historyApiFallback: true,
+      quiet: true,
+      noInfo: true,
       stats: { colors: true, },
       serverSideRender: true,
       publicPath: compiler.options.output.publicPath,
     }));
     app.use(hotMiddleware(compiler));
   }
-  
   return app;
 };
 

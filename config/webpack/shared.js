@@ -30,6 +30,7 @@ export default (env = defEnvar) => ({
         loaders: [ 'babel-loader', ],
       },
       { test: /\.json$/, loader: 'json-loader', },
+
       // {
       //   test: /\.css$/,
       //   loader: ExtractTextPlugin.extract({

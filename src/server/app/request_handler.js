@@ -11,7 +11,7 @@ import { matchRoutes, } from 'react-router-config';
 import { styleManager, theme, } from 'imports/utils';
 import { Main, } from 'imports/components';
 
-const makeSrc = path => `<script type="application/javascript" src=${path}></script>`;
+const makeSrc = path => `<script type="application/javascript" src=/${path}></script>`;
 
 export const renderHTML = (markup, state, css, chunks = {}) => `
     <!doctype html>

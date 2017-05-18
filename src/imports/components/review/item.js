@@ -8,9 +8,9 @@ import EditReviewForm from './edit_review';
 import Text from 'material-ui/Typography';
 import StarIcon from 'material-ui-icons/Star';
 
-const stars = rating => [ ...Array(rating).keys(), ].map(x => <StarIcon />);
+const stars = rating => [ ...Array(rating).keys(), ].map(x => <StarIcon key={x}/>);
 
-const mapStateToProps = ({ auth: { user, }, }, { review, }) => ({ canEdit: !!user && user.id === review.user, })
+const mapStateToProps = ({ auth: { user, }, }, { review, }) => ({ canEdit: !!user && user.id === review.user, });
 
 const ReviewCard = ({ review, deleteReview, canEdit, }) => (
   <Card raised>
