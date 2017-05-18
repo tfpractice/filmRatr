@@ -28,7 +28,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.1",
-    "eslint": "^3.19.0",
+    "eslint": "next",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
