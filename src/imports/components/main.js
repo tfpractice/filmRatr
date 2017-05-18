@@ -1,6 +1,8 @@
 import React, { Component, } from 'react';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
+import { Route, Switch, } from 'react-router-dom';
+
 import { renderRoutes, } from 'react-router-config';
 import Nav from './nav';
 import Home from './home';
@@ -8,7 +10,6 @@ import Home from './home';
 import MovieRoute, { MovieView, TopTen, } from './movie';
 
 import { SearchResults, } from './search';
-import { Route, Switch, } from 'react-router-dom';
 const styles = { paddingTop: '5rem', };
 
 export default class Main extends Component {
@@ -33,7 +34,6 @@ export default class Main extends Component {
             {renderRoutes(subRoutes)}
           </Switch>
         </Grid>
-        
       </Grid>
                 
     );
