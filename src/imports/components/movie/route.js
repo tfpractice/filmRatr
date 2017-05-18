@@ -8,10 +8,13 @@ import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 
 const MovieRoute = ({ children, dispatch, match, ...rest }) => {
-  console.log('children, rest,match', children, rest, match);
-  console.log('children', children);
-  console.log('match', match);
-  console.log('rest', rest);
+  const a = 0;
+
+  // console.log('children, rest,match', children, rest, match);
+  // console.log('children', children);
+  // console.log('match', match);
+  // console.log('rest', rest);
+
   return (
     <Grid container direction="column" align="center" className="MovieRouteDiv" id="MovieRoute">
       <Grid item>

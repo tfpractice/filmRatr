@@ -28,8 +28,9 @@ const rootRoute = {
  routes: [
    movies, search, home,
  ],
- loadData: MovieRoute.fetchData,
 };
-const routes = [ rootRoute, movies, search, home, ];
+
+// const routes = [ rootRoute, movies, search, home, ];
+const routes = [ rootRoute, ];
 
 export default routes;
