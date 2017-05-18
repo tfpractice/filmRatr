@@ -8,7 +8,7 @@ import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 import { renderRoutes, } from 'react-router-config';
 
-const MovieRoute = ({ children, dispatch, match, route: { routes: subRoutes, }, ...rest }) => {
+const MovieRoute = ({ children, dispatch, match, route: { routes, }, ...rest }) => {
   const a = 0;
   
   return (
@@ -17,7 +17,7 @@ const MovieRoute = ({ children, dispatch, match, route: { routes: subRoutes, }, 
         <Text type="display1">I am the movie route</Text>
       </Grid>
       <Grid item>
-        {renderRoutes(subRoutes)}
+        {renderRoutes(routes)}
       </Grid>
     </Grid>
   );

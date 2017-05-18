@@ -7,26 +7,25 @@ import { MovieCard, MovieList, } from '../movie';
 import FreeForm from './free_form';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
-
+import { renderRoutes, } from 'react-router-config';
 const mapStateToProps = ({ search: { results, request: { query, }, }, }) => ({ results, query, });
 
 const mapDispatchToProps = dispatch =>
- ({ actions: bindActionCreators(SearchActions, dispatch), });
+  ({ actions: bindActionCreators(SearchActions, dispatch), });
 
-const SearchResults = ({ results, query, actions, router, history, location, }) => {
-  console.log('SearchResultsresults, history, location, query, actions', results, history, location, query, actions);
+const SearchResults = ({ results, query, route: { routes, }, ...rest }) => {
   const a = 0;
-
-  console.log('SearchResults component');
-
-// CL
-
+  
+  console.log('SEARCH_REQUESTrest', query, rest);
   return (
     <Grid container direction="column" align="center" className="search-list">
       <Grid item>
         <Text type="display1">{query ? `Showing Results for ${query}` : 'Enter Movie Title' }</Text>
         <FreeForm formID={'searchRouteForm'} />
       </Grid>
+
+      {renderRoutes(routes)}
+
       <Grid item className=" SearchResults">
         <MovieList movies={results} />
       </Grid>
@@ -34,6 +33,6 @@ const SearchResults = ({ results, query, actions, router, history, location, }) 
   );
 };
 
-SearchResults.fetchData = [ SearchActions.search, ];
+SearchResults.fetchData = [ ({ params, }) => SearchActions.search(params), ];
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchResults));

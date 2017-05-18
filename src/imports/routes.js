@@ -2,9 +2,8 @@ import React from 'react';
 
 import { BrowserRouter, Link, Route, Switch, } from 'react-router-dom';
 
-import { Home, Main, MovieRoute, MovieView, SearchResults, TopTen, } from './components';
+import { Home, Main, MovieList, MovieRoute, MovieView, SearchResults, TopTen, } from './components';
 import { MovieActions, } from './actions';
-const search = { path: '/search/:query', component: SearchResults, };
 
 const moviepage = {
   path: '/movies/:movie_id',
@@ -17,7 +16,7 @@ const topMovies = {
   component: TopTen,
   loadData: MovieRoute.fetchData,
 };
- 
+
 const movies = {
   path: '/movies',
   component: MovieRoute,
@@ -25,6 +24,16 @@ const movies = {
   routes: [ moviepage, topMovies, ],
 };
 
+const results = {
+  path: '/search/:query',
+  component: MovieList,
+  loadData: SearchResults.fetchData,
+};
+const search = {
+  path: '/search',
+  component: SearchResults,
+  routes: [ results, ],
+};
 const home = {
   path: '/',
   component: Home,

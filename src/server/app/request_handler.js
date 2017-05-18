@@ -55,9 +55,9 @@ export const requestHandler = (req, res) => {
     });
     const promises = mapped.reduce(flattenBin, []);
     
-    // console.log('branch', branch);
+    console.log('branch', branch);
 
-    // console.log('rFilt', rFilt);
+    console.log('rFilt', rFilt);
     console.log('exFilt', exFilt);
 
     //
@@ -77,7 +77,6 @@ export const requestHandler = (req, res) => {
       const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
       const css = styleManager.sheetsToString();
 
-      console.log('chunks', chunks);
       const markup = renderToString(
         <Provider store={store}>
           <MuiThemeProvider styleManager={styleManager} theme={theme}>

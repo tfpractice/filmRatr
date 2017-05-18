@@ -8,10 +8,10 @@ import { FormGroup, } from 'material-ui/Form';
 const SearchForm = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
     <FormGroup row>
-      <Field label="movie title" name="query" component={renderText} />
+      <Field label="title" name="title" component={renderText} />
       <Button accent type="submit"> Searchable</Button>
     </FormGroup>
   </form>
-  );
+);
 
 export default connect()(ClearForm(SearchForm));
