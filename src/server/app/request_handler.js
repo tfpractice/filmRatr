@@ -28,7 +28,7 @@ export const renderHTML = (markup, state, css, chunks = {}) => `
         </script>
         <style id="jss-server-side">${css}</style>
   </head>
-      <body style="background-color:#424242;">
+      <body style="background-color:#322132;">
         <div id="root">${markup}</div>
             ${[].concat(chunks.manifest).map(makeSrc)}
             ${[].concat(chunks.vendor).map(makeSrc)}

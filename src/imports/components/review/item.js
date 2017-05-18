@@ -15,14 +15,19 @@ const mapStateToProps = ({ auth: { user, }, }, { review, }) => ({ canEdit: !!use
 const ReviewCard = ({ review, deleteReview, canEdit, }) => (
   <Card raised>
     <CardHeader
-  title={<p>{review.user ? review.user.username : 'default'} || {stars(review.rating)}</p>}
-  subheader={<p>{review.dateAdded} </p>}
+  title={
+  <Text
+  align="center"
+  gutterBottom
+  type="title">{review.user ? review.user.username : 'anonymous'} || {stars(review.rating)}
+        </Text>}
+  subheader={
+  <Text secondary type="caption">{review.dateAdded} </Text>}
   />
     <CardContent >
-      <Text type="headline">{review.text}</Text>
+      <Text type="body1">{review.text}</Text>
       {canEdit && <EditReviewForm review={review} /> }
     </CardContent>
-      
   </Card>
 );
 
