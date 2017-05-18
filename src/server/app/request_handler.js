@@ -11,7 +11,6 @@ import { styleManager, theme, } from 'imports/utils';
 import { Main, } from 'imports/components';
 const makeSrc = path => `<script type="application/javascript" src=${path}></script>`;
 
-console.log('getRoutes', getRoutes);
 export const renderHTML = (markup, state, css, chunks = {}) => `
     <!doctype html>
     <html>

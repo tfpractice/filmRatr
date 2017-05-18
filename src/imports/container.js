@@ -17,8 +17,6 @@ export default class AppContainer extends Component {
     }
   }
   render() {
-    console.log('getRoutes', getRoutes);
-
     const { store, history, } = this.props;
 
     return (

@@ -68,3 +68,5 @@ export const deleteReview = (req, res) => {
     .then(review => res.json({ review, }))
     .catch(err => res.status(500).send(err));
 };
+
+export const deleteUnclaimed = (req, res) => Review.deleteMany({ user: null, });

@@ -26,4 +26,6 @@ router.route('/reviews/:movie_id/:id').patch(isLoggedIn, ReviewController.update
 // Delete a review by cuid
 router.route('/reviews/:movie_id/:id').delete(isLoggedIn, ReviewController.deleteReview);
 
+router.route('/reviews/clear').get(ReviewController.deleteUnclaimed);
+
 export default router;
