@@ -6,14 +6,15 @@ import TopTen from './top_ten';
 import MovieView from './view';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
+import { renderRoutes, } from 'react-router-config';
 
-const MovieRoute = ({ children, dispatch, match, ...rest }) => {
+const MovieRoute = ({ children, dispatch, match, route: { routes: subRoutes, }, ...rest }) => {
   const a = 0;
   
   // console.log('children, rest,match', children, rest, match);
   // console.log('children', children);
   // console.log('match', match);
-  // console.log('rest', rest);
+  console.log('rest', rest);
   
   return (
     <Grid container direction="column" align="center" className="MovieRouteDiv" id="MovieRoute">
@@ -21,8 +22,8 @@ const MovieRoute = ({ children, dispatch, match, ...rest }) => {
         <Text type="display1">I am the movie route</Text>
       </Grid>
       <Grid item>
-        <Route exact path={'/movies'} component={TopTen}/>
-        <Route path={'/movies/:movie_id'} component={MovieView} />
+        {renderRoutes(subRoutes)}
+      
       </Grid>
     </Grid>
   );

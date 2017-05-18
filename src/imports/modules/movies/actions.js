@@ -39,14 +39,14 @@ export const getMovies = (...ids) => (dispatch, getState) =>
                 .then(() => movies))))
     .catch(e => dispatch(movieRequestFailure(e)));
 
-export const setMovieFromParams = ({ movie_id, }) => dispatch =>
+export const setMovieFromParams = ({ params: { movie_id, }, }) => dispatch =>
   dispatch(getMovies(movie_id))
     .then(getFirst)
     .then(setCurrentMovie)
     .then(dispatch)
     .catch(movieRequestFailure);
 
-export const getByAvg = arg => (dispatch) =>{
+export const getByAvg = arg => (dispatch) => {
   console.log('------------------');
   console.log('------------------');
   console.log('getByAvg arg', arg);
@@ -58,7 +58,7 @@ export const getByAvg = arg => (dispatch) =>{
     .then(ids=> getMovies(...ids))
     .then(dispatch)
     .catch(e => dispatch(movieRequestFailure(e)));
-}
+};
 
 export const getByFreq = () => dispatch =>
   axios.get(`${API_URL}/movies/freq`)
