@@ -30,6 +30,6 @@ const rootRoute = {
  ],
  loadData: MovieRoute.fetchData,
 };
-const routes = [ rootRoute, ];
+const routes = [ rootRoute, movies, search, home, ];
 
 export default routes;

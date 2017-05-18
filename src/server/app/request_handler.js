@@ -11,7 +11,7 @@ import { styleManager, theme, } from 'imports/utils';
 import { Main, } from 'imports/components';
 const makeSrc = path => `<script type="application/javascript" src=${path}></script>`;
 
-console.log(getRoutes);
+console.log('getRoutes', getRoutes);
 export const renderHTML = (markup, state, css, chunks = {}) => `
     <!doctype html>
     <html>
@@ -45,6 +45,7 @@ export const requestHandler = (req, res) => {
 
   // // use `some` to imitate `<Switch>` behavior of selecting only
   // // the first to match
+  
   const matchedRoutes = routes.filter((route) => {
     // use `matchPath` here
     console.log('===========+++++++==========');
@@ -52,19 +53,25 @@ export const requestHandler = (req, res) => {
     // console.log('req.url', req.url);
 
     const match = matchPath(req.url, route);
-
-    console.log('match', match);
-
+  
     if (match && !!route.loadData) {
       console.log('===========+++++++==========');
       console.log('===========MATCHED==========');
-      console.log('route', route.loadData);
+      console.log('match', match);
+
+      // promises = promises.concat(route.loadData);
+
+      // // console.log('route.component', route.component);
+      // console.log('route', route);
+      // console.log('route.loadData', route.loadData);
+
+      // console.log('promises modified', promises);
 
       // console.log('match', match);
       console.log('===========+++++++==========');
 
       // promises.push(route.loadData(match));
-      console.log('===========+++++++==========');
+      // console.log('===========+++++++==========');
     }
 
     return !!match;
@@ -72,7 +79,8 @@ export const requestHandler = (req, res) => {
 
   //
   //
-  console.log('matchedRoutes', matchedRoutes);
+  // console.log('matchedRoutes', matchedRoutes);
+  // console.log('promises', promises);
 
   // Promise.all(promises).then(data => {
   //   // do something w/ the data so the client
@@ -82,6 +90,39 @@ export const requestHandler = (req, res) => {
   // const location = history.createLocation(req.url);
   const context = {};
   
+  // import { unaryMap, } from './store/dedupe';
+  // const fetchDef = { fetchData: [], needs: [], };
+  // const isWrapped = ({ WrappedComponent = null, }) => WrappedComponent;
+  //
+  // const getNeeds = ({ needs, } = fetchDef) => needs;
+  // const getData = ({ fetchData, } = fetchDef) => fetchData;
+  // const getWrapped = c => isWrapped(c) ? c.WrappedComponent : c;
+  //
+  // const compData = component => isWrapped(component)
+  //     ? getData(component.WrappedComponent)
+  //     : getData(component);
+  //
+  // const flatten = (prev = [], next = []) => [ ...prev, ...next, ];
+  //
+  // const fetchComponentData = (dispatch, components, params) => {
+  //   const needs = components.map(compData).reduce(flatten, []);
+  //
+  //   return Promise.all(needs.map(n => n(params)).map(dispatch));
+  // };
+  //
+  // export default fetchComponentData;
+  //
+  // const mRoutes = routes.filter(route => matchPath(req.url, route))
+  // .filter(r => r.loadData).map(({ loadData, }) => loadData);
+  //
+  // console.log('mRoutes', mRoutes);
+  // console.log('promises.concat(...mRoutes)', promises.concat(...mRoutes));
+  // Promise.all(promises.concat(...mRoutes).map((f) => {
+  //   console.log('f', f);
+  //   return store.dispatch(f());
+  // }))
+  //   .then(console.log);
+
   // match({ routes, history, location, }, (error, redirectLocation, props) => {
   // const mPath = matchPath(req.url, { path: '/movies', });
 
@@ -94,23 +135,32 @@ export const requestHandler = (req, res) => {
   } else {
     // fetchComponentData(store.dispatch, props.components, props.params)
       // .then(() => {
-    const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
-    const css = styleManager.sheetsToString();
+    const mRoutes = routes.filter(route => matchPath(req.url, route))
+      .filter(r => r.loadData).map(({ loadData, }) => loadData);
+
+    console.log('mRoutes', mRoutes);
+    console.log('promises.concat(...mRoutes)', promises.concat(...mRoutes));
+    Promise.all(promises.concat(...mRoutes).map((f) => {
+      console.log('f', f);
+      return store.dispatch(f());
+    }))
+      .then((data) => {
+        const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
+        const css = styleManager.sheetsToString();
     
-    const markup = renderToString(
-      <Provider store={store}>
-        <MuiThemeProvider styleManager={styleManager} theme={theme}>
-          <StaticRouter location={req.url} context={context} >
-            {renderRoutes(routes)}
-          </StaticRouter>
-        </MuiThemeProvider>
-      </Provider>
+        const markup = renderToString(
+          <Provider store={store}>
+            <MuiThemeProvider styleManager={styleManager} theme={theme}>
+              <StaticRouter location={req.url} context={context} >
+                {renderRoutes(routes)}
+              </StaticRouter>
+            </MuiThemeProvider>
+          </Provider>
               );
     
-    return res.send(renderHTML(markup, store.getState(), css, chunks));
-    
-      // })
-      // .catch(err => res.end(err.message));
+        return res.send(renderHTML(markup, store.getState(), css, chunks));
+      })
+      .catch(err => res.end(err.message));
   }
   
   //  else {
