@@ -12,8 +12,6 @@ import { dbConfig, } from '../models';
 import { applyRoutes, MovieRoutes, ReviewRoutes, SearchRoutes, UserRoutes, } from '../routes';
 import { requestHandler, } from './request_handler';
 
-// console.log('process.cwd', process.cwd());
-// console.log('dirname', __dirname);
 mongoose.Promise = global.Promise;
 
 // MongoDB Connection
@@ -25,14 +23,14 @@ mongoose.connect(dbConfig.mongoURL, (error) => {
 
   console.log('mongoose connected');
 });
-const conn = mongoose.connection;
 
-conn.on('error', console.error.bind(console, 'connection error:'));
-conn.once('open', () => {
-  console.log('mongoose connected from conn variable');
-
-  // Wait for the database connection to establish, then start the app.
-});
+//
+// const conn = mongoose.connection;
+//
+// conn.on('error', console.error.bind(console, 'connection error:'));
+// conn.once('open', () => {
+//   console.log('mongoose connected from conn variable');
+// });
 
 // initialize express
 const app = enableHotReload(express());
@@ -43,19 +41,6 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: false, }));
 app.use(cookieParser());
 
 // Set Static Folder
-
-// app.use('/', express.static(path.resolve('dist')));
-// app.use(express.static(path.resolve('dist')));
-
-// console.log('/');
-// console.log(path.resolve(__dirname, '/dist'));
-// console.log(path.resolve('/dist'));
-// console.log(path.resolve('dist'));
-// console.log(path.join(__dirname, 'dist'));
-
-// app.use(express.static('/'));
-
-// app.use(express.static(path.join(__dirname, 'dist')));
 
 // Express Session
 app.use(session({
@@ -89,11 +74,6 @@ applyRoutes(app, passport);
 // establish server render
 app.use(requestHandler);
 app.use(express.static(path.resolve('dist')));
-
-// app.use(express.static(path.resolve(__dirname, 'dist')));
-// console.log('path.resolve(', path.resolve('dist'));
-
-// app.use(express.static(path.resolve('dist')));
 
 app.listen(3000, () => {
   console.log('Filmratr listening on port 3000!');

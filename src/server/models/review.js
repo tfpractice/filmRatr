@@ -42,7 +42,12 @@ ReviewSchema.statics.moviesByFreq = function () {
      { $limit: 10, },
   );
 };
+ReviewSchema.statics.dropAll = function () {
+  return this.deleteMany({});
+};
 
 const Review = mongoose.model('Review', ReviewSchema);
+
+Review.dropAll();
 
 export default Review;

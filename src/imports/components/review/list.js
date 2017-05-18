@@ -7,9 +7,11 @@ import Grid from 'material-ui/Grid';
 import List, { ListItem, ListItemIcon, ListItemText, } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Text from 'material-ui/Typography';
+import StarIcon from 'material-ui-icons/Star';
+
 const mapStateToProps = ({ reviews, }, { movie, }) =>
 ({ reviews: reviews.data.filter(r => r.movie_id == movie.id), });
-
+const stars = rating => Array(5).keys().map(x => <Star />);
 const ReviewList = ({ movie, reviews, }) => (
   <Grid container justify="center" direction="column" className="Review-list">
     <Grid item xs={6}>
@@ -17,11 +19,18 @@ const ReviewList = ({ movie, reviews, }) => (
       <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
     </Grid>
     <Grid item xs={12} className="ReviewList">
-      {reviews.map(r => (<Paper key={r.id}>
-        <ReviewCard review={r} />
-        <Divider />
-      </Paper>))}
+
+      <Grid container>
+        {reviews.map(r => (<Grid item key={r.id} >
+          {/* <Paper key={r.id}> */}
+          <ReviewCard review={r} />
+          <Divider />
+          {/* </Paper> */}
+
+        </Grid>))}
+      </Grid>
     </Grid>
+
   </Grid>
   );
 

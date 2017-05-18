@@ -10,7 +10,13 @@ const reviewRequestPending = requestCreators('REVIEW_REQUEST').pending;
 const reviewRequestFailure = requestCreators('REVIEW_REQUEST').failure;
 const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 
-const requestReview = id => axios.get(`${REVIEW_URL}/${id}`);
+const requestReview = id =>
+ axios.get(`${REVIEW_URL}/clear`)
+   .then((x) => {
+     console.log('axios delete', x);
+     return axios.get(`${REVIEW_URL}/${id}`);
+   })
+   .catch(err => dispatch(reviewRequestFailure(err)));
 
 const tapReviews = ({ reviews, }) => reviews;
 const tapReview = ({ review, }) => review;
