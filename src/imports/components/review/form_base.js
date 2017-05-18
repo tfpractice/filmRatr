@@ -5,10 +5,15 @@ import { Field, reduxForm, } from 'redux-form';
 import { ReviewActions, } from 'imports/actions';
 import { ClearForm, renderText, } from 'imports/utils';
 
+const stateToProps = ({ auth: { user, }, }, { review, }) => {
+  console.log(user, review);
+  console.log('!!user && !!review && user.id === review.user,', !!user && !!review && user.id === review.user);
+  return ({ canEdit: !!user && !!review && user.id === review.user, });
+};
 const renderDelete = handler => rev =>
   rev && <Button secondary onClick={() => handler(rev)} >Delete</Button>;
 
-const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
+const ReviewForm = ({ review, handleSubmit, deleteReview, canEdit, }) => (
   <form onSubmit={handleSubmit} >
     <Field
       name="rating"
@@ -18,8 +23,8 @@ const ReviewForm = ({ review, handleSubmit, deleteReview, }) => (
     />
     <Field name="text" label="content" component={renderText} />
     <Button primary type="submit" > Submit Review </Button>
-    {renderDelete(deleteReview)(review) }
+    {canEdit && renderDelete(deleteReview)(review) }
   </form>
   );
 
-export default connect(null, ReviewActions)(ClearForm(ReviewForm));
+export default connect(stateToProps, ReviewActions)(ClearForm(ReviewForm));

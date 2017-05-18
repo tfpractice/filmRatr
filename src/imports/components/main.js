@@ -21,8 +21,8 @@ export default class Main extends Component {
   render() {
     const { route: { routes: subRoutes, }, } = this.props;
     
-    console.log('Mainthis.props.match', this.props);
-    console.log(subRoutes);
+    // console.log('Mainthis.props.match', this.props);
+    // console.log('subRoutes', subRoutes);
 
     return (
       <Grid container justify="center" style={styles} >

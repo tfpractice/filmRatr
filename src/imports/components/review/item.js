@@ -21,13 +21,19 @@ const ReviewCard = ({ review, deleteReview, canEdit, }) => {
       <CardHeader
         title={<p>{review.text} || {review.rating}</p>}
         subheader={<p>{review.dateAdded} </p>}
-        avatar={canEdit ? (<Button onTouchTap={() => deleteReview(review)} >
-        edit</Button>) : null
-      }
+        avatar={
+          canEdit ? (<Button onTouchTap={() => deleteReview(review)} >
+          ele</Button>) : null
+        }
       />
       {canEdit && <CardContent >
         <EditReviewForm review={review} />
       </CardContent> }
+
+      {canEdit && <CardActions>
+        <Button onTouchTap={() => deleteReview(review)} >
+        ele</Button>
+      </CardActions>}
     </Card>
   );
 };

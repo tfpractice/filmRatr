@@ -30,12 +30,10 @@ export const getMovieReviews = (req, res) =>
  * @param res
  * @returns void
  */
-export const addReview = (req, res) => {
-  console.log('req', req);
-  return Review.create({ ...req.body, movie_id: req.movie_id, })
-    .then(review => res.json({ review, }))
-    .catch(err => res.status(500).send(err));
-};
+export const addReview = (req, res) =>
+   Review.create({ ...req.body, user: req.user.id, movie_id: req.movie_id, })
+     .then(review => res.json({ review, }))
+     .catch(err => res.status(500).send(err));
 
 export const updateReview = (req, res) =>
   Review.findByIdAndUpdate(req.params.id, req.body, { new: true, }).exec()
