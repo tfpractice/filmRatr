@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import { Route, Switch, } from 'react-router-dom';
 
 import { renderRoutes, } from 'react-router-config';
+
 import Nav from './nav';
 import Home from './home';
 

@@ -59,7 +59,7 @@ class Dash extends Component {
 
     // const { currentUser, } = this.props;
 
-    console.log('Dashthis.props', this.props);
+    // console.log('Dashthis.props', this.props);
 
     return (
         
@@ -77,17 +77,17 @@ class Dash extends Component {
           </IconButton>
         </Grid>
         <Drawer
-          anchor="right"
-          open={this.state.open.right}
-          onRequestClose={this.handleRightClose}
-        >
+    anchor="right"
+    open={this.state.open.right}
+    onRequestClose={this.handleRightClose}
+    >
 
           <List
-            id="simple-List"
-            anchorEl={this.state.anchorEl}
-            open={this.state.open}
-            onRequestClose={this.handleRequestClose}
-          >
+    id="simple-List"
+    anchorEl={this.state.anchorEl}
+    open={this.state.open}
+    onRequestClose={this.handleRequestClose}
+    >
             {loggedIn && <ListItem> <LogoutLink /></ListItem>}
             {!loggedIn && <ListItem><LoginForm formID={'navBarLogin'} /></ListItem>}
             {!loggedIn && <ListItem><RegisterForm formID={'navBarRegister'} /> </ListItem>}

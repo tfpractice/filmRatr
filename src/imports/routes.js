@@ -10,13 +10,13 @@ const moviepage = {
   path: '/movies/:movie_id',
   component: MovieView,
   loadData: [ MovieActions.setMovieFromParams, ],
-}
+};
 
-const topMovies={
+const topMovies = {
   path: '/movies/top',
   component: TopTen,
   loadData: MovieRoute.fetchData,
-}
+};
  
 const movies = {
   path: '/movies',
@@ -27,13 +27,11 @@ const movies = {
 
 const home = {
   path: '/',
-  exact: true,
   component: Home,
 };
 
 const rootRoute = {
   component: Main,
-  exact: true,
   routes: [ movies, search, home, ],
 };
 

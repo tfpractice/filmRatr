@@ -11,11 +11,6 @@ import { renderRoutes, } from 'react-router-config';
 const MovieRoute = ({ children, dispatch, match, route: { routes: subRoutes, }, ...rest }) => {
   const a = 0;
   
-  // console.log('children, rest,match', children, rest, match);
-  // console.log('children', children);
-  // console.log('match', match);
-  console.log('rest', rest);
-  
   return (
     <Grid container direction="column" align="center" className="MovieRouteDiv" id="MovieRoute">
       <Grid item>
@@ -23,7 +18,6 @@ const MovieRoute = ({ children, dispatch, match, route: { routes: subRoutes, }, 
       </Grid>
       <Grid item>
         {renderRoutes(subRoutes)}
-      
       </Grid>
     </Grid>
   );

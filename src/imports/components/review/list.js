@@ -9,7 +9,7 @@ import Paper from 'material-ui/Paper';
 import Text from 'material-ui/Typography';
 
 const mapStateToProps = ({ reviews, }, { movie, }) =>
-({ reviews: reviews.data.filter(r => r.movie_id == movie.id), });
+  ({ reviews: reviews.data.filter(r => r.movie_id == movie.id), });
 
 const ReviewList = ({ movie, reviews, }) => (
   <Grid container justify="center" direction="column" className="Review-list">
@@ -18,19 +18,14 @@ const ReviewList = ({ movie, reviews, }) => (
       <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
     </Grid>
     <Grid item xs={12} className="ReviewList">
-
       <Grid container>
-        {reviews.map(r => (<Grid item key={r.id} >
-          {/* <Paper key={r.id}> */}
+        {reviews.map(r => ( <Grid item key={r.id} >
           <ReviewCard review={r} />
-          <Divider />
-          {/* </Paper> */}
-
-        </Grid>))}
+        </Grid>) )}
       </Grid>
     </Grid>
 
   </Grid>
-  );
+);
 
 export default connect(mapStateToProps)(ReviewList);

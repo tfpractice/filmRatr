@@ -6,10 +6,10 @@ import ReviewForm from './form_base';
 
 const EditReviewForm = ({ editReview, review, }) => (
   <ReviewForm
-    form={`editReview_${review.id}`}
-    review={review}
-    initialValues={review}
-    onSubmit={editReview(review)}
+  form={`editReview_${review.id}`}
+  review={review}
+  initialValues={review}
+  onSubmit={editReview(review)}
   />
 );
 
