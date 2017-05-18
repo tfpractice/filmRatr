@@ -48,6 +48,6 @@ ReviewSchema.statics.dropAll = function () {
 
 const Review = mongoose.model('Review', ReviewSchema);
 
-Review.dropAll();
+// Review.dropAll();
 
 export default Review;

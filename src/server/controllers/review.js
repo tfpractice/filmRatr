@@ -7,17 +7,10 @@ import { Review, } from '../models';
  * @returns void
  */
 export const getReviews = (req, res) =>
-
-  // Review.deleteMany({ user: null, })
-  //   .then((x) => {
-  //     console.log('deletemany', x);
-  //     return
       Review.find()
         .sort({ movie_id: 1, dateAdded: -1, }).exec()
         .then(reviews => res.json({ reviews, }))
         .catch(err => res.status(500).send(err));
-
-    // })
 
   /**
    * Get all reviews for one movie

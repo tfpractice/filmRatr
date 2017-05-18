@@ -22,7 +22,7 @@ const makeStyle = movie => ({
 
 const divStyle = { width: '300px', height: '200px', };
 const MovieCard = ({ movie, setCurrentMovie, }) => (
-  <Card >
+  <Card raised>
     <CardHeader
       title={movie.title}
       subheader={<em>{`${movie.release_date} || ${movie.id}`}</em>}

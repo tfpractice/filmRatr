@@ -13,7 +13,7 @@ const stars = rating => [ ...Array(rating).keys(), ].map(x => <StarIcon />);
 const mapStateToProps = ({ auth: { user, }, }, { review, }) => ({ canEdit: !!user && user.id === review.user, });
 
 const ReviewCard = ({ review, deleteReview, canEdit, }) => (
-  <Card>
+  <Card raised>
     <CardHeader
       title={<p>{review.user ? review.user.username : 'default'} || {stars(review.rating)}</p>}
       subheader={<p>{review.dateAdded} </p>}
