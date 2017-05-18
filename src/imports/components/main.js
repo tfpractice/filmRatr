@@ -23,7 +23,7 @@ export default class Main extends Component {
     
     // console.log('Mainthis.props.match', this.props);
     // console.log('subRoutes', subRoutes);
-
+    
     return (
       <Grid container justify="center" style={styles} >
         <Nav />
