@@ -1,9 +1,10 @@
 import React, { Component, } from 'react';
-import { renderRoutes, } from 'react-router-config';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
+import { renderRoutes, } from 'react-router-config';
 import Nav from './nav';
 import Home from './home';
+
 import MovieRoute, { MovieView, TopTen, } from './movie';
 
 import { SearchResults, } from './search';
