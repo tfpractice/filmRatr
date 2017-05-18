@@ -9,12 +9,12 @@ import Text from 'material-ui/Typography';
 
 const MovieRoute = ({ children, dispatch, match, ...rest }) => {
   const a = 0;
-
+  
   // console.log('children, rest,match', children, rest, match);
   // console.log('children', children);
   // console.log('match', match);
   // console.log('rest', rest);
-
+  
   return (
     <Grid container direction="column" align="center" className="MovieRouteDiv" id="MovieRoute">
       <Grid item>
@@ -22,20 +22,22 @@ const MovieRoute = ({ children, dispatch, match, ...rest }) => {
       </Grid>
       <Grid item>
         <Route
-          exact path={'/movies'} component={TopTen} loadData={(...args) => {
-            console.log('loadData args', args);
-          }}
-        />
+  exact path={'/movies'} component={TopTen} loadData={(...args) => {
+    console.log('loadData args', args);
+  }}
+
+  />
         <Route
-          path={'/movies/:movie_id'} component={MovieView} loadData={(...args) => {
-            console.log('loadData args', args);
-          }}
-        />
+  path={'/movies/:movie_id'} component={MovieView} loadData={(...args) => {
+    console.log('loadData args', args);
+  }}
+
+  />
       </Grid>
     </Grid>
   );
 };
 
-MovieRoute.fetchData = [ MovieActions.getByFreq, ];
+MovieRoute.fetchData = [ MovieActions.getByFreq, MovieActions.getByAvg, ];
 
 export default connect()(MovieRoute);

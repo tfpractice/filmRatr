@@ -7,12 +7,12 @@ import { Review, } from '../models';
  * @returns void
  */
 export const getReviews = (req, res) =>
-      Review.find()
-        .sort({ movie_id: 1, dateAdded: -1, }).exec()
-        .then(reviews => res.json({ reviews, }))
-        .catch(err => res.status(500).send(err));
+  Review.find()
+    .sort({ movie_id: 1, dateAdded: -1, }).exec()
+    .then(reviews => res.json({ reviews, }))
+    .catch(err => res.status(500).send(err));
 
-  /**
+/**
    * Get all reviews for one movie
    * @param req
    * @param res
@@ -31,9 +31,9 @@ export const getMovieReviews = (req, res) =>
  * @returns void
  */
 export const addReview = (req, res) =>
-   Review.create({ ...req.body, user: req.user.id, movie_id: req.movie_id, })
-     .then(review => res.json({ review, }))
-     .catch(err => res.status(500).send(err));
+  Review.create({ ...req.body, user: req.user.id, movie_id: req.movie_id, })
+    .then(review => res.json({ review, }))
+    .catch(err => res.status(500).send(err));
 
 export const updateReview = (req, res) =>
   Review.findByIdAndUpdate(req.params.id, req.body, { new: true, }).exec()
@@ -47,9 +47,9 @@ export const updateReview = (req, res) =>
  * @returns void
  */
 export const getReview = (req, res) =>
- Review.findOne({ id: req.params.id, }).exec()
-   .then(review => res.json({ review, }))
-   .catch(err => res.status(500).send(err));
+  Review.findOne({ id: req.params.id, }).exec()
+    .then(review => res.json({ review, }))
+    .catch(err => res.status(500).send(err));
 
 export const moviesByFreq = (req, res) =>
   Review.moviesByFreq()

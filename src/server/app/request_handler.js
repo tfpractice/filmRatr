@@ -78,7 +78,7 @@ export const requestHandler = (req, res) => {
             </StaticRouter>
           </MuiThemeProvider>
         </Provider>
-              );
+      );
     
       console.log('store', store.getState());
       return res.send(renderHTML(markup, store.getState(), css, chunks));

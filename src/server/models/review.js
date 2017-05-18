@@ -12,37 +12,39 @@ const ReviewSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', default: null, },
 }, { toObject: { virtuals: true, }, toJSON: { virtuals: true, }, });
 
-ReviewSchema.statics.findByMovieID = function (movie_id) {
+ReviewSchema.statics.findByMovieID = function(movie_id){
   return this.find({ movie_id, });
 };
 
-ReviewSchema.statics.movies = function () {
+ReviewSchema.statics.movies = function(){
   return this.aggregate({ $group: { _id: '$movie_id', }, });
 };
 
-ReviewSchema.statics.moviesByAvg = function () {
-  return this.aggregate({
-    $group: {
-      _id: '$movie_id',
-      rating: { $avg: '$rating', },
+ReviewSchema.statics.moviesByAvg = function(){
+  return this.aggregate({ $match: { rating: { $gte: 0, }, }, },
+    {
+      $group: {
+        _id: '$movie_id',
+        rating: { $avg: '$rating', },
+      },
     },
-  },
-     { $sort: { rating: -1, }, },
-   );
+    { $sort: { rating: -1, }, },
+  );
 };
 
-ReviewSchema.statics.moviesByFreq = function () {
+ReviewSchema.statics.moviesByFreq = function(){
   return this.aggregate({
     $group: {
       _id: '$movie_id',
       count: { $sum: 1, },
     },
   },
-     { $sort: { count: -1, }, },
-     { $limit: 10, },
+  { $sort: { count: -1, }, },
+  { $limit: 10, },
   );
 };
-ReviewSchema.statics.dropAll = function () {
+
+ReviewSchema.statics.dropAll = function(){
   return this.deleteMany({});
 };
 

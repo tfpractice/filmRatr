@@ -10,13 +10,18 @@ const reviewRequestPending = requestCreators('REVIEW_REQUEST').pending;
 const reviewRequestFailure = requestCreators('REVIEW_REQUEST').failure;
 const reviewRequestSuccess = requestCreators('REVIEW_REQUEST').success;
 
-const requestReview = id =>
- axios.get(`${REVIEW_URL}/clear`)
-   .then((x) => {
-     console.log('axios delete', x);
-     return axios.get(`${REVIEW_URL}/${id}`);
-   })
-   .catch(err => dispatch(reviewRequestFailure(err)));
+//
+// const requestReview = id =>
+//   axios.get(`${REVIEW_URL}/clear`)
+//     .then((x) => {
+//       console.log('axios delete', x);
+//       return axios.get(`${REVIEW_URL}/${id}`);
+//     })
+//     .catch(err => dispatch(reviewRequestFailure(err)));
+   
+const requestReview = id => axios.get(`${REVIEW_URL}/${id}`)
+
+// .catch(err => dispatch(reviewRequestFailure(err)));
 
 const tapReviews = ({ reviews, }) => reviews;
 const tapReview = ({ review, }) => review;
@@ -31,7 +36,7 @@ const removeReview = ({ id, }) =>
   ({ type:  DELETE_REVIEW, curry: removeByID({ id, }), });
 
 export const mergeReviews = (...reviews) =>
-({ type: UPDATE_REVIEWS, curry: merge(...reviews), });
+  ({ type: UPDATE_REVIEWS, curry: merge(...reviews), });
 
 export const getReviews = () => dispatch =>
   Promise.resolve(dispatch(reviewRequestPending()))
@@ -39,7 +44,7 @@ export const getReviews = () => dispatch =>
     .then(getData)
     .then(tapReviews)
     .then(reviews => Promise.all(
-    [ reviewRequestSuccess(), mergeReviews(...reviews), ].map(dispatch))
+      [ reviewRequestSuccess(), mergeReviews(...reviews), ].map(dispatch))
       .then(() => reviews))
     .catch(err => dispatch(reviewRequestFailure(err)));
 
@@ -65,12 +70,12 @@ export const createReview = ({ id: movie_id, }) => (dispatch, getState) => revPr
   .catch(err => dispatch(reviewRequestFailure(err)));
 
 export const editReview = ({ movie_id, id, }) => dispatch => revProps =>
- axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, revProps)
-   .then(getData)
-   .then(tapReview)
-   .then(updateReview)
-   .then(dispatch)
-   .catch(err => dispatch(reviewRequestFailure(err)));
+  axios.patch(`${REVIEW_URL}/${movie_id}/${id}`, revProps)
+    .then(getData)
+    .then(tapReview)
+    .then(updateReview)
+    .then(dispatch)
+    .catch(err => dispatch(reviewRequestFailure(err)));
 
 export const deleteReview = ({ movie_id, id, }) => dispatch =>
   axios.delete(`${REVIEW_URL}/${movie_id}/${id}`)

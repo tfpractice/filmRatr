@@ -13,18 +13,9 @@ import { SearchResults, } from './search';
 const styles = { paddingTop: '5rem', };
 
 export default class Main extends Component {
-  // componentWillMount() {
-  //   const jssStyles = document.getElementById('jss-server-side');
-  //
-  //   if (jssStyles && jssStyles.parentNode) {
-  //     jssStyles.parentNode.removeChild(jssStyles);
-  //   }
-  // }
+  
   render() {
     const { route: { routes: subRoutes, }, } = this.props;
-    
-    // console.log('Mainthis.props.match', this.props);
-    // console.log('subRoutes', subRoutes);
     
     return (
       <Grid container justify="center" style={styles} >
