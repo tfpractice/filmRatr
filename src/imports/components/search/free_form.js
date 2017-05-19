@@ -12,9 +12,8 @@ import SearchForm from './form';
 // const mapStateToProps = (state, { formID, }) =>
 //    ({ query: formValueSelector(formID)(state, 'query'), });
 
-const IndependentForm = ({ formID, search, history, ...props }) => {
+const IndependentForm = ({ formID, search, ...props }) => {
   console.log('IndependentForm props', props);
-  console.log('history', history);
   const b = 0;
   
   // query, search, router,
