@@ -1,10 +1,9 @@
 import React from 'react';
 import qs from 'qs';
-import { connect, } from 'react-redux';
-import { withRouter, } from 'react-router';
-import { renderRoutes, } from 'react-router-config';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
+import { connect, } from 'react-redux';
+import { withRouter, } from 'react-router';
 import { SearchActions, } from 'imports/actions';
 import { MovieList, } from '../movie';
 import FreeForm from './free_form';

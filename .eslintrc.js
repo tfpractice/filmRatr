@@ -162,7 +162,7 @@ module.exports = {
         'react/jsx-equals-spacing': [ 2, 'never'],
         // imports-plugins
         'import/order': [ 'error', { groups:
-         [['builtin', 'external'], 'index', 'parent', 'sibling' ], },],
+         [['builtin', 'external'], ['internal','index'], 'parent', 'sibling' ], },],
         'import/no-extraneous-dependencies':
          ['error',
           { devDependencies: true,

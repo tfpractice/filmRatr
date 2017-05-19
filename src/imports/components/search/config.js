@@ -12,8 +12,10 @@ const searchMatch = (match) => {
   return SearchActions.search(parseMatch(match));
 };
 
-export const routes = {
+const routes = {
   path: '/search(.?):query?',
   component: SearchResults,
   loadData: [ searchMatch, ],
 };
+
+export default routes;

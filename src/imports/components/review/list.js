@@ -1,12 +1,9 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import Divider from 'material-ui/Divider';
+import Grid from 'material-ui/Grid';
+import Text from 'material-ui/Typography';
 import ReviewCard from './item';
 import MovieReviewForm from './form';
-import Grid from 'material-ui/Grid';
-import List, { ListItem, ListItemIcon, ListItemText, } from 'material-ui/List';
-import Paper from 'material-ui/Paper';
-import Text from 'material-ui/Typography';
 
 const mapStateToProps = ({ reviews, }, { movie, }) =>
   ({ reviews: reviews.data.filter(r => r.movie_id == movie.id), });
@@ -19,9 +16,9 @@ const ReviewList = ({ movie, reviews, }) => (
     </Grid>
     <Grid item xs={12} className="ReviewList">
       <Grid container>
-        {reviews.map(r => ( <Grid item key={r.id} >
+        {reviews.map(r => (<Grid item key={r.id} >
           <ReviewCard review={r} />
-        </Grid>) )}
+        </Grid>))}
       </Grid>
     </Grid>
 
