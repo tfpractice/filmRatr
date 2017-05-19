@@ -24,15 +24,8 @@ const movies = {
   routes: [ moviepage, topMovies, ],
 };
 
-const results = {
-  path: '/search/:query',
-  component: MovieList,
-  loadData: SearchResults.fetchData,
-};
-
 const search = {
-  // location: { pathname: '/search?:query?', },
-  path: '/search([?]?):query?',
+  path: '/search(.?):query?',
   component: SearchResults,
   loadData: SearchResults.fetchData,
 };
