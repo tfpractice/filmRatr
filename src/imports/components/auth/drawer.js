@@ -1,24 +1,19 @@
 import React, { Component, } from 'react';
-import { createStyleSheet, } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Drawer from 'material-ui/Drawer';
 import Button from 'material-ui/Button';
-import List, { ListItem, ListItemIcon, ListItemText, } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import InboxIcon from 'material-ui-icons/Inbox';
-import DraftsIcon from 'material-ui-icons/Drafts';
+import Menu, { MenuItem, } from 'material-ui/Menu';
+import List, { ListItem, ListItemIcon, } from 'material-ui/List';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
-
-import Menu, { MenuItem, } from 'material-ui/Menu';
-import NavMenu from 'material-ui-icons/Navigation';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
 import { connect, } from 'react-redux';
+import { createStyleSheet, } from 'jss-theme-reactor';
 import { SideBarActions, } from '../stateful';
 import LoginForm from './login_form';
 import RegisterForm from './registration_form';
 import LogoutLink from './logout_link';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
 
 const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, user, });
 
@@ -57,10 +52,6 @@ class Dash extends Component {
     const classes = this.context.styleManager.render(styleSheet);
     const { loggedIn, toggle, user, ...props } = this.props;
 
-    // const { currentUser, } = this.props;
-
-    // console.log('Dashthis.props', this.props);
-
     return (
         
       <Grid container>
@@ -68,10 +59,8 @@ class Dash extends Component {
           { loggedIn && <Text secondary align="center" type="headline">
             {`Welcome, ${user.username}`}
           </Text>}
-          
         </Grid>
         <Grid item>
-
           <IconButton contrast onClick={this.handleRightOpen}>
             <MenuIcon />
           </IconButton>
@@ -86,8 +75,8 @@ class Dash extends Component {
     id="simple-List"
     anchorEl={this.state.anchorEl}
     open={this.state.open}
-    onRequestClose={this.handleRequestClose}
-    >
+    onRequestClose={this.handleRequestClose}>
+
             {loggedIn && <ListItem> <LogoutLink /></ListItem>}
             {!loggedIn && <ListItem><LoginForm formID={'navBarLogin'} /></ListItem>}
             {!loggedIn && <ListItem><RegisterForm formID={'navBarRegister'} /> </ListItem>}

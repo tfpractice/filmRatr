@@ -1,7 +1,7 @@
 import React from 'react';
 import { routes as search, } from './components/search';
 
-import { Home, Main, MovieList, MovieRoute, MovieView, SearchResults, TopTen, } from './components';
+import { Home, Main, MovieRoute, MovieView, TopTen, } from './components';
 import { MovieActions, } from './actions';
 
 const moviepage = {
@@ -23,12 +23,6 @@ const movies = {
   routes: [ moviepage, topMovies, ],
 };
 
-//
-// const search = {
-//   path: '/search(.?):query?',
-//   component: SearchResults,
-//   loadData: SearchResults.fetchData,
-// };
 const home = {
   path: '/',
   component: Home,
