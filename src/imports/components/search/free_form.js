@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import { connect, } from 'react-redux';
 import { withRouter, } from 'react-router';
 import { formValueSelector, } from 'redux-form';
@@ -12,8 +13,8 @@ import SearchForm from './form';
 //    ({ query: formValueSelector(formID)(state, 'query'), });
 
 const IndependentForm = ({ formID, search, history, ...props }) => {
-  // console.log('IndependentForm props', props);
-  // console.log('history', history);
+  console.log('IndependentForm props', props);
+  console.log('history', history);
   const b = 0;
   
   // query, search, router,
@@ -27,12 +28,10 @@ const IndependentForm = ({ formID, search, history, ...props }) => {
 
     search(q).then((r) => {
       console.log('promise res', r);
-      console.log('q.title', q.title);
-      history.push({
-        pathname: '/search',
-        search:
-          `?[title]=${q.title}`,
-      });
+      console.log('q', q);
+      console.log('qs.parse(`?[title]=${q.title}`)', qs.parse(`[title]=${q.title}`));
+
+      history.push({ pathname: '/search', search: `[title]=${q.title}`, state: { query: q, }, });
 
       // history.push(`/search/${q.title}`);
       return r;

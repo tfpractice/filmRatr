@@ -16,15 +16,14 @@ const tapResults = ({ results, }) => results;
 const updateResults = (...results) =>
   ({ type: UPDATE_SEARCH_RESULTS, curry: replace(results), });
 
-export const search = ({ title: query, }) => (dispatch) => {
+export const search = ({ title: query, } = { title: 'matrix', }) => (dispatch) => {
   console.log('query', query);
   return Promise.resolve(dispatch(searchRequestPending(query)))
     .then(() =>
       axios.get(SEARCH_URL, { params: { query, append_to_response: 'images', }, })
         .then(getData)
         .then(tapResults)
-
-        // .then(r => console.log('SEARCH_URL res', r) || r)
+        .then(r => console.log('SEARCH_URL res success\n', r.length, '\n') || r)
         .then(results => Promise.all(
           [ searchRequestSuccess(query),
             updateResults(...results),

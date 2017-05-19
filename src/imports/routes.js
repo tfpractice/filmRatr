@@ -30,26 +30,9 @@ const results = {
   loadData: SearchResults.fetchData,
 };
 
-const searches = [{
-  path: '/search?(.*)',
-  component: SearchResults,
-  loadData: SearchResults.fetchData,
-
-},
-{
-  path: '/search?:query?',
-  component: SearchResults,
-  loadData: SearchResults.fetchData,
-
-},
-{
-  path: '/search:query?',
-  component: SearchResults,
-  loadData: SearchResults.fetchData,
-}, ];
-
 const search = {
-  path: '/search?:query?',
+  // location: { pathname: '/search?:query?', },
+  path: '/search([?]?):query?',
   component: SearchResults,
   loadData: SearchResults.fetchData,
 };

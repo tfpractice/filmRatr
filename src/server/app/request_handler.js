@@ -44,40 +44,31 @@ export const requestHandler = (req, res) => {
   const promises = [];
   
   const loadBranchData = r => (location) => {
-    console.log('req.url', req.url);
-    console.log('req.baseUrl', req.baseUrl);
-    console.log('req.roriginalUrl', req.originalUrl);
-    console.log('req.path', req.path);
-    console.log('req.path', req.path);
+    console.log('req.url', req.url, '\n');
+    console.log('req.query', req.query, '\n');
     
-    console.log('req.route', req.route);
-    
-    console.log('req.params', req.params);
-    console.log('req.query', req.query);
-
-    // console.log('location.pathname', location);
     const branch = matchRoutes(r, location);
     const rFilt = branch.filter(r => r.route.loadData);
+    const exFilt = rFilt.filter(r => r.match.isExact);
+    const mapped = exFilt.map(({ route, match, }) => {
+      console.log(' Object.keys(route)', Object.keys(route), '\n');
 
-    const exFilt = rFilt;
-
-    // rFilt.filter(r => r.match.isExact);
-    const mapped = rFilt.map(({ route, match, }) => {
-      console.log(' Object.keys(route)', Object.keys(route));
-      console.log('match', match);
+      // console.log('mathched route', route, '\n');
+      console.log('match', match, '\n');
       return route.loadData.map(f => f(match));
     });
     const promises = mapped.reduce(flattenBin, []);
     
-    console.log('branch', branch);
-
-    console.log('rFilt', rFilt);
-
-    // console.log('exFilt', exFilt);
-
+    // console.log('branch', branch, '\n');
+    console.log('branch.length', branch.length, '\n');
+    
+    // console.log('rFilt', rFilt,'\n');
+    
+    console.log('exFilt', exFilt, '\n');
+    
     //
-    // console.log('mapped', mapped);
-    // console.log('promises', promises,);
+    // console.log('mapped', mapped,'\n');
+    // console.log('promises', promises,,'\n');
     
     return Promise.all(promises.map(store.dispatch));
   };
@@ -88,10 +79,10 @@ export const requestHandler = (req, res) => {
     res.redirect(302);
   } else {
     loadBranchData(routes)(req.url).then((data) => {
-      console.log('data', data);
+      console.log('data', '\n');
       const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
       const css = styleManager.sheetsToString();
-
+      
       const markup = renderToString(
         <Provider store={store}>
           <MuiThemeProvider styleManager={styleManager} theme={theme}>
