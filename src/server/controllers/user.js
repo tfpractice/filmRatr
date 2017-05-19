@@ -18,7 +18,7 @@ export const loginUser = (req, username, password, done) =>
       if (user) {
         return user.comparePassword(password)
           .then(isValid =>
-              isValid ? done(null, user)
+            isValid ? done(null, user)
               : done(null, false, { message: 'Invalid password.', }));
       }
 
@@ -69,9 +69,9 @@ export const getUsers = (req, res) =>
  * @returns void
  */
 export const getUser = (req, res) =>
-    User.findOne({ id: req.params.id, }).exec()
-      .then(user => res.json({ user, }))
-      .catch(err => res.status(500).send(err));
+  User.findOne({ id: req.params.id, }).exec()
+    .then(user => res.json({ user, }))
+    .catch(err => res.status(500).send(err));
 
 export const updateUser = (req, res) =>
   User.findByIdAndUpdate(req.params.id, req.body, { new: true, }).exec()
