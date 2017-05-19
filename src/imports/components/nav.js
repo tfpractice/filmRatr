@@ -8,7 +8,7 @@ import { connect, } from 'react-redux';
 
 import { Link, } from 'react-router-dom';
 import { AuthMenu, LoginForm, LogoutLink, RegisterForm, } from './auth';
-import { IndependentSearch, } from './search';
+import { SearchForm, } from './search';
 import { SideBar, SideBarActions, } from './stateful';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -34,7 +34,7 @@ const Nav = ({ loggedIn, toggle, }) => (
           </Grid>
         </Grid>
         <Grid item >
-          <IndependentSearch formID="navSearchForm" />
+          <SearchForm formID="navSearchForm" />
         </Grid>
 
       </Grid>
@@ -43,18 +43,5 @@ const Nav = ({ loggedIn, toggle, }) => (
   </AppBar>
 
 );
-
-// <AppBar
-//   title={<Link to="/" >FilmRatr</Link>}
-//   iconClassNameRight="muidocs-icon-navigation-expand-more"
-//   iconElementLeft={<AuthMenu />}
-// >
-//   <SideBar>
-//     {loggedIn && <LogoutLink />}
-//     {!loggedIn && <LoginForm formID={'navBarLogin'} />}
-//     {!loggedIn && <RegisterForm formID={'navBarRegister'} />}
-//   </SideBar>
-//   <IndependentSearch formID={'navSearchForm'} />
-// </AppBar>
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

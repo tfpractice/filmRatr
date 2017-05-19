@@ -3,17 +3,18 @@ import { bindActionCreators, } from 'redux';
 import qs from 'qs';
 import { connect, } from 'react-redux';
 import { withRouter, } from 'react-router';
-import { SearchActions, } from 'imports/actions';
-import { MovieCard, MovieList, } from '../movie';
-import FreeForm from './free_form';
+import { renderRoutes, } from 'react-router-config';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
-import { renderRoutes, } from 'react-router-config';
+import { SearchActions, } from 'imports/actions';
+import { MovieList, } from '../movie';
+import FreeForm from './free_form';
 
 const mapStateToProps = ({ search: { results, request: { query, }, }, }) => ({ results, query, });
 
-const mapDispatchToProps = dispatch =>
-  ({ actions: bindActionCreators(SearchActions, dispatch), });
+//
+// const mapDispatchToProps = dispatch =>
+//   ({ actions: bindActionCreators(SearchActions, dispatch), });
 
 const SearchResults = ({ results, route, ...rest }) => {
   const a = 0;
@@ -42,12 +43,12 @@ const SearchResults = ({ results, route, ...rest }) => {
   );
 };
 
-SearchResults.fetchData = [ (match, ...args) => {
-  console.log('match.params.query\n', match.params.query);
-  console.log('qs.parse(match.params.query)', qs.parse(match.params.query));
-  console.log('SearchResults.args\n', args);
-  
-  return SearchActions.search(qs.parse(match.params.query));
-}, ];
+// SearchResults.fetchData = [ (match, ...args) => {
+//   console.log('match.params.query\n', match.params.query);
+//   console.log('qs.parse(match.params.query)', qs.parse(match.params.query));
+//   console.log('SearchResults.args\n', args);
+//
+//   return SearchActions.search(qs.parse(match.params.query));
+// }, ];
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchResults));
+export default connect(mapStateToProps, SearchActions)(withRouter(SearchResults));

@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { BrowserRouter, Link, Route, Switch, } from 'react-router-dom';
+import { routes as search, } from './components/search';
 
 import { Home, Main, MovieList, MovieRoute, MovieView, SearchResults, TopTen, } from './components';
 import { MovieActions, } from './actions';
@@ -24,11 +23,12 @@ const movies = {
   routes: [ moviepage, topMovies, ],
 };
 
-const search = {
-  path: '/search(.?):query?',
-  component: SearchResults,
-  loadData: SearchResults.fetchData,
-};
+//
+// const search = {
+//   path: '/search(.?):query?',
+//   component: SearchResults,
+//   loadData: SearchResults.fetchData,
+// };
 const home = {
   path: '/',
   component: Home,
