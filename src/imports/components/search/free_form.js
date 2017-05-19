@@ -22,14 +22,18 @@ const IndependentForm = ({ formID, search, history, ...props }) => {
     <SearchForm
   form={formID} onSubmit={(q, ...args) => {
     console.log('args', q, args);
-    
+
     // console.log('q.query', q.query);
-    
+
     search(q).then((r) => {
       console.log('promise res', r);
       console.log('q.title', q.title);
-      history.push({ pathname: '/search', search: `?title=${q.title}`, });
-      
+      history.push({
+        pathname: '/search',
+        search:
+          `?[title]=${q.title}`,
+      });
+
       // history.push(`/search/${q.title}`);
       return r;
     });

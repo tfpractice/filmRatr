@@ -23,7 +23,8 @@ export const search = ({ title: query, }) => (dispatch) => {
       axios.get(SEARCH_URL, { params: { query, append_to_response: 'images', }, })
         .then(getData)
         .then(tapResults)
-        .then(r => console.log('SEARCH_URL res', r) || r)
+
+        // .then(r => console.log('SEARCH_URL res', r) || r)
         .then(results => Promise.all(
           [ searchRequestSuccess(query),
             updateResults(...results),

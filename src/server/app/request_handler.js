@@ -44,11 +44,25 @@ export const requestHandler = (req, res) => {
   const promises = [];
   
   const loadBranchData = r => (location) => {
+    console.log('req.url', req.url);
+    console.log('req.baseUrl', req.baseUrl);
+    console.log('req.roriginalUrl', req.originalUrl);
+    console.log('req.path', req.path);
+    console.log('req.path', req.path);
+    
+    console.log('req.route', req.route);
+    
+    console.log('req.params', req.params);
+    console.log('req.query', req.query);
+
     // console.log('location.pathname', location);
     const branch = matchRoutes(r, location);
     const rFilt = branch.filter(r => r.route.loadData);
-    const exFilt = rFilt.filter(r => r.match.isExact);
-    const mapped = exFilt.map(({ route, match, }) => {
+
+    const exFilt = rFilt;
+
+    // rFilt.filter(r => r.match.isExact);
+    const mapped = rFilt.map(({ route, match, }) => {
       console.log(' Object.keys(route)', Object.keys(route));
       console.log('match', match);
       return route.loadData.map(f => f(match));
@@ -58,7 +72,8 @@ export const requestHandler = (req, res) => {
     console.log('branch', branch);
 
     console.log('rFilt', rFilt);
-    console.log('exFilt', exFilt);
+
+    // console.log('exFilt', exFilt);
 
     //
     // console.log('mapped', mapped);

@@ -20,7 +20,7 @@ mongoose.connect(dbConfig.mongoURL, (error) => {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
   }
-
+  
   console.log('mongoose connected');
 });
 
@@ -71,7 +71,9 @@ app.use('/api', MovieRoutes, ReviewRoutes);
 // applyRoutes(app, passport);
 applyRoutes(app, passport);
 
+// \/\*\/
 // establish server render
+// app.use(requestHandler);
 app.use(requestHandler);
 app.use(express.static(path.resolve('dist')));
 

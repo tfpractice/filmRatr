@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch =>
 const SearchResults = ({ results, query, route: { routes, }, ...rest }) => {
   const a = 0;
   
-  console.log('SEARCH_REQUESTrest', query, rest);
+  // console.log('SEARCH_REQUESTrest', query, rest);
   return (
     <Grid container direction="column" align="center" className="search-list">
       <Grid item>
@@ -33,6 +33,6 @@ const SearchResults = ({ results, query, route: { routes, }, ...rest }) => {
   );
 };
 
-SearchResults.fetchData = [ ({ params, }) => SearchActions.search(params), ];
+SearchResults.fetchData = [ arg => console.log('SearchResults.fetchData', arg) || SearchActions.search(arg), ];
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchResults));

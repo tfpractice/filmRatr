@@ -29,10 +29,29 @@ const results = {
   component: MovieList,
   loadData: SearchResults.fetchData,
 };
-const search = {
-  path: '/search',
+
+const searches = [{
+  path: '/search?(.*)',
   component: SearchResults,
-  routes: [ results, ],
+  loadData: SearchResults.fetchData,
+
+},
+{
+  path: '/search?:query?',
+  component: SearchResults,
+  loadData: SearchResults.fetchData,
+
+},
+{
+  path: '/search:query?',
+  component: SearchResults,
+  loadData: SearchResults.fetchData,
+}, ];
+
+const search = {
+  path: '/search?:query?',
+  component: SearchResults,
+  loadData: SearchResults.fetchData,
 };
 const home = {
   path: '/',
