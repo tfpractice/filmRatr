@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import MovieList from './list';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
+import MovieList from './list';
 
 const mapStateToProps = ({ movies: { data, }, }, own) => ({ movies: data, });
 
@@ -13,6 +13,6 @@ const TopTen = ({ movies, }) => (
     </Grid>
     <MovieList movies={movies} />
   </Grid>
-  );
+);
 
 export default connect(mapStateToProps)(TopTen);

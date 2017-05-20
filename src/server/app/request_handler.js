@@ -1,15 +1,14 @@
 import React from 'react';
 import { flattenBin, } from 'fenugreek-collections';
 import { Provider, } from 'react-redux';
-import { renderRoutes, } from 'react-router-config';
-import { renderToString, } from 'react-dom/server';
-import { AppContainer, getRoutes, getStore, } from 'imports';
 import { StaticRouter, } from 'react-router';
-import { matchPath, } from 'react-router-dom';
+
+// import { matchPath, } from 'react-router-dom';
+import { matchRoutes, renderRoutes, } from 'react-router-config';
+import { renderToString, } from 'react-dom/server';
 import { MuiThemeProvider, } from 'material-ui/styles';
-import { matchRoutes, } from 'react-router-config';
 import { styleManager, theme, } from 'imports/utils';
-import { Main, } from 'imports/components';
+import { AppContainer, getRoutes, getStore, } from 'imports';
 
 const makeSrc = path => `<script type="application/javascript" src=/${path}></script>`;
 
@@ -41,24 +40,25 @@ export const requestHandler = (req, res) => {
   const store = getStore();
   const routes = getRoutes;
   
-  const promises = [];
-  
   const loadBranchData = r => (location) => {
     console.log('req.url', req.url, '\n');
-    console.log('req.query', req.query, '\n');
-    
+     
     const branch = matchRoutes(r, location);
     const rFilt = branch.filter(r => r.route.loadData);
     const exFilt = rFilt.filter(r => r.match.isExact);
     const mapped = exFilt.map(({ route, match, }) => {
       console.log(' Object.keys(route)', Object.keys(route), '\n');
 
-      // console.log('mathched route', route, '\n');
+      console.log('route.loadData.map(f => f(match))', route.loadData.map(f => f(match)));
+
       console.log('match', match, '\n');
       return route.loadData.map(f => f(match));
     });
     const promises = mapped.reduce(flattenBin, []);
-    
+
+    // console.log('mapped', mapped, '\n');
+    // console.log('promises', promises, '\n');
+
     // console.log('branch', branch, '\n');
     console.log('branch.length', branch.length, '\n');
     
@@ -70,16 +70,18 @@ export const requestHandler = (req, res) => {
     // console.log('mapped', mapped,'\n');
     // console.log('promises', promises,,'\n');
     
-    return Promise.all(promises.map(store.dispatch));
+    return Promise.all(promises.map(action => store.dispatch(action)));
   };
   
   const context = {};
   
   if (context.url) {
+    console.log('context', context);
     res.redirect(302);
   } else {
     loadBranchData(routes)(req.url).then((data) => {
-      console.log('data', '\n');
+      // console.log('data received', '\n');
+      // console.log('context', context);
       const chunks = res.locals.webpackStats.toJson().assetsByChunkName;
       const css = styleManager.sheetsToString();
       

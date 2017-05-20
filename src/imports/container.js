@@ -6,7 +6,8 @@ import { BrowserRouter, } from 'react-router-dom';
 import { MuiThemeProvider, } from 'material-ui/styles';
 import { styleManager, theme, } from 'imports/utils';
 import getRoutes from './routes';
-import { Main, } from './components';
+
+// import { Main, } from './components';
 
 export default class AppContainer extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ export default class AppContainer extends Component {
   render() {
     const { store, history, } = this.props;
 
+    console.log('AppContainerthis.props', this.props);
     return (
       <Provider store={store}>
         <MuiThemeProvider theme={theme} styleManager={styleManager}>
@@ -29,5 +31,4 @@ export default class AppContainer extends Component {
       </Provider>
     );
   }
-  
 }

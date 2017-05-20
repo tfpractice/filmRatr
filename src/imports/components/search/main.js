@@ -13,6 +13,8 @@ const mapStateToProps = ({ search: { results, request: { query, }, }, }) => ({ r
 const SearchResults = ({ results, route, ...rest }) => {
   const a = 0;
 
+  console.log('SearchResults rest', route, rest);
+
   return (
     <Grid container direction="column" align="center" className="search-list">
       <Grid item>

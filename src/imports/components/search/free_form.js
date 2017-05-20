@@ -5,23 +5,18 @@ import { withRouter, } from 'react-router';
 import { SearchActions, } from '../../actions';
 import SearchForm from './form';
 
-const IndependentForm = ({ formID, search, ...props }) => {
+const searchAndPush = history => query => results =>
+  Promise.resolve(history.push({
+    pathname: '/search',
+    search: qs.stringify({ '': query, }, { encode: false, }),
+  })).then(x => results);
+
+const IndependentForm = ({ formID, search, history, ...props }, context) => {
   const b = 0;
   
   return (
-    <SearchForm form={formID} onSubmit={(q, ...args) => {
-    console.log('args', q, args);
-
-    search(q).then((r) => {
-      console.log('promise res', r);
-      console.log('q', q);
-      console.log('qs.parse(`?[title]=${q.title}`)', qs.parse(`[title]=${q.title}`));
-
-      history.push({ pathname: '/search', search: `[title]=${q.title}`, state: { query: q, }, });
-
-      return r;
-    });
-  }}
+    <SearchForm form={formID} onSubmit={ query => search(query)
+    .then(searchAndPush(history)(query)) }
 
   />);
 };

@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect, } from 'react-redux';
+import Grid from 'material-ui/Grid';
 import { MovieActions, } from 'imports/actions';
 import { ReviewList, } from '../review';
 import MovieCard from './single';
-import Grid from 'material-ui/Grid';
+
 const MapStateToProps = ({ currentMovie: movie, }) => ({ movie, });
+
 const MovieView = ({ movie, }) => (
   <Grid container direction="column" justify="center">
     <Grid item xs={12}>

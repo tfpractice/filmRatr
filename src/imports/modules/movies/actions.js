@@ -54,8 +54,20 @@ export const getByAvg = arg => dispatch =>
     .then(dispatch)
     .catch(e => dispatch(movieRequestFailure(e)));
 
-export const getByFreq = () => dispatch =>
-  axios.get(`${API_URL}/movies/freq`)
+export const getByFreq = arg => (dispatch) => {
+  console.log('byfreq', arg);
+  return axios.get(`${API_URL}/movies/freq`)
     .then(getData)
-    .then(ids => dispatch(getMovies(...ids)))
+
+    // .then(x => (console.log('AVERAGEmovies IDS', x) || x))
+
+    .then(ids => getMovies(...ids))
+
+    // .then(x => (console.log('AVERAGEmovies', x) || x))
+
+    .then(dispatch)
+
+    // .then(x => (console.log('AVERAGEmovies ACTION', x) || x))
+
     .catch(e => dispatch(movieRequestFailure(e)));
+};

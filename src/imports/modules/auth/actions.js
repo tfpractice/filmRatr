@@ -51,5 +51,5 @@ export const logoutUser = () => dispatch =>
       .then(getData)
       .then(tapStatus)
       .then(status =>
-            Promise.all([ logoutSuccess(status), unsetUser(), ].map(dispatch))))
+        Promise.all([ logoutSuccess(status), unsetUser(), ].map(dispatch))))
     .catch(err => dispatch(logoutFailure(err)));
