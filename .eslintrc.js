@@ -161,8 +161,13 @@ module.exports = {
         'react/jsx-filename-extension': [1, { extensions: [ '.js', '.jsx' ] }],
         'react/jsx-equals-spacing': [ 2, 'never'],
         // imports-plugins
-        'import/order': [ 'error', { groups:
-         [['builtin', 'external'], ['internal','index'], 'parent', 'sibling' ], },],
+        'import/order': [ 'error', { 
+          'newlines-between': 'always',
+          groups: [
+            ['builtin', 'external'], 
+            ['internal', 'index'],
+            ['parent', 'sibling'], ], 
+        },],
         'import/no-extraneous-dependencies':
          ['error',
           { devDependencies: true,

@@ -1,15 +1,14 @@
 import React, { Component, } from 'react';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Drawer from 'material-ui/Drawer';
-import Button from 'material-ui/Button';
-import Menu, { MenuItem, } from 'material-ui/Menu';
-import List, { ListItem, ListItemIcon, } from 'material-ui/List';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import { connect, } from 'react-redux';
 import { createStyleSheet, } from 'jss-theme-reactor';
+import List, { ListItem, } from 'material-ui/List';
+
 import { SideBarActions, } from '../stateful';
 import LoginForm from './login_form';
 import RegisterForm from './registration_form';
@@ -52,30 +51,30 @@ class Dash extends Component {
     const classes = this.context.styleManager.render(styleSheet);
     const { loggedIn, toggle, user, ...props } = this.props;
 
+    console.log(' DRAWER this.props', this.props);
     return (
-        
       <Grid container>
-        <Grid item>
-          { loggedIn && <Text secondary align="center" type="headline">
-            {`Welcome, ${user.username}`}
-          </Text>}
-        </Grid>
         <Grid item>
           <IconButton contrast onClick={this.handleRightOpen}>
             <MenuIcon />
           </IconButton>
         </Grid>
+        <Grid item>
+          { loggedIn && <Text secondary align="center" type="headline">
+            {`Welcome, ${user.username}`}
+          </Text>}
+        </Grid>
         <Drawer
-    anchor="right"
-    open={this.state.open.right}
-    onRequestClose={this.handleRightClose}
-    >
+          anchor="right"
+          open={this.state.open.right}
+          onRequestClose={this.handleRightClose}
+        >
 
           <List
-    id="simple-List"
-    anchorEl={this.state.anchorEl}
-    open={this.state.open}
-    onRequestClose={this.handleRequestClose}>
+            id="simple-List"
+            anchorEl={this.state.anchorEl}
+            open={this.state.open}
+            onRequestClose={this.handleRequestClose}>
 
             {loggedIn && <ListItem> <LogoutLink /></ListItem>}
             {!loggedIn && <ListItem><LoginForm formID={'navBarLogin'} /></ListItem>}
