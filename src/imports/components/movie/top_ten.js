@@ -4,7 +4,8 @@ import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 import MovieList from './list';
 
-const mapStateToProps = ({ movies: { data, }, }, own) => ({ movies: data, });
+const mapStateToProps = ({ movies: { data, }, }, own) =>
+  ({ movies: data, });
 
 const TopTen = ({ movies, }) => (
   <Grid container className="TopTen">

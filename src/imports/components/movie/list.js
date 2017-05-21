@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
+
 import MovieCard from './single';
 
 const MovieList = ({ movies, }) => (

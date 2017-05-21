@@ -6,6 +6,6 @@ import reducer from './reducer';
 
 const predicate = (getState, { type, }) => MOVIE_ACTIONS.has(type);
 const collapsed = (getState, action) => action.type;
-const log = createLogger({ collapsed, });
+const log = createLogger({ collapsed, predicate, });
 
-export default state => applyMiddleware(thunk)(createStore)(reducer, state);
+export default state => applyMiddleware(thunk, log)(createStore)(reducer, state);
