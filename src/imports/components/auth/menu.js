@@ -10,7 +10,7 @@ const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, });
 const AuthMenu = ({ loggedIn, toggle, ...props }) => {
   const a = 0;
   
-  // console.log('AuthMenu props', props, loggedIn, toggle);
+  console.log('AuthMenu props', props);
   
   return (
     <Menu {...props} >

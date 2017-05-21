@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch =>
 const Nav = () => (
   <AppBar>
     <Toolbar>
-      <Grid container justify="space-around" direction="row" align="center">
+      <Grid container justify="space-between" direction="row" align="center">
         <Grid item>
           <Grid container direction="row" align="center">
             <Grid item >
