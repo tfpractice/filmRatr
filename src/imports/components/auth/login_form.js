@@ -11,8 +11,8 @@ const baseLogin = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
     <FormLabel >Login</FormLabel>
     <FormGroup row>
-      <Field name="username" label="username" component={renderText} type="text" />
-      <Field name="password" label="password" component={renderText} type="password" />
+      <Field name="username" label="username" type="text" component={renderText} />
+      <Field name="password" label="password" type="password" component={renderText} />
       <Button primary type="submit">Login</Button>
     </FormGroup>
   </form>

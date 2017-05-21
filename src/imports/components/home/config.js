@@ -10,8 +10,6 @@ const home = {
   path: '/',
   component: Home,
   routes: [ about, ],
-
-  // loadData: [ MovieActions.getByFreq, ],
 };
 
 export default home;
