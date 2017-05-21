@@ -6,18 +6,20 @@ import Grid from 'material-ui/Grid';
 import { bindActionCreators, } from 'redux';
 import { connect, } from 'react-redux';
 import { Link, } from 'react-router-dom';
+
 import { AuthMenu, } from './auth';
 import { SearchForm, } from './search';
 import { SideBarActions, } from './stateful';
+
 const { toggle, } = SideBarActions;
 
 const mapStateToProps = ({ auth: { user, }, }) =>
-  ({ loggedIn: !!user, });
+  ({ loggedIn: !!user, user, });
   
 const mapDispatchToProps = dispatch =>
   ({ toggle: bindActionCreators(toggle, dispatch), });
   
-const Nav = () => (
+const Nav = ({ loggedIn, user, }) => (
   <AppBar>
     <Toolbar>
       <Grid container justify="space-between" direction="row" align="center">
@@ -31,7 +33,13 @@ const Nav = () => (
                 FilmRatr
               </Text>
             </Link>
+            <Grid item>
+              { loggedIn && <Text secondary align="center" type="title">
+                {`Welcome, ${user.username}`}
+              </Text>}
+            </Grid>
           </Grid>
+
         </Grid>
         <Grid item >
           <SearchForm formID="navSearchForm" />

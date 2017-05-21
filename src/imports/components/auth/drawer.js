@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import { connect, } from 'react-redux';
 import { createStyleSheet, } from 'jss-theme-reactor';
-import List, { ListItem, } from 'material-ui/List';
+import List, { ListItem, ListSubheader, } from 'material-ui/List';
 
 import { SideBarActions, } from '../stateful';
 import LoginForm from './login_form';
@@ -59,11 +59,7 @@ class Dash extends Component {
             <MenuIcon />
           </IconButton>
         </Grid>
-        <Grid item>
-          { loggedIn && <Text secondary align="center" type="headline">
-            {`Welcome, ${user.username}`}
-          </Text>}
-        </Grid>
+
         <Drawer
           anchor="right"
           open={this.state.open.right}
@@ -75,7 +71,9 @@ class Dash extends Component {
             anchorEl={this.state.anchorEl}
             open={this.state.open}
             onRequestClose={this.handleRequestClose}>
-
+            <ListSubheader primary>
+              { loggedIn && `Welcome, ${user.username}`}
+            </ListSubheader>
             {loggedIn && <ListItem> <LogoutLink /></ListItem>}
             {!loggedIn && <ListItem><LoginForm formID={'navBarLogin'} /></ListItem>}
             {!loggedIn && <ListItem><RegisterForm formID={'navBarRegister'} /> </ListItem>}
