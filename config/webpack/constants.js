@@ -5,12 +5,12 @@ import { resolve, } from 'path';
 
 export const DEV = 'dev';
 export const BUILD = 'build';
-export const CONFIG_EVENTS = new Set([BUILD, DEV,]);
+export const CONFIG_EVENTS = new Set([ BUILD, DEV, ]);
 
 export const ROOT_PATH = resolve('./');
 export const SRC_DIR = resolve(ROOT_PATH, 'src');
 export const APP_PATH = resolve(SRC_DIR, 'client/index');
-export const vendor = ['material-ui', 'redux-form', 'react',];
+export const vendor = [ 'material-ui', 'redux-form', 'react', ];
 
 export const PATHS = {
   src: SRC_DIR,
@@ -28,7 +28,7 @@ export const BUILD_CONFIG = {
   entry: { vendor, },
   output: { filename: '[name].[chunkhash].bundle.js', },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest',], }),
+    new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new ExtractTextPlugin('[name].[chunkhash].styles.css'),
     new HtmlPlugin({ filename: 'index.html', template: PATHS.template, }),
     new HtmlPlugin({ filename: '200.html', template: PATHS.surge, }),
@@ -37,14 +37,13 @@ export const BUILD_CONFIG = {
 
 export const DEV_CONFIG = {
   entry:   {
-    app: [PATHS.RHLPatch, PATHS.hotMiddleware, PATHS.app,],
-    vendor: [PATHS.RHLPatch, PATHS.hotMiddleware, ...vendor,],
+    app: [ PATHS.RHLPatch, PATHS.hotMiddleware, PATHS.app, ],
+    vendor: [ PATHS.RHLPatch, PATHS.hotMiddleware, ...vendor, ],
   },
   output: { },
   plugins: [
-    // new HtmlPlugin({ filename: 'index.html', template: PATHS.template, }),
-    // new HtmlPlugin({ filename: '200.html', template: PATHS.surge, }),
-    new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest',], }),
+
+    new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest', ], }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
