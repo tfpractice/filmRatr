@@ -68,7 +68,6 @@ class Dash extends Component {
 
           <List
             id="simple-List"
-            anchorEl={this.state.anchorEl}
             open={this.state.open}
             onRequestClose={this.handleRequestClose}>
             <ListSubheader primary>
