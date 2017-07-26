@@ -53,7 +53,7 @@ class Dash extends Component {
     return (
       <Grid container>
         <Grid item>
-          <IconButton contrast onClick={this.handleRightOpen}>
+          <IconButton color="contrast" onClick={this.handleRightOpen}>
             <MenuIcon />
           </IconButton>
         </Grid>

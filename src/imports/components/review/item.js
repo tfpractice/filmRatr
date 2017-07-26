@@ -22,7 +22,7 @@ const ReviewCard = ({ review, deleteReview, canEdit, }) => (
   type="title">{review.user ? review.user.username : 'anonymous'} || {stars(review.rating)}
         </Text>}
   subheader={
-  <Text secondary type="caption">{review.dateAdded} </Text>}
+  <Text color='secondary' type="caption">{review.dateAdded} </Text>}
   />
     <CardContent >
       <Text type="body1">{review.text}</Text>

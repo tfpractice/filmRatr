@@ -29,12 +29,12 @@ const Nav = ({ loggedIn, user, }) => (
               <AuthMenu />
             </Grid>
             <Link to="/" >
-              <Text type="headline" secondary >
+              <Text type="headline" color='secondary' >
                 FilmRatr
               </Text>
             </Link>
             <Grid item>
-              { loggedIn && <Text secondary align="center" type="title">
+              { loggedIn && <Text color='secondary' align="center" type="title">
                 {`Welcome, ${user.username}`}
               </Text>}
             </Grid>

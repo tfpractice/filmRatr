@@ -7,7 +7,7 @@ import { ClearForm, renderText, } from 'imports/utils';
 
 const stateToProps = ({ auth: { user, }, }, { review, }) => ({ canEdit: !!user && !!review && user.id === review.user, });
 const renderDelete = handler => rev =>
-  rev && <Button secondary onClick={() => handler(rev)} >Delete</Button>;
+  rev && <Button color='secondary' onClick={() => handler(rev)} >Delete</Button>;
 
 const ReviewForm = ({ review, handleSubmit, deleteReview, canEdit, }) => (
   <form onSubmit={handleSubmit} >
