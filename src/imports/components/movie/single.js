@@ -25,9 +25,9 @@ const makeStyle = movie => ({
 const MovieCard = ({ movie, }) => (
   <Card raised>
     <CardHeader
-  title={movie.title}
-  subheader={<em>{`${movie.release_date} || ${movie.id}`}</em>}
-  />
+      title={movie.title}
+      subheader={<em>{`${movie.release_date} || ${movie.id}`}</em>}
+    />
     <CardMedia style={makeStyle(movie)}>
       <MovieLink movie={movie} >
         <div style={divStyle} />
