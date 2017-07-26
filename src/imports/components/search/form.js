@@ -9,7 +9,7 @@ const SearchForm = ({ handleSubmit, }) => (
   <form onSubmit={handleSubmit} >
     <FormGroup row>
       <Field label="title" name="title" component={renderText} />
-      <Button accent type="submit"> Searchable</Button>
+      <Button color='accent' type="submit"> Searchable</Button>
     </FormGroup>
   </form>
 );
