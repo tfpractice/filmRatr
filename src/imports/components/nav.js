@@ -17,7 +17,7 @@ const Nav = ({ loggedIn, user }) =>
       <Grid container justify="space-between" align="center">
         <Grid item xs>
           <Grid container direction="row" align="center">
-            <Grid item>
+            <Grid item xs>
               <AuthMenu />
             </Grid>
             <Link to="/">
@@ -33,7 +33,7 @@ const Nav = ({ loggedIn, user }) =>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item xs>
           <SearchForm formID="navSearchForm" />
         </Grid>
       </Grid>
