@@ -8,7 +8,7 @@ import Card, {
 } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import Text from 'material-ui/Typography';
-
+import Avatar from 'material-ui/Avatar';
 import { MovieActions } from 'imports/actions';
 
 import MovieLink from './movie_link';
@@ -33,17 +33,17 @@ const makeStyle = movie => ({
 const MovieCard = ({ movie }) =>
   (<Card raised>
     <CardHeader
+      avatar={<Avatar src={`${imgUrl(movie)}`} />}
       title={movie.title}
       subheader={<em>{`${movie.release_date} || ${movie.id}`}</em>}
     />
     <CardMedia style={makeStyle(movie)}>
       <MovieLink movie={movie}>
         <div style={divStyle} />
-        {/* {<img src={`${imgUrl(movie)}`} />} */}
       </MovieLink>
     </CardMedia>
     <CardContent>
-      <Text type="subheading" paragraph>
+      <Text noWrap type="subheading" paragraph>
         {movie.overview && movie.overview.slice(0, 255)}
       </Text>
     </CardContent>

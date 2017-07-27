@@ -6,20 +6,17 @@ import MovieList from './list';
 
 const mapStateToProps = ({ movies: { data }}) => ({ movies: data });
 
-const TopTen = ({ movies, ...tRest }) => {
-  console.log('...tRest', tRest);
-  return (
-    <Grid container justify="center" align="center" className="TopTen">
-      <Grid item xs={11}>
-        <Text align="center" type="display1">
+const TopTen = ({ movies, ...tRest }) => (
+  <Grid container justify="center" align="center" className="TopTen">
+    <Grid item xs={11}>
+      <Text align="center" type="display1">
           Most Frequently Viewed Movies
-        </Text>
-      </Grid>
-      <Grid item xs={11}>
-        <MovieList movies={movies} />
-      </Grid>
+      </Text>
     </Grid>
-  );
-};
+    <Grid item xs={11}>
+      <MovieList movies={movies} />
+    </Grid>
+  </Grid>
+);
 
 export default connect(mapStateToProps)(TopTen);
