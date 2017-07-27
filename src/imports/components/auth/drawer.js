@@ -1,19 +1,19 @@
-import React, { Component, } from 'react';
+import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 
-import List, { ListItem, ListSubheader, } from 'material-ui/List';
-import { createStyleSheet, withStyles, } from 'material-ui/styles';
-import { SideBarActions, } from '../stateful';
+import List, { ListItem, ListSubheader } from 'material-ui/List';
+import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { SideBarActions } from '../stateful';
 import LoginForm from './login_form';
 import RegisterForm from './registration_form';
 import LogoutLink from './logout_link';
 
-const mapStateToProps = ({ auth: { user, }, }) => ({ loggedIn: !!user, user, });
+const mapStateToProps = ({ auth: { user }}) => ({ loggedIn: !!user, user });
 
 const sheet = createStyleSheet('Dash', () => ({
   list: {
@@ -40,7 +40,7 @@ class Dash extends Component {
     const drawerState = {};
 
     drawerState[side] = open;
-    this.setState({ open: drawerState, });
+    this.setState({ open: drawerState });
   };
 
   handleRightOpen = () => this.toggleDrawer('right', true);
