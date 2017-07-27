@@ -1,16 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import Card, {
-  CardContent,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-} from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
-import Text from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';
-import { MovieActions } from 'imports/actions';
+import Text from 'material-ui/Typography';
+import Card, { CardContent, CardHeader, CardMedia } from 'material-ui/Card';
+import { connect } from 'react-redux';
 
+import { MovieActions } from 'imports/actions';
 import MovieLink from './movie_link';
 
 const imgBase = 'http://image.tmdb.org/t/p/w300/';

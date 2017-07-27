@@ -170,11 +170,11 @@ module.exports = {
     'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
     'rest-spread-spacing': ['error', 'never'],
     'sort-imports': [
-      'error',
+      'warn',
       {
         ignoreCase: true,
         ignoreMemberSort: false,
-        memberSyntaxSortOrder: ['none', 'single', 'all', 'multiple'],
+        memberSyntaxSortOrder: ['none', 'all', 'single', 'multiple'],
       },
     ],
 
@@ -213,8 +213,8 @@ module.exports = {
         'newlines-between': 'always',
         groups: [
           ['builtin', 'external'],
-          ['internal', 'index'],
-          ['parent', 'sibling'],
+          ['internal', 'index', 'parent', 'sibling'],
+          // ['parent', 'sibling'],
         ],
       },
     ],

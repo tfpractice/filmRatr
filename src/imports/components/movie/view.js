@@ -9,15 +9,19 @@ import MovieCard from './single';
 
 const MapStateToProps = ({ currentMovie: movie }) => ({ movie });
 
-const MovieView = ({ movie }) =>
-  (<Grid container align="center" justify="center">
-    <Grid item xs={11}>
-      <MovieCard movie={movie} />
+const MovieView = ({ movie, ...rest }) => {
+  console.log('MovieViewrest', rest);
+  return (
+    <Grid container align="center" justify="center">
+      <Grid item xs={11}>
+        <MovieCard movie={movie} />
+      </Grid>
+      <Grid item xs={11}>
+        <ReviewList movie={movie} />
+      </Grid>
     </Grid>
-    <Grid item xs={11}>
-      <ReviewList movie={movie} />
-    </Grid>
-  </Grid>);
+  );
+};
 
 MovieView.fetchData = [ MovieActions.setMovieFromParams ];
 export default connect(MapStateToProps)(MovieView);

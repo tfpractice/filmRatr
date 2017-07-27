@@ -15,10 +15,16 @@ const topMovies = {
   loadData: [ MovieActions.getByFreq ],
 };
 
+const popMovies = {
+  path: '/movies/pop',
+  component: TopTen,
+  loadData: [ MovieActions.getByAvg ],
+};
+
 const routes = {
   path: '/movies',
   component: MovieRoute,
-  routes: [ topMovies, moviepage ],
+  routes: [ moviepage, topMovies ],
   loadData: [ MovieActions.getByFreq ],
 };
 

@@ -15,43 +15,37 @@ import { Link } from 'react-router';
 const stateToProps = ({ movies: { data }}) => ({ movies: data });
 
 const MovieRoute = ({
-  dispatch,
   getByAvg,
   getByFreq,
   movies,
-  match,
-  route: { routes, path, ...rores },
+  history,
+  route,
   ...rest
 }) => {
   const a = 0;
 
+  console.log('rest', rest);
+  console.log('route', route);
+
   return (
-    <Grid
-      container
-      justify="center"
-      align="center"
-      className="MovieRouteDiv"
-      id="MovieRoute"
-    >
+    <Grid container justify="center" align="center" className="MovieRoute">
       <Grid item xs={11}>
-        <Text type="display1">I am the movie route</Text>
-        <Grid container align="center" justify="center">
-          <Grid item xs>
-            <Button onClick={getByAvg}>By Avg</Button>
+        <Grid container justify="center" align="center" justify="center">
+          <Grid item xs={3}>
+            <Button onClick={() => getByAvg().then(x => history.replace('/'))}>
+              By Avg
+            </Button>
           </Grid>
-          <Grid item xs>
-            <Button onClick={getByFreq}>By Freq</Button>
+          <Grid item xs={3}>
+            <Button onClick={() => getByFreq().then(x => history.replace('/'))}>
+              By Freq
+            </Button>
           </Grid>
         </Grid>
       </Grid>
       <Grid item xs={11}>
-        <Route
-          exact
-          path={match.url}
-          render={() => <MovieList movies={movies} />}
-        />
         <Switch>
-          {renderRoutes(routes)}
+          {renderRoutes(route.routes)}
         </Switch>
       </Grid>
     </Grid>

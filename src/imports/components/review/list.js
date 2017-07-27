@@ -10,10 +10,12 @@ const mapStateToProps = ({ reviews: { data }}, { movie }) => ({ reviews: data.fi
 
 const ReviewList = ({ movie, reviews }) =>
   (<Grid container justify="center" align="center" className="Review-list">
-    <Grid item xs={6}>
-      <Text type="headline">
+    <Grid item xs={11}>
+      <Text align="center" type="headline">
         {`Create Review for ${movie.title}`}
       </Text>
+    </Grid>
+    <Grid item xs={8}>
       <MovieReviewForm movie={movie} formID={`newReview${movie.id}`} />
     </Grid>
     <Grid item xs={12} className="ReviewList">
