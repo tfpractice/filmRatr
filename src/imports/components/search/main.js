@@ -27,10 +27,13 @@ const SearchResults = ({ results, route, ...rest }) => {
         <FreeForm formID={'searchRouteForm'} />
       </Grid>
 
-      <Grid item xs={11} className=" SearchResults">
+      <Grid item xs={11}>
         <Text type="display1">
           {'SEARCH RESULTS'}
         </Text>
+        <MovieList movies={results} />
+      </Grid>
+      <Grid item xs={11} className=" SearchResults">
         <MovieList movies={results} />
       </Grid>
     </Grid>

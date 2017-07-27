@@ -6,7 +6,7 @@ import MovieCard from './single';
 const MovieList = ({ movies }) =>
   (<Grid container justify="center" className="MovieList">
     {movies.map(m =>
-      (<Grid item xs={6} sm={4} key={m.id}>
+      (<Grid item xs={11} sm={6} md={4} key={m.id}>
         <MovieCard movie={m} />
       </Grid>)
     )}

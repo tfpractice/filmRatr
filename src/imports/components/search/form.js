@@ -7,12 +7,8 @@ import { ClearForm, renderText } from 'imports/utils';
 
 const SearchForm = ({ handleSubmit }) =>
   (<form onSubmit={handleSubmit}>
-    <FormGroup row>
-      <Field label="title" name="title" component={renderText} />
-      <Button color="accent" type="submit">
-        Searchable
-      </Button>
-    </FormGroup>
+    <Field label="title" name="title" component={renderText} />
+    <Button color="accent" type="submit" children="Search" />
   </form>);
 
 export default ClearForm(SearchForm);

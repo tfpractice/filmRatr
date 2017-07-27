@@ -16,7 +16,7 @@ const Nav = ({ loggedIn, user }) =>
     <Toolbar>
       <Grid container justify="space-between" align="center">
         <Grid item xs>
-          <Grid container align="center">
+          <Grid container justify="space-between" align="center">
             <Grid item xs={1}>
               <AuthMenu />
             </Grid>

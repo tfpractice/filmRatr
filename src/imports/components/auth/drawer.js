@@ -49,7 +49,6 @@ class Dash extends Component {
   render() {
     const { loggedIn, toggle, user, classes, ...props } = this.props;
 
-    console.log(' DRAWER this.props', this.props);
     return (
       <Grid container>
         <Grid item>
@@ -57,34 +56,31 @@ class Dash extends Component {
             <MenuIcon />
           </IconButton>
         </Grid>
-
-        <Drawer
-          anchor="right"
-          open={this.state.open.right}
-          onRequestClose={this.handleRightClose}
-        >
-          <List
-            id="simple-List"
-            open={this.state.open}
-            onRequestClose={this.handleRequestClose}
+        <Grid item xs>
+          <Drawer
+            anchor="right"
+            open={this.state.open.right}
+            onRequestClose={this.handleRightClose}
           >
-            <ListSubheader primary>
-              {loggedIn && `Welcome, ${user.username}`}
-            </ListSubheader>
-            {loggedIn &&
-              <ListItem>
-                {' '}<LogoutLink />
-              </ListItem>}
-            {!loggedIn &&
-              <ListItem>
-                <LoginForm formID={'navBarLogin'} />
-              </ListItem>}
-            {!loggedIn &&
-              <ListItem>
-                <RegisterForm formID={'navBarRegister'} />{' '}
-              </ListItem>}
-          </List>
-        </Drawer>
+            <List>
+              <ListSubheader primary>
+                {loggedIn && `Welcome, ${user.username}`}
+              </ListSubheader>
+              {loggedIn &&
+                <ListItem>
+                  <LogoutLink />
+                </ListItem>}
+              {!loggedIn &&
+                <ListItem>
+                  <LoginForm formID={'navBarLogin'} />
+                </ListItem>}
+              {!loggedIn &&
+                <ListItem>
+                  <RegisterForm formID={'navBarRegister'} />
+                </ListItem>}
+            </List>
+          </Drawer>
+        </Grid>
       </Grid>
     );
   }
