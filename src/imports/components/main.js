@@ -7,7 +7,7 @@ import Nav from './nav';
 
 const styles = { paddingTop: '5rem' };
 
-const MainP = ({ route: { routes }}) =>
+const Main = ({ route: { routes }}) =>
   (<Grid container justify="center" align="center" style={styles}>
     <Nav />
 
@@ -18,4 +18,4 @@ const MainP = ({ route: { routes }}) =>
     </Grid>
   </Grid>);
 
-export default MainP;
+export default Main;

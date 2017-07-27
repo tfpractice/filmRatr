@@ -1,9 +1,10 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
+
 import { TopTen } from '../movie';
 
-const About = () =>
+const About = props =>
   (<Grid container justify="center" align="center">
     <Grid item xs={11}>
       <Text align="center" type="display1">

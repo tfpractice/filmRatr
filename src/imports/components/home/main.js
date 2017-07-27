@@ -6,9 +6,11 @@ import Text from 'material-ui/Typography';
 
 import { MovieActions } from 'imports/actions';
 
-const Home = ({ route }) => {
+const Home = ({ route, ...rest }) => {
   const a = 0;
 
+  console.log('rest', rest);
+  console.log('route.routes', route.routes);
   return (
     <Grid container justify="center" align="center" className="homeDiv">
       <Grid item xs={11}>
