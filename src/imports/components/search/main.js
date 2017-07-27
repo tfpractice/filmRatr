@@ -20,20 +20,17 @@ const SearchResults = ({ results, route, ...rest }) => {
 
   return (
     <Grid container justify="center" align="center" className="search-list">
-      <Grid item xs={11}>
-        <Text type="display1">
-          {'Enter Movie Title'}
+      <Grid item xs={12}>
+        <Text align="center" type="display1">
+          Enter Movie Title
         </Text>
         <FreeForm formID={'searchRouteForm'} />
       </Grid>
 
-      <Grid item xs={11}>
-        <Text type="display1">
-          {'SEARCH RESULTS'}
-        </Text>
-        <MovieList movies={results} />
-      </Grid>
       <Grid item xs={11} className=" SearchResults">
+        <Text align="center" type="display1">
+          SEARCH RESULTS
+        </Text>
         <MovieList movies={results} />
       </Grid>
     </Grid>
