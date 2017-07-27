@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
+
 import { ReviewActions } from 'imports/actions';
 import { ClearForm, renderText } from 'imports/utils';
 
@@ -25,7 +26,7 @@ const ReviewForm = ({ review, handleSubmit, deleteReview, canEdit }) =>
     />
     <Field name="text" label="content" component={renderText} />
     <Button primary type="submit">
-      {' '}Submit Review{' '}
+      Submit Review
     </Button>
     {canEdit && renderDelete(deleteReview)(review)}
   </form>);
