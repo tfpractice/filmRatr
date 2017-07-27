@@ -10,7 +10,7 @@ import MovieCard from './single';
 const MapStateToProps = ({ currentMovie: movie }) => ({ movie });
 
 const MovieView = ({ movie }) =>
-  (<Grid container direction="column" justify="center">
+  (<Grid container align="center" justify="center">
     <Grid item xs={11}>
       <MovieCard movie={movie} />
     </Grid>

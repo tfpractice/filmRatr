@@ -1,6 +1,6 @@
-import { Router, } from 'express';
-import { MovieController, ReviewController, } from '../controllers';
-import { isLoggedIn, } from './auth';
+import { Router } from 'express';
+import { MovieController, ReviewController } from '../controllers';
+import { isLoggedIn } from './auth';
 
 const router = new Router();
 
@@ -21,10 +21,14 @@ router.route('/reviews/:movie_id/:id').get(ReviewController.getReview);
 router.route('/reviews/:movie_id').post(isLoggedIn, ReviewController.addReview);
 
 // Update one review by cuid
-router.route('/reviews/:movie_id/:id').patch(isLoggedIn, ReviewController.updateReview);
+router
+  .route('/reviews/:movie_id/:id')
+  .patch(isLoggedIn, ReviewController.updateReview);
 
 // Delete a review by cuid
-router.route('/reviews/:movie_id/:id').delete(isLoggedIn, ReviewController.deleteReview);
+router
+  .route('/reviews/:movie_id/:id')
+  .delete(isLoggedIn, ReviewController.deleteReview);
 
 router.route('/reviews/clear').get(ReviewController.deleteUnclaimed);
 

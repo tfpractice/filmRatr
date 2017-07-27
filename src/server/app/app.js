@@ -6,11 +6,17 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import path from 'path';
 import session from 'express-session';
-import { Strategy as LocalStrategy, } from 'passport-local';
-import { enableHotReload, PATHS, } from 'config';
-import { dbConfig, } from '../models';
-import { applyRoutes, MovieRoutes, ReviewRoutes, SearchRoutes, UserRoutes, } from '../routes';
-import { requestHandler, } from './request_handler';
+import { Strategy as LocalStrategy } from 'passport-local';
+import { enableHotReload, PATHS } from 'config';
+import { dbConfig } from '../models';
+import {
+  applyRoutes,
+  MovieRoutes,
+  ReviewRoutes,
+  SearchRoutes,
+  UserRoutes,
+} from '../routes';
+import { requestHandler } from './request_handler';
 
 mongoose.Promise = global.Promise;
 
@@ -20,7 +26,7 @@ mongoose.connect(dbConfig.mongoURL, (error) => {
     console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
     throw error;
   }
-  
+
   console.log('mongoose connected');
 });
 
@@ -36,18 +42,20 @@ mongoose.connect(dbConfig.mongoURL, (error) => {
 const app = enableHotReload(express());
 
 // BodyParser Middleware
-app.use(bodyParser.json({ limit: '20mb', }));
-app.use(bodyParser.urlencoded({ limit: '20mb', extended: false, }));
+app.use(bodyParser.json({ limit: '20mb' }));
+app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(cookieParser());
 
 // Set Static Folder
 
 // Express Session
-app.use(session({
-  secret: process.env.FILMRATR_AUTH_SECRET,
-  saveUninitialized: true,
-  resave: true,
-}));
+app.use(
+  session({
+    secret: process.env.FILMRATR_AUTH_SECRET,
+    saveUninitialized: true,
+    resave: true,
+  })
+);
 
 // Connect Flash
 app.use(flash());

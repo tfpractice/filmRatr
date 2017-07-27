@@ -7,19 +7,16 @@ import Nav from './nav';
 
 const styles = { paddingTop: '5rem' };
 
-export default class Main extends Component {
-  render() {
-    const { route: { routes }} = this.props;
+const MainP = ({ route: { routes }}) =>
+  (<Grid container justify="center" align="center" style={styles}>
+    <Grid item xs={11}>
+      <Nav />
+    </Grid>
+    <Grid item xs={12}>
+      <Switch>
+        {renderRoutes(routes)}
+      </Switch>
+    </Grid>
+  </Grid>);
 
-    return (
-      <Grid container justify="center" align="center" style={styles}>
-        <Nav />
-        <Grid item xs={11}>
-          <Switch>
-            {renderRoutes(routes)}
-          </Switch>
-        </Grid>
-      </Grid>
-    );
-  }
-}
+export default MainP;

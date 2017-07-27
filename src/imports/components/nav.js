@@ -16,8 +16,8 @@ const Nav = ({ loggedIn, user }) =>
     <Toolbar>
       <Grid container justify="space-between" align="center">
         <Grid item xs>
-          <Grid container direction="row" align="center">
-            <Grid item xs>
+          <Grid container align="center">
+            <Grid item>
               <AuthMenu />
             </Grid>
             <Link to="/">
@@ -25,7 +25,7 @@ const Nav = ({ loggedIn, user }) =>
                 FilmRatr
               </Text>
             </Link>
-            <Grid item xs>
+            <Grid item>
               {loggedIn &&
                 <Text color="secondary" align="center" type="title">
                   {`Welcome, ${user.username}`}

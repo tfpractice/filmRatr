@@ -1,17 +1,17 @@
 import React from 'react';
-import { flattenBin, } from 'fenugreek-collections';
-import { Provider, } from 'react-redux';
-import { StaticRouter, } from 'react-router';
-import { JssProvider, SheetsRegistry, } from 'react-jss';
-import { create as jCreate, } from 'jss';
+import { flattenBin } from 'fenugreek-collections';
+import { Provider } from 'react-redux';
+import { StaticRouter } from 'react-router';
+import { JssProvider, SheetsRegistry } from 'react-jss';
+import { create as jCreate } from 'jss';
 import preset from 'jss-preset-default';
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 
-import { matchRoutes, renderRoutes, } from 'react-router-config';
-import { renderToString, } from 'react-dom/server';
-import { MuiThemeProvider, } from 'material-ui/styles';
-import { theme, } from 'imports/utils';
-import { AppContainer, getRoutes, getStore, } from 'imports';
+import { matchRoutes, renderRoutes } from 'react-router-config';
+import { renderToString } from 'react-dom/server';
+import { MuiThemeProvider } from 'material-ui/styles';
+import { theme } from 'imports/utils';
+import { AppContainer, getRoutes, getStore } from 'imports';
 
 const makeSrc = path =>
   `<script type="application/javascript" src=/${path}></script>`;
@@ -48,7 +48,7 @@ export const requestHandler = (req, res) => {
     const branch = matchRoutes(r, location);
     const rFilt = branch.filter(r => r.route.loadData);
     const exFilt = rFilt.filter(r => r.match.isExact);
-    const mapped = exFilt.map(({ route, match, }) =>
+    const mapped = exFilt.map(({ route, match }) =>
       route.loadData.map(f => f(match))
     );
     const promises = mapped.reduce(flattenBin, []);

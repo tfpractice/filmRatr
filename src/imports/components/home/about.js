@@ -4,8 +4,8 @@ import Text from 'material-ui/Typography';
 import { TopTen } from '../movie';
 
 const About = () =>
-  (<Grid container>
-    <Grid item xs>
+  (<Grid container justify="center" align="center">
+    <Grid item xs={11}>
       <Text type="display1">
         Welcome to Filmratr. Login and you can search a film and give it a
         raiting
