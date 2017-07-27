@@ -6,13 +6,15 @@ import { TopTen } from '../movie';
 const About = () =>
   (<Grid container justify="center" align="center">
     <Grid item xs={11}>
-      <Text type="display1">
+      <Text align="center" type="display1">
         Welcome to Filmratr. Login and you can search a film and give it a
         raiting
       </Text>
-      <Text type="display1">
+      <Text align="center" type="display1">
         Here are some of our most frequenctly rated movies
       </Text>
+    </Grid>
+    <Grid item xs={11}>
       <TopTen />
     </Grid>
   </Grid>);

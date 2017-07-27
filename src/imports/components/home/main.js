@@ -10,13 +10,7 @@ const Home = ({ route }) => {
   const a = 0;
 
   return (
-    <Grid
-      container
-      justify="center"
-      align="center"
-      className="homeDiv"
-      id="home"
-    >
+    <Grid container justify="center" align="center" className="homeDiv">
       <Grid item xs={11}>
         {renderRoutes(route.routes)}
       </Grid>

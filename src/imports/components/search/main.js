@@ -4,7 +4,9 @@ import Grid from 'material-ui/Grid';
 import Text from 'material-ui/Typography';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
 import { SearchActions } from 'imports/actions';
+
 import { MovieList } from '../movie';
 import FreeForm from './free_form';
 

@@ -2,6 +2,7 @@ import React from 'react';
 import qs from 'qs';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
 import { SearchActions } from '../../actions';
 import SearchForm from './form';
 

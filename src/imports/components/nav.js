@@ -17,23 +17,25 @@ const Nav = ({ loggedIn, user }) =>
       <Grid container justify="space-between" align="center">
         <Grid item xs>
           <Grid container align="center">
-            <Grid item>
+            <Grid item xs={1}>
               <AuthMenu />
             </Grid>
-            <Link to="/">
-              <Text type="headline" color="secondary">
-                FilmRatr
-              </Text>
-            </Link>
-            <Grid item>
-              {loggedIn &&
+            <Grid item xs>
+              <Link to="/">
+                <Text type="headline" color="secondary">
+                  FilmRatr
+                </Text>
+              </Link>
+            </Grid>
+            {loggedIn &&
+              <Grid item xs>
                 <Text color="secondary" align="center" type="title">
                   {`Welcome, ${user.username}`}
-                </Text>}
-            </Grid>
+                </Text>
+              </Grid>}
           </Grid>
         </Grid>
-        <Grid item xs>
+        <Grid item xs={3}>
           <SearchForm formID="navSearchForm" />
         </Grid>
       </Grid>

@@ -7,9 +7,11 @@ import MovieList from './list';
 const mapStateToProps = ({ movies: { data }}) => ({ movies: data });
 
 const TopTen = ({ movies }) =>
-  (<Grid container className="TopTen">
+  (<Grid container justify="center" align="center" className="TopTen">
     <Grid item xs={11}>
-      <Text type="display1">Most Frequently Viewed Movies</Text>
+      <Text align="center" type="display1">
+        Most Frequently Viewed Movies
+      </Text>
     </Grid>
     <Grid item xs={11}>
       <MovieList movies={movies} />

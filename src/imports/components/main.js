@@ -9,9 +9,8 @@ const styles = { paddingTop: '5rem' };
 
 const MainP = ({ route: { routes }}) =>
   (<Grid container justify="center" align="center" style={styles}>
-    <Grid item xs={11}>
-      <Nav />
-    </Grid>
+    <Nav />
+
     <Grid item xs={12}>
       <Switch>
         {renderRoutes(routes)}
