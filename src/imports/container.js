@@ -1,13 +1,11 @@
-import React, { Component, } from 'react';
-import { Provider, } from 'react-redux';
-import { renderRoutes, } from 'react-router-config';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { renderRoutes } from 'react-router-config';
 
-import { BrowserRouter, } from 'react-router-dom';
-import { MuiThemeProvider, } from 'material-ui/styles';
-import { theme, } from 'imports/utils';
+import { BrowserRouter } from 'react-router-dom';
+import { MuiThemeProvider } from 'material-ui/styles';
+import { theme } from 'imports/utils';
 import getRoutes from './routes';
-
-// import { Main, } from './components';
 
 export default class AppContainer extends Component {
   componentDidMount() {
@@ -17,8 +15,9 @@ export default class AppContainer extends Component {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
+
   render() {
-    const { store, history, } = this.props;
+    const { store, history } = this.props;
 
     return (
       <Provider store={store}>

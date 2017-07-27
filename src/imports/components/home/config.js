@@ -9,7 +9,7 @@ const about = {
 const home = {
   path: '/',
   component: Home,
-  routes: [ about, ],
+  routes: [ about ],
 };
 
 export default home;

@@ -45,22 +45,12 @@ export const requestHandler = (req, res) => {
   const routes = getRoutes;
 
   const loadBranchData = r => (location) => {
-    console.log('req.url', req.url, '\n');
-
     const branch = matchRoutes(r, location);
     const rFilt = branch.filter(r => r.route.loadData);
     const exFilt = rFilt.filter(r => r.match.isExact);
-    const mapped = exFilt.map(({ route, match, }) => {
-      console.log(' Object.keys(route)', Object.keys(route), '\n');
-
-      console.log(
-        'route.loadData.map(f => f(match))',
-        route.loadData.map(f => f(match))
-      );
-
-      console.log('match', match, '\n');
-      return route.loadData.map(f => f(match));
-    });
+    const mapped = exFilt.map(({ route, match, }) =>
+      route.loadData.map(f => f(match))
+    );
     const promises = mapped.reduce(flattenBin, []);
 
     return Promise.all(promises.map(action => store.dispatch(action)));
@@ -69,7 +59,6 @@ export const requestHandler = (req, res) => {
   const context = {};
 
   if (context.url) {
-    console.log('context', context);
     res.redirect(302);
   } else {
     loadBranchData(routes)(req.url)
