@@ -16,8 +16,6 @@ const mapStateToProps = ({ search: { results, request: { query }}}) => ({
 const SearchResults = ({ results, route, ...rest }) => {
   const a = 0;
 
-  console.log('SearchResults rest', route, rest);
-
   return (
     <Grid container justify="center" align="center" className="search-list">
       <Grid item xs={11}>
@@ -29,7 +27,7 @@ const SearchResults = ({ results, route, ...rest }) => {
 
       <Grid item xs={11} className=" SearchResults">
         <Text type="display1">
-          {'I AM THE RESULTS'}
+          {'SEARCH RESULTS'}
         </Text>
         <MovieList movies={results} />
       </Grid>
