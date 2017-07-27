@@ -1,26 +1,33 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import { connect, } from 'react-redux';
-import { Field, } from 'redux-form';
-import { ReviewActions, } from 'imports/actions';
-import { ClearForm, renderText, } from 'imports/utils';
+import { connect } from 'react-redux';
+import { Field } from 'redux-form';
+import { ReviewActions } from 'imports/actions';
+import { ClearForm, renderText } from 'imports/utils';
 
-const stateToProps = ({ auth: { user, }, }, { review, }) => ({ canEdit: !!user && !!review && user.id === review.user, });
+const stateToProps = ({ auth: { user }}, { review }) => ({ canEdit: !!user && !!review && user.id === review.user });
 const renderDelete = handler => rev =>
-  rev && <Button color='secondary' onClick={() => handler(rev)} >Delete</Button>;
+  rev &&
+  <Button color="secondary" onClick={() => handler(rev)}>
+    Delete
+  </Button>;
 
-const ReviewForm = ({ review, handleSubmit, deleteReview, canEdit, }) => (
-  <form onSubmit={handleSubmit} >
+const ReviewForm = ({ review, handleSubmit, deleteReview, canEdit }) =>
+  (<form onSubmit={handleSubmit}>
     <Field
       name="rating"
       label="rating"
       type="range"
-      component="input" min={1} max={5} step={1}
+      component="input"
+      min={1}
+      max={5}
+      step={1}
     />
     <Field name="text" label="content" component={renderText} />
-    <Button primary type="submit" > Submit Review </Button>
-    {canEdit && renderDelete(deleteReview)(review) }
-  </form>
-);
+    <Button primary type="submit">
+      {' '}Submit Review{' '}
+    </Button>
+    {canEdit && renderDelete(deleteReview)(review)}
+  </form>);
 
 export default connect(stateToProps, ReviewActions)(ClearForm(ReviewForm));
