@@ -7,7 +7,6 @@ import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import { ReviewActions } from 'imports/actions';
 import EditReviewForm from './edit_review';
-import Avatar from 'material-ui/Avatar';
 
 const stars = rating =>
   [ ...Array(rating).keys() ].map(x => <StarIcon key={x} />);
@@ -17,15 +16,17 @@ const mapStateToProps = ({ auth: { user }}, { review }) => ({ canEdit: !!user &&
 const ReviewCard = ({ review, deleteReview, canEdit }) =>
   (<Card raised>
     <CardHeader
-      avatar={
-        <Avatar>
-          {stars(review.rating)}
-        </Avatar>
-      }
       title={
-        review.user && review.user.username ? review.user.username : 'anonymous'
+        <Text align="center" gutterBottom type="title">
+          {review.user ? review.user.username : 'anonymous'} ||{' '}
+          {stars(review.rating)}
+        </Text>
       }
-      subheader={review.dateAdded}
+      subheader={
+        <Text secondary type="caption">
+          {review.dateAdded}{' '}
+        </Text>
+      }
     />
     <CardContent>
       <Text type="body1">
