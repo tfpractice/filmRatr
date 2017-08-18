@@ -62,7 +62,10 @@ export const getByAvg = arg => dispatch =>
     .then(x => console.log('AVERAGEmovies', x) || x)
     .then(ids => getMovies(...ids.filter(x => !!x)))
     .then(dispatch)
-    .catch(e => dispatch(movieRequestFailure(e)));
+    .catch((e) => {
+      console.error(e.message);
+      return dispatch(movieRequestFailure(e));
+    });
 
 export const getByFreq = arg => (dispatch) => {
   console.log('byfreq', arg);
